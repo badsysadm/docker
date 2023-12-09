@@ -1,11 +1,11 @@
 {
   "listeners": {
     "*:8081": {
-      "pass": "applications/api"
+      "pass": "applications/limesurvey"
     }
   },
   "applications": {
-    "wordpress": {
+    "limesurvey": {
       "type": "php",
       "user": "unit",
       "group": "unit",
