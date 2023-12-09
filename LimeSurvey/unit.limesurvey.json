@@ -8,6 +8,7 @@
         {
             "match": {
                 "uri": [
+                    "index.php",
                     "*.php"
                 ]
             },
@@ -22,7 +23,10 @@
                 ]
             },
             "action": {
-                "root": "var/www/limesurvey",
+                "share": "/var/www/limesurvey/$uri",
+                "fallback": {
+                    "pass": "applications/limesurvey"
+                }
             }
         },
     ],
