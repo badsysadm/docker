@@ -1,9 +1,31 @@
 {
   "listeners": {
     "*:8081": {
-      "pass": "applications/limesurvey"
+      "pass": "routes"
     }
   },
+    "routes": [
+        {
+            "match": {
+                "uri": [
+                    "*.php"
+                ]
+            },
+            "action": {
+                "pass": "applications/limesurvey"
+            }
+        },
+        {
+            "match": {
+                "uri": [
+                    "!*.php"
+                ]
+            },
+            "action": {
+                "root": "var/www/limesurvey",
+            }
+        },
+    ],
   "applications": {
     "limesurvey": {
       "type": "php",
