@@ -5,6 +5,52 @@ RUN wget -qO- https://download.limesurvey.org/latest-master/limesurvey6.3.8+2312
 RUN mkdir -p /var/lib/limesurvey/docker-entrypoint.d
 
 FROM nginx/unit:1.29.1-php8.1 AS base
+RUN set -ex; \
+        apt-get update; \
+        apt-get install -y --no-install-recommends \
+                netcat-openbsd \
+                libldap-common \
+                libsasl2-modules \
+        ; \
+        \
+        apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+        rm -rf /var/lib/apt/lists/*
+RUN set -ex; \
+        apt-get install -y --no-install-recommends \
+                libldap2-dev \
+                libfreetype6-dev \
+                libjpeg-dev \
+                libonig-dev \
+                zlib1g-dev \
+                libc-client-dev \
+                libkrb5-dev \
+                libpng-dev \
+                libpq-dev \
+                libzip-dev \
+                libtidy-dev \
+                libsodium-dev \
+        ; \
+        \
+        debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
+        docker-php-ext-configure gd --with-freetype --with-jpeg; \
+        docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
+        docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
+        docker-php-ext-install -j "$(nproc)" \
+                exif \
+                gd \
+                imap \
+                ldap \
+                mbstring \
+                pdo \
+                pdo_mysql \
+                pdo_pgsql \
+                pgsql \
+                sodium \
+                tidy \
+                zip \
+        ; \
+        apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+        rm -rf /var/lib/apt/lists/*
 COPY --from=build /src/limesurvey /var/www/limesurvey
 RUN chown unit:unit -R /var/www/limesurvey
 COPY --chmod=555 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh 
