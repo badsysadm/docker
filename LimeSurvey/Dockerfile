@@ -16,6 +16,7 @@ RUN set -ex; \
         apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
         rm -rf /var/lib/apt/lists/*
 RUN set -ex; \
+        apt-get update; \
         apt-get install -y --no-install-recommends \
                 libldap2-dev \
                 libfreetype6-dev \
