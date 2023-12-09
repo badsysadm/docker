@@ -8,5 +8,5 @@ FROM nginx/unit:1.29.1-php8.1 AS base
 COPY --from=build /src/limesurvey /var/www/limesurvey
 RUN chown unit:unit -R /var/www/limesurvey
 COPY --chmod=555 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh 
-COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/docker-entrypoint.d
+COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/docker-entrypoint.d/unit.limesurvey.json
 #COPY --from=build --chmod=750 --chown=unit:unit /var/lib/limesurvey/* /var/lib/limesurvey/
