@@ -23,7 +23,7 @@ curl_put()
 }
 
 if [ "$1" = "unitd" ] || [ "$1" = "unitd-debug" ]; then
-    if /usr/bin/find "/var/lib/$APPNAME/" -mindepth 1 -print -quit 2>/dev/null | /bin/grep -q .; then
+    if /usr/bin/find "/var/lib/$APPNAME/" -mindepth 1 -print -quit 2>/dev/null | /bin/grep -q . | false; then
         echo "$0: /var/lib/$APPNAME/ is not empty, skipping initial configuration..."
     else
         if /usr/bin/find "/var/lib/$APPNAME/docker-entrypoint.d/" -mindepth 1 -print -quit 2>/dev/null | /bin/grep -q .; then
