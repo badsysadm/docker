@@ -6,4 +6,4 @@ RUN wget -qO- https://download.limesurvey.org/latest-master/limesurvey6.3.8+2312
 FROM nginx/unit:1.29.1-php8.1 AS base
 COPY --from=build /src/limesurvey /var/www/limesurvey
 RUN chown unit:unit -R /var/www/limesurvey
-COPY docker-entrypoint.sh --chmod=555 /usr/local/bin/docker-entrypoint.sh 
+COPY --chmod=555 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh 
