@@ -1,0 +1,48 @@
+{
+  "listeners": {
+    "*:8081": {
+      "pass": "applications/api"
+    }
+  },
+  "applications": {
+    "wordpress": {
+      "type": "php",
+      "user": "unit",
+      "group": "unit",
+      "targets": {
+        "direct": {
+          "root": "/var/www/limesurvey"
+        },
+        "index": {
+          "root": "/var/www/limesurvey",
+          "script": "index.php"
+        }
+      },
+      "options": {
+        "file": "/etc/php.ini",
+        "admin": {
+          "upload_max_filesize": "20M",
+          "expose_php": "0"
+        }
+      }
+    }
+  },
+  "settings": {
+    "http": {
+      "header_read_timeout": 10,
+      "body_read_timeout": 10,
+      "send_timeout": 10,
+      "idle_timeout": 120,
+      "max_body_size": 6291456,
+      "static": {
+        "mime_types": {
+          "text/plain": [
+            ".log",
+            "README",
+            "CHANGES"
+          ]
+        }
+      }
+    }
+  }
+}
