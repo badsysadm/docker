@@ -45,7 +45,7 @@
         }
       },
       "options": {
-        "file": "/etc/php.ini",
+        "file": "/var/www/limesurvey/php.ini",
         "admin": {
           "upload_max_filesize": "20M",
           "expose_php": "0"
