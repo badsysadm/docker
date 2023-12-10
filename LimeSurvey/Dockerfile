@@ -53,8 +53,9 @@ RUN set -ex; \
         apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
         rm -rf /var/lib/apt/lists/*
 COPY --from=build /src/limesurvey /var/www/limesurvey
-RUN chown unit:unit -R /var/www/limesurvey
+RUN mkdir -p /var/log/limesurvey
+RUN chown unit:unit -R /var/www/limesurvey /var/log/limesurvey 
 COPY --chmod=555 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh 
-COPY --chmod=666 php.ini /etc/php.ini
+COPY --chmod=666 --chown=unit:unit php.ini /var/www/limesurvey/php.ini
 COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/docker-entrypoint.d/unit.limesurvey.json
 #COPY --from=build --chmod=750 --chown=unit:unit /var/lib/limesurvey/* /var/lib/limesurvey/
