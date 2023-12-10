@@ -58,4 +58,6 @@ RUN chown unit:unit -R /var/www/limesurvey /var/log/limesurvey
 COPY --chmod=555 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh 
 COPY --chmod=666 --chown=unit:unit php.ini /var/www/limesurvey/php.ini
 COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/docker-entrypoint.d/unit.limesurvey.json
+COPY --chmod=660 --chown=unit:unit config.php /var/lib/limesurvey/config.php
+COPY --chmod=555 --chown=unit:unit env.sh /usr/local/bin/lime-env
 #COPY --from=build --chmod=750 --chown=unit:unit /var/lib/limesurvey/* /var/lib/limesurvey/
