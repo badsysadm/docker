@@ -82,5 +82,5 @@ if [ "$1" = "unitd" ] || [ "$1" = "unitd-debug" ]; then
         fi
     fi
 fi
-
+sh /usr/local/bin/lime-env
 exec "$@"
