@@ -8,7 +8,7 @@ APPNAME="limesurvey"
 
 curl_put()
 {
-    RET=$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @$1 --unix-socket /var/run/control.unit.sock http://localhost/$2)
+    RET=$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @$1 --unix-socket /run/unit/control.unit.sock http://localhost/$2)
     RET_BODY=$(echo $RET | /bin/sed '$ s/...$//')
     RET_STATUS=$(echo $RET | /usr/bin/tail -c 4)
     if [ "$RET_STATUS" -ne "200" ]; then
@@ -28,12 +28,12 @@ if [ "$1" = "unitd" ] || [ "$1" = "unitd-debug" ]; then
     else
         if /usr/bin/find "/var/lib/$APPNAME/docker-entrypoint.d/" -mindepth 1 -print -quit 2>/dev/null | /bin/grep -q .; then
             echo "$0: /var/lib/$APPNAME/docker-entrypoint.d/ is not empty, launching Unit daemon to perform initial configuration..."
-            /usr/sbin/$1 --control unix:/var/run/control.unit.sock
+            /usr/sbin/$1 --control unix:/run/unit/control.unit.sock --pid /run/unit/unit.pid --state /run/unit
 
-            while [ ! -S /var/run/control.unit.sock ]; do echo "$0: Waiting for control socket to be created..."; /bin/sleep 0.1; done
+            while [ ! -S /run/unit/control.unit.sock ]; do echo "$0: Waiting for control socket to be created..."; /bin/sleep 0.1; done
             # even when the control socket exists, it does not mean unit has finished initialisation
             # this curl call will get a reply once unit is fully launched
-            /usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
+            /usr/bin/curl -s -X GET --unix-socket /run/unit/control.unit.sock http://localhost/
 
             echo "$0: Looking for certificate bundles in /var/lib/$APPNAME/docker-entrypoint.d/..."
             for f in $(/usr/bin/find /var/lib/$APPNAME/docker-entrypoint.d/ -type f -name "*.pem"); do
@@ -59,19 +59,19 @@ if [ "$1" = "unitd" ] || [ "$1" = "unitd-debug" ]; then
             done
 
             echo "$0: Stopping Unit daemon after initial configuration..."
-            kill -TERM $(/bin/cat /var/run/unit.pid)
+            kill -TERM $(/bin/cat /run/unit/unit.pid)
 
             for i in $(/usr/bin/seq $WAITLOOPS); do
-                if [ -S /var/run/control.unit.sock ]; then
+                if [ -S /run/unit/control.unit.sock ]; then
                     echo "$0 Waiting for control socket to be removed..."
                     /bin/sleep $SLEEPSEC
                 else
                     break
                 fi
             done
-            if [ -S /var/run/control.unit.sock ]; then
-                kill -KILL $(/bin/cat /var/run/unit.pid)
-                rm -f /var/run/control.unit.sock
+            if [ -S /run/unit/control.unit.sock ]; then
+                kill -KILL $(/bin/cat /run/unit/unit.pid)
+                rm -f /run/unit/control.unit.sock
             fi
 
             echo
