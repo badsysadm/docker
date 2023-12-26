@@ -1,7 +1,7 @@
 FROM alpine:latest AS build
 RUN apk update && apk add git wget
 WORKDIR /src
-RUN wget -qO- https://download.limesurvey.org/latest-master/limesurvey6.3.8+231204.zip | busybox unzip -
+RUN wget -qO- https://download.limesurvey.org/latest-master/limesurvey6.4.0+231218.zip | busybox unzip -
 RUN mkdir -p /var/lib/limesurvey/docker-entrypoint.d
 
 FROM nginx/unit:1.29.1-php8.1 AS base
