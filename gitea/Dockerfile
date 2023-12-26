@@ -1,6 +1,6 @@
 FROM alpine:latest
 ENV GITEA_WORK_DIR /var/lib/gitea/
-RUN apt update && apk add git
+RUN apk update && apk add git
 RUN adduser \
    --system \
    --shell /bin/bash \
