@@ -60,4 +60,5 @@ COPY --chmod=666 --chown=unit:unit php.ini /var/www/limesurvey/php.ini
 COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/docker-entrypoint.d/unit.limesurvey.json
 COPY --chmod=660 --chown=unit:unit config.php /var/lib/limesurvey/config.php
 COPY --chmod=555 --chown=unit:unit env.sh /usr/local/bin/lime-env
+COPY limesurvey.service /etc/system/system/limesurvey.service
 #COPY --from=build --chmod=750 --chown=unit:unit /var/lib/limesurvey/* /var/lib/limesurvey/
