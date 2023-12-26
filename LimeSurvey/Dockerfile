@@ -61,4 +61,5 @@ COPY --chmod=750 --chown=unit:unit unit.limesurvey.json /var/lib/limesurvey/dock
 COPY --chmod=660 --chown=unit:unit config.php /var/lib/limesurvey/config.php
 COPY --chmod=555 --chown=unit:unit env.sh /usr/local/bin/lime-env
 COPY limesurvey.service /etc/systemd/system/limesurvey.service
+RUN chmod 777 /var/www/limesurvey/application/config/config.php
 #COPY --from=build --chmod=750 --chown=unit:unit /var/lib/limesurvey/* /var/lib/limesurvey/
