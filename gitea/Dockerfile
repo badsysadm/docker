@@ -1,5 +1,6 @@
 FROM alpine:latest
 ENV GITEA_WORK_DIR /var/lib/gitea/
+ENV HOME /var/lib/gitea
 RUN apk update && apk add git bash
 RUN adduser \
    --system \
@@ -17,4 +18,4 @@ RUN chmod 770 /etc/gitea
 RUN wget -O /usr/local/bin/gitea https://dl.gitea.com/gitea/1.21.2/gitea-1.21.2-linux-amd64
 RUN chmod +x /usr/local/bin/gitea
 COPY gitea.service /etc/systemd/system/gitea.service
-CMD ["/usr/local/bin/gitea", "web", "-c", "/etc/gitea/app.ini"]
+CMD ["/usr/local/bin/gitea", "web", "-c", "/etc/gitea/app.ini", "--work-path", "/var/lib/gitea"]
