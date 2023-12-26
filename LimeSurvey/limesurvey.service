@@ -6,9 +6,8 @@ Documentation=https://manual.limesurvey.org/LimeSurvey_Manual
 [Service]
 User=unit
 Group=unit
-WorkingDirectory=/var/lib/gitea/
 EnvironmentFile=-/etc/default/limesurvey
-ExecStart=sh /usr/local/bin/docker-entrypoint.sh unitd --no-daemon --control unix:/run/unit/control.unit.sock --pid /run/unit/unit.pid --state /run/unit/ --log /var/log/limesurvey/unit.log
+ExecStart=/bin/bash /usr/local/bin/docker-entrypoint.sh unitd --no-daemon --control unix:/run/unit/control.unit.sock --pid /run/unit/unit.pid --state /run/unit/ --log /var/log/limesurvey/unit.log
 RuntimeDirectory=unit
 LogsDirectory=%N
 ReadWritePaths=+/var/www/limesurvey/tmp
