@@ -6,7 +6,7 @@ RUN adduser \
    --shell /bin/bash \
    --gecos 'Git Version Control' \
    --disabled-password \
-   --home /home/git \
+   --home /var/lib/gitea \
    git
 RUN mkdir -p /var/lib/gitea/custom /var/lib/gitea/data /var/lib/gitea/log /etc/systemd/system/
 RUN chown -R git /var/lib/gitea/
