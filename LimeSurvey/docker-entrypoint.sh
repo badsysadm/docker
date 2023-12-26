@@ -28,7 +28,7 @@ if [ "$1" = "unitd" ] || [ "$1" = "unitd-debug" ]; then
     else
         if /usr/bin/find "/var/lib/$APPNAME/docker-entrypoint.d/" -mindepth 1 -print -quit 2>/dev/null | /bin/grep -q .; then
             echo "$0: /var/lib/$APPNAME/docker-entrypoint.d/ is not empty, launching Unit daemon to perform initial configuration..."
-            /usr/sbin/$1 --control unix:/run/unit/control.unit.sock --pid /run/unit/unit.pid --state /run/unit
+            /usr/sbin/$1 --control unix:/run/unit/control.unit.sock --pid /run/unit/unit.pid --state /run/unit --log /var/log/limesurvey/unit.log
 
             while [ ! -S /run/unit/control.unit.sock ]; do echo "$0: Waiting for control socket to be created..."; /bin/sleep 0.1; done
             # even when the control socket exists, it does not mean unit has finished initialisation
