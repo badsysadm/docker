@@ -5,7 +5,7 @@ RUN adduser \
    --system \
    --shell /bin/bash \
    --gecos 'Git Version Control' \
-   --group \
+   -G git \
    --disabled-password \
    --home /home/git \
    git
