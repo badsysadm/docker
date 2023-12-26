@@ -17,6 +17,13 @@ return array(
             'connectionID' => 'db',
             'sessionTableName' => '{{sessions}}',
         ),
+        'urlManager' => array(
+            'urlFormat' => 'get',
+            'rules' => array(
+            // You can put your own rules here
+            ),
+            'showScriptName' => true,
+        ),
     ),
     'config'=>array(
         'debug'=>0,
