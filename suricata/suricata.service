@@ -1,0 +1,20 @@
+[Unit]
+Description=Suricata IDS/IDP daemon
+After=network.target
+Requires=network.target
+Documentation=man:suricata(8) man:suricatasc(8)
+Documentation=https://suricata.readthedocs.io/
+
+[Service]
+Environment=OPTIONS='-c %E/%N/suricata.yaml -q 0'
+PIDFile=%t/%N/suricata.pid
+ExecStartPre=/usr/bin/suricata -T
+ExecStart=/usr/bin/suricata --pidfile %t/%N.pid $OPTIONS
+RuntimeDirectory=%N
+StateDirectory=%N
+ConfigurationDirectory=%N
+ConfigurationDirectoryMode=750
+LogsDirectory=%N
+
+[Install]
+WantedBy=multi-user.target
