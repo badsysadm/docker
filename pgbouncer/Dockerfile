@@ -39,4 +39,4 @@ COPY --from=build /src/pgbouncer/userlist.txt /etc/pgbouncer/userlist.txt
 COPY --from=build /src/pgbouncer/passwd /etc/passwd
 COPY --from=build /share/doc/pgbouncer/pgbouncer.service /share/doc/pgbouncer/pgbouncer.socket /etc/systemd/system/
 USER postgres
-COPY --from=build /bin/pgbouncer /bin/pgbouncer
+COPY --from=build /bin/pgbouncer /usr/bin/pgbouncer
