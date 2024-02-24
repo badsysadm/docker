@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily checking rss feeds
+ConditionPathExists=/var/lib/rss2email/
+
+[Timer]
+OnCalendar=*-*-* 13:00:00
+
+[Install]
+WantedBy=multi-user.target

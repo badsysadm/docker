@@ -1,0 +1,14 @@
+[Unit]
+Description=Forward RSS feeds to your email address, community maintained
+After=network.target
+Requires=network.target
+Documentation=https://pypi.org/project/rss2email/
+
+[Service]
+ExecStartPre=/bin/bash -c "r2e -c /var/lib/rss2email/config -d /var/lib/rss2email/index new | true"
+ExecStart=r2e -c /var/lib/rss2email/config -d /var/lib/rss2email/index run
+StateDirectory=%N
+ConfigurationDirectory=%N
+
+[Install]
+WantedBy=multi-user.target
