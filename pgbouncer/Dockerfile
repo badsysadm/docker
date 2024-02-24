@@ -37,6 +37,7 @@ COPY --from=build /lib/x86_64-linux-gnu/libevent-2.1.so.7  /lib/x86_64-linux-gnu
 COPY --from=build /share/doc/pgbouncer/pgbouncer-minimal.ini /etc/pgbouncer/pgbouncer.ini
 COPY --from=build /src/pgbouncer/userlist.txt /etc/pgbouncer/userlist.txt
 COPY --from=build /src/pgbouncer/passwd /etc/passwd
+COPY --from=build /etc/os-release /etc/os-release
 COPY --from=build /share/doc/pgbouncer/pgbouncer.service /share/doc/pgbouncer/pgbouncer.socket /etc/systemd/system/
 USER postgres
 COPY --from=build /bin/pgbouncer /usr/bin/pgbouncer
