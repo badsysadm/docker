@@ -112,6 +112,7 @@ WORKDIR /
 #RUN chmod +x /busybox
 RUN cp -rfv /opt/htdocs /var/lib/httpd/
 RUN chown 65534:65534 -R /opt/logs /var/lib/httpd/
+RUN mkdir -m 777 -p /tmp/httpd /var/run/httpd
 
 FROM scratch
 ENV HTTPD_PORT=8080
@@ -128,7 +129,8 @@ COPY httpd.conf /conf/httpd.conf
 COPY --from=base /usr/local/apr/lib/apr-util-1/apr_crypto_openssl-1.so /usr/local/apr/lib/apr-util-1/apr_crypto_openssl-1.so
 #COPY --from=base /busybox /bin/busybox
 COPY --from=base /var/lib/httpd /var/lib/httpd
-RUN --mount=from=busybox:latest,src=/bin/,dst=/bin/ mkdir -m 777 -p /tmp/httpd /var/run/httpd
+COPY --from=base --chmod=777 /tmp/httpd /
+COPY --from=base --chmod=777 /var/run/httpd /
 
 USER nobody
 CMD ["/bin/httpd", "-d", "/", "-D", "FOREGROUND"]
