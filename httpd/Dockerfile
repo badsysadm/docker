@@ -1,5 +1,5 @@
 FROM debian:12.4 AS base
-RUN apt-get update && apt upgrade && apt install -y wget gcc make libexpat1-dev libpcre3 libldap-dev libssl-dev libxml2-dev libc-ares2
+RUN apt-get update && apt-get upgrade -y && apt-get install -y wget gcc make libexpat1-dev libpcre3 libldap-dev libssl-dev libxml2-dev libc-ares2
 WORKDIR /src
 RUN wget https://dlcdn.apache.org/apr/apr-1.7.4.tar.gz
 RUN tar -zxvf apr-1.7.4.tar.gz
@@ -20,7 +20,7 @@ WORKDIR /src
 RUN wget https://dlcdn.apache.org/httpd/httpd-2.4.58.tar.gz
 RUN tar -zxvf httpd-2.4.58.tar.gz
 WORKDIR httpd-2.4.58
-RUN apt install -y libpcre3-dev libcurl4-openssl-dev libssl-dev libjansson-dev libc-ares-dev libpcre3
+RUN apt-get install -y libpcre3-dev libcurl4-openssl-dev libssl-dev libjansson-dev libc-ares-dev libpcre3
 RUN ./configure --with-apr=/usr/local/apr --prefix="" --disable-shared --disable-so -enable-mods-static=all --enable-ssl-staticlib-deps --enable-md=false
 RUN make
 ENV DESTDIR=/opt
