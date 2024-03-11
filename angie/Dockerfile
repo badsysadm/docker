@@ -104,12 +104,15 @@ RUN ./configure \
 RUN make -j 4
 RUN make install
 WORKDIR /tmp/root
-RUN mkdir -p lib64 usr/lib tmp
+RUN mkdir -p lib64 usr/lib tmp var/log/angie
 RUN cp -v   /lib64/ld-linux-x86-64.so.2                                            -t lib64
 RUN ldd usr/sbin/angie  | awk '/=>/ {print $3}' | xargs cp -vf --copy-contents     -t usr/lib
 RUN echo "nobody:x:65534:65534:System user; nobody:/var/empty:/sbin/nologin" > etc/passwd && echo "nogroup:x:65534:" > etc/group
 #RUN wget  https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox -O usr/sbin/busybox
 #RUN chmod +x usr/sbin/busybox
+RUN cd ./etc && ln -s ./angie ./nginx && cd ./angie && ln -s angie.conf nginx.conf && cd ../.. && cd var/log && ln -s ./angie ./nginx
+RUN cp -v /etc/os-release etc/os-release
+COPY angie.service etc/systemd/system/angie.service
 
 FROM debian:trixie-20240211-slim AS lua
 WORKDIR /src
