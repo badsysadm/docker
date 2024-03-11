@@ -32,6 +32,8 @@ RUN git clone --depth=1 --branch 1.0              https://github.com/openresty/n
 #RUN git clone --depth=1 --branch 3.8.0            https://github.com/apache/apisix.git                        apisix
 #RUN git clone --depth=1 --branch v0.6.0           https://github.com/nginx-clojure/nginx-clojure.git          nginx-clojure
 #RUN git clone --depth=1 --branch v0.2.0           https://github.com/arut/nginx-python-module.git             nginx-python
+RUN git clone --depth=1 --branch v0.4.0           https://github.com/yaoweibin/nginx_upstream_check_module.git check_module
+#RUN git clone --depth=1 --branch v0.2.2           https://github.com/vozlt/nginx-module-vts.git               nginx-module-vts
 WORKDIR /src/build
 ENV LUAJIT_LIB=./LuaJIT/build/lib/ LUAJIT_INC=./LuaJIT/build/include/luajit-2.1/ DESTDIR="/tmp/root"
 
@@ -94,6 +96,8 @@ RUN ./configure \
   --add-module=$(pwd)/ngx_postgres \
 #  --add-module=$(pwd)/nginx-clojure/src/c \
 #  --add-module=$(pwd)/nginx-python \
+  --add-module=$(pwd)/check_module \
+#  --add-module=$(pwd)/nginx-module-vts \
   --with-openssl=$(pwd)/openssl \
   --with-compat
 
