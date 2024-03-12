@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y git build-essential autoconf libssl-dev
 
 #RUN git clone --depth=1 --branch release-1.25.4   https://github.com/nginx/nginx.git                          build
 
-RUN wget -c http://nginx.org/download/nginx-1.25.4.tar.gz -O nginx.tar.gz && tar -zxf nginx.tar.gz && mv nginx-1.25.4 build
+RUN wget -c http://nginx.org/download/nginx-1.24.0.tar.gz -O nginx.tar.gz && tar -zxf nginx.tar.gz && mv nginx-1.25.4 build
 #FROM scratch
 # wget -c http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz -O - | tar -xz
 
@@ -167,6 +167,10 @@ RUN find /usr \( -type f -o -type l \) -a \( \
                          -o -name "libwpire.so.*" \
                          -o -name "libparserutils.so.*" \
                          -o -name "libicudata.so.*" \
+                         -o -name "liblzma.so*" \
+                         -o -name "libdl.so*" \
+                         -o -name "libpthread.so*" \
+                         -o -name "libz.so*" \
      \) \) \) -exec cp {} . \;
 
 
