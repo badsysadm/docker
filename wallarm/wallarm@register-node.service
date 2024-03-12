@@ -1,0 +1,12 @@
+[Unit]
+Description=Register wallarm webmonitorx node
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/default/default
+Type=oneshot
+ExecStart=/usr/share/wallarm-common/register-node -t $WALLARM_TOKEN -H $WALLARM_API --name $WALLARM_HOSTNAME --filtering-only
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
