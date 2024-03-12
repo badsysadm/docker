@@ -4,8 +4,9 @@ RUN apt-get update && apt-get install -y git build-essential autoconf libssl-dev
 #RUN git clone --depth=1 --branch Angie-1.4.1      https://github.com/webserver-llc/angie.git                  build
 
 #RUN git clone --depth=1 --branch release-1.25.4   https://github.com/nginx/nginx.git                          build
+ENV NGINX_VERSION="1.24.0"
 
-RUN wget -c http://nginx.org/download/nginx-1.24.0.tar.gz -O nginx.tar.gz && tar -zxf nginx.tar.gz && mv nginx-1.25.4 build
+RUN wget -c http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz -O nginx.tar.gz && tar -zxf nginx.tar.gz && mv nginx-${NGINX_VERSION} build
 #FROM scratch
 # wget -c http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz -O - | tar -xz
 
