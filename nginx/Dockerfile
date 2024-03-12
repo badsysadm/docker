@@ -74,7 +74,7 @@ RUN ./configure \
   --with-http_stub_status_module \
   --with-http_sub_module \
   --with-http_v2_module \
-  --with-http_v3_module \
+#  --with-http_v3_module \
   --without-http_fastcgi_module \
   --without-http_memcached_module \
   --without-http_scgi_module \
