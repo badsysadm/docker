@@ -1,0 +1,16 @@
+[Unit]
+Description=Wallarm collectd statistics daemon
+Documentation=man:collectd(1) man:collectd.conf(5)
+After=local-fs.target network.target
+Requires=local-fs.target network.target
+
+[Service]
+ExecStart=/usr/sbin/collectd -C /etc/collectd/wallarm-collectd.conf -f
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+StateDirectory=wallarm-collectd
+
+[Install]
+WantedBy=multi-user.target

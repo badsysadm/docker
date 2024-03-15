@@ -133,11 +133,6 @@ RUN for folder in $(ls); do cd "/src/$folder"; make install; done
 RUN git clone --depth=1 --branch v2.0             https://github.com/bungle/lua-resty-template.git                 lua-resty-template
 RUN cp -rfv ./lua-resty-template/lib/resty/* "$LUA_LIB_DIR/"
 
-#FROM scratch AS nginx
-#COPY --from=build /tmp/root /
-#COPY --from=lua /usr/local/share/lua/5.1/ /usr/local/share/lua/5.1/
-#CMD ["/usr/sbin/nginx"]
-
 FROM wallarm
 COPY --from=build /src/build/LuaJIT/build/ /
 COPY --from=build /tmp/root/usr/sbin/nginx /usr/sbin/
@@ -145,5 +140,6 @@ COPY --from=lua /usr/local/share/lua/5.1/ /usr/local/share/lua/5.1/
 RUN apt-get update -y && apt-get upgrade -y
 RUN rm -rfv ls /etc/nginx/modules-enabled/50-mod-http-echo.conf /etc/nginx/modules-enabled/50-mod-http-geoip.conf /etc/nginx/modules-enabled/50-mod-mail.conf /etc/nginx/modules-enabled/50-mod-stream.conf /etc/nginx/modules-enabled/70-mod-stream-geoip.conf
 RUN chmod 777 /var/lib/wallarm-tarantool -R
-COPY wallarm.service /etc/systemd/system/
-#COPY --from=nginx / /opt/
+COPY wallarm.service wallarm-antibotapiextractor.service wallarm-collectd.service wallarm-registernode.service wallarm-tarantool.service wallarm-syncnode.service wallarm-iplists.service wallarm-export-metrics.service wallarm-export-environments.service wallarm-iplists-source.service wallarm-syncmarkers.service wallarm-export-attacks.service wallarm-export-counters.service wallarm-brute-detect.service wallarm-weak-jwt-detect.service /etc/systemd/system/
+RUN mkdir -p /var/lib/wallarm-collectd/
+COPY --chmod=555 init-portable /usr/local/bin/

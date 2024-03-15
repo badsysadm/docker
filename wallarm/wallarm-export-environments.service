@@ -1,0 +1,15 @@
+[Unit]
+Description=Wallarm webmonitorx
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/wallarm
+BindPaths=/etc/wallarm /etc/hosts /var/lib/wallarm /var/lib/wallarm-acl
+ReadWritePaths=/etc/wallarm /var/lib/wallarm /var/lib/wallarm-acl
+ExecStart=timeout -k 15s 10m /usr/share/wallarm-common/export-environment
+StandardOutput=journal
+LogsDirectory=wallarm
+
+[Install]
+WantedBy=multi-user.target
