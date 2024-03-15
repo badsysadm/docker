@@ -1,0 +1,12 @@
+[Unit]
+Description=Wallarm webmonitorx supervisord
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/default/default
+#Type=oneshot
+ExecStart=/usr/local/bin/init
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
