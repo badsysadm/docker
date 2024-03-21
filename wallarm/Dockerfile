@@ -3,12 +3,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get purge -y logrotate
 RUN sed 's/buster/bullseye/g' -i /etc/apt/sources.list.d/webmonitorx-node.list && \
     echo 'deb http://deb.debian.org/debian bullseye main non-free contrib' > /etc/apt/sources.list
-RUN apt-get update -y  && apt-get full-upgrade -y && apt-get install -y libpq-dev libssl-dev libpcre2-dev zlib1g-dev libpq-dev libgeoip-dev
+RUN apt-get update -y  && apt-get full-upgrade -y && apt-get install -y libpq-dev libssl-dev libpcre2-dev zlib1g-dev libpq-dev libgeoip-dev && rm -rfv /var/lock
 
 FROM wallarm AS build
 WORKDIR /src
 RUN apt-get update && apt-get install -y git build-essential autoconf libssl-dev libpcre2-dev zlib1g-dev libpq-dev libgeoip-dev python3 python3-dev wget
-RUN rm -rfv /var/lock
 #openjdk-23-jdk-headless python3 python3-dev wget
 RUN wget  https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox -O /usr/sbin/busybox && chmod +x /usr/sbin/busybox
 ARG NGINX_VERSION="1.18.0"
