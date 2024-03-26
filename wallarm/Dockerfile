@@ -113,7 +113,7 @@ RUN ldd usr/sbin/nginx  | awk '/=>/ {print $3}' | xargs cp -vf --copy-contents  
 RUN echo "nobody:x:65534:65534:System user; nobody:/var/empty:/sbin/nologin"        > etc/passwd && \
     echo "nogroup:x:65534:"                                                         > etc/group
 RUN cp -v /etc/os-release etc/os-release
-COPY nginx.service etc/systemd/system/nginx.service
+#COPY nginx.service etc/systemd/system/nginx.service
 
 FROM debian:trixie-20240211-slim AS lua
 WORKDIR /src
@@ -140,6 +140,6 @@ COPY --from=lua /usr/local/share/lua/5.1/ /usr/local/share/lua/5.1/
 RUN apt-get update -y && apt-get upgrade -y
 RUN rm -rfv ls /etc/nginx/modules-enabled/50-mod-http-echo.conf /etc/nginx/modules-enabled/50-mod-http-geoip.conf /etc/nginx/modules-enabled/50-mod-mail.conf /etc/nginx/modules-enabled/50-mod-stream.conf /etc/nginx/modules-enabled/70-mod-stream-geoip.conf
 RUN chmod 777 /var/lib/wallarm-tarantool -R
-COPY wallarm.service wallarm-antibotapiextractor.service wallarm-collectd.service wallarm-registernode.service wallarm-tarantool.service wallarm-syncnode.service wallarm-iplists.service wallarm-export-metrics.service wallarm-export-environments.service wallarm-iplists-source.service wallarm-syncmarkers.service wallarm-export-attacks.service wallarm-export-counters.service wallarm-brute-detect.service wallarm-weak-jwt-detect.service /etc/systemd/system/
+COPY wallarm.service wallarm-antibotapiextractor.service wallarm-collectd.service wallarm-registernode.service wallarm-tarantool.service wallarm-syncnode.service wallarm-iplists.service wallarm-export-metrics.service wallarm-export-environments.service wallarm-iplists-source.service wallarm-syncmarkers.service wallarm-export-attacks.service wallarm-export-counters.service wallarm-brute-detect.service wallarm-weak-jwt-detect.service wallarm-nginx.service /etc/systemd/system/
 RUN mkdir -p /var/lib/wallarm-collectd/
 COPY --chmod=555 init-portable /usr/local/bin/
