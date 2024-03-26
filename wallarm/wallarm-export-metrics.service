@@ -7,7 +7,7 @@ After=network.target
 EnvironmentFile=-/etc/default/wallarm
 BindPaths=/etc/wallarm /etc/hosts /var/lib/wallarm /var/lib/wallarm-acl
 ReadWritePaths=/etc/wallarm /var/lib/wallarm /var/lib/wallarm-acl
-ExecStart=timeout -k 15s 3h /usr/share/wallarm-common/export-metrics
+ExecStart=/usr/share/wallarm-common/export-metrics
 StandardOutput=journal
 LogsDirectory=wallarm
 
