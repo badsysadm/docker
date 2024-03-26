@@ -3,7 +3,7 @@ Description=Wallarm webmonitorx
 After=network.target
 
 [Service]
-Type=oneshot
+#Type=oneshot
 EnvironmentFile=-/etc/default/wallarm
 BindPaths=/etc/wallarm /etc/hosts /var/lib/wallarm /var/lib/wallarm-acl
 ReadWritePaths=/etc/wallarm /var/lib/wallarm /var/lib/wallarm-acl
