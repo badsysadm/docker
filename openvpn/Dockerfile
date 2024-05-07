@@ -8,7 +8,7 @@ RUN emerge -v =net-vpn/openvpn-2.6.9
 #ENV USE="curl gpg -blksha1 -cgi -cvs -doc -highlight -iconv -keyring -mediawiki -nls -pcre -perforce -perl -safe-directory (-selinux) -subversion -test -tk -webdav -xinetd"
 #RUN emerge -v dev-vcs/git dev-build/make
 WORKDIR /tmp/openvpn
-RUN mkdir -p lib64 usr/bin etc/openvpn{client,server} etc/systemd/system tmp
+RUN mkdir -p lib64 bin usr/bin etc/openvpn{client,server} etc/systemd/system tmp
 RUN cp -v   /lib64/ld-linux-x86-64.so.2                                              -t lib64
 RUN ldd /usr/bin/openvpn | grep -v 'linux-vdso' |awk '/=>/ {print $3}' | xargs cp -v --copy-contents -t lib64/
 RUN ldd /usr/bin/ip | grep -v 'linux-vdso' |awk '/=>/ {print $3}' | xargs cp -v --copy-contents -t lib64/
