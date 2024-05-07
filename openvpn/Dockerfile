@@ -11,6 +11,8 @@ WORKDIR /tmp/openvpn
 RUN mkdir -p lib64 usr/bin etc/openvpn{client,server} etc/systemd/system tmp
 RUN cp -v   /lib64/ld-linux-x86-64.so.2                                              -t lib64
 RUN ldd /usr/bin/openvpn | grep -v 'linux-vdso' |awk '/=>/ {print $3}' | xargs cp -v --copy-contents -t lib64/
+RUN ldd /usr/bin/ip | grep -v 'linux-vdso' |awk '/=>/ {print $3}' | xargs cp -v --copy-contents -t lib64/
+RUN cp -v /usr/bin/ip usr/bin/ip
 RUN cp -v /usr/bin/openvpn usr/bin/openvpn
 RUN cp -rfv /lib/systemd/system/openvpn-server@.service /lib/systemd/system/openvpn-client@.service -t etc/systemd/system
 
@@ -27,6 +29,7 @@ RUN make
 RUN make install
 RUN mkdir -p /tmp/ldap-auth/lib
 WORKDIR /tmp/ldap-auth
+RUN cp -rfv /lib/openvpn-auth-ldap.so lib/openvpn-auth-ldap.so
 RUN ldd /lib/openvpn-auth-ldap.so | grep -v 'linux-vdso' |awk '/=>/ {print $3}' | xargs cp -v --copy-contents -t lib/
 
 FROM scratch
