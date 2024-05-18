@@ -1,8 +1,10 @@
 FROM debian:trixie-20240211-slim AS build
 WORKDIR /src
 RUN apt-get update && apt-get install -y git build-essential autoconf libssl-dev libpcre2-dev zlib1g-dev libpq-dev libgeoip-dev openjdk-23-jdk-headless python3 python3-dev wget
-RUN git clone --depth=1 --branch Angie-1.4.1      https://github.com/webserver-llc/angie.git                  build
+RUN git clone --depth=1 --branch Angie-1.5.1      https://github.com/webserver-llc/angie.git                  build
+
 #RUN git clone --depth=1 --branch release-1.25.4   https://github.com/nginx/nginx.git                          build
+
 #RUN wget -c http://nginx.org/download/nginx-1.25.4.tar.gz -O nginx.tar.gz && tar -zxf nginx.tar.gz && mv nginx-1.25.4 build
 #FROM scratch
 # wget -c http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz -O - | tar -xz
@@ -132,14 +134,45 @@ RUN for folder in $(ls); do cd "/src/$folder"; make install; done
 RUN git clone --depth=1 --branch v2.0             https://github.com/bungle/lua-resty-template.git                 lua-resty-template
 RUN cp -rfv ./lua-resty-template/lib/resty/* "$LUA_LIB_DIR/"
 
-FROM debian:bullseye-20240211-slim AS waf
-RUN apt-get update -y && apt-get install -y dirmngr curl
-RUN curl -fsSL https://repo.webmonitorx.ru/wmx.gpg | apt-key add -
-RUN sh -c "echo 'deb https://repo.webmonitorx.ru/debian/webmonitorx-node bullseye/4.6/' | tee /etc/apt/sources.list.d/wmx.list"
-RUN apt-get update -y && apt-get install -y --no-install-recommends wallarm-node-nginx nginx-module-wallarm
+#FROM debian:bullseye-20240211-slim AS waf
+#RUN apt-get update -y && apt-get install -y dirmngr curl
+#RUN curl -fsSL https://repo.webmonitorx.ru/wmx.gpg | apt-key add -
+#RUN sh -c "echo 'deb https://repo.webmonitorx.ru/debian/webmonitorx-node bullseye/4.6/' | tee /etc/apt/sources.list.d/wmx.list"
+#RUN apt-get update -y && apt-get install -y --no-install-recommends wallarm-node-nginx nginx-module-wallarm
+#WORKDIR /out
+#RUN find /usr -type f \( -not -name "*.py" -a \( \
+#                         -name "libconfig.so*" \
+#                         -o -name "libproton.so*" \
+#                         -o -name "libtws.so.*" \
+#                         -o -name "libwacl.so.*" \
+#                         -o -name "libwlog.so.*" \
+#                         -o -name "libyaml-0.so.*" \
+#                         -o -name "libxml2.so.*" \
+#                         -o -name "libcrypto.so.*" \
+#                         -o -name "libwyajl.so.*" \
+#                         -o -name "libz.so.*" \
+#                         -o -name "libbrotlidec.so.*" \
+#                         -o -name "libcpire.so.*" \
+#                         -o -name "libstdc++.so.*" \
+#                         -o -name "libpthread.so.*" \
+#                         -o -name "libdetection.so.*" \
+#                         -o -name "libhubbub.so.*" \
+#                         -o -name "libsqlite3.so.*" \
+#                         -o -name "libmaxminddb.so.*" \
+#                         -o -name "libicuuc.so.*" \
+#                         -o -name "liblzma.so.*" \
+#                         -o -name "libdl.so.*" \
+#                         -o -name "libbrotlicommon.so.*" \
+#                         -o -name "libwpire.so.*" \
+#                         -o -name "libparserutils.so.*" \
+#                         -o -name "libicudata.so.*" \
+#     \) \) -exec cp {} . \;
+
 
 FROM scratch
 COPY --from=build /tmp/root /
 COPY --from=lua /usr/local/share/lua/5.1/ /usr/local/share/lua/5.1/
-COPY --from=waf /usr/lib/nginx/modules/ngx_http_wallarm_module.so /usr/lib/nginx/modules/ngx_http_wallarm_module.so
+#COPY --from=waf /usr/lib/nginx/modules/ngx_http_wallarm_module.so /usr/lib/nginx/modules/ngx_http_wallarm_module.so
+#COPY --from=waf /usr/lib/nginx/modules/ngx_http_wallarm_module.so /var/lib/angie/modules/ngx_http_wallarm_module.so
+#COPY --from=waf /out/* /usr/lib/
 CMD ["/usr/sbin/angie"]
