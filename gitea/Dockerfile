@@ -15,7 +15,7 @@ RUN chmod -R 750 /var/lib/gitea/
 RUN mkdir /etc/gitea
 RUN chown git /etc/gitea
 RUN chmod 770 /etc/gitea
-RUN wget -O /usr/local/bin/gitea https://dl.gitea.com/gitea/1.21.2/gitea-1.21.2-linux-amd64
+RUN wget -O /usr/local/bin/gitea https://dl.gitea.com/gitea/1.21.11/gitea-1.21.2-linux-amd64
 RUN chmod +x /usr/local/bin/gitea
 COPY gitea.service /etc/systemd/system/gitea.service
 CMD ["/usr/local/bin/gitea", "web", "-c", "/etc/gitea/app.ini", "--work-path", "/var/lib/gitea"]
