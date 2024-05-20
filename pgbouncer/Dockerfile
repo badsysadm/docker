@@ -12,7 +12,7 @@ ARG PGBOUNCER_BRANCH=master
 RUN git checkout $PGBOUNCER_BRANCH
 RUN git submodule init && git submodule update
 RUN ./autogen.sh
-RUN ./configure --with-pam --with-systemd --with-ldap --prefix="" --sysconfdir="/etc/pgbouncer/"
+RUN ./configure --with-pam --with-systemd --with-ldap=yes --prefix="" --sysconfdir="/etc/pgbouncer/"
 RUN make
 RUN make install
 #RUN touch userlist.txt
