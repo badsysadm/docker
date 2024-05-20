@@ -1,14 +1,14 @@
 FROM debian:trixie-20240211-slim AS build
 WORKDIR /src
-RUN apt-get update && apt-get install -y git autoconf pkg-config libssl-dev make python3 pandoc
-RUN apt-get install -y libtool libevent-dev libsystemd-dev libpam-dev
+RUN apt-get update && apt-get install -y git autoconf pkg-config libssl-dev make python3 pandoc > /dev/null
+RUN apt-get install -y libtool libevent-dev libsystemd-dev libpam-dev > /dev/null
 #ARG PGBOUNCER_REPO=https://github.com/pgbouncer/pgbouncer.git
 ARG PGBOUNCER_REPO=https://github.com/zhaorui20005/pgbouncer-postgres.git
 ARG PGBOUNCER_BRANCH=zhaorui_ldap_for_upstream
 RUN git clone -b $PGBOUNCER_BRANCH  $PGBOUNCER_REPO pgbouncer
 
 WORKDIR /src/pgbouncer
-ARG PGBOUNCER_BRANCH=master
+#ARG PGBOUNCER_BRANCH=master
 RUN git checkout $PGBOUNCER_BRANCH
 RUN git submodule init && git submodule update
 RUN ./autogen.sh
