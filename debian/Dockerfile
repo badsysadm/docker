@@ -10,6 +10,7 @@ ARG NETDEV_WAN=eth0
 ARG NETDEV_LAN=eth1
 ARG DNS="8.8.8.8 8.8.4.4"
 ARG ROUTE_GATEWAY
+RUN apt-get update && apt-get install -y locales linux-image-amd64 
 #RUN apt-get update && apt-get install -y mc apt-transport-https ca-certificates curl gnupg2 software-properties-common \
 #                                         sudo openssl wget psmisc net-tools python3 python3-pip bash-completion jq ethtool ssh locales linux-image-amd64 tcpdump vim nano
 COPY authorized_keys /root/.ssh/authorized_keys
