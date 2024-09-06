@@ -12,7 +12,7 @@ ARG DNS="8.8.8.8 8.8.4.4"
 ARG NTP="ntp1.selectel.org ntp2.selectel.org"
 ARG ROUTE_GATEWAY
 ARG ROOT_PASSWORD
-RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl wget nano iputils-ping iproute2 openssh-server htop lsb-release psmisc sudo gnupg2 apt-transport-https mc 
+RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl wget nano iputils-ping iproute2 openssh-server htop btop lsb-release psmisc sudo gnupg2 apt-transport-https mc 
 COPY authorized_keys /root/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
 RUN chmod 0600 -R /root/.ssh
