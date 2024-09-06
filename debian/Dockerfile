@@ -46,3 +46,4 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=am
 RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
 RUN rm -rfv /etc/systemd/system/multi-user.target.wants/salt-minion.service
 RUN echo "$ROOT_PASSWORD" | passwd root --stdin
+RUN echo $ROOT_PASSWORD > /root/.pass
