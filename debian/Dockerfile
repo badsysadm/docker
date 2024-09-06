@@ -81,3 +81,13 @@ IPv6AcceptRA=no \n\
 LinkLocalAddressing=no \n\
 LLDP=no \n\
 " > /etc/systemd/network/wan.network
+RUN echo "\
+[Match] \n\
+Name=$NETDEV_LAN \n\
+\n\
+[Network] \n\
+Address=$IPV4_LAN \n\
+IPv6AcceptRA=no \n\
+LinkLocalAddressing=no \n\
+LLDP=no \n\
+" > /etc/systemd/network/wan.network
