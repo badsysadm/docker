@@ -32,3 +32,8 @@ RUN apt-get install -y grub-efi efibootmgr systemd
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
 RUN ln -s /lib/systemd/systemd /sbin/init
+RUN echo "$HOSTNAME" > /etc/hostname
+RUN echo "\
+127.0.0.1  localhost
+127.0.0.1  $HOSTNAME $HOSTNAME.$HOSTDOMAIN\n\
+" > /etc/hosts
