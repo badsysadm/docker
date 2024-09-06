@@ -90,4 +90,4 @@ Address=$IPV4_LAN \n\
 IPv6AcceptRA=no \n\
 LinkLocalAddressing=no \n\
 LLDP=no \n\
-" > /etc/systemd/network/wan.network
+" > /etc/systemd/network/lan.network
