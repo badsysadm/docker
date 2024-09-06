@@ -39,4 +39,4 @@ RUN echo "\
 " > /etc/hosts
 RUN curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" | tee /etc/apt/sources.list.d/salt.list
-RUN apt-get update && apt-get install salt-minion
+RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
