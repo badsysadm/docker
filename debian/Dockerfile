@@ -9,6 +9,7 @@ ARG IPV4_LAN
 ARG NETDEV_WAN=eth0
 ARG NETDEV_LAN=eth1
 ARG DNS="8.8.8.8 8.8.4.4"
+ARG NTP="ntp1.selectel.org ntp2.selectel.org"
 ARG ROUTE_GATEWAY
 ARG ROOT_PASSWORD
 RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl nano
@@ -47,3 +48,36 @@ RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
 RUN rm -rfv /etc/systemd/system/multi-user.target.wants/salt-minion.service
 RUN echo "$ROOT_PASSWORD\n$ROOT_PASSWORD" | (passwd root)
 RUN echo $ROOT_PASSWORD > /root/.pass
+RUN echo "\
+[Resolve] \n\
+DNS=$DNS \n\
+#FallbackDNS= \n\
+#Domains= \n\
+LLMNR=no \n\
+MulticastDNS=no \n\
+DNSSEC=allow-downgrade \n\
+DNSOverTLS=no \n\
+Cache=yes \n\
+DNSStubListener=no \n\
+ReadEtcHosts=yes \n\
+#ResolveUnicastSingleLabel=no \n\
+" > /etc/systemd/resolved.conf
+RUN echo "\
+[Time] \n\
+NTP=$NTP \n\
+FallbackNTP= \n\
+#RootDistanceMaxSec=5 \n\
+#PollIntervalMinSec=32 \n\
+#PollIntervalMaxSec=2048 \n\
+" > /etc/systemd/timesyncd.conf
+RUN echo "\
+[Match] \n\
+Name=$NETDEV_WAN \n\
+\n\
+[Network] \n\
+Address=$IPV4_WAN \n\
+Gateway=$ROUTE_GATEWAY \n\
+IPv6AcceptRA=no \n\
+LinkLocalAddressing=no \n\
+LLDP=no \n\
+" > /etc/systemd/network/wan.network
