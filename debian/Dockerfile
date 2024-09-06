@@ -12,9 +12,7 @@ ARG DNS="8.8.8.8 8.8.4.4"
 ARG NTP="ntp1.selectel.org ntp2.selectel.org"
 ARG ROUTE_GATEWAY
 ARG ROOT_PASSWORD
-RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl nano iputils-ping iproute2 openssh-server htop lsb-release
-#RUN apt-get update && apt-get install -y mc apt-transport-https ca-certificates curl gnupg2 software-properties-common \
-#                                         sudo openssl wget psmisc net-tools python3 python3-pip bash-completion jq ethtool ssh locales linux-image-amd64 tcpdump vim nano
+RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl wget nano iputils-ping iproute2 openssh-server htop lsb-release psmisc sudo gnupg2 apt-transport-https mc 
 COPY authorized_keys /root/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
 RUN chmod 0600 -R /root/.ssh
@@ -37,7 +35,6 @@ RUN ln -s /lib/systemd/systemd /sbin/init || true
 RUN ln -s /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
 RUN ln -s /lib/systemd/system/systemd-resolved.service /etc/systemd/system/multi-user.target.wants/systemd-resolved.service
 RUN ln -s /lib/systemd/system/systemd-timesyncd.service /etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
-RUN rm -rfv /etc/resolv.conf && ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 RUN echo "$HOSTNAME" > /etc/hostname
 RUN echo "\
 127.0.0.1  localhost \n\
@@ -99,3 +96,8 @@ net.ipv6.conf.all.disable_ipv6 = 1 \n\
 net.ipv6.conf.default.disable_ipv6 = 1 \n\
 net.ipv6.conf.lo.disable_ipv6 = 1 \n\
 " > /etc/sysctl.conf
+RUN echo "\
+rm -rfv /etc/resolv.conf && ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf  \n\
+zpool create ssd mirror 
+zfs create -o mountpoint=/data ssd/data
+" > /root/.install
