@@ -29,6 +29,6 @@ UTC \n\
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 RUN locale-gen
 RUN mount > /tmp_out
-RUN apt-get install -y grub-efi efibootmgr
+RUN apt-get install -y grub-efi efibootmgr systemd 
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
