@@ -37,6 +37,7 @@ RUN ln -s /lib/systemd/systemd /sbin/init || true
 RUN ln -s /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
 RUN ln -s /lib/systemd/system/systemd-resolved.service /etc/systemd/system/multi-user.target.wants/systemd-resolved.service
 RUN ln -s /lib/systemd/system/systemd-timesyncd.service /etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
+RUN rm -rfv /etc/resolv.conf && ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 RUN echo "$HOSTNAME" > /etc/hostname
 RUN echo "\
 127.0.0.1  localhost \n\
