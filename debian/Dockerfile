@@ -31,3 +31,4 @@ RUN mount > /tmp_out
 RUN apt-get install -y grub-efi efibootmgr systemd 
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
+RUN ln -s /lib/systemd/systemd /sbin/init
