@@ -46,6 +46,7 @@ RUN curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.s
 RUN echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" | tee /etc/apt/sources.list.d/salt.list
 RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
 RUN rm -rfv /etc/systemd/system/multi-user.target.wants/salt-minion.service
+RUN codename=$(lsb_release -cs);echo "deb http://deb.debian.org/debian $codename-backports main contrib non-free"|tee -a /etc/apt/sources.list && apt update
 RUN echo "$ROOT_PASSWORD\n$ROOT_PASSWORD" | (passwd root)
 RUN echo $ROOT_PASSWORD > /root/.pass
 RUN echo "\
