@@ -33,7 +33,7 @@ RUN mount > /tmp_out
 RUN apt-get install -y grub-efi efibootmgr systemd systemd-resolved systemd-container
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
-RUN ln -s /lib/systemd/systemd /sbin/init
+RUN ln -s /lib/systemd/systemd /sbin/init || true
 RUN ln -s /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
 RUN ln -s /lib/systemd/system/systemd-resolved.service /etc/systemd/system/multi-user.target.wants/systemd-resolved.service
 RUN ln -s /lib/systemd/system/systemd-timesyncd.service /etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
