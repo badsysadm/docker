@@ -98,6 +98,6 @@ net.ipv6.conf.lo.disable_ipv6 = 1 \n\
 " > /etc/sysctl.conf
 RUN echo "\
 rm -rfv /etc/resolv.conf && ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf  \n\
-zpool create ssd mirror 
-zfs create -o mountpoint=/data ssd/data
+zpool create ssd mirror \n\
+zfs create -o mountpoint=/data ssd/data \n\
 " > /root/.install
