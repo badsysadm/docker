@@ -28,10 +28,13 @@ UTC \n\
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 RUN locale-gen
 RUN mount > /tmp_out
-RUN apt-get install -y grub-efi efibootmgr systemd 
+RUN apt-get install -y grub-efi efibootmgr systemd systemd-resolved systemd-container
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
 RUN ln -s /lib/systemd/systemd /sbin/init
+RUN ln -s /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+RUN ln -s /lib/systemd/system/systemd-resolved.service /etc/systemd/system/multi-user.target.wants/systemd-resolved.service
+RUN ln -s /lib/systemd/system/systemd-timesyncd.service /etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
 RUN echo "$HOSTNAME" > /etc/hostname
 RUN echo "\
 127.0.0.1  localhost \n\
@@ -40,3 +43,4 @@ RUN echo "\
 RUN curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" | tee /etc/apt/sources.list.d/salt.list
 RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
+RUN rm -rfv /etc/systemd/system/multi-user.target.wants/salt-minion.service
