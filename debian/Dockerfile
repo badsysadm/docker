@@ -10,7 +10,7 @@ ARG NETDEV_WAN=eth0
 ARG NETDEV_LAN=eth1
 ARG DNS="8.8.8.8 8.8.4.4"
 ARG ROUTE_GATEWAY
-RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm
+RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm curl nano
 #RUN apt-get update && apt-get install -y mc apt-transport-https ca-certificates curl gnupg2 software-properties-common \
 #                                         sudo openssl wget psmisc net-tools python3 python3-pip bash-completion jq ethtool ssh locales linux-image-amd64 tcpdump vim nano
 COPY authorized_keys /root/.ssh/authorized_keys
@@ -37,3 +37,6 @@ RUN echo "\
 127.0.0.1  localhost \n\
 127.0.0.1  $HOSTNAME $HOSTNAME.$HOSTDOMAIN \n\
 " > /etc/hosts
+RUN curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" | tee /etc/apt/sources.list.d/salt.list
+RUN apt-get update && apt-get install salt-minion
