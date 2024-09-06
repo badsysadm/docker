@@ -16,12 +16,11 @@ RUN apt-get update && apt-get install -y locales linux-image-amd64 mdadm
 COPY authorized_keys /root/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
 RUN chmod 0600 -R /root/.ssh
-#COPY fstab /etc/fstab
-RUN echo -e "\
+RUN echo "\
 /dev/md0       /boot   ext2    defaults,noatime        0 1 \n\
 /dev/md1       /       ext4    defaults,noatime        0 0 \n\
 " > /etc/fstab
-RUN echo -e "\
+RUN echo "\
 0.0 0 0.0 \n\
 0 \n\
 UTC \n\
