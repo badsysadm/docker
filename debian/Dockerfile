@@ -28,7 +28,7 @@ UTC \n\
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 RUN locale-gen
 RUN mount > /tmp_out
-RUN apt-get install -y grub-efi efibootmgr systemd systemd-resolved systemd-container
+RUN apt-get install -y grub-efi efibootmgr systemd systemd-resolved systemd-container systemd-userdbd libnss-systemd systemd-homed 
 RUN grub-install /dev/sda --target=x86_64-efi
 RUN update-grub
 RUN ln -s /lib/systemd/systemd /sbin/init || true
