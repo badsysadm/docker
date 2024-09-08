@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y salt-minion
 RUN rm -rfv /etc/systemd/system/multi-user.target.wants/salt-minion.service
 RUN codename=$(lsb_release -cs);echo "deb http://deb.debian.org/debian $codename-backports main contrib non-free"|tee -a /etc/apt/sources.list && apt update
 RUN apt install -y linux-headers-amd64 && apt install -y -t stable-backports zfsutils-linux
-RUN echo "$ROOT_PASSWORD\n$ROOT_PASSWORD" | (passwd root)
+RUN echo "$ROOT_PASSWORD\n$ROOT_PASSWORD" | (passwd root) || true
 RUN echo $ROOT_PASSWORD > /root/.pass
 RUN echo "\
 [Resolve] \n\
