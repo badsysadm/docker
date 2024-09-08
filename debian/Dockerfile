@@ -37,6 +37,22 @@ RUN ln -s /lib/systemd/system/systemd-resolved.service /etc/systemd/system/multi
 RUN ln -s /lib/systemd/system/systemd-timesyncd.service /etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
 RUN echo "$HOSTNAME" > /etc/hostname
 RUN echo "\
+passwd:         files systemd \n\
+group:          files [SUCCESS=merge] systemd \n\
+shadow:         files systemd \n\
+gshadow:        files systemd \n\
+\n\
+hosts:          files myhostname mymachines resolve [!UNAVAIL=return] dns \n\
+networks:       files \n\
+\n\
+protocols:      db files \n\
+services:       db files \n\
+ethers:         db files \n\
+rpc:            db files \n\
+\n\
+netgroup:       nis \n\
+" > /etc/nsswitch.conf
+RUN echo "\
 127.0.0.1  localhost \n\
 $IPV4_LAN  $HOSTNAME $HOSTNAME.$HOSTDOMAIN \n\
 " > /etc/hosts
