@@ -5,7 +5,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG HOSTNAME=devspec01-OpsOS01a
 ARG HOSTDOMAIN=devspecops.local
 ARG IPV4_WAN
+ARG IPV4_WAN_MASK
 ARG IPV4_LAN
+ARG IPV4_LAN_MASK
 ARG NETDEV_WAN=eth0
 ARG NETDEV_LAN=eth1
 ARG DNS="8.8.8.8 8.8.4.4"
@@ -91,7 +93,7 @@ RUN echo "\
 Name=$NETDEV_WAN \n\
 \n\
 [Network] \n\
-Address=$IPV4_WAN \n\
+Address=$IPV4_WAN/$IPV4_WAN_MASK \n\
 Gateway=$ROUTE_GATEWAY \n\
 IPv6AcceptRA=no \n\
 LinkLocalAddressing=no \n\
@@ -102,7 +104,7 @@ RUN echo "\
 Name=$NETDEV_LAN \n\
 \n\
 [Network] \n\
-Address=$IPV4_LAN \n\
+Address=$IPV4_LAN/$IPV4_LAN_MASK \n\
 IPv6AcceptRA=no \n\
 LinkLocalAddressing=no \n\
 LLDP=no \n\
