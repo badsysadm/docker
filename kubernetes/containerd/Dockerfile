@@ -15,5 +15,5 @@ FROM scratch
 COPY --from=build --chmod=750 /src/bin/containerd /src/bin/containerd-shim /src/bin/containerd-shim-runc-v1 /src/bin/containerd-shim-runc-v2 /usr/sbin/
 COPY --from=build --chmod=750 /src/runc /usr/sbin/
 COPY --from=build --chmod=750 /src/cni /opt/cni/bin
-COPY --from=build --chmod=644 /src/containerd.service /etc/systemd/system/containerd.service
+COPY --from=build --chmod=644 /src/containerd.service /usr/lib/systemd/system/containerd.service
 COPY --from=build /src/extension-release.containerd /usr/lib/extension-release.d/extension-release.containerd
