@@ -6,7 +6,7 @@ RUN wget -qO- https://github.com/containerd/containerd/releases/download/v$VERSI
 RUN wget -q https://github.com/opencontainers/runc/releases/download/v1.1.14/runc.amd64 -O ./runc
 RUN chmod +x ./bin/containerd ./bin/containerd-shim ./bin/containerd-shim-runc-v1 ./bin/containerd-shim-runc-v2 ./runc
 COPY containerd.service ./containerd.service
-RUN echo -e "ID=_any\nARCHITECTURE=_any" > extension-release.containerd
+RUN echo -e "ID=_any\nARCHITECTURE=_any" > ./extension-release.containerd
 WORKDIR /src/cni
 RUN wget -qO- https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-amd64-v1.5.1.tgz | tar xvz -C /src/cni/
 RUN rm -rfv ./README.md ./LICENSE
@@ -16,4 +16,4 @@ COPY --from=build --chmod=750 /src/bin/containerd /src/bin/containerd-shim /src/
 COPY --from=build --chmod=750 /src/runc /usr/sbin/
 COPY --from=build --chmod=750 /src/cni /opt/cni/bin
 COPY --from=build --chmod=644 /src/containerd.service /etc/systemd/system/containerd.service
-COPY /src/extension-release.containerd /usr/lib/extension-release.d/extension-release.containerd
+COPY --from=build /src/extension-release.containerd /usr/lib/extension-release.d/extension-release.containerd
