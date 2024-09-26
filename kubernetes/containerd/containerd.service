@@ -1,0 +1,22 @@
+[Unit]
+Description=Containerd container runtime
+Documentation=https://github.com/containerd/containerd/blob/main/docs/getting-started.md
+After=network.target local-fs.target
+Requires=network.target
+
+[Service]
+ExecStart=/usr/sbin/containerd
+WorkingDirectory=/var/lib/containerd
+EnvironmentFile=-/etc/default/containerd
+ExecStartPre=/sbin/modprobe overlay
+Delegate=yes
+KillMode=process
+OOMScoreAdjust=-999
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
