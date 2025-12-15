@@ -6,7 +6,6 @@ Requires=network.target
 
 [Service]
 ExecStart=/usr/sbin/containerd
-WorkingDirectory=/var/lib/containerd
 EnvironmentFile=-/etc/default/containerd
 ExecStartPre=/sbin/modprobe overlay
 Delegate=yes
