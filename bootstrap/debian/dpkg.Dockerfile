@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y -qq --no-install-recommends \
 RUN git clone --single-branch --branch ${DPKG_VERSION} --depth 1 https://git.dpkg.org/git/dpkg/dpkg.git /src/dpkg
 WORKDIR /src/dpkg
 
-# Полностью вырезаем директорию man из сборки, чтобы маны даже не пытались генерироваться
+# Вырезаем директорию man из сборки
 RUN sed -i 's/\bman\b//g' Makefile.am
 
 RUN ./autogen

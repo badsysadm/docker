@@ -61,10 +61,8 @@ WORKDIR /src/gnupg
 RUN sed -i 's/ZLIBS="-lz"/ZLIBS="\/usr\/lib\/x86_64-linux-gnu\/libz.a"/g' configure.ac
 RUN sed -i 's/ZLIBS="$ZLIBS -lbz2"/ZLIBS="$ZLIBS \/usr\/lib\/x86_64-linux-gnu\/libbz2.a"/g' configure.ac
 
-# 7. Генерируем конфигурационные скрипты уже с измененной логикой
 RUN ./autogen.sh
 
-# 8. Конфигурируем сборку без ломающего -Wl,-Bstatic
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -82,6 +80,5 @@ RUN ./configure \
     CFLAGS="-O2" \
     LDFLAGS="-static-libgcc -static-libstdc++"
 
-# 9. Основная сборка и установка
 RUN make
 RUN make install DESTDIR=/usr/local
