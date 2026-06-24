@@ -8,12 +8,7 @@ RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
 RUN git clone --single-branch --branch ${VERSION} --depth 1 https://github.com/util-linux/util-linux.git /src/util-linux
 WORKDIR /src/util-linux
 
-#ARG LDFLAGS="-lcap"
-RUN echo "[binaries]" > pam-static.txt && \
-    echo "[built-in options]" >> pam-static.txt && \
-    echo "pam_args = ['/usr/lib/x86_64-linux-gnu/libpam.a', '/usr/lib/x86_64-linux-gnu/libpam_misc.a']" >> pam-static.txt
 ARG LDFLAGS="-Wl,-Bstatic -lcap-ng -lcap -laudit -lsystemd -Wl,-Bdynamic"
-#ARG LDFLAGS="-Wl,-Bstatic -lpam -lpam_misc -lcap-ng -lcap -laudit -lsystemd -Wl,-Bdynamic"
 RUN meson setup build \
     --prefix=/usr \
     --buildtype=release \
