@@ -12,25 +12,30 @@ RUN git clone --single-branch --branch ${OPENSSL_VERSION} --depth 1 https://gith
 WORKDIR /src/openssl
 RUN ./config no-shared no-tests --prefix=/usr/local --openssldir=/usr/local/ssl
 RUN make -j$(nproc)
+RUN make build_libs
 RUN make install_sw
 
 RUN git clone --single-branch --branch ${APT_VERSION} --depth 1 https://salsa.debian.org/apt-team/apt.git /src/apt
 WORKDIR /src/apt
 
-RUN sed -i '/add_subdirectory(test)/d' CMakeLists.txt
+COPY apt.patches /src/
+
+RUN git apply /src/apt.patches
+
+#RUN sed -i '/add_subdirectory(test)/d' CMakeLists.txt
 
 # Переводим внутренние библиотеки APT в STATIC с поддержкой -fPIC
-RUN sed -i 's/add_library(apt-pkg SHARED/add_library(apt-pkg STATIC/g' ./apt-pkg/CMakeLists.txt
-RUN sed -i 's/add_library(apt-private SHARED/add_library(apt-private STATIC/g' ./apt-private/CMakeLists.txt
-RUN sed -i '/add_library(apt-pkg STATIC/a set_property(TARGET apt-pkg PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-pkg/CMakeLists.txt
-RUN sed -i '/add_library(apt-private STATIC/a set_property(TARGET apt-private PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-private/CMakeLists.txt
+#RUN sed -i 's/add_library(apt-pkg SHARED/add_library(apt-pkg STATIC/g' ./apt-pkg/CMakeLists.txt
+#RUN sed -i 's/add_library(apt-private SHARED/add_library(apt-private STATIC/g' ./apt-private/CMakeLists.txt
+#RUN sed -i '/add_library(apt-pkg STATIC/a set_property(TARGET apt-pkg PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-pkg/CMakeLists.txt
+#RUN sed -i '/add_library(apt-private STATIC/a set_property(TARGET apt-private PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-private/CMakeLists.txt
 
 # Ищем только статические .a файлы для всех find_package
-RUN sed -i '1i set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
+#RUN sed -i '1i set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
 
 # ИСКЛЮЧЕНИЕ: Разрешаем динамический поиск (.so) только для системных потоков Threads (pthread)
-RUN sed -i '/find_package(Threads REQUIRED)/i set(CMAKE_FIND_LIBRARY_SUFFIXES ".so" ".a")' ./CMakeLists.txt
-RUN sed -i '/find_package(Threads REQUIRED)/a set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
+#RUN sed -i '/find_package(Threads REQUIRED)/i set(CMAKE_FIND_LIBRARY_SUFFIXES ".so" ".a")' ./CMakeLists.txt
+#RUN sed -i '/find_package(Threads REQUIRED)/a set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
 
 WORKDIR /src/apt/.build
 
