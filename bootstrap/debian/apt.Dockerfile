@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie
+FROM mirror.gcr.io/library/debian:trixie AS build
 ARG APT_VERSION=3.3.1
 ARG OPENSSL_VERSION=openssl-3.4.1
 
@@ -9,8 +9,10 @@ RUN apt-get update && apt-get install -y -qq --no-install-recommends \
     git ca-certificates perl
 
 RUN git clone --single-branch --branch ${OPENSSL_VERSION} --depth 1 https://github.com/openssl/openssl.git /src/openssl
+RUN mkdir -p /src/target
 WORKDIR /src/openssl
-RUN ./config no-shared no-tests --prefix=/usr/local --openssldir=/usr/local/ssl
+
+RUN ./config no-shared no-tests --prefix=/usr/local
 RUN make -j$(nproc)
 RUN make build_libs
 RUN make install_sw
@@ -21,21 +23,6 @@ WORKDIR /src/apt
 COPY apt.patches /src/
 
 RUN git apply /src/apt.patches
-
-#RUN sed -i '/add_subdirectory(test)/d' CMakeLists.txt
-
-# Переводим внутренние библиотеки APT в STATIC с поддержкой -fPIC
-#RUN sed -i 's/add_library(apt-pkg SHARED/add_library(apt-pkg STATIC/g' ./apt-pkg/CMakeLists.txt
-#RUN sed -i 's/add_library(apt-private SHARED/add_library(apt-private STATIC/g' ./apt-private/CMakeLists.txt
-#RUN sed -i '/add_library(apt-pkg STATIC/a set_property(TARGET apt-pkg PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-pkg/CMakeLists.txt
-#RUN sed -i '/add_library(apt-private STATIC/a set_property(TARGET apt-private PROPERTY POSITION_INDEPENDENT_CODE ON)' ./apt-private/CMakeLists.txt
-
-# Ищем только статические .a файлы для всех find_package
-#RUN sed -i '1i set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
-
-# ИСКЛЮЧЕНИЕ: Разрешаем динамический поиск (.so) только для системных потоков Threads (pthread)
-#RUN sed -i '/find_package(Threads REQUIRED)/i set(CMAKE_FIND_LIBRARY_SUFFIXES ".so" ".a")' ./CMakeLists.txt
-#RUN sed -i '/find_package(Threads REQUIRED)/a set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")' ./CMakeLists.txt
 
 WORKDIR /src/apt/.build
 
@@ -50,4 +37,11 @@ RUN cmake .. \
   -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -Wl,-Bstatic -llzma -lzstd -lbz2 -llz4 -lz -lxxhash -ldb -lgcrypt /usr/local/lib64/libcrypto.a -ldl -pthread -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
-RUN make install DESTDIR=/usr/local
+RUN make install DESTDIR=/src/target
+
+FROM scratch AS bundle
+LABEL org.opencontainers.image.title="apt"
+LABEL org.opencontainers.image.version="3.3.1"
+LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
+LABEL org.opencontainers.image.description="High-level package manager"
+COPY --from=build /src/target/ /

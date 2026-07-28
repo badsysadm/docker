@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie
+FROM mirror.gcr.io/library/debian:trixie AS build
 ARG GNUPG_VERSION=gnupg-2.4.7
 ARG LIBGPG_ERROR_VERSION=libgpg-error-1.51
 ARG LIBGCRYPT_VERSION=libgcrypt-1.11.0
@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y -qq --no-install-recommends \
     autoconf automake libtool autopoint bison fig2dev imagemagick librsvg2-bin \
     bzip2 zlib1g-dev libbz2-dev
 
+RUN mkdir -p /src/target
 WORKDIR /src
 
 # 1. Клонируем и собираем libgpg-error статически
@@ -81,4 +82,11 @@ RUN ./configure \
     LDFLAGS="-static-libgcc -static-libstdc++"
 
 RUN make
-RUN make install DESTDIR=/usr/local
+RUN make install DESTDIR=/src/target
+
+FROM scratch AS bundle
+LABEL org.opencontainers.image.title="gnupg"
+LABEL org.opencontainers.image.version="2.4.7"
+LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
+LABEL org.opencontainers.image.description="Cryptographic software suite"
+COPY --from=build /src/target/ /
