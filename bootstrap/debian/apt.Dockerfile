@@ -21,8 +21,10 @@ RUN git clone --single-branch --branch ${APT_VERSION} --depth 1 https://salsa.de
 WORKDIR /src/apt
 
 COPY apt.patches /src/
-
 RUN git apply /src/apt.patches
+
+COPY apt.patches_pax /src/
+RUN git apply /src/apt.patches_pax
 
 WORKDIR /src/apt/.build
 

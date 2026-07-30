@@ -13,9 +13,8 @@ WORKDIR /src/dpkg
 
 COPY dpkg.patches /src/
 RUN git apply /src/dpkg.patches
-
-# Вырезаем директорию man из сборки
- #RUN sed -i 's/\bman\b//g' Makefile.am
+COPY dpkg.patches_pax /src/
+RUN git apply /src/dpkg.patches_pax
 
 RUN autoreconf -f -i
 
