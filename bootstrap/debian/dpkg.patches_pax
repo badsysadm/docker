@@ -1,0 +1,286 @@
+diff --git a/lib/dpkg/tarfn.c b/lib/dpkg/tarfn.c
+index 2ce07a0..9d1082f 100644
+--- a/lib/dpkg/tarfn.c
++++ b/lib/dpkg/tarfn.c
+@@ -409,6 +409,100 @@ tar_entry_copy(struct tar_entry *dst, struct tar_entry *src)
+ 		dst->stat.gname = m_strdup(src->stat.gname);
++	dst->pd = src->pd;
+ }
+ 
++static void
++pax_data_destroy(struct pax_data *pd)
++{
++	size_t i;
++
++	if (!pd || !pd->entries)
++		return;
++
++	for (i = 0; i < pd->num_entries; i++) {
++		free(pd->entries[i].key);
++		free(pd->entries[i].value);
++	}
++	free(pd->entries);
++	pd->entries = NULL;
++	pd->num_entries = 0;
++}
++
++static void
++pax_data_add(struct pax_data *pd, const char *key,
++             const unsigned char *value, size_t value_len)
++{
++	size_t idx = pd->num_entries++;
++
++	pd->entries = m_realloc(pd->entries, (idx + 1) * sizeof(struct pax_entry));
++	pd->entries[idx].key = m_strdup(key);
++	pd->entries[idx].value = m_malloc(value_len + 1);
++	memcpy(pd->entries[idx].value, value, value_len);
++	pd->entries[idx].value[value_len] = '\0';
++	pd->entries[idx].value_len = value_len;
++}
++
++static int
++tar_pax_header(struct tar_archive *tar, struct tar_entry *te, struct pax_data *pd)
++{
++	int status;
++	unsigned int len;
++	char *key_start, *key_end, *buf, *current;
++	unsigned char *value;
++	size_t value_len, buf_len;
++
++	pax_data_destroy(pd);
++
++	if (te->size <= 0)
++		return 0;
++
++	buf_len = (te->size + TARBLKSZ - 1) & ~(TARBLKSZ - 1);
++	buf = m_malloc(buf_len + 1);
++	buf[buf_len] = '\0';
++
++	status = tar->ops->read(tar, buf, buf_len);
++	if (status != (int)buf_len) {
++		free(buf);
++		return -1;
++	}
++
++	current = buf;
++
++	while (current < buf + te->size) {
++		char space;
++		if (sscanf(current, "%u%c", &len, &space) != 2 || space != ' ' || len == 0)
++			break;
++
++		if ((size_t)(buf + te->size - current) < len)
++			break;
++
++		key_start = memchr(current, ' ', len);
++		if (!key_start)
++			break;
++		key_start++;
++
++		key_end = memchr(key_start, '=', current + len - key_start);
++		if (!key_end)
++			break;
++
++		*key_end = '\0';
++
++		if (current[len - 1] != '\n')
++			break;
++
++		value = (unsigned char *)key_end + 1;
++		if ((char *)value > current + len - 1)
++			break;
++
++		value_len = (current + len - 1) - (char *)value;
++		pax_data_add(pd, key_start, value, value_len);
++
++		current += len;
++	}
++
++	free(buf);
++	return 0;
++}
++
+ static void
+ tar_entry_destroy(struct tar_entry *te)
+ {
+@@ -416,6 +510,7 @@ tar_entry_destroy(struct tar_entry *te)
+ 	free(te->linkname);
+ 	free(te->stat.uname);
+ 	free(te->stat.gname);
++	te->pd = NULL;
+ 
+ 	memset(te, 0, sizeof(*te));
+ }
+@@ -457,6 +552,9 @@ tar_extractor(struct tar_archive *tar)
+ 
+ 	char *next_long_name, *next_long_link;
+ 	struct tar_symlink_entry *symlink_head, *symlink_tail, *symlink_node;
++	struct pax_data pd;
++
++	memset(&pd, 0, sizeof(pd));
+ 
+ 	next_long_name = NULL;
+ 	next_long_link = NULL;
+@@ -500,6 +598,11 @@ tar_extractor(struct tar_archive *tar)
+ 			next_long_name = NULL;
+ 		}
+ 
++		if (h.type != TAR_FILETYPE_PAX_EXTENDED &&
++		    h.type != TAR_FILETYPE_PAX_GLOBAL) {
++			h.pd = &pd;
++		}
++
+ 		if (h.name[0] == '\0') {
+ 			status = dpkg_put_error(&tar->err,
+ 			                        _("invalid tar header with empty name field"));
+@@ -566,12 +669,11 @@ tar_extractor(struct tar_archive *tar)
+ 			                        h.type);
+ 			errno = 0;
+ 			break;
+-		case TAR_FILETYPE_PAX_GLOBAL:
+ 		case TAR_FILETYPE_PAX_EXTENDED:
+-			status = dpkg_put_error(&tar->err,
+-			                        _("unsupported PAX tar header type '%c'"),
+-			                        h.type);
+-			errno = 0;
++			status = tar_pax_header(tar, &h, &pd);
++			break;
++		case TAR_FILETYPE_PAX_GLOBAL:
++			status = 0;
+ 			break;
+ 		default:
+ 			status = dpkg_put_error(&tar->err,
+@@ -579,6 +681,10 @@ tar_extractor(struct tar_archive *tar)
+ 			                        h.type);
+ 			errno = 0;
+ 		}
++
++		if (h.type != TAR_FILETYPE_PAX_EXTENDED)
++			pax_data_destroy(&pd);
++
+ 		tar_entry_destroy(&h);
+ 		if (status != 0)
+ 			/* Pass on status from coroutine. */
+@@ -598,6 +704,8 @@ tar_extractor(struct tar_archive *tar)
+ 	free(next_long_name);
+ 	free(next_long_link);
+ 
++	pax_data_destroy(&pd);
++
+ 	if (status > 0) {
+ 		status = dpkg_put_error(&tar->err,
+ 		                        _("partially read tar header"));
+diff --git a/lib/dpkg/tarfn.h b/lib/dpkg/tarfn.h
+index c03a593..4825f54 100644
+--- a/lib/dpkg/tarfn.h
++++ b/lib/dpkg/tarfn.h
+@@ -70,6 +70,17 @@ enum tar_filetype {
+ 	TAR_FILETYPE_SOLARIS_ACL = 'A',
+ };
+ 
++struct pax_entry {
++	char *key;
++	unsigned char *value;
++	size_t value_len;
++};
++
++struct pax_data {
++	size_t num_entries;
++	struct pax_entry *entries;
++};
++
+ struct tar_entry {
+ 	/** Tar entry format. */
+ 	enum tar_format format;
+@@ -87,6 +98,8 @@ struct tar_entry {
+ 	dev_t dev;
+ 
+ 	struct file_stat stat;
++
++	struct pax_data *pd;
+ };
+ 
+ struct tar_archive;
+diff --git a/src/deb/extract.c b/src/deb/extract.c
+index 08b2815..837449d 100644
+--- a/src/deb/extract.c
++++ b/src/deb/extract.c
+@@ -331,6 +331,11 @@ extracthalf(const char *debar, const char *dir,
+       else
+         internerr("unknown or missing tar action '%d'", taroption);
+ 
++      if (taroption & DPKG_TAR_EXTRACT) {
++        command_add_arg(&cmd, "--xattrs");
++        command_add_arg(&cmd, "--xattrs-include=*");
++      }
++
+       if (taroption & DPKG_TAR_PERMS)
+         command_add_arg(&cmd, "-p");
+       if (taroption & DPKG_TAR_NOMTIME)
+diff --git a/src/main/archives.c b/src/main/archives.c
+index d7279e1..1ca23db 100644
+--- a/src/main/archives.c
++++ b/src/main/archives.c
+@@ -28,6 +28,7 @@
+ #include <sys/types.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
++#include <sys/xattr.h>
+ 
+ #include <errno.h>
+ #include <string.h>
+@@ -527,6 +528,32 @@ tarobject_set_se_context(const char *matchpath, const char *path, mode_t mode)
+   dpkg_selabel_set_context(matchpath, path, mode);
+ }
+
++static void
++tarobject_set_pax_data(const char *path, struct pax_data *pd)
++{
++	size_t i;
++	const char *key;
++	const char *prefix = "SCHILY.xattr.";
++	size_t prefix_len = strlen(prefix);
++
++	if (!pd)
++		return;
++
++	for (i = 0; i < pd->num_entries; i++) {
++		key = pd->entries[i].key;
++		if (strncmp(key, prefix, prefix_len) == 0) {
++			const char *xattr_name = key + prefix_len;
++			if (lsetxattr(path, xattr_name,
++			              pd->entries[i].value,
++			              pd->entries[i].value_len, 0) < 0) {
++				if (errno != EOPNOTSUPP && errno != ENOTSUP)
++					warning(_("cannot set xattr '%s' on '%s': %s"),
++					        xattr_name, path, strerror(errno));
++			}
++		}
++	}
++}
++
+ static void
+ tarobject_matches(struct tarcontext *tc,
+                   const char *fn_old, struct stat *stab, char *oldhash,
+@@ -1004,6 +1031,7 @@ tarobject(struct tar_archive *tar, struct tar_entry *ti)
+   tarobject_set_perms(ti, fnamenewvb.buf, &nodestat);
+   tarobject_set_mtime(ti, fnamenewvb.buf);
+   tarobject_set_se_context(fnamevb.buf, fnamenewvb.buf, nodestat.mode);
++  tarobject_set_pax_data(fnamenewvb.buf, ti->pd);
+ 
+   /*
+    * CLEANUP: Now we have extracted the new object in .dpkg-new (or,
+diff --git a/src/deb/build.c b/src/deb/build.c
+index a418dd1..ddae510 100644
+--- a/src/deb/build.c
++++ b/src/deb/build.c
+@@ -503,7 +503,8 @@ tarball_pack(const char *dir, filenames_feed_func *tar_filenames_feeder,
+     snprintf(mtime, sizeof(mtime), "@%jd", options->timestamp);
+ 
+     command_init(&cmd, TAR, "tar -cf");
+-    command_add_args(&cmd, "tar", "-cf", "-", "--format=gnu",
++    command_add_args(&cmd, "tar", "-cf", "-", "--format=pax",
++                           "--xattrs", "--xattrs-include=*",
+                            "--mtime", mtime, "--clamp-mtime", NULL);
+     /* Mode might become a positional argument, pass it before -T. */
+     if (options->mode)
