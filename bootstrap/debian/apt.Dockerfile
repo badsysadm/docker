@@ -1,5 +1,5 @@
 FROM mirror.gcr.io/library/debian:trixie AS build
-ARG APT_VERSION=3.3.1
+ARG APT_VERSION=3.3.2
 ARG OPENSSL_VERSION=openssl-3.4.1
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \
@@ -43,7 +43,7 @@ RUN make install DESTDIR=/src/target
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="apt"
-LABEL org.opencontainers.image.version="3.3.1"
+LABEL org.opencontainers.image.version="3.3.2"
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
 LABEL org.opencontainers.image.description="High-level package manager"
 COPY --from=build /src/target/ /
