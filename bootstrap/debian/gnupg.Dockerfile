@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
+FROM 127.0.0.1:12670/distro/debian:trixie AS build
 ARG GNUPG_VERSION=gnupg-2.4.7
 ARG LIBGPG_ERROR_VERSION=libgpg-error-1.51
 ARG LIBGCRYPT_VERSION=libgcrypt-1.11.0

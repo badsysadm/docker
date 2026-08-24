@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
+FROM 127.0.0.1:12670/distro/debian:trixie AS build
 ARG COREUTILS_VERSION=9.5
 ARG FORCE_UNSAFE_CONFIGURE=1
 

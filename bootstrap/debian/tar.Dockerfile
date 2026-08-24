@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
+FROM 127.0.0.1:12670/distro/debian:trixie AS build
 ARG TAR_VERSION=1.35
 ARG FORCE_UNSAFE_CONFIGURE=1
 

@@ -1,5 +1,5 @@
-FROM mirror.gcr.io/library/debian:trixie
-ARG ZFS_VERSION=zfs-2.4.3
+FROM 127.0.0.1:12670/distro/debian:trixie
+ARG ZFS_VERSION=zfs-2.4.4
 ARG OPENSSL_VERSION=openssl-3.4.1
 ARG SYSTEMD_VERSION=v261.1
 

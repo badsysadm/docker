@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
+FROM 127.0.0.1:12670/distro/debian:trixie AS build
 ARG XZ_VERSION=v5.6.2
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \

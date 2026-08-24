@@ -1,5 +1,5 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
-ARG APT_VERSION=3.3.2
+FROM 127.0.0.1:12670/distro/debian:trixie AS build
+ARG APT_VERSION=3.3.3
 ARG OPENSSL_VERSION=openssl-3.4.1
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \
