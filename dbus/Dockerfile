@@ -1,4 +1,4 @@
-FROM mirror.gcr.io/library/debian:trixie
+FROM mirror.gcr.io/library/debian:trixie AS build
 ARG DBUS_VERSION=dbus-1.16.2
 
 RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
@@ -6,6 +6,7 @@ RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
      meson ninja-build \
      libsystemd-dev libcap-dev libexpat1-dev libapparmor-dev libaudit-dev
 RUN git clone --single-branch --branch ${DBUS_VERSION} --depth 1 https://gitlab.freedesktop.org/dbus/dbus.git /src/dbus
+RUN mkdir -p /src/target
 WORKDIR /src/dbus
 
 #ARG LDFLAGS="-lcap"
@@ -37,4 +38,11 @@ RUN meson setup build \
     -Dwindows_output_debug_string=false
     
 RUN ninja -C build
-RUN DESTDIR=debian/tmp ninja -C build/ install
+RUN DESTDIR=/src/target ninja -C build/ install
+
+FROM scratch AS bundle
+LABEL org.opencontainers.image.title="dbus"
+LABEL org.opencontainers.image.version="1.16.2"
+LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
+LABEL org.opencontainers.image.description="Message bus daemon"
+COPY --from=build /src/target/ /
