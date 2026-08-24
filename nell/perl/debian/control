@@ -1,0 +1,16 @@
+Source: perl5
+Section: perl
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), build-essential, perl
+
+Package: perl
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: Scripting language used in many system scripts and utilities.
+
+Package: perl-modules
+Architecture: amd64
+Depends: ${perl:Depends}
+Description: These modules are part of Perl and required perl package.
+
