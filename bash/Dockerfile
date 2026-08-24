@@ -1,4 +1,3 @@
-
 FROM mirror.gcr.io/library/debian:trixie
 ARG BASH_VERSION=bash-5.3
 
