@@ -1,8 +1,8 @@
-FROM mirror.gcr.io/library/debian:trixie
+FROM mirror.gcr.io/library/debian:trixie AS build
 ARG SYSTEMD_VERSION=v261
 
 RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
-     build-essential meson ninja-build pkg-config \
+     git build-essential meson ninja-build pkg-config \
      libacl1-dev libapparmor-dev libaudit-dev libblkid-dev libcap-dev \
      libcryptsetup-dev libcurl4-openssl-dev libdw-dev libelf-dev \
      libfido2-dev libgcrypt20-dev libglib2.0-dev libgnutls28-dev \
@@ -16,8 +16,6 @@ RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
      libarchive-dev libfdisk-dev libbpf-dev clang bpftool \
      libcrypt-dev libdbus-1-dev
 
-RUN apt-get install -y -qq --no-install-recommends git
-
 RUN git clone --single-branch --branch ${SYSTEMD_VERSION} --depth 1 https://github.com/systemd/systemd.git /src/systemd
 WORKDIR /src/systemd
 
@@ -25,6 +23,12 @@ RUN meson setup build \
     --prefix=/usr \
     --libdir=/usr/lib/x86_64-linux-gnu \
     --buildtype=release \
+    -Dinstall-tests=false \
+    -Drpmmacrosdir=no \
+    -Dmode=release \
+    -Ddev-kvm-mode=0660 \
+    -Dnobody-group=nogroup \
+    -Dman=disabled \
     -Dauto_features=disabled \
     -Dacl=enabled \
     -Dapparmor=enabled \
@@ -65,7 +69,6 @@ RUN meson setup build \
     -Dlogind=true \
     -Dlz4=enabled \
     -Dmachined=true \
-    -Dman=disabled \
     -Dmicrohttpd=enabled \
     -Dmountfsd=true \
     -Dnetworkd=true \
@@ -132,4 +135,9 @@ RUN meson setup build \
     -Dsbat-distro-version="${SYSTEMD_VERSION}"
 
 RUN ninja -C build
-RUN DESTDIR=debian/tmp ninja -C build/ install
+RUN DESTDIR=/src/target ninja -C build/ install
+
+#systemctl preset-all: enable from /usr/lib/systemd/system-preset/
+
+#FROM scratch
+#COPY --from=build /src/target/ /
