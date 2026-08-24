@@ -1,7 +1,6 @@
 ARG VERSION=5.44.0
 
 FROM 127.0.0.1:12670/src/perl/perl:${VERSION} AS src_image
-
 FROM 127.0.0.1:12670/get/dep:latest AS build
 
 COPY debian ./debian/
