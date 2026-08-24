@@ -1,0 +1,18 @@
+[Unit]
+Description=Serial Getty on %I
+DefaultDependencies=no
+Before=getty.target
+# Убрали BindsTo и After=dev-%i.device, чтобы systemd не ждал появления устройства
+
+[Service]
+# -n -l /bin/sh — чтобы сразу войти без пароля
+ExecStart=-/bin/busybox getty -L %I 115200 vt100 -n -l /bin/sh
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/%I
+TTYReset=yes
+TTYVHangup=yes
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

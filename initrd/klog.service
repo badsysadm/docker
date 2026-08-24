@@ -1,0 +1,13 @@
+[Unit]
+Description=Kernel Log Capturer
+DefaultDependencies=no
+Before=sysinit.target
+
+[Service]
+ExecStart=/usr/local/bin/sh -c "/usr/bin/cat /proc/kmsg >> /var/log/kernel.log"
+StandardOutput=null
+StandardError=null
+Restart=always
+
+[Install]
+WantedBy=sysinit.target
