@@ -1,11 +1,15 @@
-.PHONY: clean
+.PHONY: kaniko clean bootstrap
+
+KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
+KANIKO_IMAGE_GITLAB := registry.gitlab.com/gitlab-ci-utils/container-images/kaniko:v1.25.16-debug
+KANIKO_IMAGE_LOCAL := 127.0.0.1:12670/system/kaniko:v1.25.16
+KANIKO_IMAGE := $(KANIKO_IMAGE_LOCAL)
 
 FORCE:
 
 kaniko:
 	mkdir -p .build/oci-bundle .build/rootfs
-#	skopeo copy docker://omio/gcr.io.kaniko-project.executor:latest oci:.build/oci-bundle:latest
-	skopeo copy docker://gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
+	skopeo copy --src-tls-verify=false docker://$(KANIKO_IMAGE) oci:.build/oci-bundle:latest
 	umoci raw unpack --image .build/oci-bundle .build/rootfs
 
 %Dockerfile: clean kaniko
@@ -19,11 +23,30 @@ kaniko:
 		-p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs \
 		-p BindReadOnlyPaths=$(realpath $@):/kaniko/Dockerfile.source \
 		-p BindReadOnlyPaths=$(shell dirname $(realpath $@)):/kaniko/context \
-		-p BindPaths=/tmp/cache:/cache \
-		 /kaniko/executor --context /kaniko/context -f /kaniko/Dockerfile.source --no-push --force
+		 /kaniko/executor --context /kaniko/context  --ignore-path /proc --ignore-path=/sys --ignore-path=/dev -f /kaniko/Dockerfile.source --no-push --force --oci-layout-path /kaniko/oci
+#	@rm -rf .build/rootfs/kaniko
+#--snapshot-mode=time # --single-snapshot --use-new-run
+ # --snapshot-mode=redo
+
+run:
+	systemd-run -t \
+		-p RootDirectory=$(realpath .build/rootfs/) \
+		-p Environment=SSL_CERT_DIR=/kaniko/certs \
+		-p BindReadOnlyPaths=/etc/resolv.conf \
+		-p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs \
+		-p BindReadOnlyPaths=/root/.bashrc:/root/.bashrc \
+		/bin/sh
 
 all:
 	echo Hello
 
 clean:
 	rm -rf .build
+
+bootstrap:
+	make bootstrap/debian/bootstrap.Dockerfile
+	cp /etc/apt/sources.list .build/rootfs/etc/apt/sources.list.d/
+	cp -rf /etc/apt/trusted.gpg.d/* .build/rootfs/etc/apt/trusted.gpg.d/
+	systemd-run -t         -p RootDirectory=/root/git/docker/.build/rootfs         -p Environment=SSL_CERT_DIR=/kaniko/certs         -p BindReadOnlyPaths=/etc/resolv.conf         -p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs         -p BindReadOnlyPaths=/root/.bashrc:/root/.bashrc  apt update
+	systemd-run -t         -p RootDirectory=/root/git/docker/.build/rootfs         -p Environment=SSL_CERT_DIR=/kaniko/certs -p Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin         -p BindReadOnlyPaths=/etc/resolv.conf         -p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs         -p BindReadOnlyPaths=/root/.bashrc:/root/.bashrc  apt install gcc-14-base --no-install-recommends
+	systemd-run -t         -p RootDirectory=/root/git/docker/.build/rootfs         -p Environment=SSL_CERT_DIR=/kaniko/certs -p Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin         -p BindReadOnlyPaths=/etc/resolv.conf         -p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs         -p BindReadOnlyPaths=/root/.bashrc:/root/.bashrc  apt install libc6 --no-install-recommends
