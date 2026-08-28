@@ -1,0 +1,121 @@
+# ==============================================================================
+# ЦВЕТОВАЯ СХЕМА: Yellow / Black (Желто-черная)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ОСНОВНЫЕ ТЕНЕВЫЕ И ГЛОБАЛЬНЫЕ ПАРАМЕТРЫ (Global / Shadow Settings)
+# ------------------------------------------------------------------------------
+use_shadow = ON
+shadow_color = (BLACK,BLACK,ON)
+screen_color = (YELLOW,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# 2. ДИАЛОГОВЫЕ ОКНА (Dialog Box)
+# ------------------------------------------------------------------------------
+dialog_color = (YELLOW,BLACK,ON)
+title_color = (BLACK,YELLOW,ON)
+border_color = (YELLOW,BLACK,ON)
+border2_color = (YELLOW,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# 3. КНОПКИ (Buttons)
+# ------------------------------------------------------------------------------
+button_active_color = (BLACK,YELLOW,ON)
+button_inactive_color = (YELLOW,BLACK,ON)
+button_key_active_color = (BLACK,YELLOW,ON)
+button_key_inactive_color = (YELLOW,BLACK,ON)
+button_label_active_color = (BLACK,YELLOW,ON)
+button_label_inactive_color = (YELLOW,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# 4. СПИСКИ И МЕНЮ (Lists, Menus, Radiolist, Checklist)
+# ------------------------------------------------------------------------------
+tag_color = (BLACK,YELLOW,ON)
+tag_selected_color = (YELLOW,BLACK,ON)
+tag_key_color = (BLACK,YELLOW,ON)
+tag_key_selected_color = (YELLOW,BLACK,ON)
+
+menubox_color = (YELLOW,BLACK,ON)
+menubox_border_color = (YELLOW,BLACK,ON)
+menubox_border2_color = (YELLOW,BLACK,ON)
+
+item_color = (YELLOW,BLACK,ON)
+item_selected_color = (BLACK,YELLOW,ON)
+itemhelp_color = (BLACK,YELLOW,ON)
+
+check_color = (YELLOW,BLACK,ON)
+check_selected_color = (BLACK,YELLOW,ON)
+
+# ------------------------------------------------------------------------------
+# 5. ТЕКСТОВЫЕ ПОЛЯ И ВВОД (Input fields, Text areas)
+# ------------------------------------------------------------------------------
+inputbox_color = (YELLOW,BLACK,ON)
+inputbox_border_color = (YELLOW,BLACK,ON)
+inputbox_border2_color = (YELLOW,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# 6. ИНДИКАТОР ПРОГРЕССА (Gauge / Progress bar)
+# ------------------------------------------------------------------------------
+gauge_color = (BLACK,YELLOW,ON)
+position_indicator_color = (BLACK,YELLOW,ON)
+
+# ------------------------------------------------------------------------------
+# 7. МЕНЮ ВЫБОРА ФАЙЛОВ И ДИРЕКТОРИЙ (Form, Tree, Fselect)
+# ------------------------------------------------------------------------------
+searchbox_color = (YELLOW,BLACK,ON)
+searchbox_title_color = (BLACK,YELLOW,ON)
+searchbox_border_color = (YELLOW,BLACK,ON)
+searchbox_border2_color = (YELLOW,BLACK,ON)
+
+form_active_text_color = (BLACK,YELLOW,ON)
+form_text_color = (YELLOW,BLACK,ON)
+form_item_readonly_color = (BLACK,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# 8. УКАЗАТЕЛИ И СТРЕЛКИ (Arrows)
+# ------------------------------------------------------------------------------
+uarrow_color = (YELLOW,BLACK,ON)
+darrow_color = (YELLOW,BLACK,ON)
+
+# ------------------------------------------------------------------------------
+# Полный перечень всех валидных параметров dialogrc:
+# ------------------------------------------------------------------------------
+# use_shadow
+# shadow_color
+# screen_color
+# dialog_color
+# title_color
+# border_color
+# border2_color
+# button_active_color
+# button_inactive_color
+# button_key_active_color
+# button_key_inactive_color
+# button_label_active_color
+# button_label_inactive_color
+# tag_color
+# tag_selected_color
+# tag_key_color
+# tag_key_selected_color
+# menubox_color
+# menubox_border_color
+# menubox_border2_color
+# item_color
+# item_selected_color
+# itemhelp_color
+# check_color
+# check_selected_color
+# inputbox_color
+# inputbox_border_color
+# inputbox_border2_color
+# gauge_color
+# position_indicator_color
+# searchbox_color
+# searchbox_title_color
+# searchbox_border_color
+# searchbox_border2_color
+# form_active_text_color
+# form_text_color
+# form_item_readonly_color
+# uarrow_color
+# darrow_color

@@ -1,0 +1,9 @@
+if [ -r /etc/locale.conf ]; then
+    set -a
+    . /etc/locale.conf
+    set +a
+fi
+
+if [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc
+fi
