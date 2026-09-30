@@ -3,7 +3,7 @@
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
 KANIKO_IMAGE_GITLAB := registry.gitlab.com/gitlab-ci-utils/container-images/kaniko:v1.25.16-debug
 KANIKO_IMAGE_LOCAL := 127.0.0.1:12670/system/kaniko:v1.25.16
-KANIKO_IMAGE_BADSYSADM: "oci.badsysadm.local:80/system/kaniko:v1.25.16"
+KANIKO_IMAGE_BADSYSADM := oci.badsysadm.local:80/system/kaniko:v1.25.16
 KANIKO_IMAGE := $(KANIKO_IMAGE_BADSYSADM)
 
 FORCE:
