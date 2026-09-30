@@ -1,0 +1,15 @@
+Source: glibc
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, bison, python3, linux-libc-dev
+
+Package: glibc-ld
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: glibc dynamic loader
+
+Package: glibc-runtime
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: glibc runtime libs
