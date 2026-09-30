@@ -20,6 +20,7 @@ kaniko:
 	systemd-run -t \
 		-p RootDirectory=$(realpath .build/rootfs/) \
 		-p Environment=SSL_CERT_DIR=/kaniko/certs \
+		-p BindReadOnlyPaths=/etc/hosts \
 		-p BindReadOnlyPaths=/etc/resolv.conf \
 		-p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs \
 		-p BindReadOnlyPaths=$(realpath $@):/kaniko/Dockerfile.source \
