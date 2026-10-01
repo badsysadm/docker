@@ -13,7 +13,7 @@ glibc: version ?= 2.44
 
 dialog coreutils: section = usr
 dialog: version ?= 1.3-20260721
-coreutils: 9.5
+coreutils: version ?= 9.5
 
 busybox: section = tools
 
