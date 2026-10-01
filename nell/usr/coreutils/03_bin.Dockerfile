@@ -7,6 +7,7 @@ ARG VERSION
 ARG FORCE_UNSAFE_CONFIGURE=1
 
 WORKDIR /src/coreutils
+RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -14,9 +15,12 @@ RUN ./configure \
     --disable-nls \
     --enable-single-binary=symlinks
 
+# for git cloned code
+#RUN ln -s /usr/bin/aclocal /usr/bin/aclocal-1.16
+#RUN ln -s /usr/bin/automake /usr/bin/automake-1.16
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
-    
+
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="coreutils"
 LABEL org.opencontainers.image.version=${VERSION}
