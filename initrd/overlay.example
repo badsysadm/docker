@@ -1,0 +1,14 @@
+[Unit]
+Description=OverlayFS Mount
+#Requires=mnt.mount mnt-overlay-dirs.service
+#After=mnt.mount mnt-overlay-dirs.service
+Before=local-fs.target
+
+[Mount]
+What=overlay
+Where=/mnt/overlay
+Type=overlay
+Options=lowerdir=/usr/bin:/usr/sbin,upperdir=/mnt/upper,workdir=/mnt/work
+
+[Install]
+WantedBy=multi-user.target
