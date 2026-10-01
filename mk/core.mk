@@ -1,5 +1,7 @@
 .PHONY: kaniko clean bootstrap
 
+LIST_ARTIFACTS := find .build/rootfs/ \( -path .build/rootfs/kaniko -o -path .build/rootfs/etc/hosts -o -path .build/rootfs/etc/resolv.conf \) -prune -o -type f -print0
+
 version ?=
 
 kaniko:
@@ -39,6 +41,11 @@ kaniko:
 	fi
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
 	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/$(section)/$@:$(version)
+
+	$(LIST_ARTIFACTS) | xargs -0 sha256sum > .sha256_1
+	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
+	$(LIST_ARTIFACTS) | xargs -0 sha256sum > .sha256_2
+	diff .sha256_1 .sha256_2
 
 run:
 	systemd-run -t \
