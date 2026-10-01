@@ -1,5 +1,5 @@
 FROM 127.0.0.1:12670/distro/debian:trixie AS build
-ARG OPENSSL_VERSION=3.6.4
+ARG OPENSSL_VERSION=3.6.5
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \
     build-essential ca-certificates wget perl pkg-config zlib1g-dev libzstd-dev
