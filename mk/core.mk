@@ -42,9 +42,9 @@ kaniko:
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
 	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/$(section)/$@:$(version)
 
-	$(LIST_ARTIFACTS) | xargs -0 sha256sum > .sha256_1
+	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_1
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
-	$(LIST_ARTIFACTS) | xargs -0 sha256sum > .sha256_2
+	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
 	diff .sha256_1 .sha256_2
 
 run:
