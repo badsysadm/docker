@@ -10,6 +10,10 @@ FORCE:
 
 glibc binutils: section = system
 glibc: version ?= 2.44
+
+dialog: section = usr
+dialog: version ?= 1.3-20260721
+
 busybox: section = tools
 
 include mk/core.mk
