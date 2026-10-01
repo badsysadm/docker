@@ -11,6 +11,8 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
+version ?=
+
 glibc binutils: section = system
 glibc: version ?= 2.44
 busybox: section = tools

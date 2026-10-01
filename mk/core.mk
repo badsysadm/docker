@@ -22,7 +22,6 @@ kaniko:
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo
 
-version ?=
 %:
 	@if [ -z "$(version)" ]; then \
 		echo "Error: version is not set (use make $@ version=X.XX)"; \
