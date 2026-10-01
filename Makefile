@@ -10,6 +10,10 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
+glibc binutils: section = system
+glibc: version ?= 2.44
+busybox: section = tools
+
 kaniko:
 	mkdir -p .build/oci-bundle .build/rootfs
 	skopeo copy --src-tls-verify=false docker://$(KANIKO_IMAGE) oci:.build/oci-bundle:latest
@@ -27,18 +31,27 @@ kaniko:
 		-p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs \
 		-p BindReadOnlyPaths=$(realpath $@):/kaniko/Dockerfile.source \
 		-p BindReadOnlyPaths=$(shell dirname $(realpath $@)):/kaniko/context \
-		 /kaniko/executor --context /kaniko/context  --ignore-path /proc --ignore-path=/sys --ignore-path=/dev -f /kaniko/Dockerfile.source --no-push --force --oci-layout-path /kaniko/oci
+		 /kaniko/executor --context /kaniko/context  --ignore-path /proc --ignore-path=/sys --ignore-path=/dev -f /kaniko/Dockerfile.source --build-arg VERSION=$(version) --no-push --force --oci-layout-path /kaniko/oci
 #	@rm -rf .build/rootfs/kaniko
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo
 
-glibc:
-	$(MAKE) nell/system/glibc/01_src.Dockerfile
-	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/src/system/glibc:2.44
-	$(MAKE) nell/system/glibc/02_dep.Dockerfile
-	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/dep/system/glibc:2.44
-	$(MAKE) nell/system/glibc/03_bin.Dockerfile
-	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/system/glibc:2.44
+version ?=
+%:
+	@if [ -z "$(version)" ]; then \
+		echo "Error: version is not set (use make $@ version=X.XX)"; \
+		exit 1; \
+	fi
+	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/src/$(section)/$@/manifests/$(version) >/dev/null 2>&1; then \
+		$(MAKE) nell/$(section)/$@/01_src.Dockerfile; \
+		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/src/$(section)/$@:$(version); \
+	fi
+	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/dep/$(section)/$@/manifests/$(version) >/dev/null 2>&1; then \
+		$(MAKE) nell/$(section)/$@/02_dep.Dockerfile; \
+		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/dep/$(section)/$@:$(version); \
+	fi
+	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile
+	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/$(section)/$@:$(version)
 
 run:
 	systemd-run -t \
