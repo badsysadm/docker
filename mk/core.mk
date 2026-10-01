@@ -1,5 +1,7 @@
 .PHONY: kaniko clean bootstrap
 
+version ?=
+
 kaniko:
 	mkdir -p .build/oci-bundle .build/rootfs
 	skopeo copy --src-tls-verify=false docker://$(KANIKO_IMAGE) oci:.build/oci-bundle:latest

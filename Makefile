@@ -1,6 +1,3 @@
-include mk/core.mk
-include mk/bs.mk
-
 REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
 KANIKO_IMAGE_GITLAB := registry.gitlab.com/gitlab-ci-utils/container-images/kaniko:v1.25.16-debug
@@ -11,8 +8,9 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-version ?=
-
 glibc binutils: section = system
 glibc: version ?= 2.44
 busybox: section = tools
+
+include mk/core.mk
+include mk/bs.mk
