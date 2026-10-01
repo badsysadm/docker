@@ -1,0 +1,18 @@
+[Unit]
+Description=buildbot master daemon
+After=local-fs.target network.target
+
+[Service]
+WorkingDirectory=/var/lib/buildbot
+Environment=BASEDIR=/var/lib/buildbot
+User=buildbot
+Group=buildbot
+ExecStartPre=/usr/bin/python3.14 -c "from buildbot.scripts import runner; runner.run()" checkconfig ${BASEDIR}
+ExecStartPre=/usr/bin/python3.14 -c "from buildbot.scripts import runner; runner.run()" upgrade-master ${BASEDIR}
+ExecStart=/usr/bin/python3.14 -c "from buildbot.scripts import runner; runner.run()" start --nodaemon ${BASEDIR}
+RuntimeDirectory=buildbot
+StateDirectory=buildbot
+DinamicUser=yes
+
+[Install]
+WantedBy=multi-user.target
