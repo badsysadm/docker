@@ -26,7 +26,7 @@ kaniko:
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo
 
-%: check-version get-src get-dep get-build
+%:
 	@if [ -z "$(version)" ]; then \
 		echo "Error: version is not set (use make $@ version=X.XX)"; \
 		exit 1; \
