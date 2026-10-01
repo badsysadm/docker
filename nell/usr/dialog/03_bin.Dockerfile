@@ -5,7 +5,7 @@ FROM oci.badsysadm.local:80/dep/usr/dialog:${VERSION} AS dep_image
 FROM dep_image AS build
 ARG VERSION
 
-WORKDIR /src/dialog-${DIALOG_VERSION}
+WORKDIR /src/dialog
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
