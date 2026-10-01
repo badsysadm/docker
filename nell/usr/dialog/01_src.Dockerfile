@@ -4,4 +4,4 @@ ARG VERSION=1.3-20260721
 RUN wget --no-check-certificate -qO- https://invisible-island.net/archives/dialog/dialog-${VERSION}.tgz | tar -xz -C /src
 
 FROM scratch
-COPY --from=build /src/glibc/ /src
+COPY --from=build /src/dialog/ /src
