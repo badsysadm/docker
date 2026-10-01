@@ -5,7 +5,7 @@ ENV CMDLINE="console=ttyS0 rw selinux=0 rdinit=/usr/lib/systemd/systemd init=/in
 #ENV CMDLINE="console=ttyS0 rw selinux=1 rdinit=/usr/local/bin/sh systemd.unit=default.target"
 ENV CMDLINE_MAIN="${CMDLINE} loglevel=1"
 ENV CMDLINE_DEBUG="${CMDLINE} systemd.log_level=debug systemd.log_target=console"
-ENV KVER="6.12.105+deb13-amd64"
+ENV KVER="6.12.107+deb13-amd64"
 ENV KERNEL_BIN="/boot/vmlinuz-${KVER}"
 ENV INITRD_TARGET="/src/initrd.img"
 ENV UKI_OUT="/src/custom.EFI"
@@ -315,6 +315,7 @@ COPY locale.conf /src/target/etc/locale.conf
 COPY profile /src/target/etc/profile
 COPY inputrc /src/target/etc/inputrc
 COPY vconsole.conf /src/target/etc/vconsole.conf
+COPY modules.conf /src/target/usr/lib/modules-load.d/modules.conf
 
 COPY --from=127.0.0.1:12670/pkg/libs/openssl:3.6.4 \
     /usr/lib/x86_64-linux-gnu/libcrypto.so \
@@ -334,6 +335,10 @@ COPY --from=127.0.0.1:12670/pkg/system/kbd:2.10.0 \
 COPY --from=127.0.0.1:12670/pkg/system/kbd:2.10.0 \
     /usr/share/keymaps/i386/qwerty/ru.map \
     /src/target/usr/share/keymaps/i386/qwerty/
+
+COPY --from=127.0.0.1:12670/pkg/utils/nano:9.2 \
+    /usr/bin/nano \
+    /src/target/usr/bin/nano
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \
     systemd-ukify systemd-boot cpio gzip linux-image-amd64 ovmf > /dev/null
