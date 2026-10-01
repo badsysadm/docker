@@ -1,0 +1,10 @@
+Source: dialog
+Section: usr
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), build-essential, libncursesw5-dev, libtinfo-dev, pkg-config
+
+Package: dialog
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: dialog
