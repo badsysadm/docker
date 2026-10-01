@@ -1,6 +1,6 @@
 ARG VERSION=2.44
 
-FROM 127.0.0.1:12670/dep/system/glibc:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/system/glibc:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
