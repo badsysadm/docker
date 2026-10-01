@@ -1,10 +1,12 @@
 .PHONY: kaniko clean bootstrap
 
+REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
 KANIKO_IMAGE_GITLAB := registry.gitlab.com/gitlab-ci-utils/container-images/kaniko:v1.25.16-debug
 KANIKO_IMAGE_LOCAL := 127.0.0.1:12670/system/kaniko:v1.25.16
-KANIKO_IMAGE_BADSYSADM := oci.badsysadm.local:80/system/kaniko:v1.25.16
+KANIKO_IMAGE_BADSYSADM := $(REGISTRY_BADSYSADM)/system/kaniko:v1.25.16
 KANIKO_IMAGE := $(KANIKO_IMAGE_BADSYSADM)
+SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
@@ -29,6 +31,14 @@ kaniko:
 #	@rm -rf .build/rootfs/kaniko
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo
+
+glibc:
+	$(MAKE) nell/system/glibc/01_src.Dockerfile
+	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/src/system/glibc:2.44
+	$(MAKE) nell/system/glibc/02_dep.Dockerfile
+	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/dep/system/glibc:2.44
+	$(MAKE) nell/system/glibc/03_bin.Dockerfile
+	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/system/glibc:2.44
 
 run:
 	systemd-run -t \
