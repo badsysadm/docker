@@ -29,11 +29,11 @@ kaniko:
 		echo "Error: version is not set (use make $@ version=X.XX)"; \
 		exit 1; \
 	fi
-	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/src/$(section)/$@/manifests/$(version); then \
+	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/src/$(section)/$@/manifests/$(version) >/dev/null; then \
 		$(MAKE) nell/$(section)/$@/01_src.Dockerfile version=$(version); \
 		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/src/$(section)/$@:$(version); \
 	fi
-	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/dep/$(section)/$@/manifests/$(version) >/dev/null 2>&1; then \
+	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/dep/$(section)/$@/manifests/$(version) >/dev/null; then \
 		$(MAKE) nell/$(section)/$@/02_dep.Dockerfile version=$(version); \
 		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/dep/$(section)/$@:$(version); \
 	fi
