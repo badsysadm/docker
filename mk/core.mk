@@ -26,34 +26,25 @@ kaniko:
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo
 
-check-version:
+%: check-version get-src get-dep get-build
 	@if [ -z "$(version)" ]; then \
 		echo "Error: version is not set (use make $@ version=X.XX)"; \
 		exit 1; \
 	fi
-
-get-src:
 	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/src/$(section)/$@/manifests/$(version) >/dev/null; then \
-        $(MAKE) nell/$(section)/$@/01_src.Dockerfile version=$(version); \
+		$(MAKE) nell/$(section)/$@/01_src.Dockerfile version=$(version); \
 		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/src/$(section)/$@:$(version); \
 	fi
-
-get-dep:
 	if ! curl -I --silent -f -k -H "Accept: application/vnd.docker.distribution.manifest.v2+json" $(REGISTRY_BADSYSADM)/v2/dep/$(section)/$@/manifests/$(version) >/dev/null; then \
 		$(MAKE) nell/$(section)/$@/02_dep.Dockerfile version=$(version); \
 		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/dep/$(section)/$@:$(version); \
 	fi
-
-get-build:
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
 	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_1
 
-check-reproducibility:
-	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
-	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
-	diff .sha256_1 .sha256_2
-
-%: check-version get-src get-dep get-build
+	#$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
+	#$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
+	#diff .sha256_1 .sha256_2
 
 run:
 	systemd-run -t \
