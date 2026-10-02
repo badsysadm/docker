@@ -6,6 +6,7 @@ Build-Depends:
  build-essential,
  pkg-config,
  gettext,
+ texinfo,
  autoconf,
  automake,
  autopoint,
