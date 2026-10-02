@@ -3,6 +3,8 @@ ARG VERSION=2.4.7
 FROM oci.badsysadm.local:80/src/security/gnupg:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
+RUN apt update -q && apt install -y -qq install git --no-install-recommends
+
 ARG LIBGPG_ERROR_VERSION=libgpg-error-1.51
 ARG LIBGCRYPT_VERSION=libgcrypt-1.11.0
 ARG LIBASSUAN_VERSION=libassuan-3.0.2
