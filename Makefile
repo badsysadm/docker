@@ -15,6 +15,9 @@ dialog coreutils: section = usr
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 
+findutils: section = utils
+findutils: version ?= 4.11.0
+
 busybox: section = tools
 
 include mk/core.mk
