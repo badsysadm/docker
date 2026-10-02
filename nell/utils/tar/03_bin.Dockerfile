@@ -9,6 +9,8 @@ ARG FORCE_UNSAFE_CONFIGURE=1
 COPY debian/patches /src/patches/
 RUN patch -p0 < /src/patches/_build.patch
 
+WORKDIR /src/tar
+
 RUN autoreconf -f -i
 RUN ./configure \
     --prefix=/usr \
