@@ -15,9 +15,10 @@ dialog coreutils: section = usr
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 
-findutils iputils: section = utils
+findutils iputils util-linux: section = utils
 findutils: version ?= 4.11.0
 iputils: version ?= 20250605
+util-linux: version ?= 2.42.2
 
 busybox: section = tools
 

@@ -1,0 +1,26 @@
+Source: util-linux
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ gettext,
+ texinfo,
+ autoconf,
+ automake,
+ autopoint,
+ libtool,
+ bison,
+ flex,
+ libsqlite3-dev,
+ libjson-c-dev,
+ libdevmapper-dev,
+ libpam0g-dev,
+ libaudit-dev,
+ libcap-ng-dev
+
+Package: util-linux
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: util-linux binaries
