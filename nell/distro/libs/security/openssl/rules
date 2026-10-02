@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+override_dh_auto_configure:
+	./config \
+		--prefix=/usr \
+		--openssldir=/etc/ssl \
+		--libdir=lib/x86_64-linux-gnu \
+		shared \
+		enable-zlib \
+		enable-zstd \
+		no-docs \
+		no-tests \
+		-static-libgcc
+	# Замена zlib/zstd на статические .a архивы для libcrypto.so
+	perl -pi -e 's/(CNF_EX_LIBS=.*)(-lz\b)/$$1 \/usr\/lib\/x86_64-linux-gnu\/libz.a/g' Makefile && \
+	perl -pi -e 's/(CNF_EX_LIBS=.*)(-lzstd\b)/$$1 \/usr\/lib\/x86_64-linux-gnu\/libzstd.a/g' Makefile && \
+	perl -pi -e 's/ EX_LIBS=-lz\b/ EX_LIBS=\/usr\/lib\/x86_64-linux-gnu\/libz.a/g' Makefile && \
+	perl -pi -e 's/ EX_LIBS=-lzstd\b/ EX_LIBS=\/usr\/lib\/x86_64-linux-gnu\/libzstd.a/g' Makefile
+
+	# Настройка статической сборки только для исполняемых файлов (BIN_LDFLAGS), не затрагивая shared-либы
+	perl -pi -e 's/^BIN_LDFLAGS=/BIN_LDFLAGS=-static /g' Makefile && \
+	perl -pi -e 's/apps\/openssl: (.*) libcrypto.so libssl.so/apps\/openssl: $$1 libcrypto.a libssl.a/g' Makefile

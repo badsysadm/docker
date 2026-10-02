@@ -1,0 +1,20 @@
+Source: openssl
+Section: utils
+Priority: optional
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ perl,
+ zlib1g-dev,
+ libzstd-dev
+Standards-Version: 4.6.2
+Homepage: https://www.openssl.org/
+
+Package: openssl
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Secure Sockets Layer toolkit - cryptographic utility
+ OpenSSL is a Toolkit for Transport Layer Security (TLS) and Secure Sockets
+ Layer (SSL) protocols. It includes a general-purpose cryptography library.
+ .
+ This package contains the openssl binary and related tools.

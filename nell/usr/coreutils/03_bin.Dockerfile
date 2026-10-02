@@ -20,7 +20,7 @@ RUN ./configure \
 #RUN ln -s /usr/bin/automake /usr/bin/automake-1.16
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
-RUN rm -rf /src/target/usr/share/man
+RUN rm -rf /src/target/usr/share
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="coreutils"

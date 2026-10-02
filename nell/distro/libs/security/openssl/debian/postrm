@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+DIR="/usr/src/nell/openssl"
+
+case "$1" in
+    purge|remove)
+        if [ -d "$DIR" ]; then
+            rm -rf "$DIR"
+        fi
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
