@@ -5,6 +5,36 @@ FROM oci.badsysadm.local:80/dep/security/gnupg:${VERSION} AS dep_image
 FROM dep_image AS build
 ARG VERSION
 
+WORKDIR /src/libgpg-error
+RUN ./autogen.sh
+RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
+RUN make
+RUN make install
+
+WORKDIR /src/libgcrypt
+RUN ./autogen.sh
+RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
+RUN make
+RUN make install
+
+WORKDIR /src/libassuan
+RUN ./autogen.sh
+RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
+RUN make
+RUN make install
+
+WORKDIR /src/libksba
+RUN ./autogen.sh
+RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
+RUN make
+RUN make install
+
+WORKDIR /src/npth
+RUN ./autogen.sh
+RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
+RUN make
+RUN make install
+
 WORKDIR /src/gnupg
 
 RUN sed -i 's/ZLIBS="-lz"/ZLIBS="\/usr\/lib\/x86_64-linux-gnu\/libz.a"/g' configure.ac
