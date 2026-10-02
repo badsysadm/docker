@@ -1,0 +1,16 @@
+diff --git a/apt-pkg/contrib/extracttar.cc b/apt-pkg/contrib/extracttar.cc
+index 7b545de..c6cf3f1 100644
+--- a/apt-pkg/contrib/extracttar.cc
++++ b/apt-pkg/contrib/extracttar.cc
+@@ -274,6 +274,11 @@ bool ExtractTar::Go(pkgDirStream &Stream)
+ 	    continue;
+ 	 }
+ 	 
++
++	case 'x':
++	case 'g':
++	    break;
++
+ 	 default:
+ 	 BadRecord = true;
+ 	 _error->Warning(_("Unknown TAR header type %u"), (unsigned)Tar->LinkFlag);
