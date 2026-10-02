@@ -1,6 +1,6 @@
 ARG VERSION=4.11.0
 
-FROM oci.badsysadm.local:80/dep/usr/findutils:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/utils/findutils:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION

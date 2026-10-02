@@ -1,6 +1,6 @@
 ARG VERSION=4.11.0
 
-FROM oci.badsysadm.local:80/src/usr/findutils:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/utils/findutils:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
