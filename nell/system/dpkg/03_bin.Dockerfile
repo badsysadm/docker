@@ -28,6 +28,8 @@ RUN ./configure \
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 
+RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
+
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="dpkg"
 LABEL org.opencontainers.image.version=${VERSION}
