@@ -6,10 +6,10 @@ FROM dep_image AS build
 ARG VERSION
 ARG FORCE_UNSAFE_CONFIGURE=1
 
+WORKDIR /src/tar
+
 COPY debian/patches /src/patches/
 RUN patch -p0 < /src/patches/_build.patch
-
-WORKDIR /src/tar
 
 RUN autoreconf -f -i
 RUN ./configure \
