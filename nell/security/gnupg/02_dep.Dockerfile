@@ -10,7 +10,7 @@ ARG LIBKSBA_VERSION=libksba-1.6.7
 ARG NPTH_VERSION=npth-1.8
 
 # 1. Клонируем и собираем libgpg-error статически
-RUN git clone --single-branch --branch ${LIBGPG_ERROR_VERSION} --depth 1 https://github.com/gpg/libgpg-error.git /src/libgpg-error
+RUN git clone -q --single-branch --branch ${LIBGPG_ERROR_VERSION} --depth 1 https://github.com/gpg/libgpg-error.git /src/libgpg-error
 WORKDIR /src/libgpg-error
 RUN ./autogen.sh
 RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
@@ -18,7 +18,7 @@ RUN make
 RUN make install
 
 # 2. Клонируем и собираем libgcrypt статически
-RUN git clone --single-branch --branch ${LIBGCRYPT_VERSION} --depth 1 https://github.com/gpg/libgcrypt.git /src/libgcrypt
+RUN git clone -q --single-branch --branch ${LIBGCRYPT_VERSION} --depth 1 https://github.com/gpg/libgcrypt.git /src/libgcrypt
 WORKDIR /src/libgcrypt
 RUN ./autogen.sh
 RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
@@ -26,7 +26,7 @@ RUN make
 RUN make install
 
 # 3. Клонируем и собираем libassuan статически
-RUN git clone --single-branch --branch ${LIBASSUAN_VERSION} --depth 1 https://github.com/gpg/libassuan.git /src/libassuan
+RUN git clone -q --single-branch --branch ${LIBASSUAN_VERSION} --depth 1 https://github.com/gpg/libassuan.git /src/libassuan
 WORKDIR /src/libassuan
 RUN ./autogen.sh
 RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
@@ -34,7 +34,7 @@ RUN make
 RUN make install
 
 # 4. Клонируем и собираем libksba статически
-RUN git clone --single-branch --branch ${LIBKSBA_VERSION} --depth 1 https://github.com/gpg/libksba.git /src/libksba
+RUN git clone -q --single-branch --branch ${LIBKSBA_VERSION} --depth 1 https://github.com/gpg/libksba.git /src/libksba
 WORKDIR /src/libksba
 RUN ./autogen.sh
 RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
@@ -42,7 +42,7 @@ RUN make
 RUN make install
 
 # 5. Клонируем и собираем npth статически
-RUN git clone --single-branch --branch ${NPTH_VERSION} --depth 1 https://github.com/gpg/npth.git /src/npth
+RUN git clone -q --single-branch --branch ${NPTH_VERSION} --depth 1 https://github.com/gpg/npth.git /src/npth
 WORKDIR /src/npth
 RUN ./autogen.sh
 RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
