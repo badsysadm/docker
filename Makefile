@@ -17,11 +17,12 @@ dialog coreutils: section = usr
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 
-findutils iputils xzutils util-linux: section = utils
+findutils iputils xzutils util-linux tar: section = utils
 findutils: version ?= 4.11.0
 iputils: version ?= 20250605
 xzutils: version ?= 5.6.2
 util-linux: version ?= 2.42.2
+tar: version ?= 1.35
 
 busybox: section = tools
 

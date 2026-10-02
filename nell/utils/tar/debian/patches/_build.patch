@@ -1,0 +1,13 @@
+--- src/Makefile.am.orig    2026-07-28 01:28:47.534658683 +0000
++++ src/Makefile.am 2026-07-28 01:34:13.789806538 +0000
+@@ -49,7 +49,7 @@
+ AM_CPPFLAGS = -I$(top_srcdir)/gnu -I../ -I../gnu -I$(top_srcdir)/lib -I../lib
+ AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
+ 
+-tar_LDADD = $(LIBS) ../lib/libtar.a ../gnu/libgnu.a\
+- $(LIB_ACL) $(LIB_CLOCK_GETTIME) $(LIB_EACCESS)\
++tar_LDADD = /usr/lib/x86_64-linux-gnu/libacl.a $(LIBS) ../lib/libtar.a ../gnu/libgnu.a\
++ $(LIB_CLOCK_GETTIME) $(LIB_EACCESS)\
+  $(LIB_GETRANDOM) $(LIB_HARD_LOCALE) $(FILE_HAS_ACL_LIB) $(LIB_MBRTOWC)\
+- $(LIB_SELINUX) $(LIB_SETLOCALE_NULL)
++ $(LIB_SETLOCALE_NULL)

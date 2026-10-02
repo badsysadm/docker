@@ -1,0 +1,23 @@
+Source: tar
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ gettext,
+ autoconf,
+ automake,
+ autopoint,
+ libtool,
+ zlib1g-dev,
+ libbz2-dev,
+ liblzma-dev,
+ libzstd-dev,
+ libacl1-dev
+
+Package: tar
+Architecture: amd64
+Static-Built-Using: gcc, zlib1g-dev, libbz2-dev, liblzma-dev, libzstd-dev,libacl1-dev
+Depends: ${shlibs:Depends}
+Description: tar Utils
