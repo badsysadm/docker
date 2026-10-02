@@ -1,0 +1,16 @@
+Source: xzutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), build-essential, cmake
+
+Package: xz-utils
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: XZ Utils
+
+Package: liblzma5
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: LZMA libs
