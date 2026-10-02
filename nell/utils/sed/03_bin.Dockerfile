@@ -1,6 +1,6 @@
 ARG VERSION=4.9
 
-FROM oci.badsysadm.local:80/dep/utils/tar:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/utils/sed:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
