@@ -1,6 +1,6 @@
 ARG VERSION=5.6.2
 
-FROM oci.badsysadm.local:80/src/utils/findutils:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/utils/xzutils:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/

@@ -1,11 +1,11 @@
 ARG VERSION=5.6.2
 
-FROM oci.badsysadm.local:80/dep/utils/findutils:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/utils/xzutils:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
 
-WORKDIR /src/xz
+WORKDIR /src/xzutils
 RUN cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
