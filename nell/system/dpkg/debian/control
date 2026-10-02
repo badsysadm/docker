@@ -1,0 +1,28 @@
+Source: dpkg
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ pkg-config,
+ gettext,
+ texinfo,
+ autoconf,
+ automake,
+ autopoint,
+ libtool,
+ flex,
+ bison,
+ liblzma-dev,
+ libzstd-dev,
+ libbz2-dev,
+ liblz4-dev,
+ zlib1g-dev,
+ libmd-dev,
+
+Package: dpkg
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: Low-level package manager
