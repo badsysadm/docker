@@ -3,6 +3,9 @@
 LIST_ARTIFACTS := find .build/rootfs/ \( -path .build/rootfs/kaniko -o -path .build/rootfs/etc/hosts -o -path .build/rootfs/etc/resolv.conf \) -prune -o -type f -print0
 
 version ?=
+ifneq ($(version),)
+    BUILD_ARG_VERSION = --build-arg VERSION=$(version)
+endif
 
 kaniko:
 	mkdir -p .build/oci-bundle .build/rootfs
@@ -21,7 +24,7 @@ kaniko:
 		-p BindReadOnlyPaths=/etc/ssl/certs:/kaniko/certs \
 		-p BindReadOnlyPaths=$(realpath $@):/kaniko/Dockerfile.source \
 		-p BindReadOnlyPaths=$(shell dirname $(realpath $@)):/kaniko/context \
-		 /kaniko/executor --context /kaniko/context  --ignore-path /proc --ignore-path=/sys --ignore-path=/dev -f /kaniko/Dockerfile.source --build-arg VERSION=$(version) --no-push --force --oci-layout-path /kaniko/oci
+		 /kaniko/executor --context /kaniko/context  --ignore-path /proc --ignore-path=/sys --ignore-path=/dev -f /kaniko/Dockerfile.source $(BUILD_ARG_VERSION) --no-push --force --oci-layout-path /kaniko/oci
 #	@rm -rf .build/rootfs/kaniko
 #--snapshot-mode=time # --single-snapshot --use-new-run
  # --snapshot-mode=redo

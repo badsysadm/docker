@@ -16,4 +16,4 @@ RUN git clone -q --single-branch --branch ${LIBKSBA_VERSION} --depth 1 https://g
 RUN git clone -q --single-branch --branch ${NPTH_VERSION} --depth 1 https://github.com/gpg/npth.git /src/npth
 
 FROM scratch
-COPY --from=build /src/gnupg/ /src
+COPY --from=build /src/ /src
