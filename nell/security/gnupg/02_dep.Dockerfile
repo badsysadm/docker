@@ -1,6 +1,6 @@
 ARG VERSION=2.4.7
 
-FROM oci.badsysadm.local:80/src/utils/gnupg:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/security/gnupg:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG LIBGPG_ERROR_VERSION=libgpg-error-1.51

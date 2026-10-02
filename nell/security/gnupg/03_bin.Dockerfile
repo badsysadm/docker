@@ -1,6 +1,6 @@
 ARG VERSION=2.4.7
 
-FROM oci.badsysadm.local:80/dep/utils/gnupg:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/security/gnupg:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
