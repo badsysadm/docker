@@ -45,9 +45,9 @@ kaniko:
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
 	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_1
 
-	#$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
-	#$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
-	#diff .sha256_1 .sha256_2
+	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
+	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
+	diff .sha256_1 .sha256_2
 
 run:
 	systemd-run -t \
