@@ -4,6 +4,7 @@ FROM oci.badsysadm.local:80/dep/system/apt:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
+ENV SOURCE_DATE_EPOCH=1700000000
 
 WORKDIR /src/openssl
 
