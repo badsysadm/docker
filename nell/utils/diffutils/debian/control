@@ -1,0 +1,10 @@
+Source: diffutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), build-essential, pkg-config, gettext, texinfo
+
+Package: diff
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: GNU diffutils binaries
