@@ -62,7 +62,7 @@ RUN ./configure \
 RUN make
 RUN make install DESTDIR=/src/target
 
-RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
+RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc /src/target/usr/share/gnupg
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="gnupg"
