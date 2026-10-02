@@ -15,7 +15,8 @@ glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
 
-dialog coreutils: section = usr
+bash dialog coreutils: section = usr
+bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 
