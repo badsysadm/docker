@@ -1,7 +1,7 @@
 Source: iputils
 Section: utils
 Maintainer: badsysadm <me@badsysadm.com>
-Build-Depends: debhelper-compat (= 13), build-essential, pkg-config, gettext, meson ninja-build, libcap-dev libidn2-dev libunistring-dev
+Build-Depends: debhelper-compat (= 13), build-essential, pkg-config, gettext, meson, ninja-build, libcap-dev, libidn2-dev, libunistring-dev
 
 Package: iputils
 Architecture: amd64
