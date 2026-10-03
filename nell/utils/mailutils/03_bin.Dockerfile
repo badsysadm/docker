@@ -10,6 +10,8 @@ WORKDIR /src/mailutils
 
 RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 
+RUN sed -i '/^SUBDIRS = /,/^EXTRA_DIST = / { s/\\<doc\\>//g; s/\\<testsuite\\>//g; s/\\<libtests\\>//g; }' Makefile.in
+
 RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
     export PKG_CONFIG="pkg-config --static" && \
     export LDFLAGS="-static-libgcc -Wl,-Bstatic" && \
@@ -25,8 +27,6 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --without-python \
         --without-guile \
         --with-gdbm
-
-RUN sed -i '/^SUBDIRS = /,/^EXTRA_DIST = / s/\\<doc\\>//g' Makefile
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
