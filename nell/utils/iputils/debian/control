@@ -5,6 +5,6 @@ Build-Depends: debhelper-compat (= 13), build-essential, pkg-config, gettext, me
 
 Package: iputils
 Architecture: amd64
-Static-Built-Using: gcc, libcap-dev libidn2-dev libunistring-dev
+Static-Built-Using: gcc, libcap-dev, libidn2-dev, libunistring-dev
 Depends: ${shlibs:Depends}
 Description: iputils binaries and tools
