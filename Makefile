@@ -16,6 +16,10 @@ dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
 openssh: version ?= 10.5p1
 
+libnftnl nftables: section = net
+libnftnl: version ?= 1.3.2
+nftables: version ?= 1.1.7
+
 bash dialog coreutils: section = usr
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
