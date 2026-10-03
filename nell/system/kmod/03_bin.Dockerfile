@@ -7,7 +7,8 @@ ARG VERSION
 
 WORKDIR /src/kmod
 
-RUN meson setup build \
+RUN PKG_CONFIG_PATH="/usr/local/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" \
+    meson setup build \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/bin \
@@ -20,7 +21,8 @@ RUN meson setup build \
     -Dzlib=enabled \
     -Dopenssl=enabled \
     -Dmanpages=false \
-    -Dc_link_args="-static-libgcc -Wl,-Bstatic /usr/lib/x86_64-linux-gnu/libzstd.a /usr/lib/x86_64-linux-gnu/liblzma.a /usr/lib/x86_64-linux-gnu/libz.a /usr/lib/x86_64-linux-gnu/libcrypto.a -pthread -Wl,-Bdynamic"
+    -Dc_args="-I/usr/local/include" \
+    -Dc_link_args="-static-libgcc -Wl,-Bstatic /usr/lib/x86_64-linux-gnu/libzstd.a /usr/lib/x86_64-linux-gnu/liblzma.a /usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib64/libcrypto.a -pthread -Wl,-Bdynamic"
 
 RUN ninja -C build
 RUN DESTDIR=/src/target ninja -C build install
