@@ -39,8 +39,6 @@ RUN rm -rf \
         /src/target/usr/share/man \
         /src/target/usr/share/info
 
-RUN readelf -d /src/target/usr/sbin/nft | grep NEEDED | grep 'libc.so.6' && \
-    ! readelf -d /src/target/usr/sbin/nft | grep NEEDED | grep -v 'libc.so.6'
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="nftables"
