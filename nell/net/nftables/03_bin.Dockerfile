@@ -4,10 +4,12 @@ FROM oci.badsysadm.local:80/dep/net/nftables:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
+ARG SOURCE_DATE_EPOCH=0
 
 WORKDIR /src/nftables
 
-RUN export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" && \
+RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
+    export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" && \
     export PKG_CONFIG="pkg-config --static" && \
     export LDFLAGS="-static-libgcc -Wl,-Bstatic" && \
     export LIBS="$(pkg-config --static --libs libedit) -Wl,-Bdynamic" && \
@@ -37,7 +39,8 @@ RUN rm -rf \
         /src/target/usr/share/man \
         /src/target/usr/share/info
 
-RUN ! readelf -d /src/target/usr/sbin/nft | grep NEEDED | grep -v 'libc.so.6'
+RUN readelf -d /src/target/usr/sbin/nft | grep NEEDED | grep 'libc.so.6' && \
+    ! readelf -d /src/target/usr/sbin/nft | grep NEEDED | grep -v 'libc.so.6'
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="nftables"
