@@ -22,3 +22,6 @@ make nell/perl/03_bin.Dockerfile
 skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci/ docker://127.0.0.1:12670/bin/perl/perl:5.44.0
 make nell/perl/04_deb.Dockerfile 
 skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci/ docker://127.0.0.1:12670/deb/perl/perl:5.44.0
+
+
+# skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci docker://127.0.0.1:12670/pkg/libs/openssl:3.6.5

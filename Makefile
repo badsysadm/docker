@@ -30,9 +30,10 @@ util-linux: version ?= 2.42.2
 tar: version ?= 1.35
 sed: version ?= 4.9
 
-gnupg openssl: section = security
+gnupg openssl krb5: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
+krb5: version ?= 1.22.2
 
 busybox: section = tools
 
