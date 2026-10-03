@@ -1,0 +1,15 @@
+Source: openssh
+Section: system
+Build-Depends: debhelper-compat (= 13),
+               libaudit-dev,
+               libbsd-dev,
+               libedit-dev,
+               libkrb5-dev,
+               libpam0g-dev,
+               libselinux1-dev,
+               libsystemd-dev,
+               libwrap0-dev,
+               zlib1g-dev,
+               libzstd-dev
+Standards-Version: 4.6.2
+Homepage: https://www.openssh.com/
