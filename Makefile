@@ -10,10 +10,11 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-glibc dpkg apt: section = system
+glibc dpkg apt openssh: section = system
 glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
+openssh: version ?= 10.5p1
 
 bash dialog coreutils: section = usr
 bash: version ?= 5.3
@@ -29,8 +30,9 @@ util-linux: version ?= 2.42.2
 tar: version ?= 1.35
 sed: version ?= 4.9
 
-gnupg: section = security
+gnupg openssl: section = security
 gnupg: version ?= 2.4.7
+openssl: version ?= 3.6.5
 
 busybox: section = tools
 
