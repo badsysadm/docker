@@ -1,0 +1,16 @@
+Source: openssl
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ perl,
+ pkg-config,
+ zlib1g-dev,
+ libzstd-dev
+
+Package: openssl
+Architecture: amd64
+Static-Built-Using: gcc, zlib1g-dev, libzstd-dev
+Depends: ${shlibs:Depends}
+Description: OpenSSL cryptographic toolkit

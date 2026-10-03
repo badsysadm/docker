@@ -1,4 +1,4 @@
-PHONY: util-linux
+.PHONY: util-linux
 
 REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
@@ -35,8 +35,6 @@ gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
-
-busybox: section = tools
 
 include mk/core.mk
 include mk/bs.mk
