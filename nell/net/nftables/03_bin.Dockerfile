@@ -30,9 +30,7 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --disable-shared
 
 RUN make -j$(nproc) \
-        LIBMNL_LIBS="-Wl,-Bstatic $(pkg-config --static --libs libmnl) -Wl,-Bdynamic" \
-        LIBNFTNL_LIBS="-Wl,-Bstatic $(pkg-config --static --libs libnftnl) -Wl,-Bdynamic" \
-        LIBS="-Wl,-Bstatic $(pkg-config --static --libs jansson libedit) -Wl,-Bdynamic"
+    src_nft_LDADD="src/.libs/libnftables.a -Wl,-Bstatic $(pkg-config --static --libs libmnl libnftnl jansson libedit) -Wl,-Bdynamic"
 
 RUN make install DESTDIR=/src/target
 
