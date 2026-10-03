@@ -21,6 +21,7 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --enable-static \
         --disable-shared \
         --disable-build-servers \
+        --disable-nls \
         --disable-pam \
         --without-python \
         --without-guile \
@@ -32,7 +33,8 @@ RUN make install DESTDIR=/src/target
 RUN rm -rf \
         /src/target/usr/share/doc \
         /src/target/usr/share/man \
-        /src/target/usr/share/info
+        /src/target/usr/share/info \
+        /src/target/usr/share/locale
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="mailutils"
