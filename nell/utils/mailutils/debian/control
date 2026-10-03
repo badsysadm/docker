@@ -7,7 +7,6 @@ Build-Depends:
  bison,
  flex,
  gawk,
- gettext,
  libcrypt-dev,
  libgdbm-dev,
  libgnutls28-dev,
