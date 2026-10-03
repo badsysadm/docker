@@ -7,12 +7,14 @@ Build-Depends:
  pkg-config,
  flex,
  bison,
+ libacl1-dev,
+ libcap-dev,
  libpcre2-dev,
  nettle-dev,
  zlib1g-dev
 
 Package: aide
 Architecture: amd64
-Static-Built-Using: gcc, libpcre2-dev, nettle-dev, zlib1g-dev
+Static-Built-Using: gcc, libacl1-dev, libcap-dev, libpcre2-dev, nettle-dev, zlib1g-dev
 Depends: ${shlibs:Depends}
 Description: Advanced Intrusion Detection Environment

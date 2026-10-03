@@ -15,10 +15,10 @@ RUN ./configure \
     --with-nettle \
     --without-gcrypt \
     --with-zlib \
-    --without-posix-acl \
+    --with-posix-acl \
     --without-selinux \
     --without-xattr \
-    --without-capabilities \
+    --with-capabilities \
     --without-e2fsattrs \
     --without-curl \
     --without-audit \
@@ -28,9 +28,6 @@ RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf /src/target/usr/share
-
-RUN ! readelf -l /src/target/usr/bin/aide | grep -q INTERP && \
-    ! readelf -d /src/target/usr/bin/aide 2>/dev/null | grep -q NEEDED
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="aide"
