@@ -1,4 +1,4 @@
-.PHONY: util-linux
+PHONY: util-linux
 
 REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
@@ -15,6 +15,12 @@ glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
 openssh: version ?= 10.5p1
+
+libnftnl: section = lib
+libnftnl: version ?= 1.3.2
+
+nftables: section = net
+nftables: version ?= 1.1.7
 
 bash dialog coreutils: section = usr
 bash: version ?= 5.3
