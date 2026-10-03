@@ -17,9 +17,9 @@ RUN ./configure \
     --with-zlib \
     --with-posix-acl \
     --without-selinux \
-    --without-xattr \
+    --with-xattr \
     --with-capabilities \
-    --without-e2fsattrs \
+    --with-e2fsattrs \
     --without-curl \
     --without-audit \
     --without-locale
