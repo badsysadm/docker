@@ -55,7 +55,13 @@ make nftables version=1.1.8
 
 ## Ручной дебаг
 
-Любой этап можно запустить отдельно:
+Любой этап можно запустить отдельно. Если `version` не указан, используется значение `ARG VERSION` из самого Dockerfile:
+
+```bash
+make nell/net/nftables/03_bin.Dockerfile
+```
+
+При необходимости версию можно переопределить:
 
 ```bash
 make nell/net/nftables/03_bin.Dockerfile version=1.1.7
@@ -75,7 +81,7 @@ Makefile подготовит Kaniko rootfs и запустит Dockerfile че�
 readelf -d .build/rootfs/target/usr/sbin/nft
 ```
 
-При проблемах со сборкой удобнее запускать отдельно `01_src`, `02_dep` или `03_bin`, передавая нужную версию через `version=...`.
+При проблемах со сборкой удобнее запускать отдельно `01_src`, `02_dep` или `03_bin`.
 
 ## Подсказки
 
