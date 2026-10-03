@@ -20,6 +20,7 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --localstatedir=/var \
         --enable-static \
         --disable-shared \
+        --disable-build-servers \
         --disable-pam \
         --without-python \
         --without-guile \
