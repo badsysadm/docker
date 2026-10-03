@@ -1,0 +1,14 @@
+Source: krb5
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ bison,
+ libssl-dev,
+ comerr-dev,
+ libldap-dev,
+ liblmdb-dev,
+ zlib1g-dev,
+ libzstd-dev
