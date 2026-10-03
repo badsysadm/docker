@@ -42,7 +42,5 @@ openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
 
-busybox: section = tools
-
 include mk/core.mk
 include mk/bs.mk

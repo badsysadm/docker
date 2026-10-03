@@ -1,27 +1,40 @@
-ARG VERSION=9.5
+ARG VERSION=0.19.4
 
-FROM oci.badsysadm.local:80/dep/usr/coreutils:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/security/aide:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
-ARG FORCE_UNSAFE_CONFIGURE=1
 
-WORKDIR /src/coreutils
+WORKDIR /src/aide
+
 RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
-    --disable-nls \
-    --enable-single-binary=symlinks
+    --enable-static \
+    --with-nettle \
+    --without-gcrypt \
+    --with-zlib \
+    --with-posix-acl \
+    --without-selinux \
+    --with-xattr \
+    --with-capabilities \
+    --with-e2fsattrs \
+    --without-curl \
+    --without-audit \
+    --without-locale
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
+
 RUN rm -rf /src/target/usr/share
 
 FROM scratch AS bundle
-LABEL org.opencontainers.image.title="coreutils"
+LABEL org.opencontainers.image.title="aide"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
-LABEL org.opencontainers.image.description="GNU coreutils single binary"
+LABEL org.opencontainers.image.description="AIDE static bundle"
+
 COPY --from=build /src/target/ /target/

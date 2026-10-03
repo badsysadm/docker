@@ -1,6 +1,6 @@
-ARG VERSION=3.6.5
+ARG VERSION=0.19.4
 
-FROM oci.badsysadm.local:80/src/security/openssl:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/security/aide:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
