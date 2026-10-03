@@ -17,8 +17,6 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --sysconfdir=/etc \
         --disable-debug \
         --disable-man-doc \
-        --disable-fuzzer \
-        --disable-distcheck \
         --disable-profiling \
         --enable-extended-parser-errors \
         --with-mini-gmp \
@@ -29,10 +27,17 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --enable-static \
         --disable-shared
 
-RUN make -j$(nproc) \
-    src_nft_LDADD="src/.libs/libnftables.a -Wl,-Bstatic $(pkg-config --static --libs libmnl libnftnl jansson libedit) -Wl,-Bdynamic"
-
+RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
+
+RUN gcc -static-libgcc \
+        -o /src/target/usr/sbin/nft \
+        src/main.o \
+        src/cli.o \
+        -Wl,-Bstatic,--start-group \
+        src/.libs/libnftables.a \
+        $(pkg-config --static --libs libnftnl libmnl jansson libedit) \
+        -Wl,--end-group,-Bdynamic
 
 RUN rm -rf \
         /src/target/usr/share/doc \
