@@ -12,6 +12,7 @@ Build-Depends:
  libgnutls28-dev,
  libgsasl-dev,
  libltdl-dev,
+ libncurses-dev,
  libreadline-dev,
  libunistring-dev,
  pkg-config,
