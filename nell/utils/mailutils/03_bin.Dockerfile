@@ -13,7 +13,7 @@ RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal
 RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
     export PKG_CONFIG="pkg-config --static" && \
     export LDFLAGS="-static-libgcc -Wl,-Bstatic" && \
-    export LIBS="/usr/lib/x86_64-linux-gnu/libcrypt.a /usr/lib/x86_64-linux-gnu/libreadline.a /usr/lib/x86_64-linux-gnu/libtinfo.a /usr/lib/x86_64-linux-gnu/libgdbm.a /usr/lib/x86_64-linux-gnu/libunistring.a -Wl,-Bdynamic" && \
+    export LIBS="-Wl,-Bdynamic" && \
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -26,6 +26,14 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --without-python \
         --without-guile \
         --with-gdbm
+
+RUN find . -type f -name Makefile -exec sed -i \
+        -e 's|-lcrypt\>|/usr/lib/x86_64-linux-gnu/libcrypt.a|g' \
+        -e 's|-lreadline\>|/usr/lib/x86_64-linux-gnu/libreadline.a /usr/lib/x86_64-linux-gnu/libtinfo.a|g' \
+        -e 's|-ltinfo\>|/usr/lib/x86_64-linux-gnu/libtinfo.a|g' \
+        -e 's|-lgdbm\>|/usr/lib/x86_64-linux-gnu/libgdbm.a|g' \
+        -e 's|-lunistring\>|/usr/lib/x86_64-linux-gnu/libunistring.a|g' \
+        {} +
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
