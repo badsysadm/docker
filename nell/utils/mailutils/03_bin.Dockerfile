@@ -26,7 +26,7 @@ RUN export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" && \
         --without-guile \
         --with-gdbm
 
-RUN touch doc/texinfo/mailutils.info doc/texinfo/mailutils.info-*
+RUN sed -i '/^SUBDIRS = /,/^EXTRA_DIST = / s/\\<doc\\>//g' Makefile
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
