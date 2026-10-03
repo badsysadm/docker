@@ -1,11 +1,11 @@
-# ADR: util-linux build profile
+# ADR: профиль сборки util-linux
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official kernel.org release archive.
-- Disable NLS, asciidoc, Python libmount, systemd, SELinux, cryptsetup and btrfs integration.
-- Keep liblastlog2 and PAM lastlog2 enabled.
-- Build the selected low-level utilities as static programs.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать из официального release archive kernel.org.
+- Отключать NLS, asciidoc, Python libmount, systemd, SELinux, cryptsetup и btrfs.
+- Оставлять включёнными liblastlog2 и PAM lastlog2.
+- Выбранные низкоуровневые утилиты собирать как static programs.
+- Тесты не запускать, документацию удалять.

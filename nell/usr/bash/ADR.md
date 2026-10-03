@@ -1,11 +1,11 @@
-# ADR: Bash build profile
+# ADR: профиль сборки Bash
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build Bash from the upstream release branch.
-- Produce the existing fully static Bash binary.
-- Disable NLS, help builtin and rpath; keep the selected runtime features enabled.
-- Install the shell into `/bin`.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать Bash из upstream release-ветки.
+- Сохранять существующую полностью статическую сборку Bash.
+- Отключать NLS, help builtin и rpath; выбранные runtime-функции оставлять включёнными.
+- Устанавливать shell в `/bin`.
+- Тесты не запускать, документацию удалять.

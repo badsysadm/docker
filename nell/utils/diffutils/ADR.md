@@ -1,10 +1,10 @@
-# ADR: diffutils build profile
+# ADR: профиль сборки diffutils
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official GNU release tarball.
-- Disable NLS.
-- Use the common `/usr`, `/etc`, `/var`, `/sbin` and `/usr/lib64` build layout.
-- Do not run tests and remove installed man/info documentation.
+## Решение
+- Собирать из официального GNU release tarball.
+- Отключать NLS.
+- Использовать текущий layout `/usr`, `/etc`, `/var`, `/sbin`, `/usr/lib64`.
+- Тесты не запускать, man/info удалять.

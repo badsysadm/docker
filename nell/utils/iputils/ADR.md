@@ -1,10 +1,10 @@
-# ADR: iputils build profile
+# ADR: профиль сборки iputils
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the upstream release archive with Meson/Ninja.
-- Build arping, clockdiff, ping and tracepath.
-- Link libcap, libidn2 and libunistring statically while leaving libc dynamic.
-- Disable tests, gettext and generated man/HTML documentation.
+## Решение
+- Собирать из upstream release archive через Meson/Ninja.
+- Собирать arping, clockdiff, ping и tracepath.
+- libcap, libidn2 и libunistring линковать статически, libc оставлять динамической.
+- Отключать тесты, gettext, man и HTML-документацию.

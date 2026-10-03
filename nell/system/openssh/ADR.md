@@ -1,11 +1,11 @@
-# ADR: OpenSSH build profile
+# ADR: профиль сборки OpenSSH
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build OpenSSH Portable from its release tag.
-- Enable PAM and Kerberos 5 support.
-- Use the OpenSSL bundle's `libcrypto.a` and headers rather than a repository shared libcrypto.
-- Link crypto, zlib and zstd dependencies statically while retaining the required dynamic system integration.
-- Remove installed man pages and do not run tests.
+## Решение
+- Собирать OpenSSH Portable из release-тега.
+- Включать PAM и Kerberos 5.
+- Использовать `libcrypto.a` и headers из собственного OpenSSL bundle, а не shared libcrypto из репозитория.
+- crypto, zlib и zstd линковать статически, сохраняя необходимые динамические системные интеграции.
+- Тесты не запускать, man-страницы удалять.

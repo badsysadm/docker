@@ -1,11 +1,11 @@
-# ADR: dialog build profile
+# ADR: профиль сборки dialog
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official Invisible Island release archive with normal TLS certificate verification.
-- Enable wide-character ncurses support.
-- Link ncursesw and tinfo statically while leaving libc dynamic.
-- Install the executable under `/bin`.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать из официального архива Invisible Island с обычной TLS-проверкой сертификата.
+- Использовать wide-character ncurses.
+- ncursesw и tinfo линковать статически, libc оставлять динамической.
+- Устанавливать бинарник в `/bin`.
+- Тесты не запускать, документацию удалять.

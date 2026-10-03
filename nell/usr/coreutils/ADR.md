@@ -1,11 +1,11 @@
-# ADR: coreutils build profile
+# ADR: профиль сборки coreutils
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official GNU release tarball.
-- Build coreutils as a single binary with symlink frontends.
-- Disable NLS.
-- Do not regenerate autotools files from tarball timestamps.
-- Do not run tests and remove `/usr/share` from the final bundle.
+## Решение
+- Собирать из официального GNU release tarball.
+- Использовать single-binary режим с symlink frontend'ами.
+- Отключать NLS.
+- Не регенерировать autotools-файлы release tarball из-за различий timestamp.
+- Тесты не запускать, `/usr/share` удалять из bundle.

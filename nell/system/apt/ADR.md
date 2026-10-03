@@ -1,11 +1,11 @@
-# ADR: APT build profile
+# ADR: профиль сборки APT
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build APT from the Debian upstream repository and apply the local build/PAX patches.
-- Build the pinned OpenSSL dependency locally as static libraries.
-- Link APT's external compression, crypto and support libraries statically while leaving libc dynamic.
-- Disable NLS and documentation.
-- Use a fixed `SOURCE_DATE_EPOCH` to improve reproducibility.
+## Решение
+- Собирать APT из Debian upstream-репозитория с локальными patch-файлами build/PAX.
+- Закреплённый OpenSSL собирать локально в виде статических библиотек.
+- Компрессионные, crypto и прочие внешние библиотеки линковать статически, libc оставлять динамической.
+- NLS и документацию отключать.
+- Использовать фиксированный `SOURCE_DATE_EPOCH` для воспроизводимости.

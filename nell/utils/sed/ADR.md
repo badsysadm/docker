@@ -1,10 +1,10 @@
-# ADR: sed build profile
+# ADR: профиль сборки sed
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official GNU release tarball.
-- Disable NLS.
-- Preserve release autotools files instead of regenerating them because of timestamp differences.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать из официального GNU release tarball.
+- Отключать NLS.
+- Сохранять autotools-файлы release tarball, не регенерируя их из-за timestamp.
+- Тесты не запускать, документацию удалять.

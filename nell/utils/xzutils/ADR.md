@@ -1,10 +1,10 @@
-# ADR: XZ Utils build profile
+# ADR: профиль сборки XZ Utils
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the upstream release tag with CMake.
-- Build static liblzma and disable shared-library output.
-- Disable NLS, XZ documentation and Doxygen output.
-- Do not run tests and remove any installed documentation.
+## Решение
+- Собирать из upstream release-тега через CMake.
+- liblzma собирать статически, shared-библиотеки отключать.
+- Отключать NLS, XZ docs и Doxygen.
+- Тесты не запускать, установленную документацию удалять.

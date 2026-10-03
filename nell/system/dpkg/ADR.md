@@ -1,11 +1,11 @@
-# ADR: dpkg build profile
+# ADR: профиль сборки dpkg
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build dpkg from its upstream Git tag and apply the local build/PAX patches.
-- Build static libraries and disable shared-library output.
-- Disable dselect, start-stop-daemon, developer documentation and NLS.
-- Keep update-alternatives enabled.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать dpkg из upstream Git-тега и применять локальные patch-файлы build/PAX.
+- Собирать static-библиотеки и отключать shared-библиотеки.
+- Отключать dselect, start-stop-daemon, developer docs и NLS.
+- `update-alternatives` оставлять включённым.
+- Тесты не запускать, документацию удалять.

@@ -1,10 +1,10 @@
-# ADR: tar build profile
+# ADR: профиль сборки tar
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build from the official GNU release tarball and apply the local build patch.
-- Disable NLS and SELinux support.
-- Keep external compressor integrations for gzip, bzip2, xz/lzma, lzop and zstd.
-- Do not run tests and remove installed documentation.
+## Решение
+- Собирать из официального GNU release tarball и применять локальный build patch.
+- Отключать NLS и SELinux.
+- Оставлять интеграции с gzip, bzip2, xz/lzma, lzop и zstd.
+- Тесты не запускать, документацию удалять.

@@ -1,11 +1,11 @@
-# ADR: GnuPG build profile
+# ADR: профиль сборки GnuPG
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build GnuPG together with pinned libgpg-error, libgcrypt, libassuan, libksba and npth sources.
-- Build those internal dependencies as static libraries under `/usr/local`.
-- Link zlib and bzip2 statically.
-- Disable NLS, scdaemon, gpgsm and dirmngr for the target profile.
-- Do not run tests and remove installed documentation from the bundle.
+## Решение
+- Собирать GnuPG вместе с закреплёнными версиями libgpg-error, libgcrypt, libassuan, libksba и npth.
+- Эти внутренние зависимости собирать статически в `/usr/local`.
+- zlib и bzip2 линковать статически.
+- Отключать NLS, scdaemon, gpgsm и dirmngr.
+- Тесты не запускать, документацию удалять из bundle.

@@ -1,11 +1,11 @@
-# ADR: OpenSSL build profile
+# ADR: профиль сборки OpenSSL
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build OpenSSL with zlib and zstd support.
-- Keep shared OpenSSL libraries in the bundle for consumers that require them.
-- Build the `openssl` CLI fully static; this is an intentional exception to the usual dynamic-libc rule.
-- Force zlib and zstd used by the CLI to their static archives.
-- Disable tests and documentation.
+## Решение
+- Собирать OpenSSL с поддержкой zlib и zstd.
+- Оставлять shared-библиотеки OpenSSL в bundle для зависимых проектов.
+- CLI `openssl` собирать полностью статически; это осознанное исключение из общего правила о динамической libc.
+- zlib и zstd для CLI подставлять статическими архивами.
+- Тесты и документацию отключать.

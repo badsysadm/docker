@@ -1,12 +1,12 @@
-# ADR: Perl build profile
+# ADR: профиль сборки Perl
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Decision
-- Build Perl 5.44.0 from the upstream `v5.44.0` tag.
-- Keep the existing Perl filesystem layout and optional-library profile.
-- Disable libcrypt support and restrict `libswanted` to `m c`.
-- Do not run tests.
-- Remove POD, man, HTML and other documentation from the final bundle.
-- Keep this project in its existing legacy `nell/perl` location; moving it into a section is outside this cleanup.
+## Решение
+- Собирать Perl 5.44.0 из upstream-тега `v5.44.0`.
+- Сохранять текущий layout Perl и существующий набор optional-компонентов.
+- Отключать поддержку libcrypt и ограничивать `libswanted` до `m c`.
+- Тесты не запускать.
+- Удалять POD, man, HTML и прочую документацию из конечного bundle.
+- Текущее размещение `nell/perl` считать legacy; перенос в section не входит в эту правку.
