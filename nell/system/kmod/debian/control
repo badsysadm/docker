@@ -10,11 +10,10 @@ Build-Depends:
  pkg-config,
  libzstd-dev,
  liblzma-dev,
- zlib1g-dev,
- libssl-dev
+ zlib1g-dev
 
 Package: kmod
 Architecture: amd64
-Static-Built-Using: gcc, libzstd-dev, liblzma-dev, zlib1g-dev, libssl-dev
+Static-Built-Using: gcc, libzstd-dev, liblzma-dev, zlib1g-dev
 Depends: ${shlibs:Depends}
 Description: kernel module tools
