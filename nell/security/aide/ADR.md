@@ -13,6 +13,9 @@
 - `audit` нужен только для отправки результатов в Linux Audit Framework и не влияет на набор проверяемых атрибутов.
 - `curl` не нужен, так как сетевые database/report backends не используются.
 - Release tarball содержит готовые autotools-файлы; перед `configure` обновлять timestamps `configure`, `Makefile.in` и `aclocal.m4`, чтобы `make` не пытался вызвать несовместимую версию `aclocal`.
+
+## Последствия
 - При необходимости Linux Audit Framework потребуется включить audit и добавить libaudit.
 - При переходе на libgcrypt потребуется добавить статическую цепочку зависимостей libgcrypt, включая libgpg-error.
-- Поддержка SELinux в текущем профиле отсутствует.
+- Сетевые database/report backends недоступны без curl.
+- Поддержка SELinux и locale в текущем профиле отсутствует.
