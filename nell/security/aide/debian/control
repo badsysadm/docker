@@ -1,0 +1,18 @@
+Source: aide
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ flex,
+ bison,
+ libpcre2-dev,
+ nettle-dev,
+ zlib1g-dev
+
+Package: aide
+Architecture: amd64
+Static-Built-Using: gcc, libpcre2-dev, nettle-dev, zlib1g-dev
+Depends: ${shlibs:Depends}
+Description: Advanced Intrusion Detection Environment
