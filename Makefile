@@ -10,13 +10,14 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-glibc dpkg apt openssh kmod systemd: section = system
+glibc dpkg apt openssh kmod systemd grub: section = system
 glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
 openssh: version ?= 10.5p1
 kmod: version ?= 34.2
 systemd: version ?= 261
+grub: version ?= 2.14
 
 libnftnl: section = lib
 libnftnl: version ?= 1.3.2
