@@ -4,8 +4,7 @@ FROM oci.badsysadm.local:80/dep/system/systemd:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
-ARG SOURCE_DATE_EPOCH=1700000000
-ENV SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH}
+ARG SOURCE_DATE_EPOCH=0
 
 WORKDIR /src/systemd
 
