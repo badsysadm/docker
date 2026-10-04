@@ -7,8 +7,7 @@ ARG VERSION
 
 WORKDIR /src/ncurses
 
-RUN ./configure \
-    ARFLAGS="-crD" \
+RUN cf_cv_ar_flags=-crD ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/bin \
