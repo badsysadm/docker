@@ -39,11 +39,18 @@ RUN make -C libdm install
 
 WORKDIR /src/grub
 
-RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+RUN python3 gentpl.py Makefile.util.def Makefile.utilgcry.def > Makefile.util.am && \
+    python3 gentpl.py grub-core/Makefile.core.def grub-core/Makefile.gcry.def > grub-core/Makefile.core.am && \
+    find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+
+RUN mkdir -p /src/grub-build-efi /src/grub-build-bios
+
+WORKDIR /src/grub-build-efi
+
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
     CPPFLAGS="-I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib" \
-    ./configure \
+    /src/grub/configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --target=x86_64 \
@@ -59,10 +66,6 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
         --disable-libzfs \
         --enable-grub-protect
 
-RUN python3 gentpl.py Makefile.util.def Makefile.utilgcry.def > Makefile.util.am && \
-    python3 gentpl.py grub-core/Makefile.core.def grub-core/Makefile.gcry.def > grub-core/Makefile.core.am && \
-    find . -type f -name "Makefile.in" -exec touch {} +
-
 RUN sed -i \
     -e 's|^LIBDEVMAPPER =.*|LIBDEVMAPPER = -Wl,--start-group /usr/local/lib/libdevmapper.a -Wl,--end-group -lm -lpthread -ldl|' \
     -e 's|^EFIVAR_LIBS =.*|EFIVAR_LIBS = -Wl,--start-group /usr/local/lib/libefiboot.a /usr/local/lib/libefivar.a -Wl,--end-group -ldl|' \
@@ -71,14 +74,50 @@ RUN sed -i \
     Makefile
 
 RUN make -j$(nproc)
-RUN make install DESTDIR=/src/target
+RUN make install DESTDIR=/src/target/efi
 
-RUN rm -rf /src/target/usr/share/doc /src/target/usr/share/info /src/target/usr/share/man
+WORKDIR /src/grub-build-bios
+
+RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib" \
+    /src/grub/configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --target=i386 \
+        --with-platform=pc \
+        --disable-nls \
+        --disable-efiemu \
+        --disable-werror \
+        --disable-grub-mount \
+        --disable-grub-mkfont \
+        --disable-grub-themes \
+        --enable-device-mapper \
+        --enable-liblzma \
+        --disable-libzfs \
+        --enable-grub-protect
+
+RUN sed -i \
+    -e 's|^LIBDEVMAPPER =.*|LIBDEVMAPPER = -Wl,--start-group /usr/local/lib/libdevmapper.a -Wl,--end-group -lm -lpthread -ldl|' \
+    -e 's|^LIBLZMA =.*|LIBLZMA = /usr/lib/x86_64-linux-gnu/liblzma.a|' \
+    -e 's|^LIBTASN1 =.*|LIBTASN1 = /usr/lib/x86_64-linux-gnu/libtasn1.a|' \
+    Makefile
+
+RUN make -j$(nproc)
+RUN make install DESTDIR=/src/target/bios
+
+RUN rm -rf \
+    /src/target/efi/usr/share/doc \
+    /src/target/efi/usr/share/info \
+    /src/target/efi/usr/share/man \
+    /src/target/bios/usr/share/doc \
+    /src/target/bios/usr/share/info \
+    /src/target/bios/usr/share/man
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="grub"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
-LABEL org.opencontainers.image.description="GRUB x86_64 EFI bundle"
+LABEL org.opencontainers.image.description="GRUB x86_64 EFI and i386 PC bundle"
 
 COPY --from=build /src/target/ /target/
