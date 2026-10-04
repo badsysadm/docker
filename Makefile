@@ -29,13 +29,13 @@ nftables: version ?= 1.1.7
 mailutils: section = utils
 mailutils: version ?= 3.21
 
-bash dialog coreutils kbd: section = usr
+bash dialog kbd: section = usr
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 kbd: version ?= 2.10.0
 
-findutils diffutils iputils xzutils util-linux tar sed gawk strace: section = utils
+findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 iputils: version ?= 20250605
