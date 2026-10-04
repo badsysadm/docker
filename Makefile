@@ -1,4 +1,4 @@
-.PHONY: util-linux systemd
+.PHONY: util-linux
 
 REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
