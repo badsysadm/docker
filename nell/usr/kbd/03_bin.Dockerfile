@@ -7,6 +7,8 @@ ARG VERSION
 
 WORKDIR /src/kbd
 
+RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+
 RUN ./configure \
     --prefix=/usr \
     --disable-vlock \
