@@ -20,14 +20,4 @@ COPY --from=oci.badsysadm.local:80/bin/security/openssl:3.6.5 \
     /target/usr/include/openssl \
     /usr/include/openssl
 
-COPY --from=oci.badsysadm.local:80/bin/system/kmod:34.2 \
-    /target/lib/x86_64-linux-gnu/libkmod.a \
-    /lib/x86_64-linux-gnu/
-COPY --from=oci.badsysadm.local:80/bin/system/kmod:34.2 \
-    /target/lib/x86_64-linux-gnu/pkgconfig/libkmod.pc \
-    /lib/x86_64-linux-gnu/pkgconfig/
-COPY --from=oci.badsysadm.local:80/bin/system/kmod:34.2 \
-    /target/usr/include/libkmod.h \
-    /usr/include/
-
 COPY --from=src_image /src /src/systemd/
