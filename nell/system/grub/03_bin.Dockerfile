@@ -64,8 +64,8 @@ RUN python3 gentpl.py Makefile.util.def Makefile.utilgcry.def > Makefile.util.am
     find . -type f -name "Makefile.in" -exec touch {} +
 
 RUN sed -i \
-    -e 's|^LIBDEVMAPPER =.*|LIBDEVMAPPER = -Wl,--start-group /usr/local/lib/libdevmapper.a -Wl,--end-group -Wl,-Bstatic -lm -lpthread -ldl -Wl,-Bdynamic|' \
-    -e 's|^EFIVAR_LIBS =.*|EFIVAR_LIBS = -Wl,--start-group /usr/local/lib/libefiboot.a /usr/local/lib/libefivar.a -Wl,--end-group -Wl,-Bstatic -ldl -Wl,-Bdynamic|' \
+    -e 's|^LIBDEVMAPPER =.*|LIBDEVMAPPER = -Wl,--start-group /usr/local/lib/libdevmapper.a -Wl,--end-group -lm -lpthread -ldl|' \
+    -e 's|^EFIVAR_LIBS =.*|EFIVAR_LIBS = -Wl,--start-group /usr/local/lib/libefiboot.a /usr/local/lib/libefivar.a -Wl,--end-group -ldl|' \
     -e 's|^LIBLZMA =.*|LIBLZMA = /usr/lib/x86_64-linux-gnu/liblzma.a|' \
     -e 's|^LIBTASN1 =.*|LIBTASN1 = /usr/lib/x86_64-linux-gnu/libtasn1.a|' \
     Makefile
