@@ -8,6 +8,7 @@ Build-Depends:
  ninja-build,
  pkg-config,
  libacl1-dev,
+ acl,
  libapparmor-dev,
  libaudit-dev,
  libblkid-dev,
