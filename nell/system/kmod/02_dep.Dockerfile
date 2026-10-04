@@ -17,4 +17,4 @@ COPY --from=oci.badsysadm.local:80/bin/security/openssl:3.6.5 \
     /target/usr/include/openssl \
     /usr/local/include/openssl
 
-COPY --from=src_image /src /src/kmod/
+COPY --from=src_image /src/ /src

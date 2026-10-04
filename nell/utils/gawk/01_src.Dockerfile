@@ -5,4 +5,4 @@ RUN mkdir -p /src/gawk /src/target && \
     wget -qO- https://ftp.gnu.org/gnu/gawk/gawk-${VERSION}.tar.xz | tar -xJf - -C /src/gawk --strip-components=1
 
 FROM scratch
-COPY --from=build /src/gawk/ /src
+COPY --from=build /src/ /src
