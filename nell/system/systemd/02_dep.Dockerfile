@@ -20,4 +20,4 @@ COPY --from=oci.badsysadm.local:80/bin/security/openssl:3.6.5 \
     /target/usr/include/openssl \
     /usr/include/openssl
 
-COPY --from=src_image /src /src/systemd/
+COPY --from=src_image /src/ /src
