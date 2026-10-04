@@ -4,8 +4,6 @@
 Принято.
 
 ## Решение
-- Собирать systemd 261 из upstream Git-тега `v261`.
-- Сохранять feature-профиль рабочей сборки из `systemd/v261.Dockerfile`.
 - Использовать Meson/Ninja и release build.
 - Не устанавливать тесты; man и HTML документацию отключать.
 - Сохранять PAM, NSS, resolver, audit, SELinux, AppArmor, seccomp, cryptsetup, TPM2, networkd, resolved, logind и остальные явно включённые системные интеграции.
