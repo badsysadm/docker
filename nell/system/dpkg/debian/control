@@ -19,7 +19,7 @@ Build-Depends:
  libbz2-dev,
  liblz4-dev,
  zlib1g-dev,
- libmd-dev,
+ libmd-dev
 
 Package: dpkg
 Architecture: amd64

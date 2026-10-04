@@ -23,5 +23,5 @@ FROM scratch AS bundle
 LABEL org.opencontainers.image.title="xzutils"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
-LABEL org.opencontainers.image.description="XZ and LXMZ binaries and libs"
+LABEL org.opencontainers.image.description="XZ and LZMA binaries and libs"
 COPY --from=build /src/target/ /target/

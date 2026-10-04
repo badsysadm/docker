@@ -15,9 +15,6 @@ RUN ./configure \
     --disable-nls \
     --enable-single-binary=symlinks
 
-# for git cloned code
-#RUN ln -s /usr/bin/aclocal /usr/bin/aclocal-1.16
-#RUN ln -s /usr/bin/automake /usr/bin/automake-1.16
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share

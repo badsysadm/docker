@@ -1,0 +1,19 @@
+Source: kmod
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ git,
+ meson,
+ ninja-build,
+ pkg-config,
+ libzstd-dev,
+ liblzma-dev,
+ zlib1g-dev
+
+Package: kmod
+Architecture: amd64
+Static-Built-Using: gcc, libzstd-dev, liblzma-dev, zlib1g-dev
+Depends: ${shlibs:Depends}
+Description: kernel module tools

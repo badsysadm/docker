@@ -1,6 +1,6 @@
 ARG VERSION=5.44.0
 
-FROM 127.0.0.1:12670/dep/perl/perl:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/perl/perl:${VERSION} AS dep_image
 
 FROM dep_image AS build
 ARG VERSION
@@ -27,6 +27,7 @@ RUN ./Configure -des \
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 RUN find /src/target/usr/share/perl5 -name "*.pod" -delete -o -type d -name "pod" -exec rm -rf {} +
+RUN rm -rf /src/target/usr/share/man /src/target/usr/share/doc /src/target/usr/share/info
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="perl"

@@ -1,0 +1,13 @@
+Source: nftables
+Section: net
+Build-Depends: debhelper-compat (= 13),
+               build-essential,
+               bison,
+               flex,
+               libedit-dev,
+               libjansson-dev,
+               libmnl-dev (>= 1.0.4),
+               libtool,
+               pkg-config
+Standards-Version: 4.7.0
+Homepage: https://www.netfilter.org/projects/nftables/
