@@ -7,14 +7,17 @@ ARG VERSION
 
 WORKDIR /src/kbd
 
-RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
-
 RUN ./configure \
     --prefix=/usr \
     --disable-vlock \
     --disable-nls \
     --disable-tests \
     --disable-compress
+
+RUN touch aclocal.m4 && \
+    touch configure config.h.in && \
+    find . -type f -name "Makefile.in" -exec touch {} + && \
+    ./config.status
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
