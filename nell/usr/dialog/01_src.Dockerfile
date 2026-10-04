@@ -5,4 +5,4 @@ RUN wget -qO- https://invisible-island.net/archives/dialog/dialog-${VERSION}.tgz
 RUN mv /src/dialog-${VERSION} /src/dialog
 
 FROM scratch
-COPY --from=build /src/dialog/ /src
+COPY --from=build /src/ /src
