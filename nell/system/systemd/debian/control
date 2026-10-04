@@ -1,0 +1,62 @@
+Source: systemd
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ meson,
+ ninja-build,
+ pkg-config,
+ libacl1-dev,
+ libapparmor-dev,
+ libaudit-dev,
+ libblkid-dev,
+ libcap-dev,
+ libcryptsetup-dev,
+ libcurl4-openssl-dev,
+ libdw-dev,
+ libelf-dev,
+ libfido2-dev,
+ libgcrypt20-dev,
+ libglib2.0-dev,
+ libgnutls28-dev,
+ libidn2-dev,
+ libiptc-dev,
+ liblz4-dev,
+ liblzma-dev,
+ libmicrohttpd-dev,
+ libmount-dev,
+ libnss3-dev,
+ libp11-kit-dev,
+ libpam0g-dev,
+ libpasswdqc-dev,
+ libpcre2-dev,
+ libpwquality-dev,
+ libqrencode-dev,
+ libseccomp-dev,
+ libselinux1-dev,
+ libtss2-dev,
+ libxkbcommon-dev,
+ libzstd-dev,
+ zlib1g-dev,
+ python3-pefile,
+ python3-jinja2,
+ python3-pyelftools,
+ gperf,
+ quota,
+ xsltproc,
+ docbook-xsl,
+ python3-pip,
+ libarchive-dev,
+ libfdisk-dev,
+ libbpf-dev,
+ clang,
+ bpftool,
+ libcrypt-dev,
+ libdbus-1-dev
+
+Package: systemd
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: system and service manager
