@@ -1,4 +1,4 @@
-PHONY: util-linux
+.PHONY: util-linux
 
 REGISTRY_BADSYSADM := oci.badsysadm.local:80
 KANIKO_IMAGE_GOOGLE := gcr.io/kaniko-project/executor:latest oci:.build/oci-bundle:latest
@@ -10,19 +10,30 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-glibc dpkg apt openssh grub: section = system
+glibc dpkg apt openssh kmod systemd grub: section = system
 glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
 openssh: version ?= 10.5p1
+kmod: version ?= 34.2
+systemd: version ?= 261
 grub: version ?= 2.14
+
+libnftnl: section = lib
+libnftnl: version ?= 1.3.2
+
+nftables: section = net
+nftables: version ?= 1.1.7
+
+mailutils: section = utils
+mailutils: version ?= 3.21
 
 bash dialog coreutils: section = usr
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 
-findutils diffutils iputils xzutils util-linux tar sed: section = utils
+findutils diffutils iputils xzutils util-linux tar sed gawk strace: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 iputils: version ?= 20250605
@@ -30,14 +41,14 @@ xzutils: version ?= 5.6.2
 util-linux: version ?= 2.42.2
 tar: version ?= 1.35
 sed: version ?= 4.9
+gawk: version ?= 5.4.1
+strace: version ?= 7.2
 
 gnupg openssl krb5 aide: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
-
-busybox: section = tools
 
 include mk/core.mk
 include mk/bs.mk

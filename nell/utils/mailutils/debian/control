@@ -1,0 +1,22 @@
+Source: mailutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ bison,
+ flex,
+ gawk,
+ libcrypt-dev,
+ libgdbm-dev,
+ libgnutls28-dev,
+ libgsasl-dev,
+ libltdl-dev,
+ libncurses-dev,
+ libreadline-dev,
+ libunistring-dev,
+ pkg-config,
+ texinfo,
+ zlib1g-dev
+Standards-Version: 4.7.0
+Homepage: https://mailutils.org/

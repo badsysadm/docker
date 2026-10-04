@@ -16,7 +16,8 @@ RUN ./configure \
     LDFLAGS="-static-libgcc -Wl,-Bstatic $(pkg-config --libs ncursesw tinfo) -Wl,-Bdynamic"
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
-    
+RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
+
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="dialog"
 LABEL org.opencontainers.image.version=${VERSION}
