@@ -8,6 +8,7 @@ ARG VERSION
 WORKDIR /src/ncurses
 
 RUN ./configure \
+    ARFLAGS="-crD" \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/bin \
