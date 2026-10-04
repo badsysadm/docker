@@ -22,6 +22,9 @@ libnftnl: version ?= 1.3.2
 nftables: section = net
 nftables: version ?= 1.1.7
 
+mailutils: section = utils
+mailutils: version ?= 3.21
+
 bash dialog coreutils: section = usr
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
