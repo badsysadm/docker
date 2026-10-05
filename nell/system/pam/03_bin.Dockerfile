@@ -7,12 +7,13 @@ ARG VERSION
 
 WORKDIR /src/pam
 
-RUN LDFLAGS="-Wl,-Bstatic -laudit -lcap-ng -Wl,-Bdynamic" meson setup build \
+RUN meson setup build \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --sbindir=/sbin \
     --libdir=/usr/lib64 \
+    -Dprefer_static=true \
     -Dselinux=disabled \
     -Dopenssl=disabled \
     -Ddocs=disabled \
