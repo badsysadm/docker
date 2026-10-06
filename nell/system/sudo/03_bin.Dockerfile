@@ -13,8 +13,7 @@ RUN mkdir -p /src/static-libs && \
        /src/static-libs/
 
 RUN LDFLAGS="-L/src/static-libs -L/usr/lib64 -Wl,--as-needed" \
-    SUDO_LIBS="-laudit -lcap-ng" \
-    SUDOERS_LIBS="-laudit -lcap-ng" \
+    SUDO_LIBS="/src/static-libs/libaudit.a /src/static-libs/libcap-ng.a" \
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \

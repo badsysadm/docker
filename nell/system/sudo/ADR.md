@@ -8,7 +8,7 @@
 - Использовать PAM для аутентификации.
 - Не включать LDAP и SSSD backend для sudoers.
 - Включать Linux audit.
-- `libaudit` и `libcap-ng` линковать статически через отдельный search path, содержащий только их static archives.
+- `libaudit` и `libcap-ng` линковать через явные пути к static archives из отдельного каталога.
 - Собирать sudoers policy встроенным в `sudo` через `--enable-static-sudoers`.
 - Не использовать shared `libsudo_util`.
 - Использовать встроенный static zlib.
@@ -19,6 +19,6 @@
 - PAM остаётся динамической системной зависимостью.
 - sudoers policy и внутренний `libsudo_util` не требуют отдельных shared runtime-библиотек.
 - `libaudit`, `libcap-ng` и zlib не требуются как shared runtime-зависимости sudo.
-- Для статической линковки audit/cap-ng используется отдельный каталог, где отсутствуют их shared-библиотеки.
+- Порядок static-зависимостей audit/cap-ng фиксируется явным указанием `libaudit.a` перед `libcap-ng.a`.
 - Централизованные sudo rules через SSSD/FreeIPA или LDAP текущим профилем не поддерживаются.
 - Удалённое логирование через `sudo_logsrvd` и TLS не поддерживается.
