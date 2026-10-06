@@ -7,10 +7,14 @@ ARG VERSION
 
 WORKDIR /src/sudo
 
-COPY debian/patches /src/patches/
-RUN patch -p1 < /src/patches/static-audit.patch
+RUN mkdir -p /src/static-libs && \
+    cp /usr/lib/x86_64-linux-gnu/libaudit.a \
+       /usr/lib/x86_64-linux-gnu/libcap-ng.a \
+       /src/static-libs/
 
-RUN LDFLAGS="-L/usr/lib64 -Wl,--as-needed" \
+RUN LDFLAGS="-L/src/static-libs -L/usr/lib64 -Wl,--as-needed" \
+    SUDO_LIBS="-laudit -lcap-ng" \
+    SUDOERS_LIBS="-laudit -lcap-ng" \
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
