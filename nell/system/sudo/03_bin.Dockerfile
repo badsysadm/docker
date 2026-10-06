@@ -12,8 +12,10 @@ RUN mkdir -p /src/static-libs && \
        /usr/lib/x86_64-linux-gnu/libcap-ng.a \
        /src/static-libs/
 
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/static-audit-deps.patch
+
 RUN LDFLAGS="-L/src/static-libs -L/usr/lib64 -Wl,--as-needed" \
-    SUDO_LIBS="/src/static-libs/libaudit.a /src/static-libs/libcap-ng.a" \
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
