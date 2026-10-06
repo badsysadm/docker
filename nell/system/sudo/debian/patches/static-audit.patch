@@ -1,0 +1,13 @@
+--- a/configure
++++ b/configure
+@@ -5136,8 +5136,8 @@ then :
+ 
+ 		    printf "%s\n" "#define HAVE_LINUX_AUDIT 1" >>confdefs.h
+ 
+-		    SUDO_LIBS="${SUDO_LIBS} -laudit"
+-		    SUDOERS_LIBS="${SUDO_LIBS} -laudit"
++		    SUDO_LIBS="${SUDO_LIBS} -Wl,-Bstatic -laudit -lcap-ng -Wl,-Bdynamic"
++		    SUDOERS_LIBS="${SUDO_LIBS} -Wl,-Bstatic -laudit -lcap-ng -Wl,-Bdynamic"
+ 		    SUDOERS_OBJS="${SUDOERS_OBJS} linux_audit.lo"
+ 
+ else case e in #(

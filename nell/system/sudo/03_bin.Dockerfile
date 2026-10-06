@@ -7,9 +7,10 @@ ARG VERSION
 
 WORKDIR /src/sudo
 
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/static-audit.patch
+
 RUN LDFLAGS="-L/usr/lib64 -Wl,--as-needed" \
-    SUDO_LIBS="-Wl,-Bstatic -Wl,--start-group -laudit -lcap-ng -Wl,--end-group -Wl,-Bdynamic" \
-    SUDOERS_LIBS="-Wl,-Bstatic -Wl,--start-group -laudit -lcap-ng -Wl,--end-group -Wl,-Bdynamic" \
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -20,6 +21,7 @@ RUN LDFLAGS="-L/usr/lib64 -Wl,--as-needed" \
         --with-linux-audit \
         --with-logging=syslog \
         --with-logfac=authpriv \
+        --enable-static-sudoers \
         --disable-shared-libutil \
         --enable-zlib=static \
         --disable-log-server \
