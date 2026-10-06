@@ -1,0 +1,11 @@
+Source: wipe
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ build-essential
+
+Package: wipe
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}
+Description: secure file deletion utility
