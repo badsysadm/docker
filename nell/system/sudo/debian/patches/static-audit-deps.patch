@@ -1,0 +1,24 @@
+--- a/configure
++++ b/configure
+@@ -5136,8 +5136,8 @@ then :
+ 
+ 		    printf "%s\n" "#define HAVE_LINUX_AUDIT 1" >>confdefs.h
+ 
+-		    SUDO_LIBS="${SUDO_LIBS} -laudit"
+-		    SUDOERS_LIBS="${SUDO_LIBS} -laudit"
++		    SUDO_LIBS="${SUDO_LIBS} -laudit -lcap-ng"
++		    SUDOERS_LIBS="${SUDO_LIBS}"
+ 		    SUDOERS_OBJS="${SUDOERS_OBJS} linux_audit.lo"
+ 
+ else case e in #(
+--- a/configure.ac
++++ b/configure.ac
+@@ -354,8 +354,8 @@ AC_ARG_WITH(linux_audit,
+     yes)	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libaudit.h>]], [[int i = AUDIT_USER_CMD; (void)i;]])], [
+ 		    AC_DEFINE(HAVE_LINUX_AUDIT)
+-		    SUDO_LIBS="${SUDO_LIBS} -laudit"
+-		    SUDOERS_LIBS="${SUDO_LIBS} -laudit"
++		    SUDO_LIBS="${SUDO_LIBS} -laudit -lcap-ng"
++		    SUDOERS_LIBS="${SUDO_LIBS}"
+ 		    SUDOERS_OBJS="${SUDOERS_OBJS} linux_audit.lo"
+ 		], [
