@@ -7,6 +7,13 @@ ARG VERSION
 
 WORKDIR /src/dump
 
+RUN find . -type f \( \
+        -name "configure" \
+        -o -name "Makefile.in" \
+        -o -name "aclocal.m4" \
+        -o -name "config.h.in" \
+    \) -exec touch {} +
+
 RUN mkdir -p /src/static-libs && \
     cp \
         /usr/lib/x86_64-linux-gnu/libext2fs.a \
