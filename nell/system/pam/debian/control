@@ -11,8 +11,7 @@ Build-Depends:
  meson,
  ninja-build,
  libaudit-dev,
- libcap-ng-dev,
- libdb-dev
+ libcap-ng-dev
 
 Package: pam
 Architecture: amd64

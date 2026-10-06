@@ -16,6 +16,7 @@ RUN meson setup build \
     -Dprefer_static=true \
     -Dselinux=disabled \
     -Dopenssl=disabled \
+    -Dpam_userdb=disabled \
     -Ddocs=disabled \
     -Di18n=disabled \
     -Dexamples=false \
