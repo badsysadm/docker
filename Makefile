@@ -37,7 +37,7 @@ dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 kbd: version ?= 2.10.0
 
-findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe: section = utils
+findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 iputils: version ?= 20250605
@@ -48,6 +48,7 @@ sed: version ?= 4.9
 gawk: version ?= 5.4.1
 strace: version ?= 7.2
 wipe: version ?= 0.24
+dump: version ?= 0.4b56
 
 gnupg openssl krb5 aide: section = security
 gnupg: version ?= 2.4.7
