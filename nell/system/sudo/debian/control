@@ -1,0 +1,16 @@
+Source: sudo
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ bison,
+ flex,
+ libaudit-dev,
+ libcap-ng-dev
+
+Package: sudo
+Architecture: amd64
+Static-Built-Using: gcc, libaudit-dev, libcap-ng-dev
+Depends: ${shlibs:Depends}
+Description: execute a command as another user
