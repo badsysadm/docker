@@ -20,7 +20,6 @@ RUN LDFLAGS="-L/usr/lib64 -Wl,--as-needed" \
         --with-linux-audit \
         --with-logging=syslog \
         --with-logfac=authpriv \
-        --enable-static-sudoers \
         --disable-shared-libutil \
         --enable-zlib=static \
         --disable-log-server \
