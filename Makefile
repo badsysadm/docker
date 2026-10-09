@@ -25,8 +25,9 @@ libnftnl ncurses: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
 
-nftables: section = net
+nftables iproute2: section = net
 nftables: version ?= 1.1.7
+iproute2: version ?= 7.2.0
 
 mailutils: section = utils
 mailutils: version ?= 3.21

@@ -1,0 +1,21 @@
+Source: iproute2
+Section: net
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ bison,
+ flex,
+ pkg-config,
+ libbpf-dev,
+ libelf-dev,
+ libmnl-dev,
+ libcap-dev,
+ zlib1g-dev,
+ libzstd-dev
+
+Package: iproute2
+Architecture: amd64
+Static-Built-Using: gcc, libbpf-dev, libelf-dev, libmnl-dev, libcap-dev, zlib1g-dev, libzstd-dev
+Depends: ${shlibs:Depends}
+Description: networking and traffic control utilities
