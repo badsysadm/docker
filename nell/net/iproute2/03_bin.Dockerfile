@@ -13,7 +13,6 @@ RUN mkdir -p /src/static-libs /src/pkgconfig && \
         /usr/lib/x86_64-linux-gnu/libelf.a \
         /usr/lib/x86_64-linux-gnu/libmnl.a \
         /usr/lib/x86_64-linux-gnu/libcap.a \
-        /usr/lib/x86_64-linux-gnu/libm.a \
         /usr/lib/x86_64-linux-gnu/libz.a \
         /usr/lib/x86_64-linux-gnu/libzstd.a \
         /src/static-libs/ && \
