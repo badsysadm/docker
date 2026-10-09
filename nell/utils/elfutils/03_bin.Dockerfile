@@ -20,6 +20,7 @@ RUN PKG_CONFIG="pkg-config --static" \
     ./configure \
         --prefix=/usr \
         --libdir=/usr/lib/x86_64-linux-gnu \
+        --disable-nls \
         --disable-debuginfod \
         --disable-libdebuginfod \
         --without-libarchive
