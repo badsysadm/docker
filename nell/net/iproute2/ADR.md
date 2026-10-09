@@ -6,6 +6,7 @@
 ## Решение
 - Собирать iproute2 7.2.0 из upstream release tarball.
 - Сохранять поддержку libmnl, libbpf/libelf и capabilities.
+- Использовать libelf из отдельного elfutils bundle.
 - Собирать внутренние модули без shared libraries через `SHARED_LIBS=n`.
 - Не включать xtables, TIRPC, Berkeley DB и SELinux.
 - Не устанавливать `routel`, требующий Python runtime.

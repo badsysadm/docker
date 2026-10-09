@@ -8,7 +8,6 @@ Build-Depends:
  flex,
  pkg-config,
  libbpf-dev,
- libelf-dev,
  libmnl-dev,
  libcap-dev,
  zlib1g-dev,
@@ -16,6 +15,6 @@ Build-Depends:
 
 Package: iproute2
 Architecture: amd64
-Static-Built-Using: gcc, libbpf-dev, libelf-dev, libmnl-dev, libcap-dev, zlib1g-dev, libzstd-dev
+Static-Built-Using: gcc, libbpf-dev, libmnl-dev, libcap-dev, zlib1g-dev, libzstd-dev
 Depends: ${shlibs:Depends}
 Description: networking and traffic control utilities
