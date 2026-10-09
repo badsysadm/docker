@@ -17,7 +17,6 @@ RUN mkdir -p /src/static-libs && \
     cp "$(gcc -print-file-name=libstdc++.a)" /src/static-libs/
 
 RUN PKG_CONFIG="pkg-config --static" \
-    LDFLAGS="-static-libgcc -L/src/static-libs -Wl,--as-needed" \
     ./configure \
         --prefix=/usr \
         --libdir=/usr/lib/x86_64-linux-gnu \
@@ -26,6 +25,16 @@ RUN PKG_CONFIG="pkg-config --static" \
         --without-libarchive
 
 RUN make -j$(nproc)
+
+RUN make -C src clean
+
+RUN make -j$(nproc) -C src \
+    LDFLAGS="-static-libgcc -L/src/static-libs -Wl,--as-needed" \
+    'libasm=../libasm/libasm.a' \
+    'libelf=../libelf/libelf.a -lz $(zstd_LIBS)' \
+    'libdw=../libdw/libdw.a -lz $(zip_LIBS) $(libelf) -ldl -lpthread' \
+    'libdebuginfod='
+
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
