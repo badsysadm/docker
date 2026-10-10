@@ -37,6 +37,14 @@ RUN make -j$(nproc) \
 
 RUN make install DESTDIR=/src/target
 
+RUN for file in /src/target/usr/x86_64-pc-linux-gnu/bin/*; do \
+        name="$(basename "$file")"; \
+        if [ -f "/src/target/usr/bin/$name" ]; then \
+            rm -f "$file"; \
+            ln -s "../../bin/$name" "$file"; \
+        fi; \
+    done
+
 RUN rm -rf \
         /src/target/usr/share/man \
         /src/target/usr/share/info \
