@@ -38,7 +38,7 @@ dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 kbd: version ?= 2.10.0
 
-findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils: section = utils
+findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 iputils: version ?= 20250605
@@ -53,6 +53,7 @@ dump: version ?= 0.4b56
 net-tools: version ?= 2.10
 elfutils: version ?= 0.196
 binutils: version ?= 2.47
+procps: version ?= 4.0.7
 
 gnupg openssl krb5 aide: section = security
 gnupg: version ?= 2.4.7

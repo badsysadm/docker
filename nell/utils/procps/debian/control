@@ -1,0 +1,14 @@
+Source: procps
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libncurses-dev,
+ pkg-config
+
+Package: procps
+Architecture: amd64
+Static-Built-Using: gcc, libncurses-dev
+Depends: ${shlibs:Depends}
+Description: procfs process and system utilities
