@@ -15,6 +15,21 @@ RUN gcc -O2 -fPIC \
         /usr/lib/x86_64-linux-gnu/libduktape.a \
         /usr/lib/x86_64-linux-gnu/duktape.o
 
+# polkit 127 hardcodes its public libraries as shared_library().
+# This build intentionally produces static libpolkit libraries only.
+RUN sed -i \
+        -e 's/^libpolkit_gobject = shared_library(/libpolkit_gobject = static_library(/' \
+        -e '/^  version: libversion,$/d' \
+        -e '/^  link_args: ldflags,$/d' \
+        -e '/^  link_depends: symbol_map,$/d' \
+        src/polkit/meson.build && \
+    sed -i \
+        -e 's/^libpolkit_agent = shared_library(/libpolkit_agent = static_library(/' \
+        -e '/^  version: libversion,$/d' \
+        -e '/^  link_args: ldflags,$/d' \
+        -e '/^  link_depends: symbol_map,$/d' \
+        src/polkitagent/meson.build
+
 # polkit 127 still builds po targets with -Dgettext=false.
 RUN sed -i "/subdir('po')/d" meson.build && \
     sed -i \
