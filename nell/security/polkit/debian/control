@@ -1,0 +1,19 @@
+Source: polkit
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ duktape-dev,
+ libexpat1-dev,
+ libglib2.0-dev,
+ meson,
+ ninja-build,
+ perl,
+ pkg-config
+
+Package: polkit
+Architecture: amd64
+Static-Built-Using: gcc, duktape-dev, libexpat1-dev, libglib2.0-dev
+Depends: ${shlibs:Depends}
+Description: authorization framework
