@@ -7,6 +7,13 @@ ARG VERSION
 
 WORKDIR /src/acl
 
+RUN find . -type f \( \
+        -name "configure" \
+        -o -name "Makefile.in" \
+        -o -name "aclocal.m4" \
+        -o -name "config.h.in" \
+    \) -exec touch {} +
+
 RUN ./configure \
         --prefix=/usr \
         --libdir=/usr/lib/x86_64-linux-gnu \
