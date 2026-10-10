@@ -21,9 +21,10 @@ grub: version ?= 2.14
 pam: version ?= 1.7.2
 sudo: version ?= 1.9.17p2
 
-libnftnl ncurses: section = lib
+libnftnl ncurses glib: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
+glib: version ?= 2.84.4
 
 nftables iproute2: section = net
 nftables: version ?= 1.1.7
@@ -56,11 +57,12 @@ binutils: version ?= 2.47
 procps: version ?= 4.0.7
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl: section = security
+gnupg openssl krb5 aide acl polkit: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
+polkit: version ?= 127
 
 include mk/core.mk
 include mk/bs.mk
