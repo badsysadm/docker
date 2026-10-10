@@ -7,9 +7,8 @@ ARG VERSION
 
 WORKDIR /src/polkit
 
-COPY static-internal-libs.patch /tmp/static-internal-libs.patch
-
-RUN patch -p1 < /tmp/static-internal-libs.patch
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/static-internal-libs.patch
 
 RUN gcc -O2 -fPIC \
         -I/usr/share/duktape \
