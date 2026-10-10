@@ -15,6 +15,15 @@ RUN gcc -O2 -fPIC \
         /usr/lib/x86_64-linux-gnu/libduktape.a \
         /usr/lib/x86_64-linux-gnu/duktape.o
 
+# polkit 127 still builds po targets with -Dgettext=false.
+RUN sed -i "/subdir('po')/d" meson.build && \
+    sed -i \
+        -e 's/i18n\.merge_file(/configure_file(/' \
+        -e '/po_dir: po_dir,/d' \
+        -e '/data_dirs: its_dir,/d' \
+        -e "/output: '@BASENAME@',/a\\  copy: true," \
+        actions/meson.build
+
 RUN meson setup build \
         --prefix=/usr \
         --sysconfdir=/etc \
