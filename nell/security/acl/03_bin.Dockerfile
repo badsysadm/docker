@@ -21,7 +21,15 @@ RUN ./configure \
         --enable-shared \
         --disable-nls
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) \
+    LDFLAGS="-static-libgcc -Wl,-Bstatic" \
+    LIBS="-Wl,-Bdynamic"
+
+RUN rm -f chacl getfacl setfacl && \
+    make -j$(nproc) chacl getfacl setfacl \
+        LDFLAGS="-static-libgcc -Wl,-Bstatic -static-libtool-libs" \
+        LIBS="-Wl,-Bdynamic"
+
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
