@@ -20,7 +20,7 @@ COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
     /usr/include/systemd
 
 COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
-    /target/usr/lib/x86_64-linux-gnu/libsystemd.so.0.45.0 \
+    /target/usr/lib/x86_64-linux-gnu/libsystemd.so.0.44.0 \
     /usr/lib/x86_64-linux-gnu/libsystemd.so
 
 COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
