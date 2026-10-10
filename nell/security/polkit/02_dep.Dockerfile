@@ -12,18 +12,16 @@ COPY --from=oci.badsysadm.local:80/bin/system/pam:1.7.2 \
     /usr/include/security
 
 COPY --from=oci.badsysadm.local:80/bin/system/pam:1.7.2 \
-    /target/usr/lib64/libpam.so \
-    /target/usr/lib64/libpam.so.0 \
     /target/usr/lib64/libpam.so.0.85.1 \
-    /usr/lib/x86_64-linux-gnu/
+    /usr/lib/x86_64-linux-gnu/libpam.so
 
 COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
     /target/usr/include/systemd \
     /usr/include/systemd
 
 COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
-    /target/usr/lib/x86_64-linux-gnu/libsystemd.so* \
-    /usr/lib/x86_64-linux-gnu/
+    /target/usr/lib/x86_64-linux-gnu/libsystemd.so.0.45.0 \
+    /usr/lib/x86_64-linux-gnu/libsystemd.so
 
 COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
     /target/usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc \
