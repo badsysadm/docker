@@ -21,9 +21,10 @@ grub: version ?= 2.14
 pam: version ?= 1.7.2
 sudo: version ?= 1.9.17p2
 
-libnftnl ncurses: section = lib
+libnftnl ncurses glib: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
+glib: version ?= 2.84.4
 
 nftables iproute2: section = net
 nftables: version ?= 1.1.7
