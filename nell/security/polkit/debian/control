@@ -6,14 +6,16 @@ Build-Depends:
  build-essential,
  duktape-dev,
  libexpat1-dev,
- libglib2.0-dev,
+ libffi-dev,
+ libpcre2-dev,
  meson,
  ninja-build,
  perl,
- pkg-config
+ pkg-config,
+ zlib1g-dev
 
 Package: polkit
 Architecture: amd64
-Static-Built-Using: gcc, duktape-dev, libexpat1-dev, libglib2.0-dev
+Static-Built-Using: gcc, duktape-dev, libexpat1-dev, libffi-dev, libpcre2-dev, zlib1g-dev
 Depends: ${shlibs:Depends}
 Description: authorization framework
