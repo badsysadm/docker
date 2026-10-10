@@ -10,8 +10,8 @@
 - Использовать PAM для аутентификации.
 - Использовать systemd-logind для session tracking.
 - Использовать PAM и systemd из собственных bundle проекта.
-- Использовать libmount и libblkid из собственного util-linux bundle.
-- Использовать вариант libmount, собранный без SELinux.
+- Использовать GLib/GObject/GIO из собственного статического GLib bundle.
+- Использовать GLib, собранный без SELinux и libmount.
 - Разрешить динамические зависимости от libpam и libsystemd.
 - Остальные внешние зависимости предпочитать статическими.
 - Использовать Duktape как JavaScript engine.
@@ -25,5 +25,5 @@
 - Runtime dependency на libselinux и libsepol не допускается.
 - Публичные libpolkit-gobject и libpolkit-agent доступны другим проектам.
 - PAM modules продолжают загружаться штатным динамическим механизмом PAM.
-- Duktape, GLib и Expat должны по возможности входить в конечные ELF статически.
+- Duktape, GLib и Expat должны входить в конечные ELF статически.
 - GObject Introspection и локализации отсутствуют.
