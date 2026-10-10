@@ -1,0 +1,19 @@
+Source: binutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ bison,
+ flex,
+ pkg-config,
+ python3,
+ zlib1g-dev,
+ libzstd-dev,
+ libjansson-dev
+
+Package: binutils
+Architecture: amd64
+Static-Built-Using: gcc, zlib1g-dev, libzstd-dev, libjansson-dev
+Depends: ${shlibs:Depends}
+Description: GNU assembler, linker and binary utilities
