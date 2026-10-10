@@ -10,7 +10,6 @@ Build-Depends:
  libpcre2-dev,
  meson,
  ninja-build,
- patch,
  perl,
  pkg-config,
  zlib1g-dev
