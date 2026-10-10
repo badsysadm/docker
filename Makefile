@@ -54,8 +54,9 @@ net-tools: version ?= 2.10
 elfutils: version ?= 0.196
 binutils: version ?= 2.47
 procps: version ?= 4.0.7
+acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide: section = security
+gnupg openssl krb5 aide acl: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
