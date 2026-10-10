@@ -1,0 +1,111 @@
+diff --git a/src/polkit/meson.build b/src/polkit/meson.build
+--- a/src/polkit/meson.build
++++ b/src/polkit/meson.build
+@@
+ libpolkit_gobject = shared_library(
+   name,
+   sources: sources,
+   version: libversion,
+   include_directories: incs,
+   dependencies: deps,
+   c_args: c_flags,
+   link_args: ldflags,
+   link_depends: symbol_map,
+   install: true,
+ )
++
++libpolkit_gobject_internal = static_library(
++  name + '-internal',
++  sources: sources,
++  include_directories: incs,
++  dependencies: deps,
++  c_args: c_flags,
++  install: false,
++)
+ 
+ libpolkit_gobject_dep = declare_dependency(
+   sources: enum_sources[1],
+   include_directories: src_inc,
+   dependencies: common_deps,
+   link_with: libpolkit_gobject,
+ )
++
++libpolkit_gobject_internal_dep = declare_dependency(
++  sources: enum_sources[1],
++  include_directories: src_inc,
++  dependencies: deps,
++  link_with: libpolkit_gobject_internal,
++)
+
+diff --git a/src/polkitagent/meson.build b/src/polkitagent/meson.build
+--- a/src/polkitagent/meson.build
++++ b/src/polkitagent/meson.build
+@@
+ libpolkit_agent = shared_library(
+   name,
+   sources: sources,
+   version: libversion,
+   include_directories: top_inc,
+   dependencies: deps,
+   c_args: c_flags,
+   link_args: ldflags,
+   link_depends: symbol_map,
+   install: true,
+ )
++
++internal_deps = [
++  gio_unix_dep,
++  libpolkit_gobject_internal_dep,
++]
++
++libpolkit_agent_internal = static_library(
++  name + '-internal',
++  sources: sources,
++  include_directories: top_inc,
++  dependencies: internal_deps,
++  c_args: c_flags,
++  install: false,
++)
+ 
+ libpolkit_agent_dep = declare_dependency(
+   sources: enum_sources[1],
+   include_directories: '.',
+   dependencies: libpolkit_gobject_dep,
+   link_with: libpolkit_agent,
+ )
++
++libpolkit_agent_internal_dep = declare_dependency(
++  sources: enum_sources[1],
++  include_directories: '.',
++  dependencies: internal_deps,
++  link_with: libpolkit_agent_internal,
++)
+@@
+-  deps = auth_deps + [libpolkit_gobject_dep]
++  deps = auth_deps + [libpolkit_gobject_internal_dep]
+
+diff --git a/src/programs/meson.build b/src/programs/meson.build
+--- a/src/programs/meson.build
++++ b/src/programs/meson.build
+@@
+ programs = [
+-  ['pkexec', auth_deps + [libpolkit_agent_dep]],
+-  ['pkcheck', [libpolkit_agent_dep]],
+-  ['pkaction', [libpolkit_gobject_dep]],
+-  ['pkttyagent', [libpolkit_agent_dep]],
++  ['pkexec', auth_deps + [libpolkit_agent_internal_dep]],
++  ['pkcheck', [libpolkit_agent_internal_dep]],
++  ['pkaction', [libpolkit_gobject_internal_dep]],
++  ['pkttyagent', [libpolkit_agent_internal_dep]],
+ ]
+
+diff --git a/src/polkitbackend/meson.build b/src/polkitbackend/meson.build
+--- a/src/polkitbackend/meson.build
++++ b/src/polkitbackend/meson.build
+@@
+ deps = [
+   expat_dep,
+-  libpolkit_gobject_dep,
++  libpolkit_gobject_internal_dep,
+   js_dep,
+ ]
