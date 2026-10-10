@@ -56,11 +56,12 @@ binutils: version ?= 2.47
 procps: version ?= 4.0.7
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl: section = security
+gnupg openssl krb5 aide acl polkit: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
+polkit: version ?= 127
 
 include mk/core.mk
 include mk/bs.mk
