@@ -6,19 +6,20 @@ ARG VERSION
 
 WORKDIR /src/chrony
 
-RUN ./configure \
+RUN PKG_CONFIG="pkg-config --static" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --with-user=_chrony \
     --without-nss \
     --disable-readline \
-    --enable-scfilter
+    --enable-scfilter && \
+    grep -q '^#define FEAT_NTS' config.h
 
 # Preserve DNS/NSS support in glibc while linking external libraries statically.
 # Upstream Makefile links: LDFLAGS, LIBS, then EXTRA_LIBS/EXTRA_CLI_LIBS.
 RUN make -j$(nproc) \
     LDFLAGS="-static-libgcc -Wl,-Bstatic" \
-    LIBS="$(pkg-config --static --libs nettle gnutls)" \
+    LIBS="$(pkg-config --static --libs nettle gnutls) -lm" \
     EXTRA_LIBS="$(pkg-config --static --libs libcap libseccomp) -Wl,-Bdynamic" \
     EXTRA_CLI_LIBS="-Wl,-Bdynamic"
 
