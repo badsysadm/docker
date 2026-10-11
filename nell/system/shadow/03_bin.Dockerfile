@@ -14,10 +14,6 @@ RUN mkdir -p /src/static-libs && \
         /usr/lib/x86_64-linux-gnu/libcrypt.a \
         /src/static-libs/
 
-COPY debian/patches /src/patches/
-
-RUN patch -p1 < /src/patches/static-audit-deps.patch
-
 RUN find . -type f \( \
         -name "configure" \
         -o -name "Makefile.in" \
@@ -25,9 +21,9 @@ RUN find . -type f \( \
         -o -name "config.h.in" \
     \) -exec touch {} +
 
-RUN autoreconf -fi
-
-RUN LDFLAGS="-L/src/static-libs -Wl,--as-needed" ./configure \
+RUN LIBS="-lcap-ng" \
+    LDFLAGS="-L/src/static-libs -Wl,--as-needed" \
+    ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
@@ -45,6 +41,9 @@ RUN LDFLAGS="-L/src/static-libs -Wl,--as-needed" ./configure \
     --enable-static \
     --enable-shared \
     --disable-man
+
+RUN find . -name Makefile -type f \
+    -exec sed -i '/^LIBS = /s/ -lcap-ng//g; /^LIBS = -lcap-ng$/s/-lcap-ng//' {} +
 
 RUN sed -i \
     -e 's|^LIBAUDIT =.*|LIBAUDIT = -Wl,-Bstatic -laudit -lcap-ng -Wl,-Bdynamic|' \
