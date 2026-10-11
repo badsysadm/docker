@@ -20,9 +20,9 @@ RUN make -C parser -j$(nproc) arch \
       LDFLAGS='-static-libgcc -static-libstdc++' && \
     make -C parser install-arch DESTDIR=/src/target DISTRO=debian
 
-RUN make -C binutils -j$(nproc) arch \
-      CFLAGS='-O2 -pipe' \
-      LDFLAGS='-static-libgcc -static-libstdc++' && \
+RUN LDFLAGS='-static-libgcc -static-libstdc++' \
+    make -C binutils -j$(nproc) arch \
+      CFLAGS='-O2 -pipe' && \
     make -C binutils install-arch DESTDIR=/src/target
 
 # Install runtime configuration and systemd integration directly.
