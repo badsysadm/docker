@@ -6,6 +6,13 @@ ARG VERSION
 
 WORKDIR /src/quota
 
+RUN find . -type f \( \
+        -name "configure" \
+        -o -name "Makefile.in" \
+        -o -name "aclocal.m4" \
+        -o -name "config.h.in" \
+    \) -exec touch {} +
+
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
