@@ -10,8 +10,7 @@ Build-Depends:
  libpam0g-dev,
  libaudit-dev,
  libacl1-dev,
- libcrypt-dev,
- libsystemd-dev
+ libcrypt-dev
 
 Package: shadow
 Architecture: amd64
