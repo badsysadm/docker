@@ -19,9 +19,9 @@ RUN LDFLAGS="$(pkg-config --static --libs gnutls)" ./configure \
 # Upstream Makefile links: LDFLAGS, LIBS, then EXTRA_LIBS/EXTRA_CLI_LIBS.
 RUN make -j$(nproc) \
     LDFLAGS="-static-libgcc -Wl,-Bstatic" \
-    LIBS="$(pkg-config --static --libs nettle gnutls) -lm" \
-    EXTRA_LIBS="$(pkg-config --static --libs libcap libseccomp) -Wl,-Bdynamic" \
-    EXTRA_CLI_LIBS="-Wl,-Bdynamic"
+    LIBS="$(pkg-config --static --libs nettle gnutls)" \
+    EXTRA_LIBS="$(pkg-config --static --libs libcap libseccomp) -Wl,-Bdynamic -lm" \
+    EXTRA_CLI_LIBS="-Wl,-Bdynamic -lm"
 
 RUN make install DESTDIR=/src/target
 
