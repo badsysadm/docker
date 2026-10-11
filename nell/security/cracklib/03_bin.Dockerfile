@@ -13,7 +13,7 @@ RUN touch aclocal.m4 && \
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --disable-shared \
+    --enable-shared \
     --enable-static \
     --without-python \
     --disable-nls \
