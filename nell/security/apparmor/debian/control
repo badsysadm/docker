@@ -1,0 +1,17 @@
+Source: apparmor
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ git,
+ autoconf,
+ autoconf-archive,
+ automake,
+ libtool,
+ pkgconf,
+ flex,
+ bison,
+ perl,
+ python3,
+ linux-libc-dev
