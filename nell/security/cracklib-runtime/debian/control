@@ -1,0 +1,15 @@
+Source: cracklib-runtime
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ zlib1g-dev,
+ libtool,
+ gettext
+
+Package: cracklib-runtime
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Password checking and dictionary management utilities
