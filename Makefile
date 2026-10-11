@@ -8,7 +8,7 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus: section = system
+glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus shadow: section = system
 glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
 apt: version ?= 3.3.3
@@ -21,6 +21,7 @@ sudo: version ?= 1.9.17p2
 logrotate: version ?= 3.22.0
 rsyslog: version ?= 8.2608.0
 dbus: version ?= 1.16.2
+shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
 libnftnl ncurses glib gnutls zlib: section = lib
