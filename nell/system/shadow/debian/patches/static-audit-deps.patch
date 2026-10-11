@@ -1,0 +1,19 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -399,7 +399,7 @@
+ 	if test "X$audit_header" = "Xyes"; then
+ 		AC_CHECK_LIB([audit], [audit_log_acct_message],
+-		             [audit_lib="yes"], [audit_lib="no"])
++		             [audit_lib="yes"], [audit_lib="no"], [-lcap-ng])
+ 		if test "X$audit_lib$with_audit" = "Xnoyes" ; then
+ 			AC_MSG_ERROR([libaudit not found])
+ 		elif test "X$audit_lib" = "Xno" ; then
+@@ -406,7 +406,7 @@
+ 		else
+ 			AC_DEFINE([WITH_AUDIT], [1],
+ 			          [Define if you want to enable Audit messages])
+-			LIBAUDIT="-laudit"
++			LIBAUDIT="-laudit -lcap-ng"
+ 			with_audit="yes"
+ 		fi
+ 	else
