@@ -1,6 +1,6 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -399,7 +399,7 @@
+@@ -399,6 +399,6 @@
  	if test "X$audit_header" = "Xyes"; then
  		AC_CHECK_LIB([audit], [audit_log_acct_message],
 -		             [audit_lib="yes"], [audit_lib="no"])
