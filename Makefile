@@ -62,13 +62,14 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor: section = security
+gnupg openssl krb5 aide acl polkit apparmor cracklib-runtime: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
 polkit: version ?= 127
 apparmor: version ?= 4.1.8
+cracklib-runtime: version ?= 2.10.3
 
 include mk/core.mk
 include mk/bs.mk
