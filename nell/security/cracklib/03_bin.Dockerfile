@@ -27,7 +27,8 @@ RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
     /src/target/usr/share/info \
-    /src/target/usr/share/locale
+    /src/target/usr/share/locale && \
+    find /src/target -type f -name '*.la' -delete
 
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="cracklib"
