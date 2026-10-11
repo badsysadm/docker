@@ -21,13 +21,15 @@ sudo: version ?= 1.9.17p2
 logrotate: version ?= 3.22.0
 rsyslog: version ?= 8.2608.0
 dbus: version ?= 1.16.2
+chrony: version ?= 4.9
 
-libnftnl ncurses glib: section = lib
+libnftnl ncurses glib gnutls: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
+gnutls: version ?= 3.8.13
 
-nftables iproute2: section = net
+nftables iproute2 chrony: section = net
 nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
 
