@@ -14,12 +14,18 @@ RUN mkdir -p /src/static-libs && \
         /usr/lib/x86_64-linux-gnu/libcrypt.a \
         /src/static-libs/
 
+COPY debian/patches /src/patches/
+
+RUN patch -p1 < /src/patches/static-audit-deps.patch
+
 RUN find . -type f \( \
         -name "configure" \
         -o -name "Makefile.in" \
         -o -name "aclocal.m4" \
         -o -name "config.h.in" \
     \) -exec touch {} +
+
+RUN autoreconf -fi
 
 RUN LDFLAGS="-L/src/static-libs -Wl,--as-needed" ./configure \
     --prefix=/usr \
