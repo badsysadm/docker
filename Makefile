@@ -41,7 +41,7 @@ dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 kbd: version ?= 2.10.0
 
-findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps: section = utils
+findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 iputils: version ?= 20250605
@@ -57,6 +57,7 @@ net-tools: version ?= 2.10
 elfutils: version ?= 0.196
 binutils: version ?= 2.47
 procps: version ?= 4.0.7
+quota: version ?= 4.11
 acl: version ?= 2.4.0
 
 gnupg openssl krb5 aide acl polkit apparmor: section = security
