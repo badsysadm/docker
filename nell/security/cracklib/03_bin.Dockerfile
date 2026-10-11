@@ -10,7 +10,7 @@ RUN touch aclocal.m4 && \
     touch configure config.h.in && \
     find . -type f -name 'Makefile.in' -exec touch {} +
 
-RUN LIBS="-Wl,-Bstatic -lz -Wl,-Bdynamic" ./configure \
+RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-shared \
@@ -19,7 +19,8 @@ RUN LIBS="-Wl,-Bstatic -lz -Wl,-Bdynamic" ./configure \
     --disable-nls \
     --with-default-dict=/usr/share/cracklib/pw_dict
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) \
+    LIBS="/usr/lib/x86_64-linux-gnu/libz.a"
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
