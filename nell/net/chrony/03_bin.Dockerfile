@@ -3,10 +3,12 @@ ARG VERSION=4.9
 FROM oci.badsysadm.local:80/dep/net/chrony:${VERSION} AS dep_image
 FROM dep_image AS build
 ARG VERSION
+ARG SOURCE_DATE_EPOCH=946684800
 
 WORKDIR /src/chrony
 
-RUN LDFLAGS="$(pkg-config --static --libs gnutls)" ./configure \
+RUN SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" \
+    LDFLAGS="$(pkg-config --static --libs gnutls)" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --with-user=_chrony \
