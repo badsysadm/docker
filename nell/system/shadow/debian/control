@@ -1,0 +1,19 @@
+Source: shadow
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libtool,
+ gettext,
+ libpam0g-dev,
+ libaudit-dev,
+ libacl1-dev,
+ libcrypt-dev,
+ libsystemd-dev
+
+Package: shadow
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: User and group account management utilities
