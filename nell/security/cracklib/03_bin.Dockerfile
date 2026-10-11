@@ -10,7 +10,7 @@ RUN touch aclocal.m4 && \
     touch configure config.h.in && \
     find . -type f -name 'Makefile.in' -exec touch {} +
 
-RUN ./configure \
+RUN LIBS="/usr/local/lib/libz.a" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --enable-shared \
@@ -20,7 +20,9 @@ RUN ./configure \
     --with-default-dict=/usr/share/cracklib/pw_dict
 
 RUN make -j$(nproc) \
-    LIBS="/usr/lib/x86_64-linux-gnu/libz.a"
+    cracklib_check_LDADD="../lib/.libs/libcrack.a /usr/local/lib/libz.a" \
+    cracklib_packer_LDADD="../lib/.libs/libcrack.a /usr/local/lib/libz.a" \
+    cracklib_unpacker_LDADD="../lib/.libs/libcrack.a /usr/local/lib/libz.a"
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
