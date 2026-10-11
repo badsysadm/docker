@@ -14,29 +14,16 @@ RUN cd libraries/libapparmor && \
     make -j$(nproc) && \
     make install DESTDIR=/src/target
 
-# Build binaries without documentation and translation targets.
-RUN make -C parser -j$(nproc) arch \
+RUN make -C parser -j$(nproc) \
       CFLAGS='-O2 -pipe' \
-      LDFLAGS='-static-libgcc -static-libstdc++' && \
-    make -C parser install-arch DESTDIR=/src/target DISTRO=debian
+      LDFLAGS='-static-libgcc -static-libstdc++'
+RUN make -C parser install DESTDIR=/src/target DISTRO=debian
+RUN make -C parser install-systemd DESTDIR=/src/target
 
 RUN LDFLAGS='-static-libgcc -static-libstdc++' \
-    make -C binutils -j$(nproc) arch \
-      CFLAGS='-O2 -pipe' && \
-    make -C binutils install-arch DESTDIR=/src/target
-
-# Install runtime configuration and systemd integration directly.
-RUN install -d /src/target/etc/apparmor \
-      /src/target/lib/apparmor \
-      /src/target/usr/lib/systemd/system \
-      /src/target/usr/sbin && \
-    install -m 644 parser/parser.conf /src/target/etc/apparmor/parser.conf && \
-    install -m 755 parser/rc.apparmor.functions parser/profile-load \
-      parser/apparmor.systemd /src/target/lib/apparmor/ && \
-    install -m 644 parser/apparmor.service \
-      /src/target/usr/lib/systemd/system/apparmor.service && \
-    install -m 755 parser/aa-teardown /src/target/usr/sbin/ && \
-    ln -s aa-status /src/target/usr/sbin/apparmor_status
+    make -C binutils -j$(nproc) \
+      CFLAGS='-O2 -pipe'
+RUN make -C binutils install DESTDIR=/src/target
 
 RUN make -C profiles install DESTDIR=/src/target
 
