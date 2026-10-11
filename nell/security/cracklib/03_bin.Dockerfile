@@ -6,7 +6,10 @@ ARG VERSION
 
 WORKDIR /src/cracklib
 
-RUN ./configure \
+RUN touch aclocal.m4 && \
+    touch configure config.h.in && \
+    find . -type f -name 'Makefile.in' -exec touch {} + && \
+    ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-shared \
