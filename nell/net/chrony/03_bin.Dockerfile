@@ -6,7 +6,7 @@ ARG VERSION
 
 WORKDIR /src/chrony
 
-RUN PKG_CONFIG="pkg-config --static" ./configure \
+RUN LDFLAGS="$(pkg-config --static --libs gnutls)" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --with-user=_chrony \
