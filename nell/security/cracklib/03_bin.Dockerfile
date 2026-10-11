@@ -8,8 +8,9 @@ WORKDIR /src/cracklib
 
 RUN touch aclocal.m4 && \
     touch configure config.h.in && \
-    find . -type f -name 'Makefile.in' -exec touch {} + && \
-    ./configure \
+    find . -type f -name 'Makefile.in' -exec touch {} +
+
+RUN LIBS="-Wl,-Bstatic -lz -Wl,-Bdynamic" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-shared \
