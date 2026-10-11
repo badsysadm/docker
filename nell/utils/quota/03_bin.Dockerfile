@@ -24,7 +24,11 @@ RUN ./configure \
     --enable-ext2direct \
     LDFLAGS="-static-libgcc"
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) \
+    quotacheck_LDADD="libquota.a \
+      -Wl,-Bstatic \
+      $(pkg-config --static --libs ext2fs com_err) \
+      -Wl,-Bdynamic"
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
