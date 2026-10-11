@@ -6,6 +6,14 @@ ARG VERSION
 
 WORKDIR /src/shadow
 
+RUN mkdir -p /src/static-libs && \
+    cp \
+        /usr/lib/x86_64-linux-gnu/libaudit.a \
+        /usr/lib/x86_64-linux-gnu/libcap-ng.a \
+        /usr/lib/x86_64-linux-gnu/libacl.a \
+        /usr/lib/x86_64-linux-gnu/libcrypt.a \
+        /src/static-libs/
+
 RUN find . -type f \( \
         -name "configure" \
         -o -name "Makefile.in" \
@@ -13,10 +21,11 @@ RUN find . -type f \( \
         -o -name "config.h.in" \
     \) -exec touch {} +
 
-RUN ./configure \
+RUN LDFLAGS="-L/src/static-libs -Wl,--as-needed" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
+    --disable-logind \
     --with-libpam=yes \
     --with-audit=yes \
     --with-acl=yes \
@@ -31,7 +40,21 @@ RUN ./configure \
     --enable-shared \
     --disable-man
 
-RUN make -j$(nproc)
+RUN sed -i \
+    -e 's|^LIBAUDIT =.*|LIBAUDIT = -Wl,-Bstatic -laudit -lcap-ng -Wl,-Bdynamic|' \
+    -e 's|^LIBACL =.*|LIBACL = -Wl,-Bstatic -lacl -Wl,-Bdynamic|' \
+    -e 's|^LIBCRYPT =.*|LIBCRYPT = -Wl,-Bstatic -lcrypt -Wl,-Bdynamic|' \
+    src/Makefile libsubid/Makefile
+
+RUN make -j$(nproc) -C lib
+RUN make -j$(nproc) -C libsubid
+
+RUN sed -i \
+    's|$(top_builddir)/libsubid/libsubid.la|$(top_builddir)/libsubid/.libs/libsubid.a|g' \
+    src/Makefile
+
+RUN make -j$(nproc) \
+    LDFLAGS="-L/src/static-libs -Wl,--as-needed"
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
