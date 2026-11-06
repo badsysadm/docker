@@ -9,7 +9,7 @@ ENV GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off
 ENV npm_config_offline=true
 
 COPY debian/patches /src/patches/
-RUN git -C /src/vault apply /src/patches/_ui-module-ids.patch
+RUN git -C /src/vault apply /src/patches/_ui-reproducible-build.patch
 
 WORKDIR /src/vault/ui
 RUN pnpm run build
