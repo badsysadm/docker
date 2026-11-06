@@ -4,9 +4,9 @@
 Принято для проверки сборкой.
 
 ## Решение
-- Собирать upstream etcd версии 3.7.3 с официального Git-тега.
+- Собирать upstream etcd с официального Git-тега выбранной версии.
 - Включить три штатных исполняемых файла: `etcd`, `etcdctl` и `etcdutl`.
-- Использовать Go 1.26.10 согласно `go.work` upstream.
+- Использовать версию Go, требуемую upstream в `go.work`.
 - Загружать Go toolchain и разрешать зависимости только на этапе `02_dep.Dockerfile`.
 - Подготавливать workspace vendor посредством `go work vendor` в `02_dep.Dockerfile`.
 - На этапе `03_bin.Dockerfile` запускать upstream `scripts/build.sh` с `-mod=vendor`, `-buildvcs=false` и без доступа к Go proxy.

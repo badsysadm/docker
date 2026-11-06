@@ -10,8 +10,9 @@ ENV GO_BUILD_FLAGS="-mod=vendor -buildvcs=false"
 WORKDIR /src/etcd
 RUN ./scripts/build.sh
 
-RUN mkdir -p /src/target/usr/bin \
-    && cp bin/etcd bin/etcdctl bin/etcdutl /src/target/usr/bin/
+RUN install -D -m 0755 bin/etcd /src/target/usr/bin/etcd \
+    && install -D -m 0755 bin/etcdctl /src/target/usr/bin/etcdctl \
+    && install -D -m 0755 bin/etcdutl /src/target/usr/bin/etcdutl
 
 FROM scratch AS bundle
 ARG VERSION
