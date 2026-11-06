@@ -9,7 +9,7 @@ ENV GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off
 ENV npm_config_offline=true
 
 WORKDIR /src/vault/ui
-RUN pnpm run build
+RUN mkdir -p /sha256 && pnpm run build
 RUN find /src/vault/http/web_ui -type f -print0 \
     | sort -z | xargs -0 sha256sum > /sha256/03_web_ui.sha256
 

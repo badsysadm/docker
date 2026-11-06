@@ -27,7 +27,6 @@ RUN npm install --global --prefix /opt/pnpm "pnpm@${PNPM_VERSION}" \
     && update-alternatives --install /usr/bin/pnpm pnpm /opt/pnpm/bin/pnpm 100
 
 COPY --from=src_image /src/ /src/
-COPY --from=src_image /sha256/ /sha256/
 
 # Vendor all modules in the upstream Go workspace before the binary build.
 WORKDIR /src/vault
@@ -37,7 +36,3 @@ RUN GOTOOLCHAIN=local go work vendor
 WORKDIR /src/vault/ui
 RUN pnpm install --frozen-lockfile --package-import-method=hardlink
 
-RUN find /src/vault/vendor -type f -print0 \
-    | sort -z | xargs -0 sha256sum > /sha256/02_go_vendor.sha256
-RUN find /src/vault/ui/node_modules -type f -print0 \
-    | sort -z | xargs -0 sha256sum > /sha256/02_ui_dependencies.sha256
