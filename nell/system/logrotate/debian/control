@@ -1,0 +1,13 @@
+Source: logrotate
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libpopt-dev
+
+Package: logrotate
+Architecture: amd64
+Static-Built-Using: gcc, libpopt-dev
+Depends: ${shlibs:Depends}
+Description: log file rotation utility

@@ -5,4 +5,4 @@ RUN git clone -q --single-branch --branch v${VERSION} --depth 1 https://github.c
 RUN mkdir -p /src/xzutils/.build /src/target
 
 FROM scratch
-COPY --from=build /src/xzutils/ /src
+COPY --from=build /src/ /src

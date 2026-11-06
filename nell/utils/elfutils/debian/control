@@ -1,0 +1,20 @@
+Source: elfutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ bison,
+ flex,
+ gettext,
+ pkg-config,
+ zlib1g-dev,
+ libbz2-dev,
+ liblzma-dev,
+ libzstd-dev
+
+Package: elfutils
+Architecture: amd64
+Static-Built-Using: gcc, zlib1g-dev, libbz2-dev, liblzma-dev, libzstd-dev
+Depends: ${shlibs:Depends}
+Description: ELF and DWARF utilities

@@ -1,0 +1,13 @@
+Source: acl
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libattr1-dev
+
+Package: acl
+Architecture: amd64
+Static-Built-Using: gcc, libattr1-dev
+Depends: ${shlibs:Depends}
+Description: POSIX access control list utilities and library

@@ -1,0 +1,22 @@
+Source: console-setup
+Section: usr
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ make,
+ perl,
+ libxml-parser-perl,
+ liblocale-gettext-perl,
+ bdfresize,
+ unifont,
+ unifont-bin,
+ otf2bdf,
+ fonts-dejavu-mono,
+ xkb-data,
+ locales-all,
+ sharutils
+
+Package: console-setup
+Architecture: all
+Depends: ${misc:Depends}
+Description: Linux console keyboard layout and font configuration

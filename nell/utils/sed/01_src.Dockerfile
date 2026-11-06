@@ -5,4 +5,4 @@ RUN mkdir -p /src/sed /src/target && \
     wget -qO- https://ftp.gnu.org/gnu/sed/sed-${VERSION}.tar.xz | tar -xJf - -C /src/sed --strip-components=1
 
 FROM scratch
-COPY --from=build /src/sed/ /src
+COPY --from=build /src/ /src

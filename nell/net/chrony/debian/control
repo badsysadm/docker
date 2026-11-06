@@ -1,0 +1,18 @@
+Source: chrony
+Section: net
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libcap-dev,
+ libseccomp-dev,
+ nettle-dev,
+ libtasn1-6-dev,
+ libidn2-dev,
+ libunistring-dev
+
+Package: chrony
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: NTP time synchronization daemon and client

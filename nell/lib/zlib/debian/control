@@ -1,0 +1,11 @@
+Source: zlib
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential
+
+Package: zlib
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: zlib compression library

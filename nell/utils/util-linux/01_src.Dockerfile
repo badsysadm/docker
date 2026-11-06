@@ -6,4 +6,4 @@ RUN export UTIL_LINUX_MAJOR=$(echo v${VERSION} | cut -d. -f1-2) && \
     wget -qO- https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/${UTIL_LINUX_MAJOR}/util-linux-${VERSION}.tar.xz | tar -xJf - -C /src/util-linux --strip-components=1
 
 FROM scratch
-COPY --from=build /src/util-linux/ /src
+COPY --from=build /src/ /src

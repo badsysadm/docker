@@ -1,16 +1,13 @@
-FROM mirror.gcr.io/library/debian:trixie AS build
-ARG DBUS_VERSION=dbus-1.16.2
+ARG VERSION=1.16.2
 
-RUN  apt-get update && apt-get install -y -qq --no-install-recommends \
-     build-essential git pkg-config ca-certificates \
-     meson ninja-build \
-     libsystemd-dev libcap-dev libexpat1-dev libapparmor-dev libaudit-dev
-RUN git clone --single-branch --branch ${DBUS_VERSION} --depth 1 https://gitlab.freedesktop.org/dbus/dbus.git /src/dbus
-RUN mkdir -p /src/target
+FROM oci.badsysadm.local:80/dep/system/dbus:${VERSION} AS dep_image
+FROM dep_image AS build
+ARG VERSION
+
 WORKDIR /src/dbus
 
-#ARG LDFLAGS="-lcap"
 ARG LDFLAGS="-Wl,-Bstatic -lcap -lsystemd -Wl,-Bdynamic"
+
 RUN meson setup build \
     --prefix=/usr \
     --buildtype=release \
@@ -36,13 +33,19 @@ RUN meson setup build \
     -Dverbose_mode=false \
     -Dx11_autolaunch=disabled \
     -Dwindows_output_debug_string=false
-    
+
 RUN ninja -C build
 RUN DESTDIR=/src/target ninja -C build/ install
 
+RUN rm -rf \
+    /src/target/usr/share/doc \
+    /src/target/usr/share/man \
+    /src/target/usr/share/info
+
 FROM scratch AS bundle
 LABEL org.opencontainers.image.title="dbus"
-LABEL org.opencontainers.image.version="1.16.2"
+LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
 LABEL org.opencontainers.image.description="Message bus daemon"
-COPY --from=build /src/target/ /
+
+COPY --from=build /src/target/ /target/

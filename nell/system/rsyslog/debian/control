@@ -1,0 +1,17 @@
+Source: rsyslog
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libestr-dev,
+ libexpat1-dev,
+ libfastjson-dev,
+ pkg-config,
+ zlib1g-dev
+
+Package: rsyslog
+Architecture: amd64
+Static-Built-Using: gcc, libestr-dev, libfastjson-dev, zlib1g-dev
+Depends: ${shlibs:Depends}
+Description: reliable system and network logging daemon

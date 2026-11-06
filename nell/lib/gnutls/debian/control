@@ -1,0 +1,17 @@
+Source: gnutls
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ nettle-dev,
+ libgmp-dev,
+ libtasn1-6-dev,
+ libidn2-dev,
+ libunistring-dev
+
+Package: gnutls
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: GnuTLS library without PKCS#11 support

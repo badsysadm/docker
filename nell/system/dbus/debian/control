@@ -1,0 +1,16 @@
+Source: dbus
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ git,
+ pkg-config,
+ ca-certificates,
+ meson,
+ ninja-build,
+ libsystemd-dev,
+ libcap-dev,
+ libexpat1-dev,
+ libapparmor-dev,
+ libaudit-dev

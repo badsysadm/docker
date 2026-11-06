@@ -1,0 +1,19 @@
+Source: glib
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libffi-dev,
+ libpcre2-dev,
+ meson,
+ ninja-build,
+ pkg-config,
+ python3,
+ zlib1g-dev
+
+Package: glib
+Architecture: amd64
+Static-Built-Using: gcc, libffi-dev, libpcre2-dev, zlib1g-dev
+Depends: ${shlibs:Depends}
+Description: GLib static libraries and build tools

@@ -1,0 +1,15 @@
+Source: quota
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libext2fs-dev,
+ comerr-dev,
+ gettext
+
+Package: quota
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Local filesystem disk quota administration utilities

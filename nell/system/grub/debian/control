@@ -1,0 +1,22 @@
+Source: grub
+Section: system
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ python3,
+ flex,
+ bison,
+ gawk,
+ gettext,
+ help2man,
+ texinfo,
+ liblzma-dev,
+ libtasn1-6-dev
+
+Package: grub
+Architecture: amd64
+Static-Built-Using: gcc, liblzma-dev, libtasn1-6-dev
+Depends: ${shlibs:Depends}
+Description: GNU GRUB boot loader
