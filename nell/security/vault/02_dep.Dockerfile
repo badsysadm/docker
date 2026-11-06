@@ -34,4 +34,4 @@ RUN GOTOOLCHAIN=local go work vendor
 
 # Resolve UI dependencies while networking is available in the dep stage.
 WORKDIR /src/vault/ui
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --package-import-method=hardlink
