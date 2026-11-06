@@ -2,7 +2,7 @@ ARG VERSION=2.1.23
 ARG GO_VERSION=1.27.3
 ARG NODE_VERSION=24.19.0
 
-FROM oci.badsysadm.local:80/src/net/zot:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/infra/zot:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG GO_VERSION

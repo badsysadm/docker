@@ -1,5 +1,5 @@
 Source: zot
-Section: net
+Section: admin
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),

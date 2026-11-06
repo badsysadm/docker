@@ -1,6 +1,6 @@
 ARG VERSION=2.1.23
 
-FROM oci.badsysadm.local:80/dep/net/zot:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/infra/zot:${VERSION} AS build
 ARG VERSION
 
 ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GOEXPERIMENT=jsonv2
