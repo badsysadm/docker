@@ -8,8 +8,8 @@ ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0
 ENV GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off
 ENV npm_config_offline=true
 
-COPY ui-module-ids.patch /tmp/ui-module-ids.patch
-RUN git -C /src/vault apply /tmp/ui-module-ids.patch
+COPY debian/patches /src/patches/
+RUN git -C /src/vault apply /src/patches/_ui-module-ids.patch
 
 WORKDIR /src/vault/ui
 RUN mkdir -p /sha256 && pnpm run build
