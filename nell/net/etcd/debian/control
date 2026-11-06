@@ -1,0 +1,15 @@
+Source: etcd
+Section: net
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ tar
+
+Package: etcd
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Distributed key-value store, client and administration utilities
