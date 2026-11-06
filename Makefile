@@ -31,7 +31,8 @@ glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
-nftables iproute2 chrony etcd: section = net
+nftables iproute2 chrony: section = net
+etcd: section = db
 nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
 etcd: version ?= 3.7.3

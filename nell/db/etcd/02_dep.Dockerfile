@@ -1,7 +1,7 @@
 ARG VERSION=3.7.3
 ARG GO_VERSION=1.26.10
 
-FROM oci.badsysadm.local:80/src/net/etcd:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/db/etcd:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG GO_VERSION

@@ -1,6 +1,6 @@
 ARG VERSION=3.7.3
 
-FROM oci.badsysadm.local:80/dep/net/etcd:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/db/etcd:${VERSION} AS build
 ARG VERSION
 
 ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0

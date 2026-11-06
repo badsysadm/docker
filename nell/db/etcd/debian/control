@@ -1,5 +1,5 @@
 Source: etcd
-Section: net
+Section: database
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
