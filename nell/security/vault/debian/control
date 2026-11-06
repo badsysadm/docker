@@ -1,0 +1,15 @@
+Source: vault
+Section: admin
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ xz-utils
+
+Package: vault
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Secrets management server with embedded Web UI
