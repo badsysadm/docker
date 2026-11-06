@@ -1,6 +1,16 @@
 --- a/ui/ember-cli-build.js
 +++ b/ui/ember-cli-build.js
-@@ -62,7 +62,13 @@
+@@ -17,8 +17,9 @@
+ const appConfig = {
+   'ember-service-worker': {
+     serviceWorkerScope: config.serviceWorkerScope,
+     skipWaitingOnMessage: true,
++    versionStrategy: 'project-version',
+   },
+   babel: {
+     plugins: [require.resolve('ember-concurrency/async-arrow-task-transform')],
+   },
+@@ -62,7 +63,13 @@
      browsers: ['defaults'],
    },
    autoImport: {
