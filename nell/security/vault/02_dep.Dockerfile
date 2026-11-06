@@ -28,9 +28,9 @@ RUN npm install --global --prefix /opt/pnpm "pnpm@${PNPM_VERSION}" \
 
 COPY --from=src_image /src/ /src/
 
-# Resolve and vendor all Go modules before the binary build.
+# Vendor all modules in the upstream Go workspace before the binary build.
 WORKDIR /src/vault
-RUN GOTOOLCHAIN=local go mod vendor
+RUN GOTOOLCHAIN=local go work vendor
 
 # Resolve UI dependencies while networking is available in the dep stage.
 WORKDIR /src/vault/ui

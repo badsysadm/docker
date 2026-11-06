@@ -4,7 +4,7 @@ FROM oci.badsysadm.local:80/dep/security/vault:${VERSION} AS build
 ARG VERSION
 
 # All toolchains and dependencies are supplied by the dep image.
-ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GOWORK=off
+ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0
 ENV GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off
 ENV npm_config_offline=true
 
