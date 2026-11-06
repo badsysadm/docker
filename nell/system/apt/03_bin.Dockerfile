@@ -16,7 +16,7 @@ RUN make install_sw
 WORKDIR /src/apt
 
 COPY debian/patches /src/patches/
-RUN git apply /src/patches/_build.patch
+RUN git apply /src/patches/_build_3.6.6.patch
 RUN git apply /src/patches/_pax.patch
 
 WORKDIR /src/apt/.build

@@ -13,7 +13,7 @@ FORCE:
 glibc dpkg apt openssh kmod: section = system
 glibc: version ?= 2.44
 dpkg: version ?= 1.22.11
-apt: version ?= 3.3.3
+apt: version ?= 3.3.6
 openssh: version ?= 10.5p1
 kmod: version ?= 34.2
 
