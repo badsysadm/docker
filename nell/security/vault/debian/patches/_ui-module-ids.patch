@@ -1,11 +1,12 @@
 --- a/ui/ember-cli-build.js
 +++ b/ui/ember-cli-build.js
-@@ -62,7 +62,12 @@
+@@ -62,7 +62,13 @@
      browsers: ['defaults'],
    },
    autoImport: {
      forbidEval: true,
 +    webpack: {
++      devtool: false,
 +      optimization: {
 +        moduleIds: 'size',
 +      },
