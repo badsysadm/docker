@@ -24,7 +24,7 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl ncurses glib gnutls zlib zstd: section = lib
+libnftnl ncurses glib gnutls zlib: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
@@ -64,7 +64,7 @@ kbd: version ?= 2.10.0
 console-setup: version ?= 1.249
 nano: version ?= 9.2
 
-findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
+zstd findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 grep: version ?= 3.12

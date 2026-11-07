@@ -5,7 +5,7 @@ ARG ZSTD_VERSION=1.5.7
 
 FROM oci.badsysadm.local:80/src/net/curl:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
-FROM oci.badsysadm.local:80/bin/lib/zstd:${ZSTD_VERSION} AS zstd_image
+FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 

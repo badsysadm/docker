@@ -2,7 +2,7 @@ ARG VERSION=1.5.7
 ARG ZLIB_VERSION=1.3.1
 ARG XZUTILS_VERSION=5.6.2
 
-FROM oci.badsysadm.local:80/src/lib/zstd:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/utils/zstd:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/xzutils:${XZUTILS_VERSION} AS xzutils_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build

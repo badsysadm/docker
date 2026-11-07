@@ -1,6 +1,6 @@
 ARG VERSION=1.5.7
 
-FROM oci.badsysadm.local:80/dep/lib/zstd:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/utils/zstd:${VERSION} AS build
 ARG VERSION
 
 WORKDIR /src/zstd
