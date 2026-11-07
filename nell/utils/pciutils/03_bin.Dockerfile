@@ -10,7 +10,7 @@ RUN make -j$(nproc) \
     PKG_CONFIG=pkg-config \
     LIBZ="-Xlinker -Bstatic -lz -Xlinker -Bdynamic" \
     LDFLAGS="-static-libgcc -L/usr/lib/x86_64-linux-gnu" \
-    LIBUDEV="-Xlinker -Bstatic -ludev -lcap -lblkid -lmount -llz4 -lzstd -llzma -lz -lcrypto -Xlinker -Bdynamic -ldl -lpthread" \
+    LIBUDEV="-Xlinker -Bstatic -ludev -lcap -lblkid -llz4 -lzstd -llzma -lz -lcrypto -Xlinker -Bdynamic -ldl -lpthread" \
     LIBKMOD_LIBS="-Xlinker -Bstatic -lkmod -lzstd -llzma -lz -lcrypto -Xlinker -Bdynamic -ldl -lpthread" \
     lspci setpci pcilmr update-pciids pci.ids.gz
 
