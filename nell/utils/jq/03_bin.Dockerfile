@@ -14,6 +14,7 @@ RUN ./configure \
     LDFLAGS="-static-libgcc"
 
 RUN make -C vendor/oniguruma -j$(nproc) && \
+    make src/builtin.inc src/config_opts.inc src/version.h && \
     make -j$(nproc) jq
 RUN install -D -m 0755 jq /src/target/usr/bin/jq
 
