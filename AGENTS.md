@@ -13,6 +13,11 @@ and engineering requirements belong to the linked documentation, not here.
    and affected source and build files.
 4. Use the [documentation index and templates](doc/README.md) when creating
    or updating development documentation.
+5. When a build problem occurs, consult
+   [common build problems](doc/internal/build-troubleshooting.md) before
+   diagnosing or proposing a fix. Use
+   [the entry template](doc/templates/build-troubleshooting.md) when
+   documenting a recurring issue.
 
 ## Agent behavior
 

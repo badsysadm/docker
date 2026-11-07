@@ -11,6 +11,7 @@ Development workflow and document templates for `badsysadm/docker`.
 | [Development conventions](internal/documentation.md) | Development process and review |
 | [Plan workflow](internal/plans.md) | Planning and progress records |
 | [ADR workflow](internal/adr.md) | Architectural decision lifecycle |
+| [Common build problems](internal/build-troubleshooting.md) | Recurring Autotools/M4 failures |
 
 ## Templates
 
@@ -18,6 +19,7 @@ Development workflow and document templates for `badsysadm/docker`.
 | --- | --- |
 | [Plan](templates/plan.md) | Staged development record |
 | [ADR](templates/adr.md) | Architectural decision record |
+| [Common build problem](templates/build-troubleshooting.md) | Entry for the build troubleshooting page |
 
 Instructions specific to automated development agents are maintained in
 [AGENTS.md](../AGENTS.md).
