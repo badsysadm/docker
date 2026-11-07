@@ -34,7 +34,7 @@ zlib: version ?= 1.3.1
 nftables iproute2 chrony: section = net
 zot lldap: section = infra
 silo: section = storage
-angie radicale calino synapse: section = www
+angie radicale calino synapse rss2email: section = www
 etcd: section = db
 skopeo umoci: section = virt
 nftables: version ?= 1.1.7
@@ -45,13 +45,13 @@ angie: version ?= 1.12.4
 radicale: version ?= 3.9.0
 calino: version ?= 0.42.0
 synapse: version ?= 1.164.2
+rss2email: version ?= 3.14
 etcd: version ?= 3.7.3
 skopeo: version ?= 1.24.1
 umoci: version ?= 0.6.0
 
-mailutils rss2email: section = utils
+mailutils: section = utils
 mailutils: version ?= 3.21
-rss2email: version ?= 3.14
 
 bash dialog kbd console-setup: section = usr
 bash: version ?= 5.3

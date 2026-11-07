@@ -1,5 +1,5 @@
 Source: rss2email
-Section: utils
+Section: www
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),

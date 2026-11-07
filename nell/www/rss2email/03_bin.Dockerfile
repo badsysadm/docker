@@ -8,7 +8,7 @@ FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
 FROM 127.0.0.1:12670/pkg/libs/glibc:${GLIBC_VERSION} AS glibc_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
-FROM oci.badsysadm.local:80/dep/utils/rss2email:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/www/rss2email:${VERSION} AS build
 ARG VERSION
 
 COPY --from=python_image /usr/bin/python3.14 /src/target/usr/bin/python3.14
