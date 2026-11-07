@@ -14,6 +14,7 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 
 COPY --from=python_image /usr/bin/python3.14 /usr/bin/python3.14
 COPY --from=python_image /usr/lib/python3.14 /usr/lib/python3.14
+COPY --from=python_image /usr/include/python3.14 /usr/include/python3.14
 
 ENV CARGO_HOME=/opt/cargo RUSTUP_HOME=/opt/rustup
 ENV PATH=/opt/cargo/bin:${PATH}
