@@ -12,6 +12,8 @@ Build-Depends:
  git,
  perl,
  libgeoip-dev,
+ libzstd-dev,
+ zlib1g-dev,
  binutils
 
 Package: angie

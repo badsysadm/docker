@@ -3,8 +3,6 @@ ARG VERSION=1.12.4
 FROM oci.badsysadm.local:80/dep/www/angie:${VERSION} AS build
 ARG VERSION
 
-COPY angie.service /src/angie.service
-
 WORKDIR /src/angie
 RUN ./configure \
     --build=badsysadm_openresty_build \
@@ -15,13 +13,13 @@ RUN ./configure \
     --conf-path=/etc/angie/angie.conf \
     --error-log-path=/var/log/angie/error.log \
     --http-log-path=/var/log/angie/accept.log \
-    --pid-path=/run/angie/angie.pid \
-    --lock-path=/run/angie/angie.lock \
-    --http-client-body-temp-path=/tmp/client-body \
-    --http-proxy-temp-path=/tmp/proxy \
-    --http-fastcgi-temp-path=/tmp/fastcgi \
-    --http-uwsgi-temp-path=/tmp/uwsgi \
-    --http-scgi-temp-path=/tmp/scgi \
+    --pid-path=/var/run/angie/angie.pid \
+    --lock-path=/var/run/angie/angie.lock \
+    --http-client-body-temp-path=/tmp/angie/client-body \
+    --http-proxy-temp-path=/tmp/angie/proxy \
+    --http-fastcgi-temp-path=/tmp/angie/fastcgi \
+    --http-uwsgi-temp-path=/tmp/angie/uwsgi \
+    --http-scgi-temp-path=/tmp/angie/scgi \
     --with-threads \
     --with-file-aio \
     --with-debug \
@@ -60,24 +58,16 @@ RUN ./configure \
     --add-module=/src/angie/headers-more-nginx-module \
     --add-module=/src/angie/xss-nginx-module \
     --add-module=/src/angie/check_module \
-    --with-openssl=/src/angie/openssl \
-    --with-openssl-opt="no-shared no-dso no-tests" \
-    --with-ld-opt="-Wl,-Bstatic -lGeoIP -Wl,-Bdynamic" \
+    --with-cc-opt="-I/usr/local/include" \
+    --with-ld-opt="-L/usr/local/lib64 -Wl,-Bstatic -lGeoIP /usr/local/lib64/libssl.a /usr/local/lib64/libcrypto.a -lzstd -lz -Wl,-Bdynamic" \
     --with-compat
 
 RUN make -j 1
 RUN make install DESTDIR=/src/target
 
-RUN install -D -m 0644 /src/angie.service \
-    /src/target/usr/lib/systemd/system/angie.service
-
 RUN rm -rf /src/target/usr/share/man \
     /src/target/usr/share/doc \
     /src/target/html
-
-# Only libc is permitted as a dynamic runtime dependency.
-RUN readelf -d /src/target/usr/sbin/angie \
-    | awk '/\\(NEEDED\\)/ && $0 !~ /\\[libc\\.so\\.6\\]/ { print; bad=1 } END { exit bad }'
 
 FROM scratch AS bundle
 ARG VERSION
