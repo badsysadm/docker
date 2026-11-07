@@ -1,7 +1,7 @@
 # <Project> — development plan
 
-**Status:** Proposed  
-**Project:** `nell/<section>/<project>`  
+**Status:** Proposed
+**Project:** `<project>`
 **Scope approved:** Not yet / <recorded approval>
 
 ## Purpose and deliverables
@@ -10,20 +10,19 @@
 
 ## Exclusions and dependencies
 
-<Explicit boundaries, upstream prerequisites, toolchains and infrastructure.>
+<Explicit boundaries, upstream prerequisites and dependencies.>
 
 ## References
 
-- [nell build contract](../../nell/README.md)
-- [development conventions](../internal/documentation.md)
-- [ADR rules](../internal/adr.md)
-- <Relevant existing project, upstream release and accepted decisions>
+- [Build contract](../../nell/README.md)
+- [Development workflow](../internal/documentation.md)
+- [Plan rules](../internal/plans.md)
+- <Project implementation, upstream release and accepted decisions>
 
 ## Agreed design
 
-<Section, version/tag, artifact paths, build stages, dependency sources,
-runtime assets, static linking and approved deviations. Clearly distinguish
-agreed decisions from unresolved questions.>
+<Project-specific choices and links to ADRs. Refer to the build contract
+instead of restating its rules. Distinguish decisions from open questions.>
 
 ## Implementation stages
 
@@ -33,15 +32,13 @@ agreed decisions from unresolved questions.>
 
 ## Verification
 
-| Check | Expected result | Observed result |
+| Check / reference | Expected outcome | Observed outcome / evidence |
 | --- | --- | --- |
-| `make <project>` | Build succeeds | Not executed |
-| Repeated SHA-256 comparison | Identical artifacts | Not executed |
-| Installed file / dependency review | Matches approved scope | Not executed |
+| <Refer to the authoritative check> | <expected> | Not performed |
 
 ## Decisions and related ADRs
 
-<Links to records of significant architectural choices.>
+<Links to significant architectural decisions.>
 
 ## Deferred work
 

@@ -1,78 +1,54 @@
-# New nell project — development template
+# New nell project — preparation template
 
-This is a checklist for a new project, **not** a replacement for
-[nell/README.md](../../nell/README.md). Complete with actual upstream
-data; omit unsupported components.
+The requirements for directory layout, build stages, linking, packaging,
+Makefile registration and verification live exclusively in
+[nell/README.md](../../nell/README.md). This template records
+**project-specific facts and results**; it does not restate those rules.
 
 ## Identity and upstream
 
 | Field | Value |
 | --- | --- |
 | Project / Make target | `<project>` |
-| Section (by function) | `<section>` |
+| Section | `<section>` |
 | Official source URL | `<url>` |
 | Release tag / version | `<tag>` / `<version>` |
-| Source commit (if needed) | `<sha>` |
-| Toolchain and minimum versions | `<versions>` |
+| Source commit (if relevant) | `<sha>` |
+| Toolchain and version | `<toolchain>` |
 | License | `<license>` |
-| Comparable existing nell project | `<project>` |
+| Comparable existing project | `<project>` |
 
-## Required files
+## Upstream build information
 
-```text
-nell/<section>/<project>/
-├── 01_src.Dockerfile
-├── 02_dep.Dockerfile
-├── 03_bin.Dockerfile
-├── ADR.md
-└── debian/
-    └── control
-```
+- Official build reference: `<url or source path>`
+- Required external dependencies: `<names and versions>`
+- Required language/toolchain components: `<details>`
+- Project-specific build flags: `<flags>`
+- Additional runtime assets: `<assets or none>`
 
-Add the target's `section` and pinned default `version` to the root
-`Makefile`; use the existing targets as the syntax reference.
+## Output contents
 
-## Build contract
-
-- [ ] `01_src` clones/downloads the pinned upstream version into `/src`.
-- [ ] `02_dep` uses `mk-build-deps` and `debian/control`.
-- [ ] External dependencies/toolchains are pinned and prepared before `03_bin`.
-- [ ] `03_bin` compiles the required application without new downloads.
-- [ ] Required executable files and runtime assets are installed under `/src/target`.
-- [ ] External libraries follow the `nell` static-link policy; note any
-      exception in an approved ADR.
-- [ ] Final stage is `FROM scratch`, copying only `/src/target/` to `/target/`.
-- [ ] Documentation, tests and development artifacts are excluded from
-      the output; no tests are compiled or run by image stages.
-- [ ] Service units, configuration, secrets and runtime storage match the
-      approved deliverables, without unrelated files in the artifact.
-- [ ] Project `ADR.md` records nonstandard decisions and consequences.
-
-## Runtime contents
-
-| Installed file / directory | Reason required |
+| Artifact | Purpose / consumer |
 | --- | --- |
-| `/target/<path>` | `<reason>` |
+| `<installed path>` | `<reason>` |
 
-List every necessary executable and relevant assets (Web UI, schemas,
-plugins, libraries). Explain which settings the eventual runtime needs;
-do not embed secrets or choose deployment paths without agreement.
+## Decisions and exceptions
 
-## Verification evidence
+- Project-specific ADR: `<relative link>`
+- Other accepted decisions: `<links or none>`
+- Approved exclusions or deviations: `<description or none>`
 
-| Check | Outcome / source of evidence |
-| --- | --- |
-| `make <project>` | Not executed / actual result |
-| Two consecutive SHA-256 sets | Not executed / actual result |
-| Runtime files and dynamic dependencies | Not inspected / actual result |
-| Upstream behavior relevant to project | Not checked / actual result |
+## Verification record
 
-Verification is performed via the root Makefile. Record successful checks
-only when supported by actual results.
+Use the acceptance criteria in
+[nell/README.md](../../nell/README.md#проверка-сборки).
+
+| Check / reference | Actual result | Evidence |
+| --- | --- | --- |
+| `<check>` | `<result or not performed>` | `<log or reference>` |
 
 ## Review
 
 - Branch: `<branch>`
 - PR/MR: `<link>`
-- Agreed exclusions / deferred items: `<items>`
 - Manual review status: `<status>`
