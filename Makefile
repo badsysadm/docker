@@ -31,7 +31,7 @@ glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
-nftables iproute2 chrony: section = net
+nftables iproute2 chrony curl: section = net
 zot lldap buildbot: section = infra
 silo: section = storage
 angie radicale calino synapse: section = www
@@ -39,6 +39,7 @@ etcd: section = db
 skopeo umoci: section = virt
 nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
+curl: version ?= 8.23.0
 zot: version ?= 2.1.23
 silo: version ?= 2026-10-26T00-00-00Z
 angie: version ?= 1.12.4
