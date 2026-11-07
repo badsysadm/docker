@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1002,7 +1002,7 @@
+ # We have libpcap.
+ #
+ include_directories(SYSTEM ${PCAP_INCLUDE_DIRS})
+-set(TCPDUMP_LINK_LIBRARIES ${PCAP_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})
++set(TCPDUMP_LINK_LIBRARIES ${PCAP_STATIC_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})
+ 
+ #
+ # Optional libraries.
