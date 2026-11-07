@@ -1,7 +1,7 @@
 ARG VERSION=2026-10-26T00-00-00Z
 ARG GO_VERSION=1.27.3
 
-FROM oci.badsysadm.local:80/src/infra/silo:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/storage/silo:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG GO_VERSION

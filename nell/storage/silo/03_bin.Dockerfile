@@ -1,6 +1,6 @@
 ARG VERSION=2026-10-26T00-00-00Z
 
-FROM oci.badsysadm.local:80/dep/infra/silo:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/storage/silo:${VERSION} AS build
 ARG VERSION
 
 ENV GOOS=linux GOARCH=amd64 CGO_ENABLED=0

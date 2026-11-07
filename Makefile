@@ -32,7 +32,8 @@ gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
 nftables iproute2 chrony: section = net
-zot silo: section = infra
+zot: section = infra
+silo: section = storage
 angie: section = www
 etcd: section = db
 skopeo umoci: section = virt
