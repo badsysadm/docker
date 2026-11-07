@@ -4,6 +4,7 @@ FROM oci.badsysadm.local:80/dep/usr/nano:${VERSION} AS build
 ARG VERSION
 
 WORKDIR /src/nano
+RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
