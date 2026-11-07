@@ -33,9 +33,10 @@ RUN cmake -S . -B build -G Ninja \
     cmake --build build -j$(nproc) && \
     DESTDIR=/src/target cmake --install build
 
-RUN install -D -m 0755 scripts/wcurl /src/target/usr/bin/wcurl && \
-    rm -rf /src/target/usr/share/doc /src/target/usr/share/man \
-    /src/target/usr/share/info
+RUN install -D -m 0755 scripts/wcurl /src/target/usr/bin/wcurl
+RUN rm -rf /src/target/usr/share/doc
+RUN rm -rf /src/target/usr/share/man
+RUN rm -rf /src/target/usr/share/info
 
 FROM scratch AS bundle
 ARG VERSION
