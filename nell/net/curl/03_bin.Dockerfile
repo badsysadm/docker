@@ -14,8 +14,8 @@ RUN cmake -S . -B build -G Ninja \
     -DBUILD_STATIC_CURL=ON \
     -DCURL_USE_OPENSSL=ON \
     -DOPENSSL_USE_STATIC_LIBS=TRUE \
-    -DOPENSSL_SSL_LIBRARY=/usr/local/lib/libssl.a \
-    -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib/libcrypto.a \
+    -DOPENSSL_SSL_LIBRARY=/usr/local/lib64/libssl.a \
+    -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib64/libcrypto.a \
     -DCURL_USE_LIBSSH2=ON \
     -DLIBSSH2_LIBRARY=/usr/local/lib/libssh2.a \
     -DUSE_NGHTTP2=ON \
