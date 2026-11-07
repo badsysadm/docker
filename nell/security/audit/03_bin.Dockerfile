@@ -17,7 +17,7 @@ RUN ./configure \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --runstatedir=/run \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --enable-static \
     --disable-shared \
     --with-libcap-ng=yes \
