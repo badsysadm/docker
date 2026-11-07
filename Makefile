@@ -32,7 +32,7 @@ gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
 nftables iproute2 chrony: section = net
-zot lldap: section = infra
+zot lldap buildbot: section = infra
 silo: section = storage
 angie radicale calino synapse: section = www
 etcd: section = db
@@ -90,6 +90,7 @@ cracklib: version ?= 2.10.3
 vault: version ?= 2.2.1
 ots: version ?= 1.23.1
 lldap: version ?= 0.6.3
+buildbot: version ?= 4.3.0
 
 include mk/core.mk
 include mk/bs.mk

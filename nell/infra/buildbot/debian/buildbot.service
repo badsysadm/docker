@@ -12,7 +12,7 @@ ExecStartPre=/usr/bin/python3.14 -c "from buildbot.scripts import runner; runner
 ExecStart=/usr/bin/python3.14 -c "from buildbot.scripts import runner; runner.run()" start --nodaemon ${BASEDIR}
 RuntimeDirectory=buildbot
 StateDirectory=buildbot
-DinamicUser=yes
+DynamicUser=yes
 
 [Install]
 WantedBy=multi-user.target
