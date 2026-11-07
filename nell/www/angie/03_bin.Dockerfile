@@ -27,7 +27,6 @@ RUN ./configure \
     --with-http_auth_request_module \
     --with-http_degradation_module \
     --with-http_flv_module \
-    --with-http_geoip_module \
     --with-http_gunzip_module \
     --with-http_gzip_static_module \
     --with-http_mp4_module \
@@ -43,7 +42,6 @@ RUN ./configure \
     --without-http_memcached_module \
     --without-http_scgi_module \
     --with-stream \
-    --with-stream_geoip_module \
     --with-stream_realip_module \
     --with-stream_ssl_module \
     --with-stream_ssl_preread_module \
@@ -58,8 +56,9 @@ RUN ./configure \
     --add-module=/src/angie/headers-more-nginx-module \
     --add-module=/src/angie/xss-nginx-module \
     --add-module=/src/angie/check_module \
+    --add-module=/src/angie/geoip2_module \
     --with-cc-opt="-I/usr/local/include" \
-    --with-ld-opt="-L/usr/local/lib64 -Wl,-Bstatic -lGeoIP /usr/local/lib64/libssl.a /usr/local/lib64/libcrypto.a -lzstd -lz -Wl,-Bdynamic" \
+    --with-ld-opt="-L/usr/local/lib64 -Wl,-Bstatic /usr/lib/x86_64-linux-gnu/libmaxminddb.a /usr/local/lib64/libssl.a /usr/local/lib64/libcrypto.a -lzstd -lz -Wl,-Bdynamic" \
     --with-compat
 
 RUN make -j 1

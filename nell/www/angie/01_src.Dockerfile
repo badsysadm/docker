@@ -22,6 +22,8 @@ RUN git clone -q --depth 1 --branch v0.07 \
     https://github.com/openresty/xss-nginx-module.git xss-nginx-module
 RUN git clone -q --depth 1 --branch v0.4.0 \
     https://github.com/yaoweibin/nginx_upstream_check_module.git check_module
+RUN git clone -q --depth 1 --branch 3.4 \
+    https://github.com/leev/ngx_http_geoip2_module.git geoip2_module
 
 FROM scratch
 COPY --from=build /src/ /src/

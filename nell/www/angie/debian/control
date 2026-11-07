@@ -11,7 +11,7 @@ Build-Depends:
  ca-certificates,
  git,
  perl,
- libgeoip-dev,
+ libmaxminddb-dev,
  libzstd-dev,
  zlib1g-dev,
  binutils

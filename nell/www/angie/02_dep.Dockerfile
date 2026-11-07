@@ -11,8 +11,6 @@ COPY debian ./debian/
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
-RUN ranlib /usr/lib/x86_64-linux-gnu/libGeoIP.a
-
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
 COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
