@@ -1,0 +1,23 @@
+Source: angie
+Section: www
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ pkg-config,
+ ca-certificates,
+ git,
+ perl,
+ libmaxminddb-dev,
+ libcrypt-dev,
+ libzstd-dev,
+ zlib1g-dev,
+ binutils
+
+Package: angie
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: HTTP and reverse proxy server with statically linked third-party libraries

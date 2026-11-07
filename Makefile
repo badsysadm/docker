@@ -33,11 +33,13 @@ zlib: version ?= 1.3.1
 
 nftables iproute2 chrony: section = net
 zot: section = infra
+angie: section = www
 etcd: section = db
 skopeo umoci: section = virt
 nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
 zot: version ?= 2.1.23
+angie: version ?= 1.12.4
 etcd: version ?= 3.7.3
 skopeo: version ?= 1.24.1
 umoci: version ?= 0.6.0
