@@ -17,4 +17,4 @@ RUN corepack prepare pnpm@10.30.3 --activate
 COPY --from=src_image /src/ /src/
 
 WORKDIR /src/calino
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --package-import-method=hardlink
