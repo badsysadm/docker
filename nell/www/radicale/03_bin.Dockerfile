@@ -14,7 +14,7 @@ COPY --from=python_image /usr/lib/python3.14 /src/target/usr/lib/python3.14
 
 COPY --from=glibc_image /lib64/ld-linux-x86-64.so.2 /src/target/lib64/ld-linux-x86-64.so.2
 COPY --from=glibc_image /lib64/libc.so.6 /lib64/libm.so.6 /src/target/lib64/
-COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.so* /src/target/usr/lib/x86_64-linux-gnu/
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.so.1 /src/target/usr/lib64/libz.so.1
 
 RUN /usr/bin/python3.14 -m pip install --no-index \
     --find-links=/src/wheels --no-compile \
