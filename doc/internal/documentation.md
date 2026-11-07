@@ -17,10 +17,15 @@ These rules apply to build profiles in `badsysadm/docker`. Read the
   build layout without approval.
 - Agree on the project's section based on its role; a listening network
   port does not by itself determine the section.
-- Change only what was requested. Distinguish unknowns from facts. If an
-  instruction conflicts with established architecture or requirements,
-  identify the conflict and obtain agreement **before** implementing an
-  exception, using [ADR rules](adr.md).
+- Change only what was requested. A question alone does not authorize code
+  changes. Do not add tests, dependencies, service units, scripts or other
+  architectural changes without approval. Distinguish unknowns from facts.
+- If an instruction conflicts with established architecture, requirements,
+  accepted decisions or the purpose of a component, identify the conflict
+  and obtain agreement **before** implementing an exception, using
+  [ADR rules](adr.md).
+- Do not weaken build checks or security requirements to make an
+  unverified implementation appear successful.
 
 ## Build profile contract
 
