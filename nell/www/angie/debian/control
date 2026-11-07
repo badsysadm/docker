@@ -12,6 +12,7 @@ Build-Depends:
  git,
  perl,
  libmaxminddb-dev,
+ libcrypt-dev,
  libzstd-dev,
  zlib1g-dev,
  binutils

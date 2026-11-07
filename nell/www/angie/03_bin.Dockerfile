@@ -57,7 +57,7 @@ RUN ./configure \
     --add-module=/src/angie/check_module \
     --add-module=/src/angie/geoip2_module \
     --with-cc-opt="-I/usr/local/include" \
-    --with-ld-opt="-Wl,--as-needed -L/usr/local/lib64 -Wl,-Bstatic -lmaxminddb -lssl -lcrypto -lzstd -lz -Wl,-Bdynamic" \
+    --with-ld-opt="-Wl,--as-needed -L/usr/local/lib64 -Wl,-Bstatic -lmaxminddb -lssl -lcrypto -lzstd -lz -lcrypt -Wl,-Bdynamic" \
     --with-compat
 
 RUN make -j 1
