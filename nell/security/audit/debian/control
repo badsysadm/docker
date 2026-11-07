@@ -1,0 +1,18 @@
+Source: audit
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ pkg-config,
+ linux-libc-dev,
+ libcap-ng-dev
+
+Package: audit
+Architecture: amd64
+Static-Built-Using: libcap-ng (= ${binary:Version})
+Depends: ${shlibs:Depends}
+Description: Linux Audit daemon, administrative utilities and libraries
