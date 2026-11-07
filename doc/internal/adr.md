@@ -23,6 +23,22 @@ test transcripts or operational manuals.
 6. Alternatives considered: alternatives actually evaluated.
 7. References: implementation, related ADRs and documentation.
 
+## Content boundaries
+
+- ADRs describe only architectural choices specific to their scope and
+  the rationale for those choices. Do not repeat the common build,
+  development or operational requirements already documented in
+  `nell/README.md` or other authoritative rules; link to them instead.
+- Do not pin or record concrete software, toolchain or dependency
+  versions, release tags or commit hashes in ADRs. Version selection
+  belongs to build files and version configuration, not architecture.
+- Do not record routine implementation steps, file moves, typo fixes,
+  test execution status or progress history. These belong in commits,
+  pull requests or work plans.
+- An ADR may document a project-specific exception to common rules,
+  but only after explicit approval; describe the exception and its
+  rationale, without duplicating the underlying global rule.
+
 ## Approval and maintenance
 
 Architecture changes that conflict with accepted requirements require
