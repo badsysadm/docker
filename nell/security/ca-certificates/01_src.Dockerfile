@@ -1,10 +1,10 @@
 FROM oci.badsysadm.local:80/get/source:latest AS build
-ARG VERSION=20260816
+ARG VERSION=2026-11-05
 
 RUN mkdir -p /src/ca-certificates && \
-    wget -qO- \
-        "https://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_${VERSION}.tar.xz" | \
-    tar -xJf - -C /src/ca-certificates --strip-components=1
+    wget -q \
+        "https://curl.se/ca/cacert-${VERSION}.pem" \
+        -O /src/ca-certificates/cacert.pem
 
 FROM scratch
 COPY --from=build /src/ /src/

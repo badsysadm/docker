@@ -2,13 +2,8 @@ Source: ca-certificates
 Section: security
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
- debhelper-compat (= 13),
- build-essential,
- python3,
- python3-cryptography,
- openssl
+ debhelper-compat (= 13)
 
 Package: ca-certificates
 Architecture: all
-Depends: openssl, ${misc:Depends}
-Description: Common CA trust store with local trust management
+Description: Mozilla CA root certificates in PEM format for OpenSSL

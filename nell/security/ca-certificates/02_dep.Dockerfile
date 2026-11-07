@@ -1,4 +1,4 @@
-ARG VERSION=20260816
+ARG VERSION=2026-11-05
 
 FROM oci.badsysadm.local:80/src/security/ca-certificates:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
