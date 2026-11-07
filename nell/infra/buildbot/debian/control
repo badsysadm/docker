@@ -1,0 +1,22 @@
+Source: buildbot
+Section: infra
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ python3-pip,
+ python3-setuptools,
+ python3-wheel,
+ zlib1g-dev,
+ libbz2-dev,
+ libssl-dev,
+ libsqlite3-dev,
+ libzstd-dev
+
+Package: buildbot
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Buildbot continuous integration server with web interface
