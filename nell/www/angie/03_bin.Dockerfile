@@ -2,8 +2,10 @@ ARG VERSION=1.12.4
 
 FROM oci.badsysadm.local:80/dep/www/angie:${VERSION} AS build
 ARG VERSION
+ARG SOURCE_DATE_EPOCH=1700000000
 
 WORKDIR /src/angie
+RUN sed -i "s/date +%s/printf %s ${SOURCE_DATE_EPOCH}/" auto/make
 RUN ./configure \
     --build=badsysadm_openresty_build \
     --builddir=/src/angie/buildbadsysadm \
