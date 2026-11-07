@@ -75,7 +75,7 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots: section = security
+gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots lldap: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
@@ -85,6 +85,7 @@ apparmor: version ?= 4.1.8
 cracklib: version ?= 2.10.3
 vault: version ?= 2.2.1
 ots: version ?= 1.23.1
+lldap: version ?= 0.6.3
 
 include mk/core.mk
 include mk/bs.mk
