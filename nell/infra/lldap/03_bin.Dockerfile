@@ -20,7 +20,11 @@ RUN install -D -m 0755 target/release/lldap /src/target/usr/sbin/lldap \
     && install -D -m 0755 target/release/lldap_migration_tool /src/target/usr/bin/lldap_migration_tool \
     && install -D -m 0755 target/release/lldap_set_password /src/target/usr/bin/lldap_set_password \
     && install -D -m 0644 app/index_local.html /src/target/usr/share/lldap/app/index.html \
-    && cp -a app/static app/pkg /src/target/usr/share/lldap/app/
+    && cp -a app/static app/pkg /src/target/usr/share/lldap/app/ \
+    && rm -f /src/target/usr/share/lldap/app/pkg/*.d.ts \
+        /src/target/usr/share/lldap/app/pkg/package.json \
+        /src/target/usr/share/lldap/app/static/libraries.txt \
+        /src/target/usr/share/lldap/app/static/fonts/fonts.txt
 
 FROM scratch AS bundle
 ARG VERSION
