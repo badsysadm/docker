@@ -5,6 +5,7 @@ Build-Depends:
  debhelper-compat (= 13),
  build-essential,
  ca-certificates,
+ curl,
  git,
  libstdc++6
 
