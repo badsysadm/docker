@@ -12,7 +12,8 @@ Build-Depends:
  ninja-build,
  automake,
  autoconf,
- libtool
+ libtool,
+ libzstd-dev
 
 Package: curl
 Architecture: amd64
