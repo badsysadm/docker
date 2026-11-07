@@ -1,0 +1,24 @@
+Source: git
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ zlib1g-dev,
+ libcurl4-openssl-dev,
+ libssl-dev,
+ libnghttp2-dev,
+ libssh2-1-dev,
+ libzstd-dev,
+ libbrotli-dev,
+ libpsl-dev,
+ libidn2-dev,
+ librtmp-dev,
+ libldap-dev,
+ libkrb5-dev
+
+Package: git
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Git distributed version control system and HTTPS transport
