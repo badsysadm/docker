@@ -19,7 +19,7 @@ RUN ./configure \
     --runstatedir=/run \
     --libdir=/usr/lib \
     --enable-static \
-    --disable-shared \
+    --enable-shared \
     --with-libcap-ng=yes \
     --disable-zos-remote \
     --without-python3 \
