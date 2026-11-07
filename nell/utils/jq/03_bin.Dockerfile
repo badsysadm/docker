@@ -13,7 +13,7 @@ RUN ./configure \
     --with-oniguruma=builtin \
     LDFLAGS="-static-libgcc"
 
-RUN make
+RUN make -j1
 RUN install -D -m 0755 jq /src/target/usr/bin/jq
 
 FROM scratch AS bundle
