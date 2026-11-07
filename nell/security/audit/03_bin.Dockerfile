@@ -26,7 +26,10 @@ RUN ./configure \
     --without-golang \
     LDFLAGS="-static-libgcc"
 
-RUN make -j$(nproc)
+# Link executables against libtool static archives while retaining
+# both static and shared variants of the installed libraries.
+RUN make -j$(nproc) \
+    LDFLAGS="-static-libgcc -static-libtool-libs"
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
