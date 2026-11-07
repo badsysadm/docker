@@ -19,13 +19,13 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 RUN git clone -q --single-branch --branch "v${ZLIB_VERSION}" --depth 1 \
     https://github.com/madler/zlib.git /src/zlib && \
     cd /src/zlib && \
-    ./configure --prefix=/usr/local --static && \
+    CFLAGS="-O2 -fPIC" ./configure --prefix=/usr/local --static && \
     make -j$(nproc) && make install
 
 RUN git clone -q --single-branch --branch "openssl-${OPENSSL_VERSION}" --depth 1 \
     https://github.com/openssl/openssl.git /src/openssl && \
     cd /src/openssl && \
-    ./config no-shared no-tests --prefix=/usr/local --libdir=lib && \
+    ./config no-shared no-tests enable-pic --prefix=/usr/local --libdir=lib && \
     make -j$(nproc) build_libs && make install_sw
 
 RUN git clone -q --single-branch --branch "libssh2-${LIBSSH2_VERSION}" --depth 1 \
@@ -34,6 +34,7 @@ RUN git clone -q --single-branch --branch "libssh2-${LIBSSH2_VERSION}" --depth 1
     -DCMAKE_INSTALL_PREFIX=/usr/local \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_SHARED_LIBS=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -DBUILD_TESTING=OFF \
     -DBUILD_EXAMPLES=OFF \
     -DCRYPTO_BACKEND=OpenSSL \
@@ -46,7 +47,7 @@ RUN git clone -q --single-branch --branch "v${NGHTTP2_VERSION}" --depth 1 \
     https://github.com/nghttp2/nghttp2.git /src/nghttp2 && \
     cd /src/nghttp2 && \
     autoreconf -i && \
-    ./configure --prefix=/usr/local --libdir=/usr/local/lib \
+    CFLAGS="-O2 -fPIC" ./configure --prefix=/usr/local --libdir=/usr/local/lib \
     --enable-static --disable-shared --disable-app \
     --disable-hpack-tools --disable-examples --disable-python-bindings && \
     make -j$(nproc) && make install
