@@ -21,6 +21,7 @@ COPY --from=openssl_image /target/usr/lib64/libssl.so* /src/target/usr/lib64/
 COPY --from=openssl_image /target/usr/lib64/libcrypto.so* /src/target/usr/lib64/
 
 RUN cp -a /usr/lib/x86_64-linux-gnu/libffi.so.8* /src/target/usr/lib64/
+RUN cp -a /lib/x86_64-linux-gnu/libgcc_s.so.1 /src/target/usr/lib64/
 RUN cp -a /usr/lib/x86_64-linux-gnu/libpq.so.5* /src/target/usr/lib64/
 RUN cp -a /usr/lib/x86_64-linux-gnu/libsqlite3.so.0* /src/target/usr/lib64/
 
