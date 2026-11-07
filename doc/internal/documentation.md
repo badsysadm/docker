@@ -1,88 +1,81 @@
 # Development and documentation conventions
 
-These rules apply to build profiles in `badsysadm/docker`. Read the
-[existing nell contract](../../nell/README.md) first. For plans see
-[plans.md](plans.md); for ADRs see [adr.md](adr.md).
+These rules apply to build profiles in `badsysadm/docker`. The
+[existing nell contract](../../nell/README.md) defines build architecture.
+Related workflows are described in [plans.md](plans.md) and [adr.md](adr.md).
 
 ## Sources of truth and scope
 
-- The working Dockerfiles, root Makefile and `mk/core.mk` establish the
-  implemented pipeline; `nell/README.md` defines its intended constraints.
-  Accepted project and shared ADRs explain architectural decisions.
-- Inspect upstream sources **at the pinned release**, not only its changing
-  default branch. Verify official build flags, toolchain versions, source
-  paths, relevant installation artifacts and license.
-- Read a completed `nell` project using a similar toolchain before adding
-  a new one. Do not copy unrelated functionality or introduce an alternative
-  build layout without approval.
-- Agree on the project's section based on its role; a listening network
-  port does not by itself determine the section.
-- Changes must remain within the approved project scope. New tests,
+- Dockerfiles, the root Makefile and `mk/core.mk` define the implemented
+  pipeline; `nell/README.md` defines its intended constraints. Accepted
+  project and shared ADRs record the reasons for architectural decisions.
+- Build profiles use a pinned upstream version. Build flags, toolchains,
+  source paths, installed artifacts and licensing must correspond to that
+  version, not to an unrelated upstream revision.
+- New profiles follow established `nell` patterns for the corresponding
+  toolchain. Deviations from the accepted architecture require approval.
+- Project sections classify software by function, not by implementation
+  details such as which ports a process opens.
+- Changes remain within the approved project scope. Additional tests,
   dependencies, service units, scripts and architectural changes require
-  explicit agreement when they extend that scope.
-- If an instruction conflicts with established architecture, requirements,
-  accepted decisions or the purpose of a component, identify the conflict
-  and obtain agreement **before** implementing an exception, using
-  [ADR rules](adr.md).
-- Do not weaken build checks or security requirements to make an
-  unverified implementation appear successful.
+  approval when they extend that scope.
+- Architectural exceptions require approval and documentation under the
+  [ADR process](adr.md). Existing build and security checks remain in force
+  unless an approved architectural decision changes their requirements.
 
 ## Build profile contract
 
 | File | Responsibility |
 | --- | --- |
-| `01_src.Dockerfile` | Fetch the pinned upstream source into `/src`; publish source-only stage |
-| `02_dep.Dockerfile` | Install build dependencies via `debian/control` / `mk-build-deps`; prepare external dependencies before compiling |
-| `03_bin.Dockerfile` | Compile and install only required runtime artifacts in `/src/target`; publish `FROM scratch` with `/target` |
-| `debian/control` | Reference build dependencies, not an alternate output packaging layout |
-| `ADR.md` | Project-specific architectural decisions, trade-offs and consequences |
-| Root `Makefile` | Register the target, section and default version |
+| `01_src.Dockerfile` | Obtain the pinned upstream source under `/src`; publish the source stage |
+| `02_dep.Dockerfile` | Install build dependencies through `debian/control` / `mk-build-deps`; prepare external dependencies |
+| `03_bin.Dockerfile` | Build and install required runtime artifacts in `/src/target`; publish `FROM scratch` with `/target` |
+| `debian/control` | Declare reference build dependencies, not an alternate output layout |
+| `ADR.md` | Record project-specific architectural decisions and consequences |
+| Root `Makefile` | Define target, section and pinned default version |
 
-Follow the [project template](../templates/project.md) for detailed review
-criteria. Respect the current `nell/README.md` rule to link external
-dependencies statically, allowing `libc` to remain dynamic when relevant.
-Go/Rust runtimes may produce entirely static executables. Do not add
-dependencies just to mirror another project's implementation.
+The [project template](../templates/project.md) provides the review
+checklist. External dependencies follow the static-linking policy in
+`nell/README.md`; `libc` may remain dynamic where applicable. Go and
+Rust toolchains may produce entirely static executables.
 
-Treat local static files, web bundles, schemas, certificates and other
-runtime assets as part of the project when upstream requires them. Prepare
-network-fetched material at the dependency stage where the pipeline permits
-it; `03_bin` should not rely on downloading new dependencies. Verify
-whether browser assets require CDNs at runtime.
+Runtime assets such as locally served web bundles, schemas, certificates
+and plugins are part of a build when required by the application. Materials
+downloaded from upstream belong in a network-enabled source/dependency
+stage; the final compilation stage must not require new downloads. A
+self-contained Web UI must not depend on runtime access to a CDN.
 
 ## Builds and verification
 
-- The official entry point is `make <project>`; use the build defined by
-  the repository rather than a hand-written alternative.
-- Do not compile or run tests as part of the three-stage image build:
-  existing `nell` policy explicitly disables tests.
-- A build is not accepted until the root target has succeeded and its
-  two successive output hashes match, with appropriate review of
-  dynamically linked libraries and resulting runtime files.
-- Check tool-specific behavior when relevant (e.g. binary version,
-  configuration paths, web assets, data formats), but do not silently add
-  those checks to Dockerfiles.
-- Verification records must identify the actual command, outcome and
-  source of evidence. Planned checks and completed checks are distinct.
+- The official build entry point is the root `make <project>` target.
+- The three-stage image build does not compile or execute tests under the
+  existing `nell` policy.
+- Build acceptance requires a successful root target and identical SHA-256
+  sets from two successive builds. Runtime contents and relevant dynamic
+  dependencies must match the approved build profile.
+- Project-specific validation (binary version, configuration paths,
+  web assets, data format) is performed separately when agreed; those
+  checks are not implicitly part of a Dockerfile build.
+- Verification records identify commands, results and sources of evidence;
+  planned checks remain distinct from completed checks.
 
 ## Documentation maintenance
 
-- Keep project-specific decisions in their existing `ADR.md`. Use
-  shared [ADRs](../adr/) for decisions affecting multiple projects;
-  do not retroactively change old decisions without the ADR process.
-- Use [plans](../plans/) for agreed staged work, not as a source of new
-  autonomous tasks.
-- Keep README files as navigation and architecture guidance, not a
-  changelog or a duplicated backlog.
-- Use relative links, accurately reflect the source and avoid stating
-  unsupported behavior or successful verification.
-- Keep service units and deployment/configuration separate from the build
-  profile unless the user explicitly requests them; copying a service unit
-  into `/target` requires explicit agreement.
+- Existing project-level `ADR.md` files are the record for project
+  decisions. Cross-project decisions belong under [shared ADRs](../adr/).
+- [Plans](../plans/) record agreed staged work and its history; they do
+  not supersede architecture requirements or ADRs.
+- README files provide navigation and architecture guidance, not
+  development logs or duplicate task inventories.
+- Documentation uses relative links and describes actual behavior,
+  supported configuration and observed verification results.
+- Service units, deployment configuration, secrets and runtime state are
+  separate from build outputs unless explicitly included in the approved
+  profile.
 
 ## Branches and review
 
-Work on a separate branch, submit one PR/MR for manual review and wait for
-the user to authorize merging. Batch logically related changes in one
-commit where possible. Never rewrite the branch or modify unrelated
-projects merely for convenience.
+Development takes place in a dedicated branch and is submitted for manual
+PR/MR review. Merging requires explicit approval. Logically related
+changes are grouped in coherent commits, and unrelated changes stay outside
+the branch. History is not rewritten without approval.

@@ -1,7 +1,7 @@
 # Agent instructions
 
-Entry point for LLM agents working in `badsysadm/docker`. This file is
-an agent workflow guide, not a duplicate of the development rules.
+Entry point for LLM agents working in `badsysadm/docker`. Project rules
+and engineering requirements belong to the linked documentation, not here.
 
 ## Required reading
 
@@ -9,8 +9,8 @@ an agent workflow guide, not a duplicate of the development rules.
    the [nell build contract](nell/README.md).
 2. Read [plan rules](doc/internal/plans.md) and the project's active
    plan, if one exists.
-3. Read relevant project `ADR.md`, shared [ADR rules](doc/internal/adr.md),
-   and the affected source and build files.
+3. Read the relevant project `ADR.md`, shared [ADR rules](doc/internal/adr.md),
+   and affected source and build files.
 4. Use the [documentation index and templates](doc/README.md) when creating
    or updating development documentation.
 
@@ -18,15 +18,26 @@ an agent workflow guide, not a duplicate of the development rules.
 
 - Treat questions as requests for an answer, **not** authorization to
   change files. Make edits only when explicitly requested.
-- Before implementing, compare the requested change with the documented
-  contracts and approved decisions. **Report conflicts and request
-  agreement**, rather than inventing exceptions or silently bypassing
-  requirements. Follow the ADR process for approved architectural exceptions.
+- Before making changes, inspect the upstream source and official build
+  instructions **at the pinned release**, not just the default branch.
+  Compare a completed project with a similar toolchain, but do not copy
+  unrelated assumptions or dependencies.
+- Do not infer a project's section from whether it listens on a network
+  port. Check the component's purpose and existing section conventions;
+  ask for agreement when its classification is uncertain.
+- Before implementing, compare the request with the documented contracts,
+  established architecture, requirements, accepted decisions and the
+  component's purpose. **Report conflicts and obtain agreement before
+  implementing an exception.** Follow the [ADR process](doc/internal/adr.md)
+  for approved architectural exceptions; never silently work around one.
 - Keep within the requested scope. Do not infer authorization from an
-  unchecked plan item, a template or a proposed follow-up.
-- When using the GitHub connector, prefer one commit for each coherent
-  multi-file batch: prepare a tree from the current branch, commit on the
-  current HEAD, and update the ref with the expected HEAD. Never force-push
+  unchecked plan item, template or proposed follow-up. Do not add tests,
+  dependencies, service units, verification commands or other unrelated
+  changes on your own initiative, and never weaken checks to manufacture
+  apparent success.
+- When using the GitHub connector, prefer one commit per coherent
+  multi-file batch: prepare a tree from the current branch, commit on its
+  current HEAD and update the ref with the expected HEAD. Do not force-push
   without explicit approval.
 - Report what was actually verified separately from proposed commands,
   user-reported results and checks not performed. Never imply that a build
