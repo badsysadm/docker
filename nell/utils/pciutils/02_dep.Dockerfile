@@ -21,13 +21,12 @@ RUN PKG_CONFIG_PATH="/usr/local/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_
     -Dc_args="-I/usr/local/include" \
     -Dc_link_args="-static-libgcc -Wl,-Bstatic /usr/lib/x86_64-linux-gnu/libzstd.a /usr/lib/x86_64-linux-gnu/liblzma.a /usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib64/libcrypto.a -pthread -Wl,-Bdynamic"
 
-
 RUN ninja -C build
 
 RUN archive="$(find build -name libkmod-internal.a -print -quit)" && \
     shared="$(find build -name libshared.a -print -quit)" && \
     test -n "$archive" && test -n "$shared" && \
-    printf 'CREATE /src/libkmod.a\\nADDLIB %s\\nADDLIB %s\\nSAVE\\nEND\\n' "$archive" "$shared" | ar -M && \
+    printf 'CREATE /src/libkmod.a\nADDLIB %s\nADDLIB %s\nSAVE\nEND\n' "$archive" "$shared" | ar -M && \
     objcopy \
         --redefine-sym memdup=kmod_memdup \
         --redefine-sym path_make_absolute_cwd=kmod_path_make_absolute_cwd \
