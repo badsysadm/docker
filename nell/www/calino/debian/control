@@ -1,0 +1,15 @@
+Source: calino
+Section: www
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ libstdc++6
+
+Package: calino
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Static web client for CalDAV and CardDAV
