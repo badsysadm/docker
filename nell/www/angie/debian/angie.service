@@ -15,6 +15,7 @@ ExecStart=/usr/sbin/angie
 ExecStartPre=/usr/sbin/angie -t
 ExecReload=/usr/sbin/angie -s reload
 PrivateUsers=no
+PrivateTmp=yes
 Type=forking
 
 [Install]
