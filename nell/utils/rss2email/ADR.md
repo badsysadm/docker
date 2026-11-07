@@ -40,5 +40,5 @@ rss2email 3.14 — Python CLI для доставки RSS/Atom-публикац�
 ## Ссылки
 - https://github.com/rss2email/rss2email/tree/v3.14
 - https://github.com/rss2email/rss2email/blob/v3.14/setup.py
-- ../radicale/ADR.md
+- ../../www/radicale/ADR.md
 - ../../../README.md

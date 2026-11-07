@@ -1,7 +1,7 @@
 ARG VERSION=3.14
 ARG PYTHON_VERSION=3.14.7
 
-FROM oci.badsysadm.local:80/src/www/rss2email:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/utils/rss2email:${VERSION} AS src_image
 FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
