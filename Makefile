@@ -62,9 +62,10 @@ kbd: version ?= 2.10.0
 console-setup: version ?= 1.249
 nano: version ?= 9.2
 
-findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
+findutils diffutils grep iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
+grep: version ?= 3.12
 iputils: version ?= 20250605
 xzutils: version ?= 5.6.2
 util-linux: version ?= 2.42.2
