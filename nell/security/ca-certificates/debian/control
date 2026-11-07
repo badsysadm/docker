@@ -1,0 +1,9 @@
+Source: ca-certificates
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13)
+
+Package: ca-certificates
+Architecture: all
+Description: Mozilla CA root certificates in PEM format for OpenSSL
