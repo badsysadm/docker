@@ -24,7 +24,10 @@ RUN cmake -S . -B build -G Ninja \
     -DZLIB_LIBRARY=/usr/local/lib/libz.a \
     -DCURL_USE_LIBPSL=OFF \
     -DCURL_BROTLI=OFF \
-    -DCURL_ZSTD=OFF \
+    -DCURL_ZSTD=ON \
+    -DZSTD_USE_STATIC_LIBS=TRUE \
+    -DZSTD_INCLUDE_DIR=/usr/include \
+    -DZSTD_LIBRARY=/usr/lib/x86_64-linux-gnu/libzstd.a \
     -DBUILD_TESTING=OFF \
     -DENABLE_CURL_MANUAL=OFF \
     -DBUILD_LIBCURL_DOCS=OFF \
