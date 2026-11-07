@@ -1,12 +1,6 @@
 ARG VERSION=3.9.0
-ARG PYTHON_VERSION=3.14.7
-
-FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
 FROM oci.badsysadm.local:80/dep/www/radicale:${VERSION} AS build
 ARG VERSION
-
-COPY --from=python_image /usr/bin/python3.14 /src/target/usr/bin/python3.14
-COPY --from=python_image /usr/lib/python3.14 /src/target/usr/lib/python3.14
 
 RUN /usr/bin/python3.14 -m pip install --no-index \
     --find-links=/src/wheels --no-compile \
