@@ -1,0 +1,15 @@
+Source: git
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config
+
+Package: git
+Architecture: amd64
+Static-Built-Using: curl (= 8.23.0), openssl (= 3.6.5),
+ zlib (= 1.3.1), zstd (= 1.5.7), libssh2 (= 1.11.1),
+ nghttp2 (= 1.71.0)
+Depends: ${shlibs:Depends}
+Description: Git distributed version control system
