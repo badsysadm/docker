@@ -1,7 +1,7 @@
 ARG VERSION=2026-10-26T00-00-00Z
 ARG GO_VERSION=1.27.3
 
-FROM oci.badsysadm.local:80/src/utils/siloctl:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/utils/mcli:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG GO_VERSION
@@ -15,5 +15,5 @@ RUN update-alternatives --install /usr/bin/go go /usr/local/go/bin/go 100
 
 COPY --from=src_image /src/ /src/
 
-WORKDIR /src/siloctl
+WORKDIR /src/mcli
 RUN GOTOOLCHAIN=local go mod vendor
