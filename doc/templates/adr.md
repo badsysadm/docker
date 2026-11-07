@@ -5,13 +5,14 @@
 
 ## Context
 
-<Problem, current contract, constraints, evidence and the reason a decision
-is needed. Describe what exists without guessing history.>
+<Problem, project-specific constraints, evidence and the reason a decision
+is needed. Do not pin versions or repeat common project rules.>
 
 ## Decision
 
-<Chosen design, project boundaries and any explicit exception to
-nell/README.md or an existing accepted decision.>
+<Project-specific architectural choice and its rationale. Mention an
+exception to nell/README.md only if explicitly approved. Do not repeat
+universal requirements, release tags, commit hashes or toolchain versions.>
 
 ## Consequences
 
