@@ -30,8 +30,9 @@ ncurses: version ?= 6.6
 glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
+zstd: version ?= 1.5.7
 
-nftables iproute2 chrony: section = net
+nftables iproute2 chrony curl: section = net
 zot lldap buildbot: section = infra
 silo: section = storage
 angie radicale calino synapse: section = www
@@ -39,6 +40,7 @@ etcd: section = db
 skopeo umoci: section = virt
 nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
+curl: version ?= 8.23.0
 zot: version ?= 2.1.23
 silo: version ?= 2026-10-26T00-00-00Z
 angie: version ?= 1.12.4
@@ -62,7 +64,7 @@ kbd: version ?= 2.10.0
 console-setup: version ?= 1.249
 nano: version ?= 9.2
 
-findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
+zstd findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 grep: version ?= 3.12
