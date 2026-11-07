@@ -1,0 +1,15 @@
+Source: cosign
+Section: admin
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ tar
+
+Package: cosign
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Sigstore Cosign artifact signing and verification

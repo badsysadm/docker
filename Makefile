@@ -84,12 +84,13 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy: section = security
+gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy cosign: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
 trivy: version ?= 0.76.2
+cosign: version ?= 3.1.4
 polkit: version ?= 127
 apparmor: version ?= 4.1.8
 cracklib: version ?= 2.10.3
