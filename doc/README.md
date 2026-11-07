@@ -16,7 +16,6 @@ Development workflow and document templates for `badsysadm/docker`.
 
 | Template | Purpose |
 | --- | --- |
-| [Project](templates/project.md) | Project-specific preparation and evidence |
 | [Plan](templates/plan.md) | Staged development record |
 | [ADR](templates/adr.md) | Architectural decision record |
 

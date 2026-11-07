@@ -6,9 +6,7 @@ project layout, dependency rules and build acceptance criteria are defined
 in [nell/README.md](../../nell/README.md); they are not repeated here.
 
 For staged work use [plan rules](plans.md), and for architectural decisions
-use [ADR rules](adr.md). Use the
-[project preparation template](../templates/project.md) to record the
-details of a new project, not to redefine the build contract.
+use [ADR rules](adr.md).
 
 ## Preparing a change
 
