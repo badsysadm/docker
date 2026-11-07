@@ -2,7 +2,7 @@
 
 This is a checklist for a new project, **not** a replacement for
 [nell/README.md](../../nell/README.md). Complete with actual upstream
-data; omit unsupported components. No item authorizes unrequested work.
+data; omit unsupported components.
 
 ## Identity and upstream
 
@@ -44,8 +44,8 @@ Add the target's `section` and pinned default `version` to the root
 - [ ] Final stage is `FROM scratch`, copying only `/src/target/` to `/target/`.
 - [ ] Documentation, tests and development artifacts are excluded from
       the output; no tests are compiled or run by image stages.
-- [ ] Service units, configuration, secrets and runtime storage are not
-      invented or copied into the artifact without an explicit requirement.
+- [ ] Service units, configuration, secrets and runtime storage match the
+      approved deliverables, without unrelated files in the artifact.
 - [ ] Project `ADR.md` records nonstandard decisions and consequences.
 
 ## Runtime contents
@@ -67,8 +67,8 @@ do not embed secrets or choose deployment paths without agreement.
 | Runtime files and dynamic dependencies | Not inspected / actual result |
 | Upstream behavior relevant to project | Not checked / actual result |
 
-Verification is performed via the root Makefile. Never mark a check
-successful solely because the Dockerfile was written.
+Verification is performed via the root Makefile. Record successful checks
+only when supported by actual results.
 
 ## Review
 

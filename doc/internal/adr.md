@@ -32,4 +32,4 @@ silently bypassing existing rules. Do not present a proposal as accepted.
 Keep accepted reasoning historically accurate; for a substantial change
 of direction, create a successor ADR and mark the former superseded,
 linking both. A factual correction may be made without rewriting the
-original decision. Never claim an unexecuted build/test was verified.
+original decision.

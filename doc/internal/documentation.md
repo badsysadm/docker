@@ -17,9 +17,9 @@ These rules apply to build profiles in `badsysadm/docker`. Read the
   build layout without approval.
 - Agree on the project's section based on its role; a listening network
   port does not by itself determine the section.
-- Change only what was requested. A question alone does not authorize code
-  changes. Do not add tests, dependencies, service units, scripts or other
-  architectural changes without approval. Distinguish unknowns from facts.
+- Changes must remain within the approved project scope. New tests,
+  dependencies, service units, scripts and architectural changes require
+  explicit agreement when they extend that scope.
 - If an instruction conflicts with established architecture, requirements,
   accepted decisions or the purpose of a component, identify the conflict
   and obtain agreement **before** implementing an exception, using
@@ -62,8 +62,8 @@ whether browser assets require CDNs at runtime.
 - Check tool-specific behavior when relevant (e.g. binary version,
   configuration paths, web assets, data formats), but do not silently add
   those checks to Dockerfiles.
-- Report verification precisely: a proposed command is not an executed
-  test; user-confirmed logs must not be represented as agent-run tests.
+- Verification records must identify the actual command, outcome and
+  source of evidence. Planned checks and completed checks are distinct.
 
 ## Documentation maintenance
 

@@ -45,9 +45,9 @@ agreed decisions from unresolved questions.>
 
 ## Deferred work
 
-<Explicitly excluded items, not authorization to implement them.>
+<Items excluded from the approved scope.>
 
 ## Completion record
 
-<Fill only after approval, implementation and actual verification.
-Never rewrite a completed plan retroactively.>
+<Record approved completion and actual verification. Completed plans
+remain immutable historical records.>

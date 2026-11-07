@@ -1,7 +1,6 @@
 # Development documentation
 
-The root [AGENTS.md](../AGENTS.md) is the entry point for development
-agents. This directory defines a repeatable workflow and document templates,
+This directory defines the development workflow and document templates,
 adapted from the `badsysadm/self` documentation conventions to the
 `badsysadm/docker` build repository.
 
@@ -28,5 +27,6 @@ Shared architecture decisions belong under [adr/](adr/). Existing project
 `nell/<section>/<project>/ADR.md` files remain valid and must not be
 moved merely because this documentation directory was introduced.
 
-Documentation describes verified behavior, not presumed test results.
-Do not treat a template as permission to implement additional features.
+Documentation describes verified behavior and records actual verification
+results. Instructions specific to LLM agents are maintained separately in
+[AGENTS.md](../AGENTS.md).

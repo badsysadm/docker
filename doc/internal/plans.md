@@ -24,8 +24,7 @@ same approved scope. Store it as `doc/plans/<project>.md`, following the
 A plan must identify purpose, scope, exclusions, references, agreed choices,
 dependencies, ordered stages, acceptance criteria, verification and deferred
 work. Stages use checkboxes; each item must have a tangible result.
-Plans are **not** permission to begin unapproved tasks or override build
-rules.
+The plan scope and build rules remain authoritative throughout execution.
 
 ## Approval and execution
 
