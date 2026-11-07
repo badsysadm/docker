@@ -6,8 +6,11 @@ ARG VERSION
 WORKDIR /src/pciutils
 RUN make -j$(nproc) \
     PREFIX=/usr \
-    SHARED=no ZLIB=no DNS=yes LIBKMOD=no HWDB=no \
-    LDFLAGS="-static-libgcc" \
+    SHARED=no ZLIB=no DNS=yes LIBKMOD=yes HWDB=yes \
+    PKG_CONFIG="pkg-config --static" \
+    LDFLAGS="-static-libgcc -L/usr/lib/x86_64-linux-gnu" \
+    LIBUDEV="-Wl,-Bstatic -ludev -lcap -lblkid -lmount -llz4 -lzstd -llzma -lz -lcrypto -Wl,-Bdynamic -ldl -lpthread" \
+    LIBKMOD_LIBS="-Wl,-Bstatic -lkmod -lzstd -llzma -lz -lcrypto -Wl,-Bdynamic -ldl -lpthread" \
     lspci setpci pcilmr update-pciids
 
 RUN install -D -m 0755 lspci /src/target/usr/bin/lspci

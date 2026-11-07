@@ -90,6 +90,7 @@ RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/l
     -Dsmack=true \
     -Dstandalone-binaries=true \
     -Dstatic-libsystemd=pic \
+    -Dstatic-libudev=pic \
     -Dstoragetm=true \
     -Dsysext=true \
     -Dsysupdate=enabled \

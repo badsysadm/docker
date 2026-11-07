@@ -4,7 +4,17 @@ Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
- pkg-config
+ pkg-config,
+ libkmod-dev,
+ libudev-dev,
+ libcap-dev,
+ libmount-dev,
+ libblkid-dev,
+ liblz4-dev,
+ libzstd-dev,
+ liblzma-dev,
+ zlib1g-dev,
+ libssl-dev
 
 Package: pciutils
 Architecture: amd64
