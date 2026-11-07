@@ -27,8 +27,11 @@ RUN PKG_CONFIG_PATH="/usr/local/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_
 RUN ninja -C build
 RUN DESTDIR=/src/target ninja -C build install
 
-RUN install -D -m 0644 "$(find build -name libkmod-internal.a -print -quit)" \
-    /src/target/lib/x86_64-linux-gnu/libkmod.a
+RUN archive="$(find build -name libkmod-internal.a -print -quit)" && \
+    test -n "$archive" && \
+    mkdir -p /src/target/lib/x86_64-linux-gnu && \
+    printf 'CREATE /src/target/lib/x86_64-linux-gnu/libkmod.a\\nADDLIB %s\\nSAVE\\nEND\\n' "$archive" | ar -M && \
+    ranlib /src/target/lib/x86_64-linux-gnu/libkmod.a
 
 RUN cd /src/target/bin && \
     ln -sf kmod lsmod && \
