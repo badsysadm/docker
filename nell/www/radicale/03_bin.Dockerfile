@@ -20,10 +20,7 @@ RUN printf '%s\n' \
     'from radicale.__main__ import run' \
     'run()' \
     > /src/target/usr/bin/radicale \
-    && chmod 0755 /src/target/usr/bin/radicale \
-    && find /src/target/usr/lib/python3.14 \
-        -type d -name __pycache__ -prune -exec rm -rf {} + \
-    && find /src/target/usr/lib/python3.14 -type f -name '*.pyc' -delete
+    && chmod 0755 /src/target/usr/bin/radicale
 
 FROM scratch AS bundle
 ARG VERSION
