@@ -1,0 +1,15 @@
+Source: umoci
+Section: virt
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ tar
+
+Package: umoci
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: OCI image unpacking and repacking
