@@ -49,8 +49,9 @@ etcd: version ?= 3.7.3
 skopeo: version ?= 1.24.1
 umoci: version ?= 0.6.0
 
-mailutils: section = utils
+mailutils rss2email: section = utils
 mailutils: version ?= 3.21
+rss2email: version ?= 3.14
 
 bash dialog kbd console-setup: section = usr
 bash: version ?= 5.3
