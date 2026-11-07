@@ -19,8 +19,14 @@ RUN printf '%s\n' \
     'sys.path.insert(0, "/usr/lib/python3.14/site-packages")' \
     'from radicale.__main__ import run' \
     'run()' \
-    > /src/target/usr/bin/radicale \
-    && chmod 0755 /src/target/usr/bin/radicale
+    > /src/target/usr/bin/radicale
+
+RUN chmod 0755 /src/target/usr/bin/radicale
+
+RUN find /src/target/usr/lib/python3.14 \
+    -type d -name __pycache__ -prune -exec rm -rf {} +
+
+RUN find /src/target/usr/lib/python3.14 -type f -name '*.pyc' -delete
 
 FROM scratch AS bundle
 ARG VERSION
