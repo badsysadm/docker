@@ -8,6 +8,9 @@ ARG CALINO_GITHUB_REPO=ivan-malinovski/Calino
 ARG CALINO_CONTACT_EMAIL=calendar@malinov.ski
 ARG CALINO_SELF_HOSTED=true
 
+COPY debian/patches /src/patches/
+RUN git -C /src/calino apply /src/patches/_remove-product-metadata.patch
+
 WORKDIR /src/calino
 RUN pnpm exec vite build
 
