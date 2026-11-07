@@ -20,6 +20,8 @@ COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.so* /src/target/usr
 COPY --from=openssl_image /target/usr/lib64/libssl.so* /src/target/usr/lib64/
 COPY --from=openssl_image /target/usr/lib64/libcrypto.so* /src/target/usr/lib64/
 
+RUN cp -a /usr/lib/x86_64-linux-gnu/libffi.so.8* /src/target/usr/lib64/
+
 RUN /usr/bin/python3.14 -m pip install --no-index \
     --find-links=/src/wheels --no-compile \
     --target=/src/target/usr/lib/python3.14/site-packages \
