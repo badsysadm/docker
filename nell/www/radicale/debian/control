@@ -1,0 +1,17 @@
+Source: radicale
+Section: www
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ python3-pip,
+ python3-setuptools,
+ python3-wheel
+
+Package: radicale
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: CalDAV and CardDAV server with web administration UI
