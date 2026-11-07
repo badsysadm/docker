@@ -1,0 +1,24 @@
+Source: pciutils
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libkmod-dev,
+ libudev-dev,
+ libcap-dev,
+ libmount-dev,
+ libblkid-dev,
+ liblz4-dev,
+ libzstd-dev,
+ liblzma-dev,
+ zlib1g-dev,
+ libssl-dev
+
+Package: pciutils
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Static-Built-Using: kmod (= 34.2), systemd (= 261), zlib (= 1.3.1),
+ openssl (= 3.6.5)
+Description: PCI bus inspection and configuration utilities
