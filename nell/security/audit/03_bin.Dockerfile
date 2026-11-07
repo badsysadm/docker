@@ -8,7 +8,7 @@ WORKDIR /src/audit
 # Pass libcap-ng as a static linker dependency so it is not stored
 # as a nested archive member inside libaudit.a.
 RUN sed -i \
-    's|CAPNG_LDADD=-lcap-ng|CAPNG_LDADD="-Wl,-Bstatic -lcap-ng -Wl,-Bdynamic"|' \
+    's|CAPNG_LDADD=-lcap-ng|CAPNG_LDADD="-Xlinker -Bstatic -lcap-ng -Xlinker -Bdynamic"|' \
     m4/cap-ng.m4
 RUN autoreconf -f -i
 
