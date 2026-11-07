@@ -1,0 +1,16 @@
+Source: ots
+Section: security
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ tar,
+ xz-utils
+
+Package: ots
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: One-time secret sharing server with embedded Web UI
