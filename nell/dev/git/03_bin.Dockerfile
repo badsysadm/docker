@@ -14,7 +14,6 @@ RUN make -j$(nproc) \
     NO_PYTHON=YesPlease \
     NO_EXPAT=YesPlease \
     NO_GITWEB=YesPlease \
-    NO_OPENSSL=YesPlease \
     SKIP_DASHED_BUILT_INS=YesPlease \
     INSTALL_SYMLINKS=YesPlease \
     NO_INSTALL_HARDLINKS=YesPlease \
@@ -29,6 +28,7 @@ RUN make -j$(nproc) \
         /usr/local/lib/libzstd.a \
         /usr/local/lib/libz.a \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
+    OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
     CFLAGS="-O2 -I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
@@ -44,7 +44,6 @@ RUN make install \
     NO_PYTHON=YesPlease \
     NO_EXPAT=YesPlease \
     NO_GITWEB=YesPlease \
-    NO_OPENSSL=YesPlease \
     SKIP_DASHED_BUILT_INS=YesPlease \
     INSTALL_SYMLINKS=YesPlease \
     NO_INSTALL_HARDLINKS=YesPlease \
@@ -59,6 +58,7 @@ RUN make install \
         /usr/local/lib/libzstd.a \
         /usr/local/lib/libz.a \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
+    OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
     CFLAGS="-O2 -I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
