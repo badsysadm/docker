@@ -4,15 +4,7 @@ Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
- pkg-config,
- perl,
- python3,
- tcl,
- tk,
- gettext,
- cargo,
- rustc,
- libexpat1-dev
+ pkg-config
 
 Package: git
 Architecture: amd64

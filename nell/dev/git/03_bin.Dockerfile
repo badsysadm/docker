@@ -7,6 +7,15 @@ WORKDIR /src/git
 
 RUN make -j$(nproc) \
     prefix=/usr \
+    NO_RUST=YesPlease \
+    NO_GETTEXT=YesPlease \
+    NO_TCLTK=YesPlease \
+    NO_PERL=YesPlease \
+    NO_PYTHON=YesPlease \
+    NO_EXPAT=YesPlease \
+    NO_GITWEB=YesPlease \
+    NO_OPENSSL=YesPlease \
+    SKIP_DASHED_BUILT_INS=YesPlease \
     INSTALL_SYMLINKS=YesPlease \
     NO_INSTALL_HARDLINKS=YesPlease \
     CURL_CONFIG=/usr/local/bin/curl-config \
@@ -20,7 +29,6 @@ RUN make -j$(nproc) \
         /usr/local/lib/libzstd.a \
         /usr/local/lib/libz.a \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
-    OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
     CFLAGS="-O2 -I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
@@ -29,6 +37,15 @@ RUN make -j$(nproc) \
 RUN make install \
     prefix=/usr \
     DESTDIR=/src/target \
+    NO_RUST=YesPlease \
+    NO_GETTEXT=YesPlease \
+    NO_TCLTK=YesPlease \
+    NO_PERL=YesPlease \
+    NO_PYTHON=YesPlease \
+    NO_EXPAT=YesPlease \
+    NO_GITWEB=YesPlease \
+    NO_OPENSSL=YesPlease \
+    SKIP_DASHED_BUILT_INS=YesPlease \
     INSTALL_SYMLINKS=YesPlease \
     NO_INSTALL_HARDLINKS=YesPlease \
     CURL_CONFIG=/usr/local/bin/curl-config \
@@ -42,7 +59,6 @@ RUN make install \
         /usr/local/lib/libzstd.a \
         /usr/local/lib/libz.a \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
-    OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
     CFLAGS="-O2 -I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
