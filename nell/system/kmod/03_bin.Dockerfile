@@ -30,7 +30,7 @@ RUN DESTDIR=/src/target ninja -C build install
 RUN archive="$(find build -name libkmod-internal.a -print -quit)" && \
     test -n "$archive" && \
     mkdir -p /src/target/lib/x86_64-linux-gnu && \
-    printf 'CREATE /src/target/lib/x86_64-linux-gnu/libkmod.a\\nADDLIB %s\\nSAVE\\nEND\\n' "$archive" | ar -M && \
+    printf 'CREATE /src/target/lib/x86_64-linux-gnu/libkmod.a\nADDLIB %s\nSAVE\nEND\n' "$archive" | ar -M && \
     ranlib /src/target/lib/x86_64-linux-gnu/libkmod.a
 
 RUN cd /src/target/bin && \
