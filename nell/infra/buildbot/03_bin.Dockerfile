@@ -3,14 +3,12 @@ ARG PYTHON_VERSION=3.14.7
 ARG GLIBC_VERSION=2.44
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
-ARG COREUTILS_VERSION=9.5
 ARG GIT_VERSION=2.56.0
 
 FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
 FROM oci.badsysadm.local:80/bin/system/glibc:${GLIBC_VERSION} AS glibc_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
-FROM oci.badsysadm.local:80/bin/utils/coreutils:${COREUTILS_VERSION} AS coreutils_image
 FROM 127.0.0.1:12670/pkg/utils/git:${GIT_VERSION} AS git_image
 FROM oci.badsysadm.local:80/dep/infra/buildbot:${VERSION} AS build
 ARG VERSION
@@ -24,7 +22,6 @@ COPY --from=openssl_image /target/usr/lib64/libssl.so* /src/target/usr/lib64/
 COPY --from=openssl_image /target/usr/lib64/libcrypto.so* /src/target/usr/lib64/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.so* /src/target/usr/lib64/
 
-COPY --from=coreutils_image /target/usr/bin/coreutils /src/target/usr/bin/coreutils
 COPY --from=git_image /usr/bin/git /src/target/usr/bin/git
 COPY debian/buildbot.service /src/target/usr/lib/systemd/system/buildbot.service
 
@@ -44,12 +41,10 @@ RUN printf '%s\n' \
     'sys.path.insert(0, "/usr/lib/python3.14/site-packages")' \
     'from buildbot.scripts import runner' \
     'runner.run()' \
-    > /src/target/usr/bin/buildbot \
-    && chmod 0755 /src/target/usr/bin/buildbot \
-    && ln -s coreutils /src/target/usr/bin/tail \
-    && printf 'ID=_any\n' > /src/target/usr/lib/os-release
+    > /src/target/usr/bin/buildbot
 
-RUN rm -rf /src/target/usr/lib/python3.14/site-packages/bin
+RUN chmod 0755 /src/target/usr/bin/buildbot
+
 RUN find /src/target/usr/lib/python3.14 \
     -type d -name __pycache__ -prune -exec rm -rf {} +
 RUN find /src/target/usr/lib/python3.14 -type f -name '*.pyc' -delete
