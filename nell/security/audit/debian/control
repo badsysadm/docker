@@ -13,6 +13,6 @@ Build-Depends:
 
 Package: audit
 Architecture: amd64
-Static-Built-Using: libcap-ng (= ${binary:Version})
+Static-Built-Using: libcap-ng (= 0.8.5-4)
 Depends: ${shlibs:Depends}
 Description: Linux Audit daemon, administrative utilities and libraries
