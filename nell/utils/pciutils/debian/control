@@ -19,4 +19,5 @@ Build-Depends:
 Package: pciutils
 Architecture: amd64
 Depends: ${shlibs:Depends}
+Static-Built-Using: ${static:Built-Using}
 Description: PCI bus inspection and configuration utilities
