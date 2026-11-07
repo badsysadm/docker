@@ -11,7 +11,7 @@ RUN make -j$(nproc) \
     LIBZ="-Xlinker -Bstatic -lz -Xlinker -Bdynamic" \
     LDFLAGS="-static-libgcc -L/usr/lib/x86_64-linux-gnu" \
     LIBUDEV="-Xlinker -Bstatic -ludev -lcap -lblkid -llz4 -lzstd -llzma -lz -lcrypto -Xlinker -Bdynamic -ldl -lpthread" \
-    LIBKMOD_LIBS="-Xlinker -Bstatic -lkmod -lzstd -llzma -lz -lcrypto -Xlinker -Bdynamic -ldl -lpthread" \
+    LIBKMOD_LIBS="-Xlinker -Bstatic -lkmod -llzma -lcrypto -lzstd -lz -Xlinker -Bdynamic -ldl -lpthread" \
     lspci setpci pcilmr update-pciids pci.ids.gz
 
 RUN install -D -m 0755 lspci /src/target/usr/bin/lspci
