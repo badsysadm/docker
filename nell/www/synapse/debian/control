@@ -1,0 +1,26 @@
+Source: matrix-synapse
+Section: www
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ cargo (>= 1.85),
+ rustc (>= 1.85),
+ pkg-config,
+ libsystemd-dev,
+ libpq-dev,
+ libicu-dev,
+ libffi-dev,
+ libssl-dev,
+ python3-dev,
+ python3-pip,
+ python3-setuptools,
+ python3-wheel
+
+Package: matrix-synapse
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Matrix federated messaging homeserver
