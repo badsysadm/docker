@@ -54,12 +54,13 @@ mailutils: version ?= 3.21
 rss2email: version ?= 3.14
 mcli: version ?= 2026-10-26T00-00-00Z
 
-bash dialog kbd console-setup: section = usr
+bash dialog kbd console-setup nano: section = usr
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
 kbd: version ?= 2.10.0
 console-setup: version ?= 1.249
+nano: version ?= 9.2
 
 findutils diffutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
 findutils: version ?= 4.11.0
