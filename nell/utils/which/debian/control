@@ -1,0 +1,12 @@
+Source: gnu-which
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ texinfo
+
+Package: gnu-which
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: GNU which command lookup utility
