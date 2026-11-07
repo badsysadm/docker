@@ -30,8 +30,9 @@ RUN cmake -S . -B build -G Ninja \
     -DBUILD_LIBCURL_DOCS=OFF \
     -DBUILD_MISC_DOCS=OFF \
     -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" && \
-    cmake --build build -j$(nproc) && \
-    DESTDIR=/src/target cmake --install build
+    cmake --build build -j$(nproc)
+
+RUN DESTDIR=/src/target cmake --install build
 
 RUN install -D -m 0755 scripts/wcurl /src/target/usr/bin/wcurl
 RUN rm -rf /src/target/usr/share/doc
