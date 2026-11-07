@@ -32,7 +32,7 @@ gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
 nftables iproute2 chrony: section = net
-zot: section = infra
+zot lldap: section = infra
 silo: section = storage
 angie: section = www
 etcd: section = db
@@ -75,7 +75,7 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots lldap: section = security
+gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 krb5: version ?= 1.22.2

@@ -1,5 +1,5 @@
 Source: lldap
-Section: security
+Section: infra
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),

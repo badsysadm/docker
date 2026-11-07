@@ -2,7 +2,7 @@ ARG VERSION=0.6.3
 ARG RUST_VERSION=1.89.0
 ARG WASM_PACK_VERSION=0.13.1
 
-FROM oci.badsysadm.local:80/src/security/lldap:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/infra/lldap:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG RUST_VERSION

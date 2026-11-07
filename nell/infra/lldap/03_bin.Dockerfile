@@ -1,6 +1,6 @@
 ARG VERSION=0.6.3
 
-FROM oci.badsysadm.local:80/dep/security/lldap:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/infra/lldap:${VERSION} AS build
 ARG VERSION
 
 ENV CARGO_HOME=/opt/cargo RUSTUP_HOME=/opt/rustup
