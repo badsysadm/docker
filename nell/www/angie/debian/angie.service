@@ -17,6 +17,7 @@ ExecReload=/usr/sbin/angie -s reload
 PrivateUsers=no
 PrivateTmp=yes
 Type=forking
+PIDFile=/var/run/angie/angie.pid
 
 [Install]
 WantedBy=multi-user.target
