@@ -1,0 +1,21 @@
+[Unit]
+Description=The NGINX HTTP and reverse proxy server
+Documentation=https://angie.software/
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/lib/angie
+RuntimeDirectory=angie
+StateDirectory=angie
+ConfigurationDirectory=angie
+LogsDirectory=angie
+ExecStart=/usr/sbin/angie
+ExecStartPre=/usr/sbin/angie -t
+ExecReload=/usr/sbin/angie -s reload
+PrivateUsers=no
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
