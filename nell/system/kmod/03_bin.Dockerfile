@@ -27,18 +27,6 @@ RUN PKG_CONFIG_PATH="/usr/local/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_
 RUN ninja -C build
 RUN DESTDIR=/src/target ninja -C build install
 
-RUN archive="$(find build -name libkmod-internal.a -print -quit)" && \
-    shared="$(find build -name libshared.a -print -quit)" && \
-    test -n "$archive" && test -n "$shared" && \
-    mkdir -p /src/target/lib/x86_64-linux-gnu && \
-    printf 'CREATE /src/target/lib/x86_64-linux-gnu/libkmod.a\nADDLIB %s\nADDLIB %s\nSAVE\nEND\n' "$archive" "$shared" | ar -M && \
-    objcopy \
-        --redefine-sym memdup=kmod_memdup \
-        --redefine-sym path_make_absolute_cwd=kmod_path_make_absolute_cwd \
-        --redefine-sym mkdir_p=kmod_mkdir_p \
-        /src/target/lib/x86_64-linux-gnu/libkmod.a && \
-    ranlib /src/target/lib/x86_64-linux-gnu/libkmod.a
-
 RUN cd /src/target/bin && \
     ln -sf kmod lsmod && \
     ln -sf kmod modprobe && \
