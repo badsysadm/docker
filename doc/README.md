@@ -11,6 +11,7 @@ Development workflow and document templates for `badsysadm/docker`.
 | [Development conventions](internal/documentation.md) | Development process and review |
 | [Plan workflow](internal/plans.md) | Planning and progress records |
 | [ADR workflow](internal/adr.md) | Architectural decision lifecycle |
+| [Common build problems](internal/build-troubleshooting.md) | Recurring Autotools/M4 failures |
 
 ## Templates
 
