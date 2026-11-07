@@ -20,7 +20,7 @@ RUN cmake -S . -B build -G Ninja \
     -DWITH_SMI=OFF \
     -DENABLE_SMB=OFF \
     -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" \
-    -DCMAKE_C_STANDARD_LIBRARIES="-Wl,-Bstatic -lcap-ng -Wl,-Bdynamic"
+    -DCMAKE_C_STANDARD_LIBRARIES="-Wl,-Bstatic -lcap-ng -lzstd -lz -Wl,-Bdynamic"
 
 RUN cmake --build build -j$(nproc)
 RUN DESTDIR=/src/target cmake --install build
