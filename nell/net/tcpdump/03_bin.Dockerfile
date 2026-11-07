@@ -5,6 +5,12 @@ ARG VERSION
 
 WORKDIR /src/tcpdump
 
+# Upstream discovers both libpcap variants but links executables against
+# PCAP_LIBRARIES by default. Select the existing static discovery result.
+RUN sed -i \
+    's|set(TCPDUMP_LINK_LIBRARIES ${PCAP_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})|set(TCPDUMP_LINK_LIBRARIES ${PCAP_STATIC_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})|' \
+    CMakeLists.txt
+
 RUN cmake -S . -B build -G Ninja \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
