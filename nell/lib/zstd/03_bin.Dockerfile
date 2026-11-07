@@ -5,11 +5,17 @@ ARG VERSION
 
 WORKDIR /src/zstd
 
-RUN make -j$(nproc) CFLAGS="-O2 -fPIC"
+RUN make -j$(nproc) \
+    CFLAGS="-O2 -fPIC -I/usr/local/include" \
+    HAVE_ZLIB=1 \
+    HAVE_LZMA=1 \
+    HAVE_LZ4=0 \
+    ZLIBLD=/usr/local/lib/libz.a \
+    LZMALD=/usr/local/lib/liblzma.a
 
 RUN make install \
     PREFIX=/usr \
-    LIBDIR=/usr/lib/x86_64-linux-gnu \
+    LIBDIR=/usr/lib \
     DESTDIR=/src/target
 
 RUN rm -rf /src/target/usr/share/doc \

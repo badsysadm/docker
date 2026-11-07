@@ -23,7 +23,7 @@ COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/li
 COPY --from=zstd_image /target/usr/include/zstd.h /usr/local/include/zstd.h
 COPY --from=zstd_image /target/usr/include/zstd_errors.h /usr/local/include/zstd_errors.h
 COPY --from=zstd_image /target/usr/include/zdict.h /usr/local/include/zdict.h
-COPY --from=zstd_image /target/usr/lib/x86_64-linux-gnu/libzstd.a /usr/local/lib/libzstd.a
+COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 
 COPY --from=src_image /src/ /src/
 
