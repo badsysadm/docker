@@ -45,6 +45,16 @@ RUN printf '%s\n' \
 
 RUN chmod 0755 /src/target/usr/bin/buildbot
 
+RUN printf '%s\n' \
+    '#!/usr/bin/python3.14' \
+    'import sys' \
+    'sys.path.insert(0, "/usr/lib/python3.14/site-packages")' \
+    'from buildbot_worker.scripts.runner import run' \
+    'run()' \
+    > /src/target/usr/bin/buildbot-worker
+
+RUN chmod 0755 /src/target/usr/bin/buildbot-worker
+
 RUN find /src/target/usr/lib/python3.14 \
     -type d -name __pycache__ -prune -exec rm -rf {} +
 RUN find /src/target/usr/lib/python3.14 -type f -name '*.pyc' -delete
