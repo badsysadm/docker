@@ -32,7 +32,7 @@ gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 
 nftables iproute2 chrony: section = net
-zot: section = infra
+zot lldap: section = infra
 silo: section = storage
 angie: section = www
 etcd: section = db
@@ -85,6 +85,7 @@ apparmor: version ?= 4.1.8
 cracklib: version ?= 2.10.3
 vault: version ?= 2.2.1
 ots: version ?= 1.23.1
+lldap: version ?= 0.6.3
 
 include mk/core.mk
 include mk/bs.mk

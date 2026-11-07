@@ -1,0 +1,20 @@
+Source: lldap
+Section: infra
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ pkg-config,
+ libssl-dev,
+ libsqlite3-dev,
+ binaryen,
+ gzip,
+ tar
+
+Package: lldap
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Lightweight LDAP directory server with web administration UI
