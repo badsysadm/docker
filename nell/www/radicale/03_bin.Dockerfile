@@ -1,6 +1,17 @@
 ARG VERSION=3.9.0
+ARG PYTHON_VERSION=3.14.7
+ARG GLIBC_VERSION=2.44
+
+FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
+FROM 127.0.0.1:12670/pkg/libs/glibc:${GLIBC_VERSION} AS glibc_image
 FROM oci.badsysadm.local:80/dep/www/radicale:${VERSION} AS build
 ARG VERSION
+
+COPY --from=python_image /usr/bin/python3.14 /src/target/usr/bin/python3.14
+COPY --from=python_image /usr/lib/python3.14 /src/target/usr/lib/python3.14
+
+COPY --from=glibc_image /lib64/ld-linux-x86-64.so.2 /src/target/lib64/ld-linux-x86-64.so.2
+COPY --from=glibc_image /lib64/libc.so.6 /lib64/libm.so.6 /src/target/lib64/
 
 RUN /usr/bin/python3.14 -m pip install --no-index \
     --find-links=/src/wheels --no-compile \
