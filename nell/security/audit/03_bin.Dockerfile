@@ -5,10 +5,10 @@ ARG VERSION
 
 WORKDIR /src/audit
 
-# Use the archive from the Debian development package rather than
-# the shared libcap-ng object when libtool links libaudit.
+# Pass libcap-ng as a static linker dependency so it is not stored
+# as a nested archive member inside libaudit.a.
 RUN sed -i \
-    's|CAPNG_LDADD=-lcap-ng|CAPNG_LDADD=/usr/lib/x86_64-linux-gnu/libcap-ng.a|' \
+    's|CAPNG_LDADD=-lcap-ng|CAPNG_LDADD="-Wl,-Bstatic -lcap-ng -Wl,-Bdynamic"|' \
     m4/cap-ng.m4
 RUN autoreconf -f -i
 
