@@ -32,7 +32,8 @@ RUN cmake -S . -B build -G Ninja \
     -DENABLE_CURL_MANUAL=OFF \
     -DBUILD_LIBCURL_DOCS=OFF \
     -DBUILD_MISC_DOCS=OFF \
-    -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc"
+    -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" \
+    -DCMAKE_C_STANDARD_LIBRARIES=/usr/lib/x86_64-linux-gnu/libzstd.a
 
 RUN cmake --build build -j$(nproc)
 
