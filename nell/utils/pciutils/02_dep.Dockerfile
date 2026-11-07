@@ -14,4 +14,8 @@ COPY --from=oci.badsysadm.local:80/bin/system/systemd:261 \
     /target/usr/lib/x86_64-linux-gnu/libudev.a \
     /usr/lib/x86_64-linux-gnu/libudev.a
 
+COPY --from=oci.badsysadm.local:80/bin/lib/zlib:1.3.1 \
+    /target/usr/lib/x86_64-linux-gnu/libz.a \
+    /usr/lib/x86_64-linux-gnu/libz.a
+
 COPY --from=src_image /src/ /src/

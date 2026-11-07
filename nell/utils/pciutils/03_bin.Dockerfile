@@ -6,18 +6,19 @@ ARG VERSION
 WORKDIR /src/pciutils
 RUN make -j$(nproc) \
     PREFIX=/usr \
-    SHARED=no ZLIB=no DNS=yes LIBKMOD=yes HWDB=yes \
+    SHARED=no ZLIB=yes DNS=yes LIBKMOD=yes HWDB=yes \
     PKG_CONFIG=pkg-config \
+    LIBZ="-Wl,-Bstatic -lz -Wl,-Bdynamic" \
     LDFLAGS="-static-libgcc -L/usr/lib/x86_64-linux-gnu" \
     LIBUDEV="-Wl,-Bstatic -ludev -lcap -lblkid -lmount -llz4 -lzstd -llzma -lz -lcrypto -Wl,-Bdynamic -ldl -lpthread" \
     LIBKMOD_LIBS="-Wl,-Bstatic -lkmod -lzstd -llzma -lz -lcrypto -Wl,-Bdynamic -ldl -lpthread" \
-    lspci setpci pcilmr update-pciids
+    lspci setpci pcilmr update-pciids pci.ids.gz
 
 RUN install -D -m 0755 lspci /src/target/usr/bin/lspci
 RUN install -D -m 0755 setpci /src/target/usr/sbin/setpci
 RUN install -D -m 0755 pcilmr /src/target/usr/sbin/pcilmr
 RUN install -D -m 0755 update-pciids /src/target/usr/sbin/update-pciids
-RUN install -D -m 0644 pci.ids /src/target/usr/share/pci.ids
+RUN install -D -m 0644 pci.ids.gz /src/target/usr/share/pci.ids.gz
 
 FROM scratch AS bundle
 ARG VERSION
