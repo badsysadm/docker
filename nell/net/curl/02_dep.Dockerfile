@@ -4,6 +4,7 @@ ARG ZLIB_VERSION=1.3.1
 
 FROM oci.badsysadm.local:80/src/net/curl:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
+FROM oci.badsysadm.local:80/dep/security/openssl:${OPENSSL_VERSION} AS openssl_dep_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
@@ -17,6 +18,10 @@ COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib64/libcryp
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+
+COPY --from=openssl_dep_image /usr/include/zstd.h /usr/include/zstd.h
+COPY --from=openssl_dep_image /usr/include/zstd_errors.h /usr/include/zstd_errors.h
+COPY --from=openssl_dep_image /usr/lib/x86_64-linux-gnu/libzstd.a /usr/lib/x86_64-linux-gnu/libzstd.a
 
 COPY --from=src_image /src/ /src/
 
