@@ -17,12 +17,9 @@ RUN ./configure \
     --lock-path=/var/run/angie/angie.lock \
     --http-client-body-temp-path=/tmp/angie/client-body \
     --http-proxy-temp-path=/tmp/angie/proxy \
-    --http-fastcgi-temp-path=/tmp/angie/fastcgi \
     --http-uwsgi-temp-path=/tmp/angie/uwsgi \
-    --http-scgi-temp-path=/tmp/angie/scgi \
     --with-threads \
     --with-file-aio \
-    --with-debug \
     --with-http_addition_module \
     --with-http_auth_request_module \
     --with-http_degradation_module \
@@ -58,7 +55,7 @@ RUN ./configure \
     --add-module=/src/angie/check_module \
     --add-module=/src/angie/geoip2_module \
     --with-cc-opt="-I/usr/local/include" \
-    --with-ld-opt="-L/usr/local/lib64 -Wl,-Bstatic /usr/lib/x86_64-linux-gnu/libmaxminddb.a /usr/local/lib64/libssl.a /usr/local/lib64/libcrypto.a -lzstd -lz -Wl,-Bdynamic" \
+    --with-ld-opt="-Wl,--as-needed -L/usr/local/lib64 -Wl,-Bstatic -lmaxminddb -lssl -lcrypto -lzstd -lz -Wl,-Bdynamic" \
     --with-compat
 
 RUN make -j 1
