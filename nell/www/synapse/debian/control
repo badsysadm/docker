@@ -7,8 +7,6 @@ Build-Depends:
  ca-certificates,
  curl,
  git,
- cargo (>= 1.85),
- rustc (>= 1.85),
  pkg-config,
  libsystemd-dev,
  libpq-dev,
