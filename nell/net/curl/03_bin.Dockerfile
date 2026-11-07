@@ -26,14 +26,14 @@ RUN cmake -S . -B build -G Ninja \
     -DCURL_BROTLI=OFF \
     -DCURL_ZSTD=ON \
     -DZSTD_USE_STATIC_LIBS=TRUE \
-    -DZSTD_INCLUDE_DIR=/usr/include \
-    -DZSTD_LIBRARY=/usr/lib/x86_64-linux-gnu/libzstd.a \
+    -DZSTD_INCLUDE_DIR=/usr/local/include \
+    -DZSTD_LIBRARY=/usr/local/lib/libzstd.a \
     -DBUILD_TESTING=OFF \
     -DENABLE_CURL_MANUAL=OFF \
     -DBUILD_LIBCURL_DOCS=OFF \
     -DBUILD_MISC_DOCS=OFF \
     -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" \
-    -DCMAKE_C_STANDARD_LIBRARIES=/usr/lib/x86_64-linux-gnu/libzstd.a
+    -DCMAKE_C_STANDARD_LIBRARIES=/usr/local/lib/libzstd.a
 
 RUN cmake --build build -j$(nproc)
 

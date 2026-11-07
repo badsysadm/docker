@@ -12,7 +12,7 @@
 - Собирать curl, разделяемую и статическую libcurl из официальных исходников.
 - Использовать OpenSSL для TLS, libssh2 для SSH/SFTP, nghttp2
   для HTTP/2, zlib и Zstandard для сжатия.
-- Использовать готовые артефакты OpenSSL и zlib из профилей nell.
+- Использовать готовые артефакты OpenSSL, zlib и Zstandard из профилей nell.
 - Подключать статическую Zstandard через штатную поддержку curl.
 - Собирать libssh2 и nghttp2 из upstream-исходников, полученных на стадии 01.
 - Сохранять вспомогательный скрипт wcurl из upstream.

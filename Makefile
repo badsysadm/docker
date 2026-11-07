@@ -24,12 +24,13 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl ncurses glib gnutls zlib: section = lib
+libnftnl ncurses glib gnutls zlib zstd: section = lib
 libnftnl: version ?= 1.3.2
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
+zstd: version ?= 1.5.7
 
 nftables iproute2 chrony curl: section = net
 zot lldap buildbot: section = infra
