@@ -1,0 +1,15 @@
+Source: siloctl
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ tar
+
+Package: siloctl
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: S3-compatible object storage client based on PGSTY mcli
