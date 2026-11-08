@@ -9,19 +9,22 @@ RUN ./install.sh /src/target/usr
 
 # Keep each library's upstream runtime layout under BATS_LIB_PATH=/usr/lib/bats.
 RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-support \
-        /src/bats-support/load.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-support/src \
-        /src/bats-support/src/*.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-assert \
-        /src/bats-assert/load.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-assert/src \
-        /src/bats-assert/src/*.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-file \
-        /src/bats-file/load.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-file/src \
-        /src/bats-file/src/*.bash && \
-    install -D -m 0644 -t /src/target/usr/lib/bats/bats-detik/lib \
-        /src/bats-detik/lib/*.bash
+    /src/bats-support/load.bash
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-support/src \
+    /src/bats-support/src/*.bash
+
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-assert \
+    /src/bats-assert/load.bash
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-assert/src \
+    /src/bats-assert/src/*.bash
+
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-file \
+    /src/bats-file/load.bash
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-file/src \
+    /src/bats-file/src/*.bash
+
+RUN install -D -m 0644 -t /src/target/usr/lib/bats/bats-detik/lib \
+    /src/bats-detik/lib/*.bash
 
 RUN rm -rf \
     /src/target/usr/share/man \
