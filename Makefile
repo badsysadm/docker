@@ -36,7 +36,7 @@ zlib: version ?= 1.3.1
 libunwind: version ?= 1.8.3
 zstd: version ?= 1.5.7
 
-nftables iproute2 chrony curl tcpdump: section = net
+nftables iproute2 chrony curl tcpdump ethtool: section = net
 zot lldap buildbot: section = infra
 silo: section = storage
 angie radicale calino synapse: section = www
@@ -46,6 +46,7 @@ nftables: version ?= 1.1.7
 iproute2: version ?= 7.2.0
 curl: version ?= 8.23.0
 tcpdump: version ?= 4.99.7
+ethtool: version ?= 7.2
 zot: version ?= 2.1.23
 silo: version ?= 2026-10-26T00-00-00Z
 angie: version ?= 1.12.4
