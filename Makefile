@@ -72,7 +72,8 @@ nano: version ?= 9.2
 mc: version ?= 4.8.33
 htop: version ?= 3.5.3
 
-zstd findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
+tree zstd findutils diffutils grep jq which pciutils iputils xzutils util-linux tar sed gawk strace coreutils wipe dump net-tools elfutils binutils procps quota: section = utils
+tree: version ?= 2.3.2
 findutils: version ?= 4.11.0
 diffutils: version ?= 3.12
 grep: version ?= 3.12
