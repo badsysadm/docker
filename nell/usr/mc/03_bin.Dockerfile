@@ -6,6 +6,7 @@ ARG VERSION
 WORKDIR /src/mc
 
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
+    GLIB_LIBDIR=/usr/local/lib \
     ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
