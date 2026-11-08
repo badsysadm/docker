@@ -21,7 +21,8 @@ RUN make install \
 RUN rm -rf \
     /src/target/usr/share/man \
     /src/target/usr/share/info \
-    /src/target/usr/share/doc
+    /src/target/usr/share/doc \
+    /src/target/usr/share/locale
 
 FROM scratch AS bundle
 ARG VERSION
