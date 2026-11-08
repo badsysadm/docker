@@ -1,0 +1,16 @@
+Source: mc
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ gettext,
+ libpcre2-dev,
+ libffi-dev
+
+Package: mc
+Architecture: amd64
+Static-Built-Using: glib (= 2.84.4), ncurses (= 6.6), zlib (= 1.3.1)
+Depends: ${shlibs:Depends}
+Description: Midnight Commander terminal file manager
