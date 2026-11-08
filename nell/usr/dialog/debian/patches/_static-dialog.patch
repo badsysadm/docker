@@ -1,0 +1,6 @@
+diff --git a/makefile.in b/makefile.in
+--- a/makefile.in
++++ b/makefile.in
+@@ -1 +1 @@
+-	$(LINK) -o $@ dialog$o -L. -l@PACKAGE@ $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o $@ dialog$o .libs/libdialog.a /usr/local/lib/libncursesw.a $(LDFLAGS) -Wl,-Bstatic -lm -Wl,-Bdynamic

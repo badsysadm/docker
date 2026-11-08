@@ -6,6 +6,9 @@ FROM dep_image AS build
 ARG VERSION
 
 WORKDIR /src/dialog
+
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/_static-dialog.patch
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
