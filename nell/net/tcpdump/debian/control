@@ -9,6 +9,7 @@ Build-Depends:
  ninja-build,
  pkg-config,
  libpcap0.8-dev,
+ libcap-dev,
  libcap-ng-dev
 
 Package: tcpdump
