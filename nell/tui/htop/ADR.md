@@ -9,8 +9,9 @@ Unicode и без динамических зависимостей, кроме 
 
 ## Решение
 - Использовать официальный release tarball htop версии 3.5.3.
-- Использовать статическую ncursesw и tinfo из существующего профиля
-  `nell/lib/ncurses` без его изменения.
+- Использовать статическую ncursesw из существующего профиля
+  `nell/lib/ncurses` без его изменения. Отдельная `libtinfo` в этом
+  профиле не собирается: terminfo входит в `libncursesw.a`.
 - Использовать статическую zlib из `nell/lib/zlib` для транзитивных
   зависимостей `libunwind` и `libxml2`.
 - Сохранить Unicode, управление процессами и CPU affinity через hwloc.
@@ -22,7 +23,7 @@ Unicode и без динамических зависимостей, кроме 
   `02_dep.Dockerfile` без изменения других профилей.
 - Не использовать upstream `--enable-static`, так как он делает
   статической также libc. Вместо этого статически линковать
-  библиотеки ncursesw/tinfo, libcap, hwloc и libunwind.
+  библиотеки ncursesw, libcap, hwloc и libunwind.
 - Не включать sensors и delay accounting: штатная реализация загружает
   libsensors и libnl через `dlopen()` во время работы.
 - Не включать PCP, поскольку это отдельная интеграция с системой
