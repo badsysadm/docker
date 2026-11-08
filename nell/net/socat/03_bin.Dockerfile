@@ -2,6 +2,8 @@ ARG VERSION=1.8.1.3
 
 FROM oci.badsysadm.local:80/dep/net/socat:${VERSION} AS build
 ARG VERSION
+ARG SOURCE_DATE_EPOCH=0
+ENV SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH}
 
 WORKDIR /src/socat
 
