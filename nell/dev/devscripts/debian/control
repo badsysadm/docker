@@ -3,6 +3,7 @@ Section: devel
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
+ build-essential,
  perl,
  libpar-packer-perl,
  faketime,
@@ -14,4 +15,4 @@ Build-Depends:
 Package: devscripts
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Selected Debian development utilities with standalone Perl programs
+Description: Debian development utilities with standalone Perl programs

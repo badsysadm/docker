@@ -5,48 +5,68 @@ ARG VERSION
 
 WORKDIR /src/devscripts
 
-# Substitute the release version just as the upstream scripts/Makefile does.
-RUN sed -i "s/###VERSION###/${VERSION}/g" \
-    scripts/mk-build-deps.pl \
-    scripts/debuild.pl \
-    scripts/dpkg-depcheck.pl \
-    scripts/debdiff.pl \
-    scripts/debc.pl \
-    scripts/hardening-check.pl \
-    scripts/dscverify.pl \
-    scripts/debchange.pl
+# Upstream scripts/Makefile substitutes the release version into scripts.
+RUN sed -i "s/###VERSION###/${VERSION}/g" scripts/*.pl scripts/*.sh
 
-# Perl programs are packaged individually, including local Devscripts modules.
-# Dpkg::Vendor and Changelog::Parse are also loaded dynamically.
-RUN mkdir -p /src/target/usr/bin && \
-    for name in mk-build-deps debuild dpkg-depcheck debdiff debc hardening-check dscverify debchange; do \
+# Each Perl command is packaged individually. Dynamically loaded Dpkg
+# vendor modules need explicit inclusion, as with mk-build-deps.
+RUN mkdir -p /src/target/usr/bin /src/target/usr/share/devscripts && \
+    for file in scripts/*.pl; do \
+        name="${file##*/}"; \
+        name="${name%.pl}"; \
+        output="/src/target/usr/bin/${name}"; \
+        if [ "${name}" = debpkg ]; then \
+            output=/src/target/usr/share/devscripts/debpkg; \
+        fi; \
         TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
         faketime -f '2020-01-01 00:00:00' \
         pp -B -I lib \
            -M Dpkg::Changelog::Parse \
            -M Dpkg::Vendor::Default \
            -M Dpkg::Vendor::Debian \
-           -o "/src/target/usr/bin/${name}" \
-           "scripts/${name}.pl" || exit 1; \
+           -o "${output}" "${file}" || exit 1; \
     done
 
-# Keep shell utilities as shell scripts, without packaging them with pp.
-RUN for name in debclean dpkg-genbuilddeps debsign; do \
-        sed "s/###VERSION###/${VERSION}/g" "scripts/${name}.sh" \
-            > "/src/target/usr/bin/${name}" || exit 1; \
-    done && \
-    chmod 755 /src/target/usr/bin/*
+# Upstream debpkg uses a small C launcher rather than a direct Perl entry.
+RUN cc -O2 -o /src/target/usr/bin/debpkg scripts/debpkg-wrapper.c
 
-# Python scripts remain Python. Keep their local support module available.
-RUN install -m 755 scripts/suspicious-source /src/target/usr/bin/suspicious-source && \
+# Keep all shell commands as scripts. debbisect's helpers have a separate
+# runtime path, matching the upstream installation layout.
+RUN mkdir -p /src/target/usr/share/devscripts/scripts && \
+    for file in scripts/*.sh; do \
+        name="${file##*/}"; \
+        name="${name%.sh}"; \
+        output="/src/target/usr/bin/${name}"; \
+        case "${name}" in \
+            run_bisect|run_bisect_qemu) \
+                output="/src/target/usr/share/devscripts/scripts/${name}";; \
+        esac; \
+        install -m 755 "${file}" "${output}" || exit 1; \
+    done
+
+# Python entrypoints remain Python; setup.py is an installation helper.
+RUN for name in deb-janitor debbisect debdiff-apply debootsnap \
+                reproducible-check sadt suspicious-source wrap-and-sort; do \
+        install -m 755 "scripts/${name}" \
+            "/src/target/usr/bin/${name}" || exit 1; \
+    done && \
     mkdir -p /src/target/usr/lib/python3/dist-packages/devscripts && \
-    install -m 644 scripts/devscripts/logger.py \
-        /src/target/usr/lib/python3/dist-packages/devscripts/logger.py
+    install -m 644 scripts/devscripts/*.py \
+        /src/target/usr/lib/python3/dist-packages/devscripts/ && \
+    printf "version = '%s'\\n" "${VERSION}" \
+        > /src/target/usr/lib/python3/dist-packages/devscripts/__init__.py
+
+# Runtime files used by the original devscripts commands.
+RUN mkdir -p /src/target/usr/share/devscripts/templates && \
+    cp -a templates/. /src/target/usr/share/devscripts/templates/ && \
+    sed "s/###VERSION###/${VERSION}/g" conf.default.in \
+        > /src/target/usr/share/devscripts/conf.default && \
+    chmod 755 /src/target/usr/bin/*
 
 FROM scratch AS bundle
 ARG VERSION
 LABEL org.opencontainers.image.title="devscripts"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
-LABEL org.opencontainers.image.description="Selected Debian devscripts: PAR-packed Perl and original shell/Python programs"
+LABEL org.opencontainers.image.description="Debian devscripts: PAR-packed Perl tools and original shell/Python programs"
 COPY --from=build /src/target/ /target/
