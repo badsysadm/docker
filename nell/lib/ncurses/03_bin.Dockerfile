@@ -10,7 +10,7 @@ WORKDIR /src/ncurses
 COPY debian/patches /src/patches/
 RUN patch -p1 < /src/patches/_static-progs.patch
 
-RUN cf_cv_ar_flags=-crD ./configure \
+RUN cf_cv_ar_flags=-crD CFLAGS="-O2 -fPIC" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/usr/bin \
