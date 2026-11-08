@@ -13,6 +13,6 @@ Build-Depends:
 Package: socat
 Architecture: amd64
 Static-Built-Using: openssl (= 3.6.5), ncurses (= 6.6),
- readline (= 8.2-6), tcp-wrappers (= 7.6.q-35)
+ readline (= 8.2-6), tcp-wrappers (= 7.6.q-36)
 Depends: ${shlibs:Depends}
 Description: Multipurpose bidirectional data relay
