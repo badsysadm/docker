@@ -1,0 +1,11 @@
+Source: tree
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential
+
+Package: tree
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Recursive directory listing utility
