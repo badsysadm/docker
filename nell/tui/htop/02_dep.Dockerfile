@@ -27,6 +27,6 @@ COPY --from=libunwind_image /target/usr/lib/ /usr/local/lib/
 
 COPY --from=systemd_image /target/usr/lib/x86_64-linux-gnu/libudev.a /usr/local/lib/libudev.a
 
-COPY --from=zlib_image /target/usr/lib/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 
 COPY --from=src_image /src/ /src/
