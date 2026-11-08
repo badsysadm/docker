@@ -6,36 +6,24 @@
 
 ## Контекст
 
-Bats-core и его библиотеки распространяются отдельными upstream-репозиториями.
-Для работы тестовых сценариев необходимы исполняемые скрипты Bats, его
-внутренние runtime-файлы и доступные по `load` вспомогательные библиотеки.
+Bats-core, bats-support, bats-assert, bats-detik и bats-file
+распространяются отдельными репозиториями, но используются совместно.
+Bats-core разрешает имена библиотек при помощи `BATS_LIB_PATH`.
 
 ## Решение
 
-- Использовать один профиль `nell/test/bats` и единый артефакт.
-- На `01_src` получать пять официальных Git-репозиториев:
-  `bats-core`, `bats-support`, `bats-assert`, `bats-detik`, `bats-file`.
-- На `02_dep` устанавливать сборочные зависимости через `mk-build-deps`.
-- На `03_bin` устанавливать `bats-core` upstream-скриптом `install.sh`
-  и раскладывать runtime-файлы всех четырёх библиотек под
-  `/usr/lib/bats/<library>`, сохраняя их внутреннюю структуру.
-- Сохранять `/usr/bin/bats`, `/usr/libexec/bats-core` и
-  `/usr/lib/bats-core`; не запускать тесты и не поставлять документацию.
-- Поставлять всё в едином `FROM scratch` через каталог `/target`.
+- Объединить все пять компонентов в один профиль `nell/test/bats`
+  и один поставляемый артефакт.
+- Установить bats-core штатным `install.sh`, сохранив его
+  собственную структуру runtime-файлов.
+- Разместить четыре библиотеки в `/usr/lib/bats/<имя-библиотеки>`,
+  соответствующем стандартному `BATS_LIB_PATH=/usr/lib/bats`.
+- Сохранить `load.bash` и каталог `src/` для bats-support,
+  bats-assert и bats-file; для bats-detik сохранить каталог `lib/`.
 
 ## Последствия
 
-- Bats загружает библиотеки из стандартного `BATS_LIB_PATH=/usr/lib/bats`.
-- `bats-detik` использует собственные `lib/*.bash`; их расположение
-  сохраняется.
-- Вызываемые `bats-detik` внешние клиенты Kubernetes (kubectl, oc, helm)
-  не являются частью этого артефакта.
-- Профиль содержит shell-скрипты, без сторонней нативной линковки.
-
-## Ссылки
-
-- https://github.com/bats-core/bats-core
-- https://github.com/bats-core/bats-support
-- https://github.com/bats-core/bats-assert
-- https://github.com/bats-core/bats-detik
-- https://github.com/bats-core/bats-file
+- Сценарии Bats могут загружать включённые библиотеки по имени,
+  без задания собственного `BATS_LIB_PATH`.
+- Внешние клиенты Kubernetes, вызываемые bats-detik
+  (kubectl, oc, helm), не входят в объединённый артефакт.
