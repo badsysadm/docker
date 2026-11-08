@@ -1,10 +1,9 @@
 FROM oci.badsysadm.local:80/get/source:latest AS build
 ARG VERSION=1.3-20260721
 
-RUN wget --tries=3 -O /tmp/dialog.tgz https://invisible-island.net/archives/dialog/dialog-${VERSION}.tgz && \
-    tar -xzf /tmp/dialog.tgz -C /src && \
-    mv /src/dialog-${VERSION} /src/dialog && \
-    rm /tmp/dialog.tgz
+RUN wget -qO- https://invisible-island.net/archives/dialog/dialog-${VERSION}.tgz 2>/tmp/dialog-wget.err | \
+    tar -xz -C /src || { cat /tmp/dialog-wget.err >&2; exit 1; }
+RUN mv /src/dialog-${VERSION} /src/dialog
 
 FROM scratch
 COPY --from=build /src/ /src
