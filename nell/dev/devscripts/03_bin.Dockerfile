@@ -15,9 +15,6 @@ RUN mkdir -p /src/target/usr/bin /src/target/usr/share/devscripts && \
         name="${file##*/}"; \
         name="${name%.pl}"; \
         output="/src/target/usr/bin/${name}"; \
-        if [ "${name}" = debpkg ]; then \
-            output=/src/target/usr/share/devscripts/debpkg; \
-        fi; \
         TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
         faketime -f '2020-01-01 00:00:00' \
         pp -B -I lib \
@@ -26,9 +23,6 @@ RUN mkdir -p /src/target/usr/bin /src/target/usr/share/devscripts && \
            -M Dpkg::Vendor::Debian \
            -o "${output}" "${file}" || exit 1; \
     done
-
-# Upstream debpkg uses a small C launcher rather than a direct Perl entry.
-RUN cc -O2 -o /src/target/usr/bin/debpkg scripts/debpkg-wrapper.c
 
 # Keep all shell commands as scripts. debbisect's helpers have a separate
 # runtime path, matching the upstream installation layout.
