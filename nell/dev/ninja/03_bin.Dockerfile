@@ -5,7 +5,10 @@ ARG VERSION
 
 WORKDIR /src/ninja
 
-RUN python3 configure.py --bootstrap
+RUN LDFLAGS="-static-libstdc++ -static-libgcc \
+    -Wl,-Bstatic -Wl,--whole-archive -lm \
+    -Wl,--no-whole-archive -Wl,-Bdynamic" \
+    python3 configure.py --bootstrap
 RUN install -Dm755 ninja /src/target/usr/bin/ninja
 
 FROM scratch AS bundle
