@@ -1,0 +1,13 @@
+Source: devscripts
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ perl,
+ libpar-packer-perl,
+ libdpkg-perl
+
+Package: devscripts
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Standalone mk-build-deps packaged with PAR::Packer
