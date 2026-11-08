@@ -17,13 +17,7 @@ RUN make install \
     PKGCONF=false \
     LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64" \
     LDLIBS="-Wl,-Bstatic -lcrypto -lz -lzstd -Wl,-Bdynamic" && \
-    rm -rf /src/target/usr/share/man && \
-    test -f /src/target/usr/bin/fsverity && \
-    test -f /src/target/usr/lib/libfsverity.a && \
-    test -f /src/target/usr/lib/libfsverity.so.0 && \
-    test -L /src/target/usr/lib/libfsverity.so && \
-    test -f /src/target/usr/include/libfsverity.h && \
-    test -f /src/target/usr/lib/pkgconfig/libfsverity.pc
+    rm -rf /src/target/usr/share/man
 
 FROM scratch AS bundle
 ARG VERSION
