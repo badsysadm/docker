@@ -20,7 +20,8 @@ RUN make install DESTDIR=/src/target
 RUN rm -rf \
     /src/target/usr/share/man \
     /src/target/usr/share/info \
-    /src/target/usr/share/doc
+    /src/target/usr/share/doc \
+    /src/target/usr/share/metainfo
 
 FROM scratch AS bundle
 ARG VERSION
