@@ -1,0 +1,13 @@
+Source: libtool
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ m4,
+ perl
+
+Package: libtool
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNU Libtool and libltdl
