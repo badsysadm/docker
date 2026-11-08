@@ -15,6 +15,12 @@ RUN ./configure \
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 
+RUN install -D -m 0644 -t /src/target/usr/share/nano-syntax-highlighting \
+    /src/nano-syntax-highlighting/*.nanorc
+
+RUN mkdir -p /src/target/etc && \
+    printf '\ninclude "/usr/share/nano-syntax-highlighting/*.nanorc"\n' >> /src/target/etc/nanorc
+
 RUN rm -rf /src/target/usr/share/man \
     /src/target/usr/share/info \
     /src/target/usr/share/doc
