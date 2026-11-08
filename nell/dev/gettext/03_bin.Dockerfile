@@ -20,6 +20,15 @@ RUN ./configure \
     --enable-shared \
     LDFLAGS="-static-libgcc"
 
+# Keep both libtool library formats, but link the tools to static archives.
+RUN for program in \
+        msgattrib msgcat msgcmp msgcomm msgconv msgen msgexec \
+        msgfilter msgfmt msggrep msginit msgmerge msgpre msgunfmt \
+        msguniq recode_sr_latin xgettext; do \
+        printf 'override %s_LDFLAGS += -static-libtool-libs\\n' \
+            "$program"; \
+    done >> gettext-tools/src/Makefile
+
 RUN make -j$(nproc) \
     MAKEINFO=true \
     man_MANS= \
