@@ -25,7 +25,7 @@ RUN for program in \
         msgattrib msgcat msgcmp msgcomm msgconv msgen msgexec \
         msgfilter msgfmt msggrep msginit msgmerge msgpre msgunfmt \
         msguniq recode_sr_latin xgettext; do \
-        printf 'override %s_LDFLAGS += -static-libtool-libs\\n' \
+        printf 'override %s_LDFLAGS += -static-libtool-libs\n' \
             "$program"; \
     done >> gettext-tools/src/Makefile
 
