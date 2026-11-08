@@ -6,9 +6,12 @@ Build-Depends:
  perl,
  libpar-packer-perl,
  faketime,
- libdpkg-perl
+ libdpkg-perl,
+ libfile-homedir-perl,
+ libdistro-info-perl,
+ libsoap-lite-perl
 
 Package: devscripts
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Standalone mk-build-deps packaged with PAR::Packer
+Description: Selected Debian development utilities with standalone Perl programs
