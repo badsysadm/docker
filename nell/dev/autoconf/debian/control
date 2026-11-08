@@ -1,0 +1,12 @@
+Source: autoconf
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ perl
+
+Package: autoconf
+Architecture: amd64
+Depends: ${misc:Depends}
+Description: GNU Autoconf configuration script generator

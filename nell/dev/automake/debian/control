@@ -1,0 +1,12 @@
+Source: automake
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ perl
+
+Package: automake
+Architecture: amd64
+Depends: ${misc:Depends}
+Description: GNU Automake Makefile.in generator
