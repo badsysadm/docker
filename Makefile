@@ -8,7 +8,7 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-git m4 make autoconf automake ninja bison meson flex gettext autopoint: section = dev
+git m4 make autoconf automake ninja bison meson flex gettext: section = dev
 git: version ?= 2.56.0
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
@@ -19,7 +19,6 @@ bison: version ?= 3.8.2
 meson: version ?= 1.12.1
 flex: version ?= 2.6.4
 gettext: version ?= 1.0
-autopoint: version ?= 1.0
 
 glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus shadow: section = system
 glibc: version ?= 2.44
