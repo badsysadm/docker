@@ -12,4 +12,16 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
 COPY --from=ncurses_image /target/lib/x86_64-linux-gnu/ /usr/local/lib/
 
+RUN cp /usr/lib/x86_64-linux-gnu/libcap.a \
+       /usr/lib/x86_64-linux-gnu/libhwloc.a \
+       /usr/lib/x86_64-linux-gnu/libunwind.a \
+       /usr/lib/x86_64-linux-gnu/libunwind-ptrace.a \
+       /usr/lib/x86_64-linux-gnu/libunwind-generic.a \
+       /usr/lib/x86_64-linux-gnu/libunwind-x86_64.a \
+       /usr/lib/x86_64-linux-gnu/liblzma.a \
+       /usr/lib/x86_64-linux-gnu/libxml2.a \
+       /usr/lib/x86_64-linux-gnu/libnuma.a \
+       /usr/lib/x86_64-linux-gnu/libltdl.a \
+       /usr/local/lib/
+
 COPY --from=src_image /src/ /src/
