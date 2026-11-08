@@ -7,8 +7,10 @@ ARG VERSION
 
 WORKDIR /src/dialog
 
-COPY debian/patches /src/patches/
-RUN patch -p1 < /src/patches/_static-dialog.patch
+RUN sed -n '/dialog\$o.*-L\./p' makefile.in > /tmp/dialog-link-rule && \
+    test "$(wc -l < /tmp/dialog-link-rule)" -eq 1 && \
+    sed -i '/dialog\$o.*-L\./c\\\t$(CC) $(CFLAGS) -o $@ dialog$o .libs/libdialog.a /usr/local/lib/libncursesw.a $(LDFLAGS) -Wl,-Bstatic -lm -Wl,-Bdynamic' makefile.in && \
+    grep -Fq '.libs/libdialog.a /usr/local/lib/libncursesw.a' makefile.in
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
