@@ -11,7 +11,7 @@ Tcpdump использует libpcap для захвата пакетов. Дл�
 - Использовать официальный upstream tcpdump.
 - Сохранить поддержку libpcap, OpenSSL и libcap-ng.
 - Использовать libpcap и libcap-ng из Debian build-зависимостей,
-  а libcrypto — из существующего профиля OpenSSL в nell.
+  а libcrypto, zlib и zstd — из существующих профилей `nell`.
 - Отключить интеграцию с libsmi и SMB dissector.
 
 ## Последствия
