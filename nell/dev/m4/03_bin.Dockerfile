@@ -12,8 +12,9 @@ RUN ./configure \
     --disable-nls \
     LDFLAGS="-static-libgcc"
 
-RUN make -j$(nproc)
-RUN make install DESTDIR=/src/target
+RUN make -C lib -j$(nproc) && \
+    make -C src -j$(nproc)
+RUN make -C src install DESTDIR=/src/target
 
 RUN rm -rf \
     /src/target/usr/share/man \
