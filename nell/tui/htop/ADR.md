@@ -13,17 +13,20 @@ Unicode и без динамических зависимостей, кроме 
   `nell/lib/ncurses` без его изменения. Отдельная `libtinfo` в этом
   профиле не собирается: terminfo входит в `libncursesw.a`.
 - Использовать статическую zlib из `nell/lib/zlib` для транзитивных
-  зависимостей `libunwind` и `libxml2`.
+  зависимостей `libxml2`.
 - Сохранить Unicode, управление процессами и CPU affinity через hwloc.
   Upstream hwloc заменяет штатный backend affinity, а не дополняет его.
 - Включить Linux capabilities через статическую libcap.
-- Включить Backtrace (unwind-ptrace) через статические libunwind и liblzma.
+- Включить Backtrace (unwind-ptrace) через статическую libunwind
+  из собственного профиля `nell/lib/libunwind` версии 1.8.3.
 - Использовать hwloc со статической libhwloc и её транзитивными
   библиотеками; статические архивы Debian размещаются локально в
   `02_dep.Dockerfile` без изменения других профилей.
-- Отключить PIE для исполняемого файла (`-no-pie`): статический
-  Debian `libunwind.a` содержит релокации `R_X86_64_32S`, несовместимые
-  с PIE. Это не меняет требование динамической линковки libc.
+- Сохранить PIE: прежний Debian `libunwind.a` имел несовместимые
+  релокации `R_X86_64_32S`; новый профиль компилируется с `-fPIC`.
+- Перед `configure` обновить timestamps Autotools-файлов командой
+  `touch` (как в профиле nano), чтобы `make` не пытался перегенерировать
+  `aclocal.m4` через отсутствующий `aclocal-1.16`.
 - Не использовать upstream `--enable-static`, так как он делает
   статической также libc. Вместо этого статически линковать
   библиотеки ncursesw, libcap, hwloc и libunwind.
