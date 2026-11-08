@@ -3,7 +3,7 @@ ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
 
-FROM oci.badsysadm.local:80/src/test/fsverity-utils:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/kernel/fsverity-utils:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image

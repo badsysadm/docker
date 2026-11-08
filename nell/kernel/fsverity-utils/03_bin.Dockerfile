@@ -1,6 +1,6 @@
 ARG VERSION=1.7
 
-FROM oci.badsysadm.local:80/dep/test/fsverity-utils:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/kernel/fsverity-utils:${VERSION} AS build
 ARG VERSION
 
 WORKDIR /src/fsverity-utils
