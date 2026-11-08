@@ -1,0 +1,14 @@
+Source: debhelper
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dpkg-dev,
+ perl,
+ libpar-packer-perl,
+ faketime
+
+Package: debhelper
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Debian debhelper command suite bundled using PAR::Packer
