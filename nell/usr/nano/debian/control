@@ -6,7 +6,6 @@ Build-Depends:
  build-essential,
  ca-certificates,
  wget,
- xz-utils,
  pkg-config,
  libncurses-dev
 
