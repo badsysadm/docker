@@ -44,6 +44,16 @@ and engineering requirements belong to the linked documentation, not here.
   multi-file batch: prepare a tree from the current branch, commit on its
   current HEAD and update the ref with the expected HEAD. Do not force-push
   without explicit approval.
+- Treat ADRs strictly as records of specific, nontrivial architectural
+  decisions and their rationale, not as containers for context or as
+  summaries of a project. Before adding anything to an ADR, verify that it
+  is an architectural choice rather than a routine implementation detail
+  or a requirement already established elsewhere. Do not copy shared
+  rules, release versions, source retrieval commands, build instructions,
+  test policy, verification checklists or progress into an ADR. If the
+  project has no distinct architectural decisions, keep its mandatory
+  `ADR.md` minimal and explicitly state that there are none. Follow
+  [ADR rules](doc/internal/adr.md).
 - Report what was actually verified separately from proposed commands,
   user-reported results and checks not performed. Never imply that a build
   or test was run when it was not.
