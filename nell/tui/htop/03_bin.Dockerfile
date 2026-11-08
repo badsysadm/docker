@@ -22,6 +22,7 @@ RUN ./configure \
     CURSES_CFLAGS="-I/usr/local/include" \
     CURSES_LIBS="-L/usr/local/lib -Wl,-Bstatic -lncursesw -Wl,-Bdynamic" \
     LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LIBUNWIND_CFLAGS="-I/usr/local/include" \
     LIBUNWIND_LIBS="-Wl,-Bstatic -lunwind-ptrace -lunwind-generic -lunwind -Wl,-Bdynamic" \
     LIBS="-Wl,-Bstatic -Wl,--start-group -lcap -lhwloc -lnuma -lltdl -lxml2 -lunwind-ptrace -lunwind-generic -lunwind-x86_64 -lunwind -llzma -lz -lm -Wl,--end-group -Wl,-Bdynamic"
 
