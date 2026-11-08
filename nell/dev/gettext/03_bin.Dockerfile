@@ -20,8 +20,16 @@ RUN ./configure \
     --enable-shared \
     LDFLAGS="-static-libgcc"
 
-RUN make -j$(nproc) MAKEINFO=true
-RUN make install DESTDIR=/src/target MAKEINFO=true
+RUN make -j$(nproc) \
+    MAKEINFO=true \
+    man_MANS= \
+    notrans_man_MANS= \
+    man_HTML=
+RUN make install DESTDIR=/src/target \
+    MAKEINFO=true \
+    man_MANS= \
+    notrans_man_MANS= \
+    man_HTML=
 
 RUN rm -rf \
     /src/target/usr/share/man \
