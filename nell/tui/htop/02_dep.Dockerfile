@@ -1,8 +1,10 @@
 ARG VERSION=3.5.3
 ARG NCURSES_VERSION=6.6
+ARG ZLIB_VERSION=1.3.1
 
 FROM oci.badsysadm.local:80/src/tui/htop:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/lib/ncurses:${NCURSES_VERSION} AS ncurses_image
+FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
@@ -23,5 +25,7 @@ RUN cp /usr/lib/x86_64-linux-gnu/libcap.a \
        /usr/lib/x86_64-linux-gnu/libnuma.a \
        /usr/lib/x86_64-linux-gnu/libltdl.a \
        /usr/local/lib/
+
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 
 COPY --from=src_image /src/ /src/
