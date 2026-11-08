@@ -1,15 +1,9 @@
 diff --git a/progs/Makefile.in b/progs/Makefile.in
 --- a/progs/Makefile.in
 +++ b/progs/Makefile.in
-@@ -53,7 +53,7 @@
- x		= @EXEEXT@
- o		= .@OBJEXT@
- 
+@@ -56,1 +56,1 @@
 -MODEL		= ../@DFT_OBJ_SUBDIR@
 +MODEL		= ../objects
- DESTDIR		= @DESTDIR@
- top_srcdir	= @top_srcdir@
- srcdir		= @srcdir@
 @@ -103,7 +103,7 @@
  CFLAGS_PROFILE	= $(CCFLAGS) -DNCURSES_STATIC -pg
  CFLAGS_SHARED	= $(CCFLAGS) @CC_SHARED_OPTS@
