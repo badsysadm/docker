@@ -25,6 +25,9 @@ RUN sed -i \
 
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
 COPY --from=ncurses_image /target/lib/x86_64-linux-gnu/ /usr/local/lib/
+RUN mkdir -p /usr/local/include/ncursesw && \
+    ln -s ../curses.h /usr/local/include/ncursesw/curses.h && \
+    ln -s ../term.h /usr/local/include/ncursesw/term.h
 
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
