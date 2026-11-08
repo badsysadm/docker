@@ -19,11 +19,11 @@ COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openss
 COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=ncurses_image /target/usr/lib/libncursesw.a /usr/local/lib/libncursesw.a
-COPY --from=zlib_image /target/usr/lib/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 
-RUN cp /usr/lib/libreadline.a \
-       /usr/lib/libwrap.a \
-       /usr/local/lib/
+RUN for lib in libreadline.a libwrap.a; do \
+        install -D "/usr/lib/x86_64-linux-gnu/$lib" "/usr/local/lib/$lib" || exit 1; \
+    done
 
 COPY --from=src_image /src/ /src/
