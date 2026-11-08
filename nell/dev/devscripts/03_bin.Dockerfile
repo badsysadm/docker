@@ -19,9 +19,7 @@ RUN sed -i "s/###VERSION###/${VERSION}/g" \
 # Perl programs are packaged individually, including local Devscripts modules.
 # Dpkg::Vendor and Changelog::Parse are also loaded dynamically.
 RUN mkdir -p /src/target/usr/bin && \
-    for name in mk-build-deps debuild dpkg-depcheck debdiff debc hardening-check dscverify dch; do \
-        source_name="${name}"; \
-        if [ "${name}" = dch ]; then source_name=debchange; fi; \
+    for name in mk-build-deps debuild dpkg-depcheck debdiff debc hardening-check dscverify debchange; do \
         TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
         faketime -f '2020-01-01 00:00:00' \
         pp -B -I lib \
@@ -29,7 +27,7 @@ RUN mkdir -p /src/target/usr/bin && \
            -M Dpkg::Vendor::Default \
            -M Dpkg::Vendor::Debian \
            -o "/src/target/usr/bin/${name}" \
-           "scripts/${source_name}.pl" || exit 1; \
+           "scripts/${name}.pl" || exit 1; \
     done
 
 # Keep shell utilities as shell scripts, without packaging them with pp.
