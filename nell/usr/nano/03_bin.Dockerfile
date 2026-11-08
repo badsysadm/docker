@@ -9,9 +9,9 @@ RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-nls \
-    CPPFLAGS="-I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib -static-libgcc" \
-    LIBS="-Wl,-Bstatic -lncursesw -Wl,-Bdynamic"
+    NCURSESW_CFLAGS="-I/usr/local/include" \
+    NCURSESW_LIBS="-L/usr/local/lib -Wl,-Bstatic -lncursesw -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
