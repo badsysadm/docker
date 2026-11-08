@@ -5,7 +5,8 @@ ARG VERSION
 
 WORKDIR /src/meson
 
-RUN mkdir -p /src/target/usr/bin && \
+RUN find meson.py mesonbuild -exec touch -d '@315532800' {} + && \
+    mkdir -p /src/target/usr/bin && \
     python3 packaging/create_zipapp.py \
         --outfile /src/target/usr/bin/meson \
         --interpreter '/usr/bin/env python3' \
