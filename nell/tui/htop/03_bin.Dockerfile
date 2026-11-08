@@ -19,7 +19,7 @@ RUN ./configure \
     --disable-pcp \
     CURSES_CFLAGS="-I/usr/local/include" \
     CURSES_LIBS="-L/usr/local/lib -Wl,-Bstatic -lncursesw -Wl,-Bdynamic" \
-    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc -no-pie" \
     LIBS="-Wl,-Bstatic -Wl,--start-group -lcap -lhwloc -lnuma -lltdl -lxml2 -lunwind-ptrace -lunwind-generic -lunwind-x86_64 -lunwind -llzma -lz -lm -Wl,--end-group -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
