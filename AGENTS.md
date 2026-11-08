@@ -52,8 +52,10 @@ and engineering requirements belong to the linked documentation, not here.
   rules, release versions, source retrieval commands, build instructions,
   test policy, verification checklists or progress into an ADR. If the
   project has no distinct architectural decisions, keep its mandatory
-  `ADR.md` minimal and explicitly state that there are none. Follow
-  [ADR rules](doc/internal/adr.md).
+  `ADR.md` concise, but preserve every required section of the ADR template.
+  Before declaring that no decisions exist, examine nonstandard build and
+  installation choices (including staging and upstream Makefile semantics)
+  and document their rationale. Follow [ADR rules](doc/internal/adr.md).
 - Report what was actually verified separately from proposed commands,
   user-reported results and checks not performed. Never imply that a build
   or test was run when it was not.
