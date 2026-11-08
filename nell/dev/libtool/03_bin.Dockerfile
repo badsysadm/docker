@@ -14,6 +14,12 @@ RUN ./configure \
     --enable-shared \
     LDFLAGS="-static-libgcc"
 
+# The release already contains generated Autotools files.  In particular,
+# libltdl/Makefile.am must not trigger automake regeneration.
+RUN touch libltdl/config-h.in libltdl/Makefile.am && \
+    touch libltdl/Makefile.in libltdl/configure && \
+    touch Makefile
+
 RUN make -j$(nproc) MAKEINFO=true HELP2MAN=true
 RUN make install DESTDIR=/src/target MAKEINFO=true HELP2MAN=true
 
