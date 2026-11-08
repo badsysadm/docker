@@ -7,7 +7,8 @@ WORKDIR /src/quilt
 
 # quilt is primarily a Bash script suite; retain upstream entrypoints and
 # installed runtime helpers rather than converting scripts into PAR binaries.
-RUN ./configure --prefix=/usr --disable-nls
+RUN autoconf && \
+    ./configure --prefix=/usr --disable-nls
 
 RUN make -j$(nproc) && \
     make install DESTDIR=/src/target
