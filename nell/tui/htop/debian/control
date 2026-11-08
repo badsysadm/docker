@@ -1,0 +1,19 @@
+Source: htop
+Section: utils
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libcap-dev,
+ libhwloc-dev,
+ liblzma-dev,
+ libxml2-dev,
+ libnuma-dev,
+ libltdl-dev
+
+Package: htop
+Architecture: amd64
+Static-Built-Using: ncurses (= 6.6), zlib (= 1.3.1), libunwind (= 1.8.3), systemd (= 261)
+Depends: ${shlibs:Depends}
+Description: Interactive process viewer
