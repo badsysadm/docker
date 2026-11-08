@@ -13,7 +13,9 @@ RUN ./configure \
     --mandir=/usr/share/man \
     --with-ncursesw \
     --enable-widec \
-    LDFLAGS="-static-libgcc -Wl,-Bstatic $(pkg-config --libs ncursesw tinfo) -Wl,-Bdynamic"
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LIBS="-Wl,-Bstatic -lncursesw -Wl,-Bdynamic"
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
