@@ -8,11 +8,12 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-hyperfine nnd binsider: section = test
+hyperfine nnd binsider bats: section = test
 fsverity-utils: section = kernel
 hyperfine: version ?= 2.0.0
 nnd: version ?= 0.80
 binsider: version ?= 0.3.2
+bats: version ?= 1.14.0
 fsverity-utils: version ?= 1.7
 
 git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt: section = dev
