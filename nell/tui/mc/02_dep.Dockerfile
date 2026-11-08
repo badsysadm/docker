@@ -14,7 +14,7 @@ RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
 COPY --from=glib_image /target/usr/include/glib-2.0/ /usr/local/include/glib-2.0/
-COPY --from=glib_image /target/usr/lib/ /usr/local/lib/
+COPY --from=glib_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
 RUN sed -i \
     -e 's|^prefix=.*|prefix=/usr/local|' \
     -e 's|^libdir=.*|libdir=/usr/local/lib|' \
@@ -24,17 +24,17 @@ RUN sed -i \
     /usr/local/lib/pkgconfig/gmodule-no-export-2.0.pc
 
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
-COPY --from=ncurses_image /target/usr/lib/ /usr/local/lib/
+COPY --from=ncurses_image /target/usr/lib/libncursesw.a /usr/local/lib/libncursesw.a
 RUN mkdir -p /usr/local/include/ncursesw && \
     ln -s ../curses.h /usr/local/include/ncursesw/curses.h && \
     ln -s ../term.h /usr/local/include/ncursesw/term.h
 
-RUN cp /usr/lib/libe2p.a \
-       /usr/lib/libpcre2-8.a \
-       /usr/local/lib/
+RUN for lib in libe2p.a libpcre2-8.a; do \
+        install -D "/usr/lib/x86_64-linux-gnu/$lib" "/usr/local/lib/$lib" || exit 1; \
+    done
 
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
-COPY --from=zlib_image /target/usr/lib/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 
 COPY --from=src_image /src/ /src/
