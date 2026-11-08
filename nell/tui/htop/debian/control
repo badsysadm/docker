@@ -4,10 +4,17 @@ Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
- pkg-config
+ pkg-config,
+ libcap-dev,
+ libhwloc-dev,
+ libunwind-dev,
+ liblzma-dev,
+ libxml2-dev,
+ libnuma-dev,
+ libltdl-dev
 
 Package: htop
 Architecture: amd64
-Static-Built-Using: ncurses (= 6.6)
+Static-Built-Using: ncurses (= 6.6), libcap-dev, libhwloc-dev, libunwind-dev, liblzma-dev, libxml2-dev, libnuma-dev, libltdl-dev
 Depends: ${shlibs:Depends}
 Description: Interactive process viewer
