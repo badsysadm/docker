@@ -14,13 +14,13 @@ RUN cmake -S . -B build -G Ninja \
     -DCMAKE_FIND_LIBRARY_SUFFIXES=.a \
     -DCRYPTO_ROOT=/usr/local \
     -DCRYPTO_INCLUDE_DIRS=/usr/local/include \
-    -DCRYPTO_LIBRARIES=/usr/local/lib64/libcrypto.a \
+    -DCRYPTO_LIBRARIES="/usr/local/lib64/libcrypto.a;/usr/local/lib/libzstd.a;/usr/local/lib/libz.a" \
     -DWITH_CRYPTO=ON \
     -DWITH_CAP_NG=ON \
     -DWITH_SMI=OFF \
     -DENABLE_SMB=OFF \
     -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" \
-    -DCMAKE_C_STANDARD_LIBRARIES="-Wl,-Bstatic -lcap-ng -lzstd -lz -Wl,-Bdynamic"
+    -DCMAKE_C_STANDARD_LIBRARIES="-Wl,-Bstatic -lcap-ng -Wl,-Bdynamic"
 
 RUN cmake --build build -j$(nproc)
 RUN DESTDIR=/src/target cmake --install build
