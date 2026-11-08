@@ -1,0 +1,13 @@
+Source: fsverity-utils
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config
+
+Package: fsverity-utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Static-Built-Using: openssl (= 3.6.5), zlib (= 1.3.1), zstd (= 1.5.7)
+Description: fs-verity utility and static/shared libfsverity libraries
