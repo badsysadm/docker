@@ -51,10 +51,6 @@ RUN install -m 755 scripts/suspicious-source /src/target/usr/bin/suspicious-sour
     install -m 644 scripts/devscripts/logger.py \
         /src/target/usr/lib/python3/dist-packages/devscripts/logger.py
 
-# The removed utility is retained from the last Debian stable source version.
-RUN install -m 755 legacy/scripts/deb-check-file-conflicts \
-    /src/target/usr/bin/deb-check-file-conflicts
-
 FROM scratch AS bundle
 ARG VERSION
 LABEL org.opencontainers.image.title="devscripts"

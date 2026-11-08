@@ -17,9 +17,6 @@
 - `debclean`, `dpkg-genbuilddeps`, `debsign` — оригинальные shell-скрипты.
 - `suspicious-source` — оригинальный Python-скрипт вместе с
   `devscripts.logger`; не упаковывать его через `pp`.
-- `deb-check-file-conflicts` отсутствует в основном исходном дереве
-  upstream, поэтому отдельно брать этот скрипт из официального
-  Debian devscripts 2.25.15+deb13u1. Не считать его версией 2.26.13.
 - Не собирать документацию и тесты.
 
 ## Ограничения
@@ -37,5 +34,4 @@
 
 ## Ссылки
 - https://sources.debian.org/src/devscripts/2.26.13/
-- https://sources.debian.org/src/devscripts/2.25.15%2Bdeb13u1/
 - https://metacpan.org/pod/pp
