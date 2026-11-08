@@ -9,7 +9,8 @@ RUN ./configure \
     --prefix=/usr \
     CPPFLAGS="-I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
-    LIBS="-Wl,-Bstatic -lssl -lcrypto -lreadline -lncursesw -lwrap -Wl,-Bdynamic"
+    LIBS="-Wl,-Bstatic -lssl -lcrypto -lzstd -lz -lreadline -lncursesw -lwrap -Wl,-Bdynamic" && \
+    grep -q '^#define WITH_OPENSSL 1$' config.h
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
