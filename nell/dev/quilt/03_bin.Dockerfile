@@ -12,15 +12,12 @@ RUN ./configure --prefix=/usr --disable-nls
 RUN make -j$(nproc) && \
     make install DESTDIR=/src/target
 
-# Documentation and shell completions are not needed by the quilt commands.
-# Keep /usr/share/quilt: it contains runtime command scripts and resources.
+# Remove documentation only; retain upstream runtime files and completions.
 RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
     /src/target/usr/share/info \
-    /src/target/usr/share/locale \
-    /src/target/usr/share/bash-completion \
-    /src/target/etc/bash_completion.d
+    /src/target/usr/share/locale
 
 FROM scratch AS bundle
 ARG VERSION
