@@ -13,8 +13,9 @@ RUN ./configure \
     --without-guile \
     LDFLAGS="-static-libgcc"
 
-RUN make -j$(nproc)
-RUN make install DESTDIR=/src/target
+RUN make -C lib -j$(nproc) && \
+    make -j$(nproc) make
+RUN install -Dm755 make /src/target/usr/bin/make
 
 RUN rm -rf \
     /src/target/usr/share/man \
