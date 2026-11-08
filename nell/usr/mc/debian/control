@@ -7,7 +7,8 @@ Build-Depends:
  pkg-config,
  gettext,
  libpcre2-dev,
- libffi-dev
+ libffi-dev,
+ libext2fs-dev
 
 Package: mc
 Architecture: amd64
