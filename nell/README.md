@@ -27,6 +27,30 @@ nell/<section>/<project>/
 
 Получает исходники указанной версии из официального upstream и помещает их в `/src`.
 
+Для архивов используется потоковая загрузка через `wget` с тремя попытками,
+выводом ошибок в файл и показом ошибки при неудачной распаковке:
+
+```dockerfile
+ARG VERSION=1.0.0
+
+RUN mkdir -p /src/project && \
+    wget --tries=3 -nv -O- "https://example.org/project-${VERSION}.tar.gz" 2>/tmp/project-wget.err | \
+    tar -xzf - -C /src/project --strip-components=1 || { cat /tmp/project-wget.err >&2; exit 1; }
+```
+
+Для исходников из Git (в том числе GitHub) используется `git clone` с
+`-q --single-branch --branch --depth 1`, с явным указанием версии и каталога:
+
+```dockerfile
+ARG VERSION=1.0.0
+
+RUN git clone -q --single-branch --branch "v${VERSION}" --depth 1 \
+    https://github.com/owner/project.git /src/project
+```
+
+Префикс `v` в имени тега используется только если он принят у конкретного
+upstream; в остальных случаях указывается `"${VERSION}"`.
+
 ### `02_dep.Dockerfile`
 
 Устанавливает build-зависимости из `debian/control` через `mk-build-deps`.
