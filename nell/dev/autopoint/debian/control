@@ -1,0 +1,13 @@
+Source: gettext
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ coreutils,
+ tar,
+ xz-utils
+
+Package: autopoint
+Architecture: all
+Depends: ${misc:Depends}
+Description: GNU Gettext infrastructure bootstrap tool
