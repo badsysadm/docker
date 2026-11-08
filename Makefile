@@ -8,7 +8,7 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper: section = dev
+git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt: section = dev
 git: version ?= 2.56.0
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
@@ -24,6 +24,8 @@ libtool: version ?= 2.6.2
 cmake: version ?= 4.4.5
 devscripts: version ?= 2.26.13
 debhelper: version ?= 14.5
+equivs: version ?= 2.3.3
+quilt: version ?= 0.69
 
 glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus shadow: section = system
 glibc: version ?= 2.44

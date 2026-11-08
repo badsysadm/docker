@@ -1,0 +1,18 @@
+Source: quilt
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ autoconf,
+ automake,
+ gettext,
+ perl,
+ gawk,
+ diffstat,
+ patch,
+ ed
+
+Package: quilt
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Quilt patch series management utilities

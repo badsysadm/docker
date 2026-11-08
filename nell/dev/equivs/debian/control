@@ -1,0 +1,14 @@
+Source: equivs
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ perl,
+ libpar-packer-perl,
+ libdpkg-perl,
+ faketime
+
+Package: equivs
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Debian equivs-build and equivs-control utilities
