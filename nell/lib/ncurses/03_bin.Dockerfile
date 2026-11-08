@@ -18,7 +18,6 @@ RUN cf_cv_ar_flags=-crD ./configure \
     --without-shared \
     --without-debug \
     --enable-widec \
-    --disable-overwrite \
     --enable-pc-files \
     --with-pkg-config-libdir=/usr/lib/x86_64-linux-gnu/pkgconfig \
     --enable-ext-colors \
