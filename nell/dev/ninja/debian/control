@@ -1,0 +1,12 @@
+Source: ninja
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ python3
+
+Package: ninja
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Ninja build system
