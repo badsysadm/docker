@@ -16,8 +16,12 @@ RUN make install \
     PREFIX=/usr LIBDIR=/usr/lib DESTDIR=/src/target \
     PKGCONF=false \
     LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64" \
-    LDLIBS="-Wl,-Bstatic -lcrypto -lz -lzstd -Wl,-Bdynamic" && \
-    rm -rf /src/target/usr/share/man
+    LDLIBS="-Wl,-Bstatic -lcrypto -lz -lzstd -Wl,-Bdynamic"
+
+RUN rm -rf \
+    /src/target/usr/share/man \
+    /src/target/usr/share/info \
+    /src/target/usr/share/doc
 
 FROM scratch AS bundle
 ARG VERSION
