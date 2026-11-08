@@ -1,0 +1,15 @@
+Source: binary-security-check
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ pkg-config
+
+Package: binary-security-check
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Binary security feature analyzer
