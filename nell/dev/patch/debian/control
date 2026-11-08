@@ -1,0 +1,13 @@
+Source: patch
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ libattr1-dev
+
+Package: patch
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Static-Built-Using: zlib (= 1.3.1)
+Description: GNU Patch utility for applying diff files

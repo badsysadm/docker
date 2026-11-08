@@ -1,0 +1,18 @@
+Source: flex
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ autopoint,
+ gettext,
+ bison,
+ flex
+
+Package: flex
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Fast lexical analyzer generator

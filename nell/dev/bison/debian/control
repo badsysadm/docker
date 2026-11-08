@@ -1,0 +1,11 @@
+Source: bison
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential
+
+Package: bison
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: GNU Bison parser generator

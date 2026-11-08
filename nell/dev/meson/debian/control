@@ -1,0 +1,11 @@
+Source: meson
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ python3
+
+Package: meson
+Architecture: amd64
+Depends: ${misc:Depends}
+Description: Meson build system
