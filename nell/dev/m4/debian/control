@@ -1,0 +1,13 @@
+Source: m4
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ gettext,
+ texinfo
+
+Package: m4
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: GNU macro processor
