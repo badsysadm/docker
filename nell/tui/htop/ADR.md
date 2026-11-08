@@ -11,6 +11,8 @@ Unicode и без динамических зависимостей, кроме 
 - Использовать официальный release tarball htop версии 3.5.3.
 - Использовать статическую ncursesw и tinfo из существующего профиля
   `nell/lib/ncurses` без его изменения.
+- Использовать статическую zlib из `nell/lib/zlib` для транзитивных
+  зависимостей `libunwind` и `libxml2`.
 - Сохранить Unicode, управление процессами и CPU affinity через hwloc.
   Upstream hwloc заменяет штатный backend affinity, а не дополняет его.
 - Включить Linux capabilities через статическую libcap.
