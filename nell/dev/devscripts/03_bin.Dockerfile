@@ -6,6 +6,8 @@ ARG VERSION
 WORKDIR /src/devscripts
 
 RUN mkdir -p /src/target/usr/bin && \
+    TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
+    faketime -f '2020-01-01 00:00:00' \
     pp -B -M Dpkg::Changelog::Parse \
        -o /src/target/usr/bin/mk-build-deps \
        scripts/mk-build-deps.pl && \

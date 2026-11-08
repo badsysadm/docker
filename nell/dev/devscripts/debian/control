@@ -5,6 +5,7 @@ Build-Depends:
  debhelper-compat (= 13),
  perl,
  libpar-packer-perl,
+ libfaketime,
  libdpkg-perl
 
 Package: devscripts
