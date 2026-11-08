@@ -53,7 +53,7 @@ RUN for name in deb-janitor debbisect debdiff-apply debootsnap \
     mkdir -p /src/target/usr/lib/python3/dist-packages/devscripts && \
     install -m 644 scripts/devscripts/*.py \
         /src/target/usr/lib/python3/dist-packages/devscripts/ && \
-    printf "version = '%s'\\n" "${VERSION}" \
+    printf "version = '%s'\n" "${VERSION}" \
         > /src/target/usr/lib/python3/dist-packages/devscripts/__init__.py
 
 # Runtime files used by the original devscripts commands.
