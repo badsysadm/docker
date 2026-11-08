@@ -1,4 +1,4 @@
-# ADR: htop with statically linked ncursesw
+# ADR: htop with statically linked terminal and diagnostic libraries
 
 ## Статус
 Принято для проверки сборкой.
@@ -11,20 +11,31 @@ Unicode и без динамических зависимостей, кроме 
 - Использовать официальный release tarball htop версии 3.5.3.
 - Использовать статическую ncursesw и tinfo из существующего профиля
   `nell/lib/ncurses` без его изменения.
-- Сохранить Unicode, управление процессами и настройку CPU affinity.
+- Сохранить Unicode, управление процессами и CPU affinity через hwloc.
+  Upstream hwloc заменяет штатный backend affinity, а не дополняет его.
+- Включить Linux capabilities через статическую libcap.
+- Включить Backtrace (unwind-ptrace) через статические libunwind и liblzma.
+- Использовать hwloc со статической libhwloc и её транзитивными
+  библиотеками; статические архивы Debian размещаются локально в
+  `02_dep.Dockerfile` без изменения других профилей.
 - Не использовать upstream `--enable-static`, так как он делает
-  статической также libc. Вместо этого статически линковать ncursesw/tinfo.
-- Не включать опциональные hwloc, capabilities, sensors, delay accounting,
-  backtrace и PCP. Это исключает дополнительные обязательные библиотеки
-  и runtime-зависимости от них.
+  статической также libc. Вместо этого статически линковать
+  библиотеки ncursesw/tinfo, libcap, hwloc и libunwind.
+- Не включать sensors и delay accounting: штатная реализация загружает
+  libsensors и libnl через `dlopen()` во время работы.
+- Не включать PCP, поскольку это отдельная интеграция с системой
+  мониторинга, требующая дополнительных компонентов.
 - Удалить документацию и графические ярлыки из конечного образа.
 
 ## Последствия
 - Конечный исполняемый файл должен зависеть только от динамической libc
   и загрузчика; подтвердить это через `ldd`.
-- Доступны основные функции htop, включая Unicode и CPU affinity.
-- Температурные датчики, Linux capabilities, delay accounting и backtrace
-  не включены в эту конфигурацию.
+- Доступны Unicode, CPU affinity через hwloc, Linux capabilities
+  и просмотр backtrace через libunwind-ptrace.
+- Температурные датчики и delay accounting не включены.
+- Фактическую статичность транзитивных библиотек проверить через `ldd`;
+  ошибки линковки или новые динамические зависимости требуют исправления
+  только в профиле htop.
 - До завершения проверки нужно подтвердить состав `/target` и
   воспроизводимость двух последовательных сборок.
 
