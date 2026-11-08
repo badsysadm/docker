@@ -5,6 +5,8 @@ ARG VERSION
 
 WORKDIR /src/libunwind
 
+RUN autoreconf -i
+
 RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib/x86_64-linux-gnu \
