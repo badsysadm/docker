@@ -24,7 +24,7 @@ RUN ./configure \
     LDFLAGS="-L/usr/local/lib -static-libgcc" \
     LIBUNWIND_CFLAGS="-I/usr/local/include" \
     LIBUNWIND_LIBS="-Wl,-Bstatic -lunwind-ptrace -lunwind-generic -lunwind -Wl,-Bdynamic" \
-    LIBS="-Wl,-Bstatic -Wl,--start-group -lcap -lhwloc -lnuma -lltdl -lxml2 -lunwind-ptrace -lunwind-generic -lunwind-x86_64 -lunwind -llzma -lz -lm -Wl,--end-group -Wl,-Bdynamic"
+    LIBS="-Wl,-Bstatic -Wl,--start-group -lcap -lhwloc -ludev -lnuma -lltdl -lxml2 -lunwind-ptrace -lunwind-generic -lunwind-x86_64 -lunwind -llzma -lz -lm -Wl,--end-group -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
