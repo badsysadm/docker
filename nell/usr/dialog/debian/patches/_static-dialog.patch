@@ -1,0 +1,6 @@
+diff --git a/makefile.in b/makefile.in
+--- a/makefile.in
++++ b/makefile.in
+@@ -1 +1 @@
+-LINK		= $(LIBTOOL_LINK)
++LINK		= $(CC) $(CFLAGS) -Wl,-Bstatic -L.libs
