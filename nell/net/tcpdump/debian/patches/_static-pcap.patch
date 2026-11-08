@@ -1,0 +1,21 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1002,7 +1002,7 @@
+ # We have libpcap.
+ #
+ include_directories(SYSTEM ${PCAP_INCLUDE_DIRS})
+-set(TCPDUMP_LINK_LIBRARIES ${PCAP_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})
++set(TCPDUMP_LINK_LIBRARIES ${PCAP_STATIC_LIBRARIES} ${TCPDUMP_LINK_LIBRARIES})
+ 
+ #
+ # Optional libraries.
+@@ -1104,7 +1104,7 @@
+ if(WITH_CAP_NG)
+     check_include_file(cap-ng.h HAVE_CAP_NG_H)
+     check_library_exists(cap-ng capng_change_id "" HAVE_LIBCAP_NG)
+     if(HAVE_LIBCAP_NG)
+-        set(TCPDUMP_LINK_LIBRARIES ${TCPDUMP_LINK_LIBRARIES} cap-ng)
++        set(TCPDUMP_LINK_LIBRARIES ${TCPDUMP_LINK_LIBRARIES} /usr/lib/x86_64-linux-gnu/libcap-ng.a)
+     endif(HAVE_LIBCAP_NG)
+ endif(WITH_CAP_NG)
