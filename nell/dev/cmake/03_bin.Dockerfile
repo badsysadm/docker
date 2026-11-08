@@ -21,8 +21,8 @@ RUN PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" \
     -DOPENSSL_ROOT_DIR=/usr/local \
     -DOPENSSL_USE_STATIC_LIBS=ON \
     -DCMAKE_EXE_LINKER_FLAGS="-static-libstdc++ -static-libgcc" \
-    -DCMAKE_C_STANDARD_LIBRARIES="/usr/local/lib/libz.a;/usr/local/lib/libzstd.a" \
-    -DCMAKE_CXX_STANDARD_LIBRARIES="/usr/local/lib/libz.a;/usr/local/lib/libzstd.a" \
+    -DCMAKE_C_STANDARD_LIBRARIES="/usr/local/lib/libz.a /usr/local/lib/libzstd.a" \
+    -DCMAKE_CXX_STANDARD_LIBRARIES="/usr/local/lib/libz.a /usr/local/lib/libzstd.a" \
     -DSPHINX_HTML=OFF \
     -DSPHINX_MAN=OFF
 
