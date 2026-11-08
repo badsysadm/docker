@@ -17,8 +17,8 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
     --disable-nls \
     --disable-dependency-tracking \
     CPPFLAGS="-I/usr/local/include" \
-    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-Bstatic" \
-    LIBS="-lpcre2-8 -lffi -lz -lm -Wl,-Bdynamic"
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LIBS="-Wl,-Bstatic -lpcre2-8 -lffi -lz -lm -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
