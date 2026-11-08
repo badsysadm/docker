@@ -1,0 +1,13 @@
+Source: cmake
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ perl
+
+Package: cmake
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Static-Built-Using: openssl (= 3.6.5)
+Description: CMake build tools including CTest and CPack
