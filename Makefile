@@ -60,7 +60,8 @@ mailutils: version ?= 3.21
 rss2email: version ?= 3.14
 mcli: version ?= 2026-10-26T00-00-00Z
 
-bash dialog kbd console-setup nano mc: section = usr
+bash dialog kbd console-setup nano: section = usr
+mc: section = tui
 bash: version ?= 5.3
 dialog: version ?= 1.3-20260721
 coreutils: version ?= 9.5
