@@ -9,7 +9,7 @@ WORKDIR /src/dialog
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --bindir=/bin \
+    --bindir=/usr/bin \
     --mandir=/usr/share/man \
     --with-ncursesw \
     --enable-widec \
