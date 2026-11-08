@@ -9,7 +9,8 @@ RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-nls \
-    LDFLAGS="-static-libgcc" \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
     LIBS="-Wl,-Bstatic -lncursesw -ltinfo -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
