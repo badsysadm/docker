@@ -1,7 +1,7 @@
 Source: dialog
 Section: usr
 Maintainer: badsysadm <me@badsysadm.com>
-Build-Depends: debhelper-compat (= 13), build-essential, pkg-config
+Build-Depends: debhelper-compat (= 13), build-essential, pkg-config, libtool-bin
 
 Package: dialog
 Architecture: amd64
