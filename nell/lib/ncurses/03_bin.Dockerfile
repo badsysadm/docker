@@ -11,25 +11,20 @@ RUN cf_cv_ar_flags=-crD ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/bin \
-    --libdir=/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib/x86_64-linux-gnu \
     --without-manpages \
     --without-tests \
-    --enable-static \
-    --without-shared \
+    --with-normal \
+    --with-shared \
     --without-debug \
     --enable-widec \
     --enable-pc-files \
     --with-pkg-config-libdir=/usr/lib/x86_64-linux-gnu/pkgconfig \
     --enable-ext-colors \
-    --enable-ext-mouse \
-    CC="gcc -static" \
-    LDFLAGS="-static"
+    --enable-ext-mouse
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
-
-RUN mkdir -p /src/target/lib/x86_64-linux-gnu && \
-    cp -a /src/target/usr/lib/x86_64-linux-gnu/* /src/target/lib/x86_64-linux-gnu/ 2>/dev/null || true
 
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 

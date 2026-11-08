@@ -24,7 +24,7 @@ RUN sed -i \
     /usr/local/lib/pkgconfig/gmodule-no-export-2.0.pc
 
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
-COPY --from=ncurses_image /target/lib/x86_64-linux-gnu/ /usr/local/lib/
+COPY --from=ncurses_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
 RUN mkdir -p /usr/local/include/ncursesw && \
     ln -s ../curses.h /usr/local/include/ncursesw/curses.h && \
     ln -s ../term.h /usr/local/include/ncursesw/term.h

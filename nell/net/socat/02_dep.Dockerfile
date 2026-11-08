@@ -18,7 +18,7 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
 COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
-COPY --from=ncurses_image /target/lib/x86_64-linux-gnu/libncursesw.a /usr/local/lib/libncursesw.a
+COPY --from=ncurses_image /target/usr/lib/x86_64-linux-gnu/libncursesw.a /usr/local/lib/libncursesw.a
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 
