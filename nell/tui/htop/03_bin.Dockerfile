@@ -9,16 +9,18 @@ RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --enable-unicode \
-    --enable-affinity \
-    --disable-hwloc \
-    --disable-capabilities \
+    --disable-affinity \
+    --enable-hwloc \
+    --enable-capabilities \
     --disable-sensors \
     --disable-delayacct \
-    --disable-backtrace \
+    --enable-backtrace=unwind-ptrace \
+    --with-libunwind=yes \
     --disable-pcp \
     CURSES_CFLAGS="-I/usr/local/include" \
     CURSES_LIBS="-L/usr/local/lib -Wl,-Bstatic -lncursesw -ltinfo -Wl,-Bdynamic" \
-    LDFLAGS="-static-libgcc"
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LIBS="-Wl,-Bstatic -Wl,--start-group -lcap -lhwloc -lnuma -lltdl -lxml2 -lunwind-ptrace -lunwind-generic -lunwind-x86_64 -lunwind -llzma -lz -lm -Wl,--end-group -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
