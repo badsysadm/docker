@@ -48,6 +48,7 @@ kaniko:
 	$(MAKE) nell/$(section)/$@/03_bin.Dockerfile version=$(version)
 	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
 	diff .sha256_1 .sha256_2
+	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/$(section)/$@:$(version)
 
 run:
 	systemd-run -t \
