@@ -8,7 +8,8 @@ WORKDIR /src/cmake
 RUN mkdir build
 WORKDIR /src/cmake/build
 
-RUN CXXFLAGS="-O2" \
+RUN PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" \
+    CXXFLAGS="-O2" \
     LDFLAGS="-static-libstdc++ -static-libgcc" \
     ../bootstrap \
     --prefix=/usr \
