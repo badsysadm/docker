@@ -31,3 +31,15 @@ find . -type f \( -name configure -o -name Makefile.in -o -name aclocal.m4 \) -e
 ```sh
 -Xlinker -Bstatic -lcap-ng -Xlinker -Bdynamic
 ```
+
+## OpenSSL: undefined reference при статической линковке
+
+**Симптом:** при линковке с `libcrypto.a` отсутствуют символы
+`inflate`, `deflate`, `ZSTD_decompressStream` и другие.
+
+**Причина:** статический OpenSSL собран с поддержкой zlib и zstd,
+но их библиотеки не переданы линковщику.
+
+**Решение:** подключить `libz.a` и `libzstd.a` после `libcrypto.a`
+(предпочтительно из профилей `nell`). `OPENSSL_USE_STATIC_LIBS=ON`
+не добавляет эти зависимости автоматически.
