@@ -7,7 +7,7 @@
 - Использовать wide-character ncurses с extended colors и extended mouse.
 - Собирать статические и разделяемые библиотеки (.a и .so) из одного исходного дерева.
 - Не выделять terminfo в отдельную библиотеку.
-- Устанавливать библиотеки в /usr/lib/x86_64-linux-gnu и экспортировать pkg-config metadata.
+- Устанавливать библиотеки в /usr/lib и экспортировать pkg-config metadata.
 - Сохранять скомпилированную базу terminfo для runtime-потребителей.
 
 ## Последствия

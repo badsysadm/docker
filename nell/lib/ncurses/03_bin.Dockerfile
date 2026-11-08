@@ -11,7 +11,7 @@ RUN cf_cv_ar_flags=-crD ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --bindir=/bin \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --without-manpages \
     --without-tests \
     --with-normal \
@@ -19,7 +19,7 @@ RUN cf_cv_ar_flags=-crD ./configure \
     --without-debug \
     --enable-widec \
     --enable-pc-files \
-    --with-pkg-config-libdir=/usr/lib/x86_64-linux-gnu/pkgconfig \
+    --with-pkg-config-libdir=/usr/lib/pkgconfig \
     --enable-ext-colors \
     --enable-ext-mouse
 

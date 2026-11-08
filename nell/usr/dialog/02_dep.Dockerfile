@@ -10,6 +10,6 @@ RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
-COPY --from=ncurses_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
+COPY --from=ncurses_image /target/usr/lib/ /usr/local/lib/
 
 COPY --from=src_image /src/ /src
