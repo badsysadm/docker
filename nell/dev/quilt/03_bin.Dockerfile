@@ -11,7 +11,9 @@ RUN autoconf && \
     ./configure --prefix=/usr --disable-nls
 
 RUN make -j$(nproc) && \
-    make install DESTDIR=/src/target
+    make install BUILD_ROOT=/src/target && \
+    test -f /src/target/usr/bin/quilt && \
+    test -d /src/target/usr/share/quilt
 
 # Remove documentation only; retain upstream runtime files and completions.
 RUN rm -rf \
