@@ -10,9 +10,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
     ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --with-screen=ncurses \
-    --with-ncurses-includes=/usr/local/include \
-    --with-ncurses-libs=/usr/local/lib \
+    --with-screen=ncursesw \
     --with-glib-static \
     --without-gpm-mouse \
     --without-x \
