@@ -18,13 +18,9 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
 COPY --from=ncurses_image /target/usr/lib/ /usr/local/lib/
 
-RUN cp /usr/lib/libcap.a \
-       /usr/lib/libhwloc.a \
-       /usr/lib/liblzma.a \
-       /usr/lib/libxml2.a \
-       /usr/lib/libnuma.a \
-       /usr/lib/libltdl.a \
-       /usr/local/lib/
+RUN for lib in libcap.a libhwloc.a liblzma.a libxml2.a libnuma.a libltdl.a; do \
+        install -D "/usr/lib/x86_64-linux-gnu/$lib" "/usr/local/lib/$lib" || exit 1; \
+    done
 
 COPY --from=libunwind_image /target/usr/include/ /usr/local/include/
 COPY --from=libunwind_image /target/usr/lib/ /usr/local/lib/
