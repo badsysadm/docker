@@ -9,8 +9,8 @@
 
 ## Решение
 - Сохранить OpenSSL, Readline и TCP Wrappers.
-- Брать OpenSSL и ncurses из профилей nell; Readline и
-  TCP Wrappers — из Debian.
+- Брать OpenSSL, ncurses, zlib и Zstandard из профилей nell;
+  Readline и TCP Wrappers — из Debian.
 - Линковать эти библиотеки статически.
 
 ## Последствия
