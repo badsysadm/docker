@@ -7,7 +7,6 @@ Build-Depends:
  pkg-config,
  libcap-dev,
  libhwloc-dev,
- libunwind-dev,
  liblzma-dev,
  libxml2-dev,
  libnuma-dev,
@@ -15,6 +14,6 @@ Build-Depends:
 
 Package: htop
 Architecture: amd64
-Static-Built-Using: ncurses (= 6.6), zlib (= 1.3.1)
+Static-Built-Using: ncurses (= 6.6), zlib (= 1.3.1), libunwind (= 1.8.3)
 Depends: ${shlibs:Depends}
 Description: Interactive process viewer
