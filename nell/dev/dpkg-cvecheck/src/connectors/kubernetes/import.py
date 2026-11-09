@@ -9,11 +9,11 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 
 
 URL = "https://kubernetes.io/docs/reference/issues-security/official-cve-feed/index.json"
-DESTINATION = Path(DATA / "kubernetes-cve.json")
+DESTINATION = Path(CVE_BUILD_DIR / "kubernetes-cve.json")
 
 
 def get():

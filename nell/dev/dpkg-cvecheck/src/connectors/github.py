@@ -8,7 +8,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from config import DATA
+from config import CVE_BUILD_DIR
 
 
 URL = "https://github.com/github/advisory-database/archive/refs/heads/main.tar.gz"
@@ -17,7 +17,7 @@ def make_purl(package: dict) -> str:
     return f"pkg:{package['ecosystem']}/{package['name']}".lower()
 
 def update_github_cve_database(
-    path: Path = DATA / "github-cve.jsonl",
+    path: Path = CVE_BUILD_DIR / "github-cve.jsonl",
     url: str = URL,
 ) -> int:
     output = Path(path)

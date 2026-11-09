@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CONNECTORS = ROOT / "connectors"
-from config import DATA
+from config import CVE_BUILD_DIR
 
 MODULES = {
     "nvd": ("nvd/import.py", "nvd/converter.py", "nvd-purl.txt"),
@@ -26,14 +26,14 @@ MODULES = {
 
 
 def merge():
-    sources = [DATA / scripts[2] for scripts in MODULES.values()]
-    destination = DATA / "merged-purl.txt"
+    sources = [CVE_BUILD_DIR / scripts[2] for scripts in MODULES.values()]
+    destination = CVE_BUILD_DIR / "merged-purl.txt"
 
     for source in sources:
         if not source.is_file():
             raise FileNotFoundError(source)
 
-    with tempfile.NamedTemporaryFile(dir=DATA, delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(dir=CVE_BUILD_DIR, delete=False) as tmp:
         temporary = Path(tmp.name)
 
     try:

@@ -5,12 +5,12 @@ import re
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 from urllib.parse import unquote
 
 
-SOURCE = DATA / "debian-cve.json"
-DESTINATION = DATA / "debian-purl.txt"
+SOURCE = CVE_BUILD_DIR / "debian-cve.json"
+DESTINATION = CVE_BUILD_DIR / "debian-purl.txt"
 ALIASES = str(Path(__file__).resolve().parents[2] / "aliases")
 
 def normalize(value: str) -> str:

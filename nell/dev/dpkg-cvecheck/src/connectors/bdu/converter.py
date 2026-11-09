@@ -5,12 +5,12 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 from urllib.parse import unquote
 
 
-SOURCE = DATA / "fstec-cve.xml"
-DESTINATION = DATA / "fstec-purl.txt"
+SOURCE = CVE_BUILD_DIR / "fstec-cve.xml"
+DESTINATION = CVE_BUILD_DIR / "fstec-purl.txt"
 ALIASES = str(Path(__file__).resolve().parents[2] / "aliases")
 
 CVE_PATTERN = re.compile(r"^CVE-\d{4}-\d{4,}$")

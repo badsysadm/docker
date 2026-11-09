@@ -9,14 +9,14 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 
 
 URL = "https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-{year}.json.gz"
 
 
 def update_nvd_cve_database(
-    path: Path = DATA / "nvd-cve.jsonl",
+    path: Path = CVE_BUILD_DIR / "nvd-cve.jsonl",
     url: str = URL,
     first_year: int = 2002,
     last_year: int | None = None,

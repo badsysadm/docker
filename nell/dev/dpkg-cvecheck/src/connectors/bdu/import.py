@@ -9,11 +9,11 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 
 
 URL = "https://bdu.fstec.ru/files/documents/vulxml.zip"
-DESTINATION = DATA / "fstec-cve.xml"
+DESTINATION = CVE_BUILD_DIR / "fstec-cve.xml"
 
 
 def update_fstec_cve_database(

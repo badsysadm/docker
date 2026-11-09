@@ -6,11 +6,11 @@ import re
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from config import DATA
+from config import CVE_BUILD_DIR
 
 
-SOURCE = Path(DATA / "kubernetes-cve.json")
-DESTINATION = Path(DATA / "kubernetes-purl.txt")
+SOURCE = Path(CVE_BUILD_DIR / "kubernetes-cve.json")
+DESTINATION = Path(CVE_BUILD_DIR / "kubernetes-purl.txt")
 PURL = "pkg:kubernetes/kubernetes"
 CVE = re.compile(r"^CVE-\d{4}-\d{4,}$")
 

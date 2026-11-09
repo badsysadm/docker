@@ -1,4 +1,4 @@
 from pathlib import Path
 
 
-DATA = Path(__file__).resolve().parent / ".buildcve"
+CVE_BUILD_DIR = Path(__file__).resolve().parent / ".buildcve"
