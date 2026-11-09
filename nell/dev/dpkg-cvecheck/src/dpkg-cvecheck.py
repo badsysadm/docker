@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-#DB = ROOT / "debian/protego/cve"
-DB = Path("debian/protego/cve")
+#DB = ROOT / "debian/cve"
+DB = Path("debian/cve")
 INDEX = Path("/var/lib/cve/db.txt")
 
 ID_PATTERN = re.compile(r"(?:CVE-\d{4}-\d{4,}|BDU:\d{4}-\d+)")
