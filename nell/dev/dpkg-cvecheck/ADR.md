@@ -14,10 +14,11 @@ The source of the project is the local `src/` tree in this repository.
 - `02_dep` uses `debian/control` as the single source for build
   dependencies and installs them with `mk-build-deps`.
 - As an explicit exception to the usual NELL build-stage separation, `02_dep`
-  runs `make build` (fetch, convert, merge and refresh) and `make install`
-  to produce `/src/target`. The vulnerability feeds are mutable external inputs.
-- `03_bin` only packages the finished `/src/target` into a scratch image;
-  it does not rebuild or update the index.
+  runs `make build` (fetch, convert, merge and refresh). The vulnerability
+  feeds are mutable external inputs.
+- `03_bin` runs only `make install` to populate `/src/target` from the
+  prepared index, then packages the result into a scratch image; it does not
+  rebuild or update the index.
 - The scratch image contains only `/target/usr/bin/dpkg-cvecheck` and
   `/target/var/lib/cve/db.txt`. Python and dpkg are runtime requirements
   of the target host, not bundled binaries.

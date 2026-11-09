@@ -12,5 +12,4 @@ RUN apt-get -qq update && \
         --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' \
         debian/control
 
-RUN make build && \
-    make install DESTDIR=/src/target
+RUN make build
