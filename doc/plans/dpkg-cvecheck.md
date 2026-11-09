@@ -173,4 +173,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stages 4–6 pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules); the Debian build and package-content checks have not been performed, so Stage 4 remains open. Stages 5–6 pending.
