@@ -13,10 +13,11 @@ The source of the project is the local `src/` tree in this repository.
   context; this is a first-party project rather than an external upstream clone.
 - `02_dep` uses `debian/control` as the single source for build
   dependencies and installs them with `mk-build-deps`.
-- Network-dependent `make get` (fetch and convert) runs only in `02_dep`.
-- `03_bin` runs `make refresh` to merge and normalize the downloaded
-  intermediate indexes offline, then `make install` to populate
-  `/src/target`.
+- As an explicit exception to the usual NELL build-stage separation, `02_dep`
+  runs `make build` (fetch, convert, merge and refresh) and `make install`
+  to produce `/src/target`. The vulnerability feeds are mutable external inputs.
+- `03_bin` only packages the finished `/src/target` into a scratch image;
+  it does not rebuild or update the index.
 - The scratch image contains only `/target/usr/bin/dpkg-cvecheck` and
   `/target/var/lib/cve/db.txt`. Python and dpkg are runtime requirements
   of the target host, not bundled binaries.
@@ -27,7 +28,8 @@ The source of the project is the local `src/` tree in this repository.
   `dep/dev/dpkg-cvecheck:<version>` images are cached by version by the
   root Makefile. To refresh sources or CVE feeds, rebuild these images with
   a new version or explicitly replace the corresponding cached images.
-- A reproducible `03_bin` uses the same snapshot from `02_dep`; the
-  vulnerability index is not fetched during final assembly.
+- Repeated `03_bin` builds are identical for the same `02_dep` snapshot;
+  rebuilding `02_dep` may change the index even at the same project version
+  because upstream feeds change.
 - Debian packaging metadata lives in the standard profile-level `debian/`
   directory and is used by both `02_dep` and `04_deb`.
