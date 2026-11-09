@@ -265,7 +265,7 @@ usr/bin/trivy usr/bin/
 usr/share/vex/trivy.vex.json usr/share/vex/
 ```
 
-Сборочная стадия [Trivy](../../security/trivy/04_deb.Dockerfile) получает
+Сборочная стадия [Trivy](../../../security/trivy/04_deb.Dockerfile) получает
 `deb/dev/dpkg-cvecheck:0.1.0`, устанавливает его `.deb`, выполняет
 `dh_prep`, копирует содержимое `bin/security/trivy` в `debian/tmp`, затем
 вызывает `dpkg-vexgen` и `dh_install`. Из корня репозитория стадию можно
