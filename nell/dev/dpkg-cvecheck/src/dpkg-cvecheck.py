@@ -25,9 +25,9 @@ def changelog_field(field):
     ).strip()
 
 
-def version_ge(current, required):
+def version_compare(current, operator, required):
     result = subprocess.run(
-        ["dpkg", "--compare-versions", current, "ge", required],
+        ["dpkg", "--compare-versions", current, operator, required],
         check=False,
     )
 
@@ -37,6 +37,10 @@ def version_ge(current, required):
         )
 
     return result.returncode == 0
+
+
+def version_ge(current, required):
+    return version_compare(current, "ge", required)
 
 
 def index_identifiers(path, purl):
@@ -103,6 +107,13 @@ def verify():
                 continue
 
             required = decision.status.removeprefix("fixed:")
+            if decision.introduced is not None and not version_compare(
+                decision.introduced, "lt", required
+            ):
+                errors.append(
+                    f"{binary}: {identifier}: introduced {decision.introduced} "
+                    f"должен быть ниже fixed {required}"
+                )
             if not version_ge(version, required):
                 errors.append(
                     f"{binary}: {identifier}: версия {version} ниже {required}"

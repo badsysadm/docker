@@ -22,6 +22,7 @@ class Decision:
     identifier: str
     status: str
     comment: str
+    introduced: str | None = None
 
 
 def binary_packages(path: Path = Path("debian/control")) -> list[str]:
@@ -73,12 +74,18 @@ def load_decisions(path: Path) -> dict[str, Decision]:
                 )
 
             fields = content.split()
-            if len(fields) != 2:
+            if len(fields) not in (2, 3):
                 raise ValueError(
-                    f"{path}:{number}: ожидается ID статус # описание триажа"
+                    f"{path}:{number}: ожидается ID статус [introduced:<версия>] # описание триажа"
                 )
 
-            identifier, status = fields
+            identifier, status = fields[:2]
+            introduced = None
+            if len(fields) == 3:
+                item = fields[2]
+                if not item.startswith("introduced:") or not item.removeprefix("introduced:"):
+                    raise ValueError(f"{path}:{number}: требуется introduced:<версия>")
+                introduced = item.removeprefix("introduced:")
             if not ID_PATTERN.fullmatch(identifier):
                 raise ValueError(
                     f"{path}:{number}: неверный идентификатор {identifier}"
@@ -88,6 +95,8 @@ def load_decisions(path: Path) -> dict[str, Decision]:
                 if not status.removeprefix("fixed:"):
                     raise ValueError(f"{path}:{number}: не указана версия исправления")
             elif status.startswith("not_affected:"):
+                if introduced is not None:
+                    raise ValueError(f"{path}:{number}: introduced допустим только с fixed")
                 justification = status.removeprefix("not_affected:")
                 if justification not in JUSTIFICATIONS:
                     raise ValueError(
@@ -99,7 +108,7 @@ def load_decisions(path: Path) -> dict[str, Decision]:
             if identifier in decisions:
                 raise ValueError(f"{path}:{number}: повторный {identifier}")
 
-            decisions[identifier] = Decision(identifier, status, comment.strip())
+            decisions[identifier] = Decision(identifier, status, comment.strip(), introduced)
 
     if not decisions:
         raise ValueError(f"Пустой файл решений: {path}")

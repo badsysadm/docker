@@ -16,7 +16,7 @@
 решений. Формат каждой непустой строки:
 
 ```text
-CVE-2024-35192 fixed:0.51.2 # Исправление включено upstream начиная с 0.51.2.
+CVE-2024-35192 fixed:0.51.2 introduced:0 # Исправление включено upstream начиная с 0.51.2.
 CVE-2026-26189 not_affected:component_not_present # trivy-action не входит в бинарный пакет Trivy CLI.
 ```
 
@@ -28,6 +28,13 @@ CVE-2026-26189 not_affected:component_not_present # trivy-action не входи
 `vulnerable_code_cannot_be_controlled_by_adversary` и
 `inline_mitigations_already_exist`. Старый `not-apply` недопустим.
 `under_investigation` не используется: отсутствие решения блокирует проверку.
+
+`introduced:<версия>` необязателен и допускается только после `fixed:<версия>`.
+Он задаёт включительную нижнюю границу уязвимого диапазона, а `fixed`
+— исключающую верхнюю. Если точное начало неизвестно, поле можно не задавать;
+`introduced:0` явно обозначает консервативную границу «с начала истории версий»,
+а не доказанный момент появления уязвимого кода. При заданном `introduced`
+`dpkg-cvecheck` требует `introduced < fixed` по правилам `dpkg`.
 
 `fixed:<версия>` задаётся сопровождающим вручную. `dpkg-cvecheck`
 сравнивает указанный порог с полной версией из `debian/changelog` через
