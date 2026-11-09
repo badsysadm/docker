@@ -3,7 +3,6 @@ import gzip
 import json
 import os
 import tempfile
-import time
 import urllib.request
 
 from datetime import datetime
@@ -11,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from config import CVE_BUILD_DIR
+from download import retry_download
 
 
 URL = "https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-{year}.json.gz"
@@ -50,24 +50,15 @@ def update_nvd_cve_database(
                     },
                 )
 
-                for attempt in range(1, 4):
-                    try:
-                        with urllib.request.urlopen(
-                            request,
-                            timeout=120,
-                        ) as response:
-                            with gzip.GzipFile(fileobj=response) as compressed:
-                                feed = json.load(compressed)
-                        break
-                    except (EOFError, OSError, json.JSONDecodeError) as error:
-                        if attempt == 3:
-                            raise
-                        print(
-                            f"NVD {year}: ошибка загрузки ({error}), "
-                            f"повтор {attempt}/2...",
-                            flush=True,
-                        )
-                        time.sleep(5 * attempt)
+                def fetch_year():
+                    with urllib.request.urlopen(
+                        request,
+                        timeout=120,
+                    ) as response:
+                        with gzip.GzipFile(fileobj=response) as compressed:
+                            return json.load(compressed)
+
+                feed = retry_download(f"NVD {year}", fetch_year)
 
                 vulnerabilities = feed["vulnerabilities"]
 

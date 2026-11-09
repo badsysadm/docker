@@ -22,6 +22,11 @@ The source of the project is the local `src/` tree in this repository.
 - The scratch image contains only `/target/usr/bin/dpkg-cvecheck` and
   `/target/var/lib/cve/db.txt`. Python and dpkg are runtime requirements
   of the target host, not bundled binaries.
+- All remote-feed importers use a uniform failure policy: retry a failed or
+  interrupted download or decoding operation up to three times with bounded
+  delays, and print the source, attempt number and human-readable reason.
+  After the final failure, stop the build with an explicit diagnostic.
+  Incomplete feeds must never replace the last successfully downloaded data.
 - No tests or documentation are built or installed.
 
 ## Consequences
