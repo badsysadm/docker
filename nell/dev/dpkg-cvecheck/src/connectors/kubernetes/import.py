@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import os
 import shutil
 import tempfile
@@ -7,9 +8,12 @@ import urllib.request
 
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
+
 
 URL = "https://kubernetes.io/docs/reference/issues-security/official-cve-feed/index.json"
-DESTINATION = Path(".buildcve/kubernetes-cve.json")
+DESTINATION = Path(DATA / "kubernetes-cve.json")
 
 
 def get():

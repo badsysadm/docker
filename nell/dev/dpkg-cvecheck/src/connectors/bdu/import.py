@@ -1,3 +1,4 @@
+import sys
 import os
 import ssl
 import shutil
@@ -7,9 +8,12 @@ import zipfile
 
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
+
 
 URL = "https://bdu.fstec.ru/files/documents/vulxml.zip"
-DESTINATION = ".buildcve/fstec-cve.xml"
+DESTINATION = DATA / "fstec-cve.xml"
 
 
 def update_fstec_cve_database(

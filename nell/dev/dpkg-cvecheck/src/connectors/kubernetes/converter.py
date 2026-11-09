@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
+import sys
 import json
 import re
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
 
-SOURCE = Path(".buildcve/kubernetes-cve.json")
-DESTINATION = Path(".buildcve/kubernetes-purl.txt")
+
+SOURCE = Path(DATA / "kubernetes-cve.json")
+DESTINATION = Path(DATA / "kubernetes-purl.txt")
 PURL = "pkg:kubernetes/kubernetes"
 CVE = re.compile(r"^CVE-\d{4}-\d{4,}$")
 

@@ -1,12 +1,16 @@
+import sys
 import json
 import re
 
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
 from urllib.parse import unquote
 
 
-SOURCE = ".buildcve/nvd-cve.jsonl"
-DESTINATION = ".buildcve/nvd-purl.txt"
+SOURCE = DATA / "nvd-cve.jsonl"
+DESTINATION = DATA / "nvd-purl.txt"
 ALIASES = str(Path(__file__).resolve().parents[2] / "aliases")
 
 
@@ -134,8 +138,8 @@ def extract_cpe(cve: dict):
 
 
 def convert_nvd_database(
-    source: str = SOURCE,
-    destination: str = DESTINATION,
+    source: Path = SOURCE,
+    destination: Path = DESTINATION,
     aliases_file: str = ALIASES,
 ) -> int:
     aliases = load_aliases(aliases_file)

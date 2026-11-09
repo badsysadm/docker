@@ -1,9 +1,13 @@
+import sys
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
+
 
 def update_debian_cve_database(
-    path: str = ".buildcve/debian-cve.json",
+    path: Path = DATA / "debian-cve.json",
     url: str = "https://security-tracker.debian.org/tracker/data/json",
 ) -> int:
     Path(path).parent.mkdir(parents=True, exist_ok=True)

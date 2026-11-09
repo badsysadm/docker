@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CONNECTORS = ROOT / "connectors"
-DATA = Path(".buildcve")
+from config import DATA
 
 MODULES = {
     "nvd": ("nvd/import.py", "nvd/converter.py", "nvd-purl.txt"),

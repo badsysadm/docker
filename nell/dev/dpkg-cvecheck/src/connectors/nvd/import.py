@@ -1,3 +1,4 @@
+import sys
 import gzip
 import json
 import os
@@ -7,12 +8,15 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import DATA
+
 
 URL = "https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-{year}.json.gz"
 
 
 def update_nvd_cve_database(
-    path: str = ".buildcve/nvd-cve.jsonl",
+    path: Path = DATA / "nvd-cve.jsonl",
     url: str = URL,
     first_year: int = 2002,
     last_year: int | None = None,

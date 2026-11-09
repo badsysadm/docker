@@ -11,7 +11,9 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent
 ALIASES = ROOT / "aliases"
-MERGED = Path(".buildcve/merged-purl.txt")
+from config import DATA
+
+MERGED = DATA / "merged-purl.txt"
 
 
 def normalize(value: str) -> str:
