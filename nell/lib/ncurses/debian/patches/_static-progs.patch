@@ -1,0 +1,43 @@
+diff --git a/progs/Makefile.in b/progs/Makefile.in
+--- a/progs/Makefile.in
++++ b/progs/Makefile.in
+@@ -56,1 +56,1 @@
+-MODEL		= ../@DFT_OBJ_SUBDIR@
++MODEL		= ../objects
+@@ -103,7 +103,7 @@
+ CFLAGS_PROFILE	= $(CCFLAGS) -DNCURSES_STATIC -pg
+ CFLAGS_SHARED	= $(CCFLAGS) @CC_SHARED_OPTS@
+ 
+-CFLAGS_DEFAULT	= $(CFLAGS_@DFT_UPR_MODEL@)
++CFLAGS_DEFAULT	= $(CFLAGS_NORMAL)
+ 
+ REL_VERSION	= @cf_cv_rel_version@
+ ABI_VERSION	= @cf_cv_abi_version@
+@@ -120,13 +120,13 @@
+ LDFLAGS_PROFILE	= $(LDFLAGS) $(CFLAGS_PROFILE)
+ LDFLAGS_SHARED	= $(LDFLAGS) $(CFLAGS_SHARED) @LD_SHARED_OPTS@
+ 
+-LDFLAGS_DEFAULT	= $(LDFLAGS_@DFT_UPR_MODEL@)
++LDFLAGS_DEFAULT	= $(LDFLAGS_NORMAL)
+ 
+-LIBS_TIC	= @TINFO_LDFLAGS@ @LDFLAGS_STATIC@ @TICS_LIBS@ @TINFO_LIBS@ @LDFLAGS_SHARED@ @LD_MODEL@ @LIBS@
++LIBS_TIC	= ../lib/libncursesw.a @LIBS@
+-LDFLAGS_TIC	= @TICS_LDFLAGS@ $(LDFLAGS_@DFT_UPR_MODEL@) $(LIBS_TIC)
++LDFLAGS_TIC	= $(LDFLAGS_NORMAL) $(LIBS_TIC)
+ 
+-LIBS_TINFO	= @LDFLAGS_STATIC@ @TINFO_LIBS@ @LDFLAGS_SHARED@ @LD_MODEL@ @LIBS@
++LIBS_TINFO	= ../lib/libncursesw.a @LIBS@
+-LDFLAGS_TINFO	= @TINFO_LDFLAGS@ $(LDFLAGS_@DFT_UPR_MODEL@) $(LIBS_TINFO)
++LDFLAGS_TINFO	= $(LDFLAGS_NORMAL) $(LIBS_TINFO)
+ 
+ LINT		= @LINT@
+ LINT_OPTS	= @LINT_OPTS@
+@@ -142,7 +142,7 @@
+ PROGS = $(PUT_PROGS) $(GET_PROGS)
+ 
+ # Default library, for linking applications
+-DEPS_CURSES = ../lib/@LIB_PREFIX@ncurses@DFT_DEP_SUFFIX@
++DEPS_CURSES = ../lib/libncursesw.a
+ 
+ HEADER_DEPS	= \
+ 	../include/curses.h \

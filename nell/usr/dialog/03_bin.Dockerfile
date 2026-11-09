@@ -6,16 +6,27 @@ FROM dep_image AS build
 ARG VERSION
 
 WORKDIR /src/dialog
+
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/_static-dialog.patch
+
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --bindir=/bin \
+    --bindir=/usr/bin \
+    --libdir=/usr/lib \
     --mandir=/usr/share/man \
     --with-ncursesw \
     --enable-widec \
-    LDFLAGS="-static-libgcc -Wl,-Bstatic $(pkg-config --libs ncursesw tinfo) -Wl,-Bdynamic"
+    --with-shared \
+    --with-libtool \
+    --disable-rpath-hack \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    LIBS="-Wl,-Bstatic -lncursesw -Wl,-Bdynamic"
 RUN make -j$(nproc)
-RUN make install DESTDIR=/src/target
+RUN make install install-lib DESTDIR=/src/target
+RUN find /src/target -name '*.la' -delete
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 
 FROM scratch AS bundle

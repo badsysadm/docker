@@ -9,11 +9,18 @@ RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-nls \
-    LDFLAGS="-static-libgcc" \
-    LIBS="-Wl,-Bstatic -lncursesw -ltinfo -Wl,-Bdynamic"
+    LDFLAGS="-L/usr/local/lib -static-libgcc" \
+    NCURSESW_CFLAGS="-I/usr/local/include" \
+    NCURSESW_LIBS="-L/usr/local/lib -Wl,-Bstatic -lncursesw -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
+
+RUN install -D -m 0644 -t /src/target/usr/share/nano-syntax-highlighting \
+    /src/nano-syntax-highlighting/*.nanorc
+
+RUN mkdir -p /src/target/etc && \
+    printf '\ninclude "/usr/share/nano-syntax-highlighting/*.nanorc"\n' >> /src/target/etc/nanorc
 
 RUN rm -rf /src/target/usr/share/man \
     /src/target/usr/share/info \
