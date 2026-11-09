@@ -227,8 +227,8 @@ debian/cve/trivy-server
 
 Документ содержит `@context`, `@id`, `author`, `timestamp`,
 `version` и `statements`. Идентификатор документа и порядок
-заявлений воспроизводимы, время берётся из `SOURCE_DATE_EPOCH`
-либо даты changelog. Каждое заявление содержит `vulnerability.name`,
+заявлений воспроизводимы, время всегда берётся из даты
+`debian/changelog`. Каждое заявление содержит `vulnerability.name`,
 `products`, `status` и `status_notes` (дословный текст комментария,
 без внешних пробелов).
 

@@ -29,11 +29,11 @@ would make otherwise identical VEX reports differ between builds.
   delays, and print the source, attempt number and human-readable reason.
   After the final failure, stop the build with an explicit diagnostic.
   Incomplete feeds must never replace the last successfully downloaded data.
-- OpenVEX document timestamps are derived from `SOURCE_DATE_EPOCH` when
-  provided, otherwise from the date in `debian/changelog`. The selected time
-  is normalized to UTC (RFC 3339) and participates in deterministic document
-  identification. This deliberately represents reproducible build metadata,
-  not necessarily the actual instant when a VEX decision was made.
+- OpenVEX document timestamps always use the date from `debian/changelog`,
+  normalized to UTC (RFC 3339), rather than the wall-clock time or an
+  environment-provided build timestamp. This ensures deterministic document
+  identification for a given changelog and set of decisions; it does not
+  necessarily represent the instant when a VEX decision was made.
 - No tests or documentation are built or installed.
 
 ## Consequences
@@ -46,6 +46,6 @@ would make otherwise identical VEX reports differ between builds.
   because upstream feeds change.
 - Debian packaging metadata lives in the standard profile-level `debian/`
   directory and is used by both `02_dep` and `04_deb`.
-- Rebuilding VEX from the same decisions, package version and timestamp
-  inputs yields stable document metadata; changing `SOURCE_DATE_EPOCH` or the
-  changelog date changes the generated timestamp and document identifier.
+- Rebuilding VEX from the same decisions, package version and changelog date
+  yields stable document metadata; changing the changelog date changes the
+  generated timestamp and document identifier.

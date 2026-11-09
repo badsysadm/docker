@@ -31,11 +31,7 @@ def changelog_field(name):
 
 
 def issued_at():
-    epoch = os.environ.get("SOURCE_DATE_EPOCH")
-    if epoch is not None:
-        instant = datetime.fromtimestamp(int(epoch), tz=timezone.utc)
-    else:
-        instant = parsedate_to_datetime(changelog_field("Date"))
+    instant = parsedate_to_datetime(changelog_field("Date"))
     return instant.astimezone(timezone.utc).isoformat(timespec="seconds").replace(
         "+00:00", "Z"
     )

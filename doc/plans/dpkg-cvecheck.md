@@ -80,7 +80,7 @@ Deliverables:
 5. Each VEX document identifies the particular binary package and its
    package version (not the source package collectively), emits deterministic
    statement ordering and document identity, and uses a stable build
-   timestamp (for example `SOURCE_DATE_EPOCH`) to preserve reproducibility.
+   timestamp from `debian/changelog` to preserve reproducibility.
    The package product identifier, PURL encoding and version source are to
    be specified concretely in Stage 1.
 6. Keep the checker as the validation gate; the generator must not turn
