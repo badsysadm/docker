@@ -3,6 +3,7 @@ import gzip
 import json
 import os
 import tempfile
+import time
 import urllib.request
 
 from datetime import datetime
@@ -49,12 +50,24 @@ def update_nvd_cve_database(
                     },
                 )
 
-                with urllib.request.urlopen(
-                    request,
-                    timeout=120,
-                ) as response:
-                    with gzip.GzipFile(fileobj=response) as compressed:
-                        feed = json.load(compressed)
+                for attempt in range(1, 4):
+                    try:
+                        with urllib.request.urlopen(
+                            request,
+                            timeout=120,
+                        ) as response:
+                            with gzip.GzipFile(fileobj=response) as compressed:
+                                feed = json.load(compressed)
+                        break
+                    except (EOFError, OSError, json.JSONDecodeError) as error:
+                        if attempt == 3:
+                            raise
+                        print(
+                            f"NVD {year}: ошибка загрузки ({error}), "
+                            f"повтор {attempt}/2...",
+                            flush=True,
+                        )
+                        time.sleep(5 * attempt)
 
                 vulnerabilities = feed["vulnerabilities"]
 
