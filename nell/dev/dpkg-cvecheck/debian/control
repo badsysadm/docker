@@ -9,11 +9,6 @@ Rules-Requires-Root: no
 Package: dpkg-cvecheck
 Architecture: all
 Depends: ${misc:Depends}, python3, dpkg-dev, dpkg
-Description: Debian source package CVE verification using a consolidated index
- Checks source package vulnerabilities against local applicability and fix decisions.
-
-Package: dpkg-vexgen
-Architecture: all
-Depends: ${misc:Depends}, python3, dpkg-dev, dpkg-cvecheck (= ${binary:Version})
-Description: Generate OpenVEX reports from Debian CVE triage decisions
- Creates per-binary-package OpenVEX reports from debian/cve decisions.
+Description: Debian CVE verification and OpenVEX report generation
+ Checks source package vulnerabilities against local applicability and fix
+ decisions, and generates per-binary-package OpenVEX reports from triage.
