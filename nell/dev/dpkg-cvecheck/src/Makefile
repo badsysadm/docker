@@ -1,12 +1,26 @@
-build: get refresh
+build: get convert refresh
 
 get:
-	python3 ./main.py get
-	python3 ./main.py convert
+	python3 ./connectors/nvd/import.py
+	python3 ./connectors/debian/import.py
+	python3 ./connectors/bdu/import.py
+	python3 ./connectors/kubernetes/import.py
 
-refresh:
-	python3 ./main.py merge
-	python3 ./main.py refresh
+convert:
+	python3 ./connectors/nvd/converter.py
+	python3 ./connectors/debian/converter.py
+	python3 ./connectors/bdu/converter.py
+	python3 ./connectors/kubernetes/converter.py
+
+merge:
+	LC_ALL=C sort -u -o .buildcve/merged-purl.txt \
+		.buildcve/nvd-purl.txt \
+		.buildcve/debian-purl.txt \
+		.buildcve/fstec-purl.txt \
+		.buildcve/kubernetes-purl.txt
+
+refresh: merge
+	python3 ./refresh.py
 
 install:
 	install -D -m 755 dpkg-cvecheck.py $(DESTDIR)/usr/bin/dpkg-cvecheck
@@ -16,4 +30,4 @@ clean:
 	rm -rf .buildcve
 
 verify:
-	python3 ./main.py verify
+	python3 ./dpkg-cvecheck.py
