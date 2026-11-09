@@ -11,6 +11,9 @@
 │   ├── bdu/
 │   │   ├── import.py
 │   │   └── converter.py
+│   ├── chainguard/
+│   │   ├── import.py
+│   │   └── converter.py
 │   ├── debian/
 │   │   ├── import.py
 │   │   └── converter.py
@@ -43,6 +46,7 @@
 | NVD | `connectors/nvd/import.py` | `connectors/nvd/converter.py` | `/.buildcve/nvd-cve.jsonl` | `/.buildcve/nvd-purl.txt` |
 | Debian Security Tracker | `connectors/debian/import.py` | `connectors/debian/converter.py` | `/.buildcve/debian-cve.json` | `/.buildcve/debian-purl.txt` |
 | БДУ ФСТЭК | `connectors/bdu/import.py` | `connectors/bdu/converter.py` | `/.buildcve/fstec-cve.xml` | `/.buildcve/fstec-purl.txt` |
+| Chainguard OSV v3 | `connectors/chainguard/import.py` | `connectors/chainguard/converter.py` | `/.buildcve/chainguard-cve.jsonl` | `/.buildcve/chainguard-purl.txt` |
 | Kubernetes Official CVE Feed | `connectors/kubernetes/import.py` | `connectors/kubernetes/converter.py` | `/.buildcve/kubernetes-cve.json` | `/.buildcve/kubernetes-purl.txt` |
 
 Общий индекс: **`/.buildcve/merged-purl.txt`**.
@@ -54,9 +58,10 @@
 - **NVD:** построчная обработка JSONL; сопоставление программного обеспечения по сведениям из NVD; поисковые PURL преимущественно вида `pkg:generic/...`.
 - **Debian:** используются исходные пакеты Debian Security Tracker; PURL вида `pkg:deb/debian_<source-package>`. Временные обозначения `TEMP-*` в выходной индекс не включаются.
 - **БДУ ФСТЭК:** XML обрабатывается потоково. Если запись содержит CVE, создаются пары с CVE; если CVE отсутствуют, используется идентификатор `BDU:...`. Не нужно дублировать одну запись одновременно под CVE и BDU.
+- **Chainguard:** используется полный архив OSV v3; из `affected[].package` формируются ключи `pkg:chainguard/<package>` и `pkg:wolfi/<package>`, из `upstream` — идентификаторы CVE. Диапазоны версий и статусы триажа фида не фильтруются; анализ применимости остаётся ручным. Пакеты с другими экосистемами игнорируются. Для Trivy добавлены соответствия `pkg:chainguard/trivy` и `pkg:wolfi/trivy`.
 - **Kubernetes:** все CVE официального JSON-фида сохраняются с единым ключом `pkg:kubernetes/kubernetes`. Конвертер не разбирает текст бюллетеней, не выделяет отдельные компоненты и не применяет алиасы.
 
-Конвертеры NVD, Debian и БДУ применяют соответствия из корневого `aliases` при формировании промежуточных индексов. Kubernetes сохраняет исходный ключ `pkg:kubernetes/kubernetes` без алиасов.
+Конвертеры NVD, Debian, БДУ и Chainguard применяют соответствия из корневого `aliases` при формировании промежуточных индексов. Kubernetes сохраняет исходный ключ `pkg:kubernetes/kubernetes` без алиасов.
 
 ## Команды
 
@@ -73,8 +78,8 @@ make verify
 
 | Команда | Назначение |
 |---|---|
-| `build` | Выполнить `get`, `convert` и `refresh` для всех четырёх источников. |
-| `get` | Загрузить исходные данные NVD, Debian, БДУ ФСТЭК и Kubernetes. |
+| `build` | Выполнить `get`, `convert` и `refresh` для всех пяти источников. |
+| `get` | Загрузить исходные данные NVD, Debian, БДУ ФСТЭК, Kubernetes и Chainguard. |
 | `convert` | Пересоздать все промежуточные индексы из локальных исходных данных. |
 | `merge` | Объединить промежуточные индексы, отсортировать и удалить идентичные строки. |
 | `refresh` | Выполнить `merge` и применить текущие алиасы к объединённому индексу. |
