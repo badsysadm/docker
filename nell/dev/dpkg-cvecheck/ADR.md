@@ -11,7 +11,7 @@ The source of the project is the local `src/` tree in this repository.
 ## Decision
 - The `01_src` stage copies the maintained `src/` tree from the NELL build
   context; this is a first-party project rather than an external upstream clone.
-- `02_dep` uses `src/debian/control` as the single source for build
+- `02_dep` uses `debian/control` as the single source for build
   dependencies and installs them with `mk-build-deps`.
 - Network-dependent `make get` (fetch and convert) runs only in `02_dep`.
 - `03_bin` runs `make refresh` to merge and normalize the downloaded
@@ -29,7 +29,5 @@ The source of the project is the local `src/` tree in this repository.
   a new version or explicitly replace the corresponding cached images.
 - A reproducible `03_bin` uses the same snapshot from `02_dep`; the
   vulnerability index is not fetched during final assembly.
-- Debian packaging metadata lives in `src/debian/control`, because the
-  source tree is also independently built as a Debian package; duplicating
-  that control file at the NELL profile root would create two dependency
-  specifications.
+- Debian packaging metadata lives in the standard profile-level `debian/`
+  directory and is used by both `02_dep` and `04_deb`.

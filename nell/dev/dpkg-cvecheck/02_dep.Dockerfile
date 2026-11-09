@@ -5,6 +5,7 @@ FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY --from=src_image /src/ /src/
 WORKDIR /src/dpkg-cvecheck
+COPY debian/ ./debian/
 
 RUN apt-get -qq update && \
     mk-build-deps --install --remove \

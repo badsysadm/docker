@@ -10,7 +10,7 @@ ARG SOURCE_DATE_EPOCH=728438400
 
 WORKDIR /src
 RUN mkdir -p /target
-COPY src/debian/ ./debian/
+COPY debian ./debian/
 RUN dh_prep
 COPY --from=bin_image /target/* /src/debian/tmp/
 RUN dh_testdir
