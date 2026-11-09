@@ -24,6 +24,8 @@ refresh: merge
 
 install:
 	install -D -m 755 dpkg-cvecheck.py $(DESTDIR)/usr/bin/dpkg-cvecheck
+	install -D -m 755 dpkg-vexgen.py $(DESTDIR)/usr/bin/dpkg-vexgen
+	install -D -m 644 triage.py $(DESTDIR)/usr/lib/python3/dist-packages/triage.py
 	install -D -m 644 .buildcve/merged-purl.txt $(DESTDIR)/var/lib/cve/db.txt
 
 clean:

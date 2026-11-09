@@ -1,2 +1,3 @@
 usr/bin/dpkg-cvecheck usr/bin/
 var/lib/cve/db.txt var/lib/cve/
+usr/lib/python3/dist-packages/triage.py usr/lib/python3/dist-packages/
