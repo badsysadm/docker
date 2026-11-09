@@ -43,7 +43,7 @@ Deliverables:
 - [Current checker](../../nell/dev/dpkg-cvecheck/src/dpkg-cvecheck.py)
 - [Current package build](../../nell/dev/dpkg-cvecheck/04_deb.Dockerfile)
 - [Project ADR](../../nell/dev/dpkg-cvecheck/ADR.md)
-- [Trivy decisions](../../nell/security/trivy/debian/cve/main)
+- [Trivy decisions](../../nell/security/trivy/debian/cve/trivy)
 - [OpenVEX specification](https://github.com/openvex/spec)
 
 ## Agreed design
