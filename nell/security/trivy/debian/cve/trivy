@@ -1,11 +1,11 @@
-CVE-2024-35192 fixed:0.51.2 # Утечка учётных данных registry; исправлено upstream в v0.51.2 (GHSA-xcq4-m2r3-cmrj).
-CVE-2026-104994 fixed:0.71.0 # Обход путей через Terraform filesystem functions; исправлено до upstream v0.71.0.
+CVE-2024-35192 introduced:0 fixed:0.51.2 # Утечка учётных данных registry; исправлено upstream в v0.51.2 (GHSA-xcq4-m2r3-cmrj).
+CVE-2026-104994 introduced:0 fixed:0.71.0 # Обход путей через Terraform filesystem functions; исправлено до upstream v0.71.0.
 CVE-2026-26189 not_affected:component_not_present # Инъекция команд относится к trivy-action 0.31.0–0.33.x, а не к CLI Trivy.
 CVE-2026-28353 not_affected:component_not_present # Вредоносная версия расширения Trivy VS Code 1.8.12; расширение не входит в пакет CLI.
 CVE-2026-32285 not_affected:component_not_present # Уязвимость buger/jsonparser (<1.1.2); модуль отсутствует в go.mod upstream Trivy v0.76.2.
 CVE-2026-33634 not_affected:vulnerable_code_not_present # Компрометация конкретного релиза Trivy v0.69.4; пакет собирается из исходников v0.76.2.
 CVE-2026-41567 not_affected:component_not_present # Уязвим Docker/Moby daemon; пакет содержит Trivy CLI, а не Docker daemon.
 CVE-2026-44432 not_affected:component_not_present # Уязвимость Python urllib3 2.6.x; Trivy CLI собран на Go и не содержит urllib3.
-CVE-2026-54448 fixed:0.71.0 # Исчерпание памяти при распаковке Helm-архива; исправлено upstream в v0.71.0.
-CVE-2026-55092 fixed:0.71.1 # Обход путей через заголовок OCI-артефакта; исправлено upstream в v0.71.1.
-CVE-2026-63328 fixed:0.72.0 # Обход путей в менеджере плагинов; исправлено upstream в v0.72.0.
+CVE-2026-54448 introduced:0 fixed:0.71.0 # Исчерпание памяти при распаковке Helm-архива; исправлено upstream в v0.71.0.
+CVE-2026-55092 introduced:0 fixed:0.71.1 # Обход путей через заголовок OCI-артефакта; исправлено upstream в v0.71.1.
+CVE-2026-63328 introduced:0 fixed:0.72.0 # Обход путей в менеджере плагинов; исправлено upstream в v0.72.0.
