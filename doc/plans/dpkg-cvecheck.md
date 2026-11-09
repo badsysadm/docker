@@ -1,8 +1,8 @@
 # dpkg-cvecheck / dpkg-vexgen — development plan
 
-**Status:** Proposed
+**Status:** Active
 **Project:** `nell/dev/dpkg-cvecheck`
-**Scope approved:** Not yet; plan requested for review.
+**Scope approved:** User authorized execution on 2026-11-09.
 
 ## Purpose and deliverables
 
@@ -92,7 +92,7 @@ Deliverables:
 
 ## Implementation stages
 
-- [ ] **Stage 1 — Update README documentation first.** Revise both
+- [x] **Stage 1 — Update README documentation first.** Revise both
   `nell/dev/dpkg-cvecheck/README.md` and `src/README.md` to specify the
   per-binary-package decision-file model, three statuses, mandatory inline
   explanation, allowed justifications, version comparison contract,
@@ -150,7 +150,7 @@ Deliverables:
 
 | Check / reference | Expected outcome | Observed outcome / evidence |
 | --- | --- | --- |
-| README contract review | Both READMEs specify the exact formats before implementation | Not performed |
+| README contract review | Both READMEs specify the exact formats before implementation | Documented in commit ee17287; build verification not performed |
 | Decision parsing / checker manual review | Mandatory explanations, typed justifications, no implicit affected-status acceptance | Not performed |
 | OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Not performed |
 | Multi-binary-package packaging inspection | Each `.deb` contains only its own `usr/share/vex/<name>.vex.json` | Not performed |
@@ -175,5 +175,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Not started. No implementation or verification has been performed under
-this plan.
+Stage 1 documentation completed in ee17287. Stages 2–6 pending.
