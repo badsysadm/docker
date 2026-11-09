@@ -14,6 +14,8 @@ COPY debian ./debian/
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
 COPY src/dpkg-cvecheck.py /src/debian/tmp/usr/bin/dpkg-cvecheck
+COPY src/dpkg-vexgen.py /src/debian/tmp/usr/bin/dpkg-vexgen
+COPY src/triage.py /src/debian/tmp/usr/lib/python3/dist-packages/triage.py
 RUN dh_testdir
 RUN dh_install
 RUN dh_installdebconf
