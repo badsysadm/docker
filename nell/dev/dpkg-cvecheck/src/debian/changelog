@@ -1,5 +1,0 @@
-dpkg-cvecheck (0.1.0) unstable; urgency=medium
-
-  * Initial package with vulnerability index and checker.
-
- -- badsysadm <me@badsysadm.com>  Mon, 09 Nov 2026 00:00:00 +0000
