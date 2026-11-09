@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 
-import re
-import shlex
 import subprocess
 import sys
 
 from pathlib import Path
 
+from triage import binary_packages, load_decisions
 
-ROOT = Path(__file__).resolve().parent
-#DB = ROOT / "debian/cve"
+
 DB = Path("debian/cve")
 INDEX = Path("/var/lib/cve/db.txt")
-
-ID_PATTERN = re.compile(r"(?:CVE-\d{4}-\d{4,}|BDU:\d{4}-\d+)")
 
 
 def changelog_field(field):
@@ -43,58 +39,6 @@ def version_ge(current, required):
     return result.returncode == 0
 
 
-def load_decisions(directory):
-    if not directory.is_dir():
-        raise FileNotFoundError(
-            f"Не найден каталог базы уязвимостей: {directory}"
-        )
-
-    files = sorted(path for path in directory.iterdir() if path.is_file())
-
-    if not files:
-        raise ValueError(
-            f"Каталог базы уязвимостей пуст: {directory}"
-        )
-
-    decisions = {}
-
-    for path in files:
-        with open(path, encoding="utf-8") as src:
-            for number, line in enumerate(src, 1):
-                fields = shlex.split(line, comments=True)
-
-                if not fields:
-                    continue
-
-                if len(fields) != 2:
-                    raise ValueError(
-                        f"{path}:{number}: ожидается ID и значение"
-                    )
-
-                identifier, status = fields
-
-                if not ID_PATTERN.fullmatch(identifier):
-                    raise ValueError(
-                        f"{path}:{number}: неверный идентификатор {identifier}"
-                    )
-
-                if status != "not-apply" and not (
-                    status.startswith("fixed:") and len(status) > 6
-                ):
-                    raise ValueError(
-                        f"{path}:{number}: неверное значение {status}"
-                    )
-
-                if identifier in decisions:
-                    raise ValueError(
-                        f"{path}:{number}: повторный {identifier}"
-                    )
-
-                decisions[identifier] = status
-
-    return decisions
-
-
 def index_identifiers(path, purl):
     if not path.is_file():
         raise FileNotFoundError(path)
@@ -117,49 +61,64 @@ def verify():
     package = changelog_field("Source")
     version = changelog_field("Version")
     purl = f"pkg:protego/{package}"
+    packages = binary_packages()
 
     vulnerabilities = index_identifiers(INDEX, purl)
-
-#    directory = DB / package
-    directory = DB
-    decisions = load_decisions(directory) if directory.is_dir() else {}
-
     errors = []
+    total_decisions = 0
 
-    if vulnerabilities and not directory.is_dir():
-        errors.append(
-            f"Не найден каталог базы уязвимостей для пакета {package}: {directory}"
-        )
+    if DB.exists() and not DB.is_dir():
+        raise ValueError(f"Не является каталогом решений: {DB}")
 
-    for identifier in sorted(vulnerabilities):
-        if identifier not in decisions:
-            errors.append(
-                f"{identifier}: отсутствует решение в локальной базе"
-            )
+    if DB.is_dir():
+        for path in sorted(DB.iterdir()):
+            if not path.is_file() or path.is_symlink():
+                raise ValueError(f"Недопустимый объект в каталоге решений: {path}")
+            if path.name not in packages:
+                raise ValueError(
+                    f"Файл решений {path} не соответствует бинарному пакету "
+                    "из debian/control"
+                )
 
-    for identifier, status in sorted(decisions.items()):
-        if status == "not-apply":
+    for binary in packages:
+        path = DB / binary
+        if not path.exists():
+            if vulnerabilities:
+                errors.append(
+                    f"{binary}: не найден файл решений {path}"
+                )
             continue
 
-        required = status.removeprefix("fixed:")
+        decisions = load_decisions(path)
+        total_decisions += len(decisions)
 
-        if not version_ge(version, required):
-            errors.append(
-                f"{identifier}: версия {version} ниже {required}"
-            )
+        for identifier in sorted(vulnerabilities):
+            if identifier not in decisions:
+                errors.append(
+                    f"{binary}: {identifier}: отсутствует решение в локальной базе"
+                )
 
-    print(f"Пакет: {package}")
+        for identifier, decision in sorted(decisions.items()):
+            if not decision.status.startswith("fixed:"):
+                continue
+
+            required = decision.status.removeprefix("fixed:")
+            if not version_ge(version, required):
+                errors.append(
+                    f"{binary}: {identifier}: версия {version} ниже {required}"
+                )
+
+    print(f"Исходный пакет: {package}")
     print(f"Версия: {version}")
     print(f"PURL: {purl}")
+    print(f"Бинарных пакетов: {len(packages)}")
     print(f"Уязвимостей в индексе: {len(vulnerabilities)}")
-    print(f"Решений в локальной базе: {len(decisions)}")
+    print(f"Решений в локальной базе: {total_decisions}")
 
     if errors:
         print("\nПроверка не пройдена:", file=sys.stderr)
-
         for error in errors:
             print(f"  {error}", file=sys.stderr)
-
         return 1
 
     print("Проверка пройдена")

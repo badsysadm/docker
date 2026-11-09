@@ -100,7 +100,7 @@ Deliverables:
   and resolve any remaining design questions **before source edits**.
   **Acceptance:** the documented examples are coherent, match the agreed
   requirements and can serve as the implementation contract.
-- [ ] **Stage 2 — Implement the decision validation model.** Update
+- [x] **Stage 2 — Implement the decision validation model.** Update
   `dpkg-cvecheck.py` to load decision files by binary package from
   `debian/control`, enforce the revised syntax and comments, and retain
   its existing source-CVE coverage and upstream fixed-version checks.
@@ -150,7 +150,7 @@ Deliverables:
 | Check / reference | Expected outcome | Observed outcome / evidence |
 | --- | --- | --- |
 | README contract review | Both READMEs specify the exact formats before implementation | Documented in commit ee17287; build verification not performed |
-| Decision parsing / checker manual review | Mandatory explanations, typed justifications, only fixed and not_affected statuses | Not performed |
+| Decision parsing / checker manual review | Mandatory explanations, typed justifications, only fixed and not_affected statuses | Source inspection completed in Stage 2; execution and packaging not performed |
 | OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Not performed |
 | Multi-binary-package packaging inspection | Each `.deb` contains only its own `usr/share/vex/<name>.vex.json` | Not performed |
 | [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | Not performed |
@@ -173,4 +173,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Stage 1 documentation completed in ee17287. Stages 2–6 pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stages 3–6 pending.
