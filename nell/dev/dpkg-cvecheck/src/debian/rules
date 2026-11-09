@@ -6,9 +6,6 @@
 override_dh_auto_build:
 	$(MAKE) build
 
-override_dh_auto_install:
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/dpkg-cvecheck
-
 override_dh_auto_clean:
 	$(MAKE) clean
 
