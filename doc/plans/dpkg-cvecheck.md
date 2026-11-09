@@ -29,10 +29,9 @@ Deliverables:
 - Depend on the current `dpkg-cvecheck.py`, `src/Makefile`,
   `04_deb.Dockerfile`, Debian metadata, and the established NELL packaging
   flow. The generator must not require external CVE feeds at generation time.
-- The exact OpenVEX schema and requirements for `affected` statements
-  (including any mandatory action field) must be confirmed in Stage 1 before
-  implementation. An arbitrary triage comment must not silently be treated
-  as an action or mitigation commitment.
+- Local triage supports only `fixed` and `not_affected`; `affected` and
+  `under_investigation` are deliberately excluded. Confirmed vulnerabilities
+  must be fixed before release, while untriaged findings block verification.
 
 ## References
 
@@ -69,10 +68,10 @@ Deliverables:
      `vulnerable_code_not_in_execute_path`,
      `vulnerable_code_cannot_be_controlled_by_adversary`,
      `inline_mitigations_already_exist`.
-   - `affected` — VEX status `affected`; the checker must fail rather
-     than silently allow a release with an acknowledged vulnerability.
-   The old `not-apply` spelling is rejected after migration;
-   `under_investigation` is not accepted: missing triage remains an error.
+   The old `not-apply` spelling is rejected after migration.
+   `affected` and `under_investigation` are not accepted: confirmed
+   vulnerabilities must be remediated before release and missing triage
+   remains an error.
 4. The output format is OpenVEX JSON. For each input
    `debian/cve/<binary-package>`, write
    `debian/tmp/usr/share/vex/<binary-package>.vex.json`. Only packages with
@@ -94,10 +93,10 @@ Deliverables:
 
 - [x] **Stage 1 — Update README documentation first.** Revise both
   `nell/dev/dpkg-cvecheck/README.md` and `src/README.md` to specify the
-  per-binary-package decision-file model, three statuses, mandatory inline
+  per-binary-package decision-file model, two statuses, mandatory inline
   explanation, allowed justifications, version comparison contract,
-  OpenVEX fields and file paths. Review schema-required fields
-  (especially `affected`), package identity, timestamp and naming,
+  OpenVEX fields and file paths. Review schema-required fields,
+  package identity, timestamp and naming,
   and resolve any remaining design questions **before source edits**.
   **Acceptance:** the documented examples are coherent, match the agreed
   requirements and can serve as the implementation contract.
@@ -105,7 +104,7 @@ Deliverables:
   `dpkg-cvecheck.py` to load decision files by binary package from
   `debian/control`, enforce the revised syntax and comments, and retain
   its existing source-CVE coverage and upstream fixed-version checks.
-  Explicitly detect missing decisions, `affected` decisions, empty files
+  Explicitly detect missing decisions, prohibited statuses, empty files
   and invalid justifications; avoid making the presence of one binary
   package's decision satisfy another package's verification.
   **Acceptance:** documented validation semantics hold for source packages
@@ -151,7 +150,7 @@ Deliverables:
 | Check / reference | Expected outcome | Observed outcome / evidence |
 | --- | --- | --- |
 | README contract review | Both READMEs specify the exact formats before implementation | Documented in commit ee17287; build verification not performed |
-| Decision parsing / checker manual review | Mandatory explanations, typed justifications, no implicit affected-status acceptance | Not performed |
+| Decision parsing / checker manual review | Mandatory explanations, typed justifications, only fixed and not_affected statuses | Not performed |
 | OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Not performed |
 | Multi-binary-package packaging inspection | Each `.deb` contains only its own `usr/share/vex/<name>.vex.json` | Not performed |
 | [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | Not performed |
@@ -169,8 +168,7 @@ do not treat the implementation checklist as an ADR.
 - Automatic inclusion of vulnerabilities from statically linked dependencies.
 - Automated exploitability classification and version-range inference from
   external CVE feeds.
-- Support for `under_investigation`, additional triage statuses or
-  automatic translation of arbitrary comments to mitigation actions.
+- Support for `affected`, `under_investigation`, or other local triage statuses.
 - New test suites or validation utilities beyond those explicitly approved.
 
 ## Completion record
