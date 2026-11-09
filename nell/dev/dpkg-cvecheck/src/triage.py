@@ -76,15 +76,16 @@ def load_decisions(path: Path) -> dict[str, Decision]:
             fields = content.split()
             if len(fields) not in (2, 3):
                 raise ValueError(
-                    f"{path}:{number}: ожидается ID статус [introduced:<версия>] # описание триажа"
+                    f"{path}:{number}: ожидается ID [introduced:<версия>] статус # описание триажа"
                 )
 
-            identifier, status = fields[:2]
+            identifier = fields[0]
+            status = fields[-1]
             introduced = None
             if len(fields) == 3:
-                item = fields[2]
+                item = fields[1]
                 if not item.startswith("introduced:") or not item.removeprefix("introduced:"):
-                    raise ValueError(f"{path}:{number}: требуется introduced:<версия>")
+                    raise ValueError(f"{path}:{number}: требуется introduced:<версия> перед fixed")
                 introduced = item.removeprefix("introduced:")
             if not ID_PATTERN.fullmatch(identifier):
                 raise ValueError(
