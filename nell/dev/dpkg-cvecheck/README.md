@@ -29,11 +29,11 @@ CVE-2026-26189 not_affected:component_not_present # trivy-action не входи
 `inline_mitigations_already_exist`. Старый `not-apply` недопустим.
 `under_investigation` не используется: отсутствие решения блокирует проверку.
 
-`fixed:<версия>` хранит первую версию исправления upstream, а не версию
-нашего пакета; проверка `dpkg --compare-versions` использует собираемую
-версию из `debian/changelog`. Для сборок с бэкпортированными патчами,
-не отражёнными в upstream-пороге, потребуется отдельное согласованное
-решение: генератор не должен утверждать статус `fixed` без проверки.
+`fixed:<версия>` задаётся сопровождающим вручную. `dpkg-cvecheck`
+сравнивает указанный порог с полной версией из `debian/changelog` через
+`dpkg --compare-versions ... ge ...`; порог может содержать Debian-ревизию,
+например `fixed:0.71.0-2`. Утилита не проверяет содержимое исправления:
+обоснованность порога устанавливается при ручном триаже.
 
 Статусы `affected` и `under_investigation` не допускаются в решениях:
 подтверждённую уязвимость требуется исправить до выпуска, а отсутствие
@@ -58,3 +58,39 @@ CVE-2026-26189 not_affected:component_not_present # trivy-action не входи
 Полный контракт и этапы разработки:
 [src/README.md](src/README.md) и
 [план](../../../doc/plans/dpkg-cvecheck.md).
+
+## Использование при сборке Debian-пакета
+
+Команды `dpkg-cvecheck` и `dpkg-vexgen` запускаются **из корня исходного
+Debian-пакета**, содержащего `debian/control`, `debian/changelog` и
+`debian/cve/<binary-package>`. Для проверки требуется установленный индекс
+`/var/lib/cve/db.txt`:
+
+```sh
+dpkg-cvecheck
+dpkg-vexgen
+```
+
+Вторая команда самостоятельно вызывает первую; при ошибке проверки
+VEX-документы не публикуются и генератор возвращает ненулевой код.
+После успешного запуска документы находятся в
+`debian/tmp/usr/share/vex/<binary-package>.vex.json`.
+
+В [`nell/security/trivy/04_deb.Dockerfile`](../../security/trivy/04_deb.Dockerfile)
+используется опубликованный образ `deb/dev/dpkg-cvecheck:0.1.0`: из него
+устанавливается Debian-пакет инструмента, затем после `dh_prep` и
+размещения бинарника вызывается `dpkg-vexgen`, **до** `dh_install`.
+Соответствующий [`trivy.install`](../../security/trivy/debian/trivy.install)
+включает `usr/bin/trivy` и `usr/share/vex/trivy.vex.json` в бинарный пакет.
+
+Пример запуска стадии из корня репозитория:
+
+```sh
+make nell/security/trivy/04_deb.Dockerfile version=0.76.2
+```
+
+Отчёт устанавливается по пути `/usr/share/vex/trivy.vex.json`. Trivy не
+загружает этот файл автоматически: для его использования необходимо явно
+передать `--vex /usr/share/vex/trivy.vex.json`. Нормализация внутренних
+`pkg:protego/...` и продуктовых PURL OpenVEX запланирована отдельно в
+[`docs/TODO.md`](../../../docs/TODO.md) и в этой интеграции не изменяется.

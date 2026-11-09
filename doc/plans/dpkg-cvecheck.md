@@ -126,7 +126,7 @@ Deliverables:
   command sequence; if an architectural conflict emerges, stop for review.
   **Acceptance:** VEX documents appear inside the correct produced
   `.deb` payloads, not merely in `debian/tmp`.
-- [ ] **Stage 5 — Migrate current decisions and finalize usage guidance.**
+- [x] **Stage 5 — Migrate current decisions and finalize usage guidance.**
   Rename `nell/security/trivy/debian/cve/main` to
   `nell/security/trivy/debian/cve/trivy`, replace old `not-apply`
   statuses with evidence-based `not_affected:<justification>`, retain
@@ -173,4 +173,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules); the Debian build and package-content checks have not been performed, so Stage 4 remains open. Stages 5–6 pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules). User reports that the produced Debian package is correct; multi-binary package checks and reproducibility have not been independently verified, so Stage 4 remains open. Stage 5 decision-file migration and user-facing command/build guidance completed; the user reported successful OpenVEX application in Trivy after an experimental local edit (not evidence for validity of the original triage). Stage 6 pending.

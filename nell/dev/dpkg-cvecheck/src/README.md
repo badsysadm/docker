@@ -30,7 +30,7 @@
 ├── config.py
 ├── refresh.py
 ├── dpkg-cvecheck.py
-├── dpkg-vexgen.py (планируется)
+├── dpkg-vexgen.py
 └── README.md
 ```
 
@@ -166,11 +166,11 @@ CVE-2024-35192 fixed:0.51.2 # Утечка registry credentials устранен
 CVE-2026-26189 not_affected:component_not_present # trivy-action не входит в Trivy CLI.
 ```
 
-- **`fixed:<upstream-version>`** — первая версия upstream, в которой
-  присутствует исправление. Сравнение собираемой версии из
-  `debian/changelog` с этим порогом выполняет `dpkg --compare-versions`.
-  Backport исправления без соответствующего повышения версии этим контрактом
-  не выражается и требует отдельного решения.
+- **`fixed:<version>`** — вручную заданная первая версия, содержащая
+  исправление. Проверка сравнивает с порогом полную версию из
+  `debian/changelog` командой `dpkg --compare-versions ... ge ...`.
+  При необходимости порог включает Debian-ревизию, например
+  `fixed:0.71.0-2`; проверка не устанавливает наличие патча в исходниках.
 - **`not_affected:<justification>`** — уязвимость неприменима. Допустимы
   только `component_not_present`, `vulnerable_code_not_present`,
   `vulnerable_code_not_in_execute_path`,
@@ -243,6 +243,41 @@ debian/cve/trivy-server
 Файлы записываются атомарно; невалидный триаж не должен приводить
 к публикации частичных отчётов. Через `dh_install` отчёт попадает
 **только** в соответствующий бинарный `.deb`.
+
+### Практическое использование при Debian packaging
+
+Из корня исходного пакета с установленным `dpkg-cvecheck` и индексом
+`/var/lib/cve/db.txt`:
+
+```sh
+dpkg-cvecheck    # необязательный отдельный прогон проверки
+dpkg-vexgen      # самостоятельно запускает dpkg-cvecheck
+```
+
+Генератор возвращает ошибку при неполном или недопустимом триаже и не
+создаёт новые отчёты до успешного завершения проверки. Результат помещается
+в `debian/tmp/usr/share/vex/`; перед `dh_install` файл каждого бинарного
+пакета должен быть перечислен в соответствующем `debian/<binary-package>.install`.
+Например, профиль Trivy использует:
+
+```text
+usr/bin/trivy usr/bin/
+usr/share/vex/trivy.vex.json usr/share/vex/
+```
+
+Сборочная стадия [Trivy](../../security/trivy/04_deb.Dockerfile) получает
+`deb/dev/dpkg-cvecheck:0.1.0`, устанавливает его `.deb`, выполняет
+`dh_prep`, копирует содержимое `bin/security/trivy` в `debian/tmp`, затем
+вызывает `dpkg-vexgen` и `dh_install`. Из корня репозитория стадию можно
+запустить командой:
+
+```sh
+make nell/security/trivy/04_deb.Dockerfile version=0.76.2
+```
+
+Фактический внутренний ключ индекса пока `pkg:protego/<source-package>`, а
+PURL документа — `pkg:deb/debian/<binary-package>@<version>`; их сквозная
+кастомизация и унификация отложена в [TODO](../../../../docs/TODO.md).
 
 См. [спецификацию OpenVEX](https://github.com/openvex/spec)
 и [план разработки](../../../doc/plans/dpkg-cvecheck.md).
