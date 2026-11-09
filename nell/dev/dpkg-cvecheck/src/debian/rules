@@ -3,12 +3,6 @@
 %:
 	dh $@
 
-override_dh_auto_build:
-	$(MAKE) build
-
-override_dh_auto_clean:
-	$(MAKE) clean
-
 override_dh_auto_test:
 
 override_dh_installdocs:
