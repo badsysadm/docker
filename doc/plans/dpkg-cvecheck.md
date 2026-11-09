@@ -1,6 +1,6 @@
 # dpkg-cvecheck / dpkg-vexgen — development plan
 
-**Status:** Active
+**Status:** Completed
 **Project:** `nell/dev/dpkg-cvecheck`
 **Scope approved:** User authorized execution on 2026-11-09.
 
@@ -54,14 +54,19 @@ Deliverables:
    records and duplicate vulnerability identifiers within a file are errors.
    The same identifier may have separate decisions for different packages.
 2. Each nonempty record has the syntax
-   `<CVE-or-BDU-ID> <decision> # <nonempty one-line triage explanation>`.
+   `<CVE-or-BDU-ID> <decision> # <nonempty one-line triage explanation>`
+   or `<CVE-or-BDU-ID> introduced:<version> fixed:<version> # <explanation>`.
+   The optional `introduced` field precedes `fixed` and is not valid with
+   `not_affected`. It is an inclusive lower bound of the affected range;
+   the checker enforces `introduced < fixed` with Debian version comparison.
    The checker rejects a missing or empty explanation. The generator copies
    the explanation verbatim (apart from surrounding whitespace) into the
    OpenVEX `status_notes` field.
 3. Supported decisions are:
-   - `fixed:<upstream-fixed-version>` — the checker validates the build
-     version against the declared upstream fix version; the VEX status is
-     `fixed` (without a version suffix).
+   - `fixed:<version>` — the checker compares the full Debian build version
+     from `debian/changelog` against the manually supplied threshold using
+     `dpkg --compare-versions ... ge ...`; the VEX status is `fixed`
+     (without a version suffix). The threshold may include a Debian revision.
    - `not_affected:<justification>` — VEX status `not_affected`; the
      justification must be one of the allowed OpenVEX values:
      `component_not_present`, `vulnerable_code_not_present`,
@@ -137,7 +142,7 @@ Deliverables:
   the implemented commands and paths.
   **Acceptance:** Trivy's decisions are valid under the new grammar and
   its binary package receives its own VEX document.
-- [ ] **Stage 6 — Review and acceptance.** Inspect the generated VEX
+- [x] **Stage 6 — Review and acceptance.** Inspect the generated VEX
   schema, reproducibility, Debian package contents, and behavior when a
   binary package has no decisions. Review any architectural impacts
   under the ADR process. Record only observed results, obtain manual
@@ -155,7 +160,7 @@ Deliverables:
 | Debian package contents | Generated VEX is included in the corresponding `.deb` | User confirms package contents are correct; independent inspection and multi-binary-package isolation were not performed |
 | [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | User confirms reproducibility; independent hash comparison was not performed in this session |
 | Boundary-condition checks | Check missing decisions, malformed entries and failure handling | Skipped by user agreement; no successful verification claimed |
-| Manual PR review | Approved changes only | Pending user's final approval before merge |
+| Manual PR review | Approved changes only | User requested documentation corrections and plan completion before merge on 2026-11-09; merge itself remains a separate user action |
 
 ## Decisions and related ADRs
 
@@ -172,6 +177,15 @@ do not treat the implementation checklist as an ADR.
 - Support for `affected`, `under_investigation`, or other local triage statuses.
 - New test suites or validation utilities beyond those explicitly approved.
 
+## Approved scope extension
+
+After the staged implementation, the user approved optional
+`introduced:<version>` support in `triage.py` and the checker, with the
+three-token order `CVE-ID introduced:<version> fixed:<version> # comment`.
+The Trivy decision file uses `introduced:0` as an illustrative conservative
+lower bound. CVE-feed generation and PURL normalization remain separate
+items in `docs/TODO.md`.
+
 ## Completion record
 
-Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules), accepted on the basis of the user's confirmation that Debian package contents are correct; multi-binary package isolation was not independently checked. Stage 5 decision-file migration and user-facing command/build guidance completed; the user reported successful OpenVEX application in Trivy after an experimental local edit (not evidence for validity of the original triage). For Stage 6, the user confirmed reproducible builds and correct package contents, and explicitly elected to skip boundary-condition checks. The assistant reviewed the generator, checker, packaging and ADR source for consistency, without executing builds or tests. Final user PR review and merge approval remain pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules), accepted on the basis of the user's confirmation that Debian package contents are correct; multi-binary package isolation was not independently checked. Stage 5 decision-file migration and user-facing command/build guidance completed; the user reported successful OpenVEX application in Trivy after an experimental local edit (not evidence for validity of the original triage). For Stage 6, the user confirmed reproducible builds and correct package contents, and explicitly elected to skip boundary-condition checks. The assistant reviewed the generator, checker, packaging and ADR source for consistency, without executing builds or tests. The user authorized final documentation corrections and closing the plan as completed on 2026-11-09. The agreed boundary-condition checks remain skipped, and multi-binary isolation was not independently checked; no such checks are claimed successful. The plan is completed; merging PR #82 remains a separate user action.

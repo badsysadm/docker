@@ -24,8 +24,6 @@
 │   │   ├── import.py
 │   │   └── converter.py
 │   └── github.py
-├── debian/cve/
-│   └── <binary-package>
 ├── Makefile
 ├── config.py
 ├── refresh.py
@@ -34,19 +32,19 @@
 └── README.md
 ```
 
-`Makefile` организует загрузку, конвертацию, объединение индексов и проверку. Коннекторы запускаются отдельными процессами и не импортируют код друг друга. `github.py` существует отдельно, но не входит в сборочный цикл.
+`Makefile` организует загрузку, конвертацию, объединение индексов и содержит отдельную цель `verify`. Файлы решений `debian/cve/<binary-package>` находятся в исходном Debian-пакете, который проверяется, а не в каталоге `src/` утилиты. Коннекторы запускаются отдельными процессами и не импортируют код друг друга. `github.py` существует отдельно, но не входит в сборочный цикл.
 
 ## Источники и файлы
 
 | Источник | Загрузчик | Конвертер | Исходный файл | Промежуточный индекс |
 |---|---|---|---|---|
-| NVD | `connectors/nvd/import.py` | `connectors/nvd/converter.py` | `/.buildcve/nvd-cve.jsonl` | `/.buildcve/nvd-purl.txt` |
-| Debian Security Tracker | `connectors/debian/import.py` | `connectors/debian/converter.py` | `/.buildcve/debian-cve.json` | `/.buildcve/debian-purl.txt` |
-| БДУ ФСТЭК | `connectors/bdu/import.py` | `connectors/bdu/converter.py` | `/.buildcve/fstec-cve.xml` | `/.buildcve/fstec-purl.txt` |
-| Chainguard OSV v3 | `connectors/chainguard/import.py` | `connectors/chainguard/converter.py` | `/.buildcve/chainguard-cve.jsonl` | `/.buildcve/chainguard-purl.txt` |
-| Kubernetes Official CVE Feed | `connectors/kubernetes/import.py` | `connectors/kubernetes/converter.py` | `/.buildcve/kubernetes-cve.json` | `/.buildcve/kubernetes-purl.txt` |
+| NVD | `connectors/nvd/import.py` | `connectors/nvd/converter.py` | `.buildcve/nvd-cve.jsonl` | `.buildcve/nvd-purl.txt` |
+| Debian Security Tracker | `connectors/debian/import.py` | `connectors/debian/converter.py` | `.buildcve/debian-cve.json` | `.buildcve/debian-purl.txt` |
+| БДУ ФСТЭК | `connectors/bdu/import.py` | `connectors/bdu/converter.py` | `.buildcve/fstec-cve.xml` | `.buildcve/fstec-purl.txt` |
+| Chainguard OSV v3 | `connectors/chainguard/import.py` | `connectors/chainguard/converter.py` | `.buildcve/chainguard-cve.jsonl` | `.buildcve/chainguard-purl.txt` |
+| Kubernetes Official CVE Feed | `connectors/kubernetes/import.py` | `connectors/kubernetes/converter.py` | `.buildcve/kubernetes-cve.json` | `.buildcve/kubernetes-purl.txt` |
 
-Общий индекс: **`/.buildcve/merged-purl.txt`**.
+Общий индекс: **`.buildcve/merged-purl.txt`**.
 
 Загрузка (`get`) и конвертация (`convert`) разделены: уже загруженные исходные данные можно преобразовывать повторно, не обращаясь к внешним источникам.
 
@@ -58,11 +56,11 @@
 - **Chainguard (отключён от Makefile из-за недоступности источника):** используется полный архив OSV v3; из `affected[].package` формируются ключи `pkg:chainguard/<package>` и `pkg:wolfi/<package>`, из `upstream` — идентификаторы CVE. Диапазоны версий и статусы триажа фида не фильтруются; анализ применимости остаётся ручным. Пакеты с другими экосистемами игнорируются. Для Trivy добавлены соответствия `pkg:chainguard/trivy` и `pkg:wolfi/trivy`.
 - **Kubernetes:** все CVE официального JSON-фида сохраняются с единым ключом `pkg:kubernetes/kubernetes`. Конвертер не разбирает текст бюллетеней, не выделяет отдельные компоненты и не применяет алиасы.
 
-Конвертеры NVD, Debian, БДУ и (при ручном запуске) Chainguard применяют соответствия из корневого `aliases` при формировании промежуточных индексов. Kubernetes сохраняет исходный ключ `pkg:kubernetes/kubernetes` без алиасов.
+Конвертеры NVD, Debian, БДУ и (при ручном запуске) Chainguard применяют соответствия из `src/aliases` при формировании промежуточных индексов. Kubernetes сохраняет исходный ключ `pkg:kubernetes/kubernetes` без алиасов.
 
 ## Команды
 
-Команды запускаются из каталога `src/`:
+Команды формирования индекса запускаются из каталога `nell/dev/dpkg-cvecheck/src/`:
 
 ```bash
 make build
@@ -70,7 +68,6 @@ make get
 make convert
 make merge
 make refresh
-make verify
 ```
 
 | Команда | Назначение |
@@ -80,7 +77,12 @@ make verify
 | `convert` | Пересоздать все промежуточные индексы из локальных исходных данных. |
 | `merge` | Объединить промежуточные индексы, отсортировать и удалить идентичные строки. |
 | `refresh` | Выполнить `merge` и применить текущие алиасы к объединённому индексу. |
-| `verify` | Проверить собираемый пакет через `dpkg-cvecheck.py`. |
+| `verify` | Запустить `dpkg-cvecheck.py` относительно текущего каталога. Цель `make verify` из `src/` не проверяет сторонний Debian-пакет; используйте установленную команду `dpkg-cvecheck` из корня пакета. |
+
+Для проверки перейдите в **корень проверяемого Debian-пакета**
+(с `debian/control`, `debian/changelog` и `debian/cve/`)
+и выполните установленный `dpkg-cvecheck`. Команда `dpkg-vexgen`
+также запускается оттуда и самостоятельно вызывает проверку.
 
 ### Типовой цикл обновления
 
@@ -112,13 +114,13 @@ pkg:generic/example BDU:2022-03163
 
 Примеры показывают формат записей; не все приведённые сочетания означают подтверждённую запись в текущем индексе.
 
-Индекс не хранит описания CVE, уровни критичности и диапазоны уязвимых версий. Исходные данные источников остаются в соответствующих файлах `/.buildcve/`.
+Индекс не хранит описания CVE, уровни критичности и диапазоны уязвимых версий. Исходные данные источников остаются в соответствующих файлах `.buildcve/`.
 
 Один CVE может соответствовать нескольким PURL. При `merge` удаляются **только полные дубликаты строк**: одинаковые PURL и идентификатор. Для сортировки и дедупликации используется системная `sort -u` с `LC_ALL=C`. Итог создаётся во временном файле и заменяется атомарно; промежуточные индексы не изменяются.
 
 ## Алиасы PURL
 
-Файл **`aliases` в корне репозитория** задаёт соответствия вариантов названий ПО одному целевому PURL. Первая колонка — каноническое имя для нашего индекса, остальные — его алиасы:
+Файл **`aliases` в каталоге `nell/dev/dpkg-cvecheck/src/`** задаёт соответствия вариантов названий ПО одному целевому PURL. Первая колонка — каноническое имя для нашего индекса, остальные — его алиасы:
 
 ```text
 pkg:protego/openjdk pkg:generic/openjdk pkg:generic/oracle/openjdk pkg:generic/redhat/java-17-openjdk pkg:generic/sun_openjdk
@@ -295,10 +297,10 @@ PURL документа — `pkg:deb/debian/<binary-package>@<version>`; их с
 
 ```bash
 # Какие PURL содержат openjdk в объединённом индексе:
-awk '$1 ~ /openjdk/ {print $1}' /.buildcve/merged-purl.txt | sort -u
+awk '$1 ~ /openjdk/ {print $1}' .buildcve/merged-purl.txt | sort -u
 
 # Сколько строк сопоставлено с нашим каноническим именем:
-grep -c '^pkg:protego/openjdk ' /.buildcve/merged-purl.txt
+grep -c '^pkg:protego/openjdk ' .buildcve/merged-purl.txt
 
 # Применить новые алиасы к уже объединённому индексу:
 make refresh
@@ -317,4 +319,4 @@ make refresh
 - `dpkg-parsechangelog` и `dpkg` для проверки исходного пакета и сравнения Debian-версий.
 - Сетевой доступ к внешним источникам для команды `get`; для `convert`, `merge`, `refresh` и `verify` данные уже должны находиться локально.
 
-Путь `/.buildcve/` — рабочий каталог данных и индексов; его содержимое не является частью исходного дерева репозитория. При запуске `verify` файл `debian/changelog` ищется относительно текущего рабочего каталога, поэтому проверку следует выполнять из корня собираемого Debian-пакета.
+Путь `.buildcve/` — рабочий каталог данных и индексов внутри `nell/dev/dpkg-cvecheck/src/`; его содержимое не является частью исходного дерева репозитория. При запуске `verify` файл `debian/changelog` ищется относительно текущего рабочего каталога, поэтому проверку следует выполнять из корня собираемого Debian-пакета.
