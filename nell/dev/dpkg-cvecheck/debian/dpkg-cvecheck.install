@@ -1,0 +1,2 @@
+usr/bin/dpkg-cvecheck usr/bin/
+var/lib/cve/db.txt var/lib/cve/
