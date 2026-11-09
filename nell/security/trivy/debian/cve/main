@@ -1,50 +1,11 @@
-# Trivy source package 0.76.2-1, upstream tag v0.76.2.
-# NELL builds the upstream CLI from source (CGO_ENABLED=0).
-# fixed:0.76.2-1 means the reviewed package version contains the upstream fix.
-
-# Registry credentials could leak to malicious registries; fixed upstream v0.51.2.
-# https://github.com/aquasecurity/trivy/security/advisories/GHSA-xcq4-m2r3-cmrj
-CVE-2024-35192 fixed:0.76.2-1
-
-# Terraform filesystem function path traversal; fixed before upstream v0.71.0.
-# https://nvd.nist.gov/vuln/detail/CVE-2026-104994
-CVE-2026-104994 fixed:0.76.2-1
-
-# Shell injection affects trivy-action >=0.31.0 and <0.34.0, not the Trivy CLI.
-# https://github.com/advisories/GHSA-9p44-j4g5-cfx5
-CVE-2026-26189 not-apply
-
-# Malicious OpenVSX Trivy VS Code extension v1.8.12, not the Trivy CLI.
-# https://github.com/aquasecurity/trivy-vscode-extension/security/advisories/GHSA-8mr6-gf9x-j8qg
-CVE-2026-28353 not-apply
-
-# github.com/buger/jsonparser Delete panic; vulnerable library versions <1.1.2.
-# The module is absent from the upstream Trivy v0.76.2 go.mod module graph.
-# https://pkg.go.dev/vuln/GO-2026-4514
-CVE-2026-32285 not-apply
-
-# Compromise targeted Trivy release v0.69.4 and the separate setup/action tags.
-# The NELL package is built from upstream v0.76.2 source rather than v0.69.4.
-# https://nvd.nist.gov/vuln/detail/CVE-2026-33634
-CVE-2026-33634 not-apply
-
-# Vulnerable archive-upload behavior is in the Moby/Docker daemon, not Trivy CLI.
-# Although Trivy uses Docker client libraries, it does not ship the daemon.
-# https://github.com/moby/moby/security/advisories/GHSA-x86f-5xw2-fm2r
-CVE-2026-41567 not-apply
-
-# urllib3 2.6.x Python HTTP response decompression issue, not a Go CLI component.
-# https://github.com/urllib3/urllib3/security/advisories/GHSA-mf9v-mfxr-j63j
-CVE-2026-44432 not-apply
-
-# Helm archive decompression memory exhaustion; fixed upstream v0.71.0.
-# https://github.com/advisories/GHSA-q3fv-x8vg-qqm4
-CVE-2026-54448 fixed:0.76.2-1
-
-# OCI artifact title path traversal; fixed upstream v0.71.1.
-# https://github.com/advisories/GHSA-mcj4-mphf-j9ff
-CVE-2026-55092 fixed:0.76.2-1
-
-# Plugin manager path traversal; fixed upstream v0.72.0.
-# https://github.com/advisories/GHSA-8rc5-4fr6-64pw
-CVE-2026-63328 fixed:0.76.2-1
+CVE-2024-35192 fixed:0.76.2-1 # Утечка учётных данных registry; исправлено upstream в v0.51.2 (GHSA-xcq4-m2r3-cmrj).
+CVE-2026-104994 fixed:0.76.2-1 # Обход путей через Terraform filesystem functions; исправлено до upstream v0.71.0.
+CVE-2026-26189 not-apply # Инъекция команд относится к trivy-action 0.31.0–0.33.x, а не к CLI Trivy.
+CVE-2026-28353 not-apply # Вредоносная версия расширения Trivy VS Code 1.8.12; расширение не входит в пакет CLI.
+CVE-2026-32285 not-apply # Уязвимость buger/jsonparser (<1.1.2); модуль отсутствует в go.mod upstream Trivy v0.76.2.
+CVE-2026-33634 not-apply # Компрометация конкретного релиза Trivy v0.69.4; пакет собирается из исходников v0.76.2.
+CVE-2026-41567 not-apply # Уязвим Docker/Moby daemon; пакет содержит Trivy CLI, а не Docker daemon.
+CVE-2026-44432 not-apply # Уязвимость Python urllib3 2.6.x; Trivy CLI собран на Go и не содержит urllib3.
+CVE-2026-54448 fixed:0.76.2-1 # Исчерпание памяти при распаковке Helm-архива; исправлено upstream в v0.71.0.
+CVE-2026-55092 fixed:0.76.2-1 # Обход путей через заголовок OCI-артефакта; исправлено upstream в v0.71.1.
+CVE-2026-63328 fixed:0.76.2-1 # Обход путей в менеджере плагинов; исправлено upstream в v0.72.0.
