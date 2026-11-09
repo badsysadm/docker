@@ -109,7 +109,7 @@ Deliverables:
   package's decision satisfy another package's verification.
   **Acceptance:** documented validation semantics hold for source packages
   producing one or multiple binary packages.
-- [ ] **Stage 3 — Implement `dpkg-vexgen`.** Add the CLI using the same
+- [x] **Stage 3 — Implement `dpkg-vexgen`.** Add the CLI using the same
   accepted decision grammar as Stage 2; generate one OpenVEX document per
   binary-package decision file, with `status_notes` from the inline
   comment, the correct `not_affected.justification`, product identity,
@@ -151,7 +151,7 @@ Deliverables:
 | --- | --- | --- |
 | README contract review | Both READMEs specify the exact formats before implementation | Documented in commit ee17287; build verification not performed |
 | Decision parsing / checker manual review | Mandatory explanations, typed justifications, only fixed and not_affected statuses | Source inspection completed in Stage 2; execution and packaging not performed |
-| OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Not performed |
+| OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Compared document structure and status fields against upstream OpenVEX JSON Schema; execution against actual package not performed |
 | Multi-binary-package packaging inspection | Each `.deb` contains only its own `usr/share/vex/<name>.vex.json` | Not performed |
 | [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | Not performed |
 | Manual PR review | Approved changes only | Not performed |
@@ -173,4 +173,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stages 3–6 pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stages 4–6 pending.
