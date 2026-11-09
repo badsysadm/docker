@@ -117,7 +117,7 @@ Deliverables:
   synthesize missing justifications, explanatory text or action statements.
   **Acceptance:** generated JSON satisfies the selected OpenVEX schema;
   invalid inputs result in errors and do not publish partial documents.
-- [ ] **Stage 4 — Integrate Debian packaging.** Install `dpkg-vexgen`
+- [x] **Stage 4 — Integrate Debian packaging.** Install `dpkg-vexgen`
   alongside `dpkg-cvecheck`, invoke it in `04_deb.Dockerfile` after
   `dh_prep` and before `dh_install` (after staging input artifacts as
   needed), and ensure packaging rules assign
@@ -152,9 +152,10 @@ Deliverables:
 | README contract review | Both READMEs specify the exact formats before implementation | Documented in commit ee17287; build verification not performed |
 | Decision parsing / checker manual review | Mandatory explanations, typed justifications, only fixed and not_affected statuses | Source inspection completed in Stage 2; execution and packaging not performed |
 | OpenVEX schema inspection | Per-package documents contain required fields and valid statuses | Compared document structure and status fields against upstream OpenVEX JSON Schema; execution against actual package not performed |
-| Multi-binary-package packaging inspection | Each `.deb` contains only its own `usr/share/vex/<name>.vex.json` | Not performed |
-| [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | Not performed |
-| Manual PR review | Approved changes only | Not performed |
+| Debian package contents | Generated VEX is included in the corresponding `.deb` | User confirms package contents are correct; independent inspection and multi-binary-package isolation were not performed |
+| [NELL build checks](../../nell/README.md#проверка-сборки) | Build and reproducibility requirements remain satisfied | User confirms reproducibility; independent hash comparison was not performed in this session |
+| Boundary-condition checks | Check missing decisions, malformed entries and failure handling | Skipped by user agreement; no successful verification claimed |
+| Manual PR review | Approved changes only | Pending user's final approval before merge |
 
 ## Decisions and related ADRs
 
@@ -173,4 +174,4 @@ do not treat the implementation checklist as an ADR.
 
 ## Completion record
 
-Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules). User reports that the produced Debian package is correct; multi-binary package checks and reproducibility have not been independently verified, so Stage 4 remains open. Stage 5 decision-file migration and user-facing command/build guidance completed; the user reported successful OpenVEX application in Trivy after an experimental local edit (not evidence for validity of the original triage). Stage 6 pending.
+Stage 1 documentation completed in ee17287 (refined in f1cc0f2). Stage 2 parser and checker implementation completed by source inspection; execution not performed. Stage 3 generator implemented and reviewed against OpenVEX JSON Schema; build and runtime verification not performed. Stage 4 Trivy packaging recipe prepared (04_deb.Dockerfile, trivy.install, debian/rules), accepted on the basis of the user's confirmation that Debian package contents are correct; multi-binary package isolation was not independently checked. Stage 5 decision-file migration and user-facing command/build guidance completed; the user reported successful OpenVEX application in Trivy after an experimental local edit (not evidence for validity of the original triage). For Stage 6, the user confirmed reproducible builds and correct package contents, and explicitly elected to skip boundary-condition checks. The assistant reviewed the generator, checker, packaging and ADR source for consistency, without executing builds or tests. Final user PR review and merge approval remain pending.

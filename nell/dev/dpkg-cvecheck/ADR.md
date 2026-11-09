@@ -30,7 +30,9 @@ would make otherwise identical VEX reports differ between builds.
 - `03_bin` runs only `make install` to populate `/src/target` from the
   prepared index, then packages the result into a scratch image; it does not
   rebuild or update the index.
-- The scratch image contains only `/target/usr/bin/dpkg-cvecheck` and
+- The scratch image contains `/target/usr/bin/dpkg-cvecheck`,
+  `/target/usr/bin/dpkg-vexgen`, the shared Python module
+  `/target/usr/lib/python3/dist-packages/triage.py` and
   `/target/var/lib/cve/db.txt`. Python and dpkg are runtime requirements
   of the target host, not bundled binaries.
 - All remote-feed importers use a uniform failure policy: retry a failed or
