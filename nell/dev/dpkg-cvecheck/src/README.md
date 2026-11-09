@@ -29,7 +29,7 @@
 │   └── changelog
 ├── main.py
 ├── refresh.py
-├── verify.py
+├── dpkg-cvecheck.py
 └── README.md
 ```
 
@@ -39,12 +39,12 @@
 
 | Источник | Загрузчик | Конвертер | Исходный файл | Промежуточный индекс |
 |---|---|---|---|---|
-| NVD | `connectors/nvd/import.py` | `connectors/nvd/converter.py` | `/tmp/cve/nvd-cve.jsonl` | `/tmp/cve/nvd-purl.txt` |
-| Debian Security Tracker | `connectors/debian/import.py` | `connectors/debian/converter.py` | `/tmp/cve/debian-cve.json` | `/tmp/cve/debian-purl.txt` |
-| БДУ ФСТЭК | `connectors/bdu/import.py` | `connectors/bdu/converter.py` | `/tmp/cve/fstec-cve.xml` | `/tmp/cve/fstec-purl.txt` |
-| Kubernetes Official CVE Feed | `connectors/kubernetes/import.py` | `connectors/kubernetes/converter.py` | `/tmp/cve/kubernetes-cve.json` | `/tmp/cve/kubernetes-purl.txt` |
+| NVD | `connectors/nvd/import.py` | `connectors/nvd/converter.py` | `/.buildcve/nvd-cve.jsonl` | `/.buildcve/nvd-purl.txt` |
+| Debian Security Tracker | `connectors/debian/import.py` | `connectors/debian/converter.py` | `/.buildcve/debian-cve.json` | `/.buildcve/debian-purl.txt` |
+| БДУ ФСТЭК | `connectors/bdu/import.py` | `connectors/bdu/converter.py` | `/.buildcve/fstec-cve.xml` | `/.buildcve/fstec-purl.txt` |
+| Kubernetes Official CVE Feed | `connectors/kubernetes/import.py` | `connectors/kubernetes/converter.py` | `/.buildcve/kubernetes-cve.json` | `/.buildcve/kubernetes-purl.txt` |
 
-Общий индекс: **`/tmp/cve/merged-purl.txt`**.
+Общий индекс: **`/.buildcve/merged-purl.txt`**.
 
 Загрузка (`get`) и конвертация (`convert`) разделены: уже загруженные исходные данные можно преобразовывать повторно, не обращаясь к внешним источникам.
 
@@ -111,7 +111,7 @@ pkg:generic/example BDU:2022-03163
 
 Примеры показывают формат записей; не все приведённые сочетания означают подтверждённую запись в текущем индексе.
 
-Индекс не хранит описания CVE, уровни критичности и диапазоны уязвимых версий. Исходные данные источников остаются в соответствующих файлах `/tmp/cve/`.
+Индекс не хранит описания CVE, уровни критичности и диапазоны уязвимых версий. Исходные данные источников остаются в соответствующих файлах `/.buildcve/`.
 
 Один CVE может соответствовать нескольким PURL. При `merge` удаляются **только полные дубликаты строк**: одинаковые PURL и идентификатор. Для сортировки и дедупликации используется системная `sort -u` с `LC_ALL=C`. Итог создаётся во временном файле и заменяется атомарно; промежуточные индексы не изменяются.
 
@@ -172,7 +172,7 @@ BDU:2022-03163 fixed:3.0.15-2
 
 ## Проверка пакета: `verify`
 
-`verify.py` извлекает **имя исходного пакета** (`Source`) и **собираемую версию** (`Version`) из `debian/changelog` через `dpkg-parsechangelog`. Для поиска формируется точный ключ:
+`dpkg-cvecheck.py` извлекает **имя исходного пакета** (`Source`) и **собираемую версию** (`Version`) из `debian/changelog` через `dpkg-parsechangelog`. Для поиска формируется точный ключ:
 
 ```text
 pkg:protego/<source-package>
@@ -180,7 +180,7 @@ pkg:protego/<source-package>
 
 Алгоритм проверки:
 
-1. Найти все идентификаторы уязвимостей, сопоставленные этому PURL в `/tmp/cve/merged-purl.txt`.
+1. Найти все идентификаторы уязвимостей, сопоставленные этому PURL в `/.buildcve/merged-purl.txt`.
 2. Прочитать решения из всех обычных файлов `db/<source-package>/`, если каталог существует.
 3. Если в индексе есть CVE/BDU для пакета, каждый идентификатор должен иметь локальное решение; отсутствие каталога решений в этом случае — ошибка.
 4. Если для пакета **нет уязвимостей в индексе** и каталога `db/<source-package>/` нет, проверка проходит без требования создать пустую базу.
@@ -210,10 +210,10 @@ PURL: pkg:protego/openjdk
 
 ```bash
 # Какие PURL содержат openjdk в объединённом индексе:
-awk '$1 ~ /openjdk/ {print $1}' /tmp/cve/merged-purl.txt | sort -u
+awk '$1 ~ /openjdk/ {print $1}' /.buildcve/merged-purl.txt | sort -u
 
 # Сколько строк сопоставлено с нашим каноническим именем:
-grep -c '^pkg:protego/openjdk ' /tmp/cve/merged-purl.txt
+grep -c '^pkg:protego/openjdk ' /.buildcve/merged-purl.txt
 
 # Применить новые алиасы к уже объединённому индексу:
 python3 main.py refresh
@@ -232,4 +232,4 @@ python3 main.py merge
 - `dpkg-parsechangelog` и `dpkg` для проверки исходного пакета и сравнения Debian-версий.
 - Сетевой доступ к внешним источникам для команды `get`; для `convert`, `merge`, `refresh` и `verify` данные уже должны находиться локально.
 
-Путь `/tmp/cve/` — рабочий каталог данных и индексов; его содержимое не является частью исходного дерева репозитория. При запуске `verify` файл `debian/changelog` ищется относительно текущего рабочего каталога, поэтому проверку следует выполнять из корня собираемого Debian-пакета.
+Путь `/.buildcve/` — рабочий каталог данных и индексов; его содержимое не является частью исходного дерева репозитория. При запуске `verify` файл `debian/changelog` ищется относительно текущего рабочего каталога, поэтому проверку следует выполнять из корня собираемого Debian-пакета.

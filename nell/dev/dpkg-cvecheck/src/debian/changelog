@@ -1,5 +1,5 @@
-apt (3.0.15-1) stable; urgency=medium
+dpkg-cvecheck (0.1.0) unstable; urgency=medium
 
-  * Build package.
+  * Initial package with vulnerability index and checker.
 
- -- Maintainer <maintainer@example.com>  Fri, 16 Oct 2026 12:00:00 +0500
+ -- badsysadm <me@badsysadm.com>  Mon, 09 Nov 2026 00:00:00 +0000

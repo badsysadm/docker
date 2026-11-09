@@ -76,7 +76,7 @@ def main():
             merge()
         else:
             result = subprocess.run(
-                [sys.executable, str(ROOT / f"{args.command}.py")]
+                [sys.executable, str(ROOT / ("dpkg-cvecheck.py" if args.command == "verify" else f"{args.command}.py"))]
             )
             sys.exit(result.returncode)
 
@@ -92,8 +92,8 @@ def main():
         print(f"[{module}] {args.command}", flush=True)
 
         subprocess.run(
-            [sys.executable, script],
-            cwd=CONNECTORS,
+            [sys.executable, str(CONNECTORS / script)],
+            cwd=ROOT,
             check=True,
         )
 

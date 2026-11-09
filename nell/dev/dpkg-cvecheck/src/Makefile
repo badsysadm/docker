@@ -9,7 +9,7 @@ refresh:
 	python3 ./main.py refresh
 
 install:
-	install -m 755 verify.py $(DESTDIR)/usr/bin/dpkg-cvecheck
+	install -D -m 755 dpkg-cvecheck.py $(DESTDIR)/usr/bin/dpkg-cvecheck
 	install -D -m 644 .buildcve/merged-purl.txt $(DESTDIR)/var/lib/cve/db.txt
 
 clean:
