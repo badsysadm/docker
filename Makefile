@@ -18,7 +18,7 @@ checksec: version ?= 3.2.0
 binary-security-check: version ?= 1.3.1
 fsverity-utils: version ?= 1.7
 
-git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt: section = dev
+git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt dpkg-cvecheck: section = dev
 git: version ?= 2.56.0
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
@@ -36,6 +36,7 @@ devscripts: version ?= 2.26.13
 debhelper: version ?= 14.5
 equivs: version ?= 2.3.3
 quilt: version ?= 0.69
+dpkg-cvecheck: version ?= 0.1.0
 
 glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus shadow: section = system
 glibc: version ?= 2.44

@@ -1,0 +1,14 @@
+Source: dpkg-cvecheck
+Section: devel
+Priority: optional
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends: debhelper-compat (= 13), python3, dpkg-dev, ca-certificates, coreutils
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dpkg-cvecheck
+Architecture: all
+Depends: ${misc:Depends}, python3, dpkg-dev, dpkg
+Description: Debian CVE verification and OpenVEX report generation
+ Checks source package vulnerabilities against local applicability and fix
+ decisions, and generates per-binary-package OpenVEX reports from triage.
