@@ -44,7 +44,9 @@ RUN mkdir -p /src/target/usr/bin && \
         -a "$(perl -MConfig -e 'print "$Config{privlib}/unicore/Name.pl"');lib/unicore/Name.pl" \
         -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames \
         -M MLDBM::Serializer::Storable -M BerkeleyDB::Btree \
-        -M Data::DPath::Step -M Data::DPath::Point "$@" -o /src/target/usr/bin/lintian bin/lintian
+        -M Data::DPath -M Data::DPath::Attrs -M Data::DPath::Context \
+        -M Data::DPath::Filters -M Data::DPath::Path \
+        -M Data::DPath::Point -M Data::DPath::Step "$@" -o /src/target/usr/bin/lintian bin/lintian
 
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.
