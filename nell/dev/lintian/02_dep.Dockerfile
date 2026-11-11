@@ -11,4 +11,6 @@ COPY --from=src_image /src/ /src/
 
 # Vendor the upstream Perl module; the Trixie package is older than Lintian requires.
 RUN mkdir -p /src/vendor/perl/Debian && \
-    cp /src/distro-info/perl/Debian/DistroInfo.pm /src/vendor/perl/Debian/DistroInfo.pm
+    module="$(find /src/distro-info -type f -path '*/Debian/DistroInfo.pm' -print -quit)" && \
+    test -n "$module" && \
+    cp "$module" /src/vendor/perl/Debian/DistroInfo.pm
