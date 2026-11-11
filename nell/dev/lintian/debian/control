@@ -22,6 +22,7 @@ Build-Depends:
  libdigest-sha-perl,
  libdistro-info-perl,
  distro-info-data,
+ iso-codes,
  libdpkg-perl,
  libemail-address-xs-perl,
  libencode-perl,
