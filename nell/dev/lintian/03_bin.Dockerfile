@@ -51,7 +51,7 @@ RUN mkdir -p /src/target/usr/bin && \
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.
 RUN mkdir -p /src/target/usr/share/lintian && \
-    cp -a lib data tags profiles vendors private commands \
+    cp -a data tags profiles vendors private commands \
         /src/target/usr/share/lintian/
 
 FROM scratch AS bundle
