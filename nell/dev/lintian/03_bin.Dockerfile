@@ -11,6 +11,12 @@ RUN git apply /src/patches/_par-runtime.patch
 # Populate the upstream version placeholder from the build argument.
 RUN VERSION="${VERSION}" perl -pi -e 's/^my \$LINTIAN_VERSION;/my \$LINTIAN_VERSION = "$ENV{VERSION}";/' bin/lintian
 
+# MLDBM requires BerkeleyDB/Btree.pm by filename, but BerkeleyDB defines
+# BerkeleyDB::Btree in BerkeleyDB.pm. Supply a loader for PAR.
+RUN mkdir -p /src/vendor/perl/BerkeleyDB && \
+    printf 'package BerkeleyDB::Btree; require BerkeleyDB; 1;\\n' \
+        > /src/vendor/perl/BerkeleyDB/Btree.pm
+
 # Some checks are loaded dynamically by name: enumerate all Lintian modules
 # rather than relying solely on PAR's static dependency discovery.
 RUN mkdir -p /src/target/usr/bin && \
@@ -37,7 +43,8 @@ RUN mkdir -p /src/target/usr/bin && \
     env PERL5LIB=/src/vendor/perl pp -B -I /src/vendor/perl -I lib \
         -a "$(perl -MConfig -e 'print "$Config{privlib}/unicore/Name.pl"');lib/unicore/Name.pl" \
         -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames \
-        -M MLDBM::Serializer::Storable -M Data::DPath::Step "$@" -o /src/target/usr/bin/lintian bin/lintian
+        -M MLDBM::Serializer::Storable -M BerkeleyDB::Btree \
+        -M Data::DPath::Step -M Data::DPath::Point "$@" -o /src/target/usr/bin/lintian bin/lintian
 
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.
