@@ -25,7 +25,7 @@ RUN dh_installsysusers
 RUN dh_installtmpfiles
 RUN dh_installudev
 RUN dh_link
-RUN dh_strip
+RUN dh_strip -Xusr/bin/lintian
 RUN dh_fixperms
 RUN dh_missing
 RUN dh_strip_nondeterminism
