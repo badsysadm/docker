@@ -23,7 +23,7 @@ RUN mkdir -p /src/target/usr/bin && \
     done; \
     TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
     faketime -f '2020-01-01 00:00:00' \
-    pp -B -I lib -M namespace::clean "$@" -o /src/target/usr/bin/lintian bin/lintian
+    pp -B -I lib -M namespace::clean -M IPC::Run3 "$@" -o /src/target/usr/bin/lintian bin/lintian
 
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.

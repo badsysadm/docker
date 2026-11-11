@@ -22,6 +22,7 @@ Build-Depends:
  libemail-address-xs-perl,
  libfile-basedir-perl,
  libio-interactive-perl,
+ libipc-run3-perl,
  liblist-compare-perl,
  liblist-someutils-perl,
  libmldbm-perl,
