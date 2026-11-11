@@ -9,7 +9,7 @@ Lintian — Perl-программа, однако его проверки и п�
 не охватывает ни динамически загружаемые модули, ни базы правил.
 
 ## Решение
-- Использовать официальный Debian source archive `lintian 2.142.0`.
+- Получать исходники `lintian 2.142.0` из официального репозитория Debian Salsa по Git-тегу версии (`--single-branch --branch --depth 1`).
 - Собрать основной исполняемый файл `lintian` через `pp -B`, по аналогии
   с профилями `equivs`, `devscripts` и `debhelper`.
 - Явно включать модули из `lib/Lintian` посредством `-M`.
@@ -34,5 +34,6 @@ Lintian — Perl-программа, однако его проверки и п�
   сборки с учётом версии Debian в окружении.
 
 ## Ссылки
+- https://salsa.debian.org/lintian/lintian
 - https://sources.debian.org/src/lintian/2.142.0/
 - https://lintian.debian.org/manual/
