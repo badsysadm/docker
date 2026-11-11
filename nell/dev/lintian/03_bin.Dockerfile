@@ -36,7 +36,8 @@ RUN mkdir -p /src/target/usr/bin && \
     faketime -f '2020-01-01 00:00:00' \
     env PERL5LIB=/src/vendor/perl pp -B -I /src/vendor/perl -I lib \
         -a "$(perl -MConfig -e 'print "$Config{privlib}/unicore/Name.pl"');lib/unicore/Name.pl" \
-        -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames "$@" -o /src/target/usr/bin/lintian bin/lintian
+        -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames \
+        -M MLDBM::Serializer::Storable -M Data::DPath::Step "$@" -o /src/target/usr/bin/lintian bin/lintian
 
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.
