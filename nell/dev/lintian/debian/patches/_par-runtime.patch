@@ -23,3 +23,23 @@ diff --git a/bin/lintian b/bin/lintian
 +$ENV{LINTIAN_BASE} = THISDIR;
  
  $ENV{LINTIAN_VERSION} = $LINTIAN_VERSION // guess_version($ENV{LINTIAN_BASE});
+diff --git a/lib/Lintian/Tag.pm b/lib/Lintian/Tag.pm
+--- a/lib/Lintian/Tag.pm
++++ b/lib/Lintian/Tag.pm
+@@ -219,10 +219,11 @@
+         my $absolute = first_value { -e } @candidates;
+-        die encode_utf8(
+-            "Cannot find screen $screen_name (looking for $relative)")
+-          unless length $absolute;
+ 
+         try {
+-            require $absolute;
++            if (length $absolute) {
++                require $absolute;
++            } else {
++                require "Lintian/Screen/$relative";
++            }
+         } catch {
+-            die encode_utf8("Cannot load screen $absolute: $@");
++            die encode_utf8("Cannot load screen $screen_name: $@");
+         }
