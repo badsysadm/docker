@@ -3,6 +3,7 @@ Section: dev
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
+ git,
  perl,
  libpar-packer-perl,
  faketime,
