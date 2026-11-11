@@ -20,6 +20,7 @@ Build-Depends:
  libdata-validate-uri-perl,
  libdevel-size-perl,
  libdigest-sha-perl,
+ libdistro-info-perl,
  libdpkg-perl,
  libemail-address-xs-perl,
  libencode-perl,
