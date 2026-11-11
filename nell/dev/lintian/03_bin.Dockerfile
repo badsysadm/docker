@@ -42,7 +42,7 @@ RUN mkdir -p /src/target/usr/share/lintian && \
     cp -a lib data tags profiles vendors private commands \
         /src/target/usr/share/lintian/ && \
     mkdir -p /src/target/usr/share/distro-info && \
-    cp /usr/share/distro-info/debian.csv /src/target/usr/share/distro-info/
+    cp /usr/share/distro-info/*.csv /src/target/usr/share/distro-info/
 
 FROM scratch AS bundle
 ARG VERSION
