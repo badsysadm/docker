@@ -39,7 +39,6 @@ Build-Depends:
  libmoo-perl,
  libmoox-aliases-perl,
  libnamespace-clean-perl,
- libpar-packer-perl,
  libpath-tiny-perl,
  libperlio-gzip-perl,
  libperlio-utf8-strict-perl,
