@@ -6,7 +6,7 @@ ARG VERSION
 WORKDIR /src/lintian
 
 COPY debian/patches /src/patches/
-RUN patch -p1 < /src/patches/_par-runtime.patch
+RUN git apply /src/patches/_par-runtime.patch
 
 # Some checks are loaded dynamically by name: enumerate all Lintian modules
 # rather than relying solely on PAR's static dependency discovery.

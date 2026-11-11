@@ -1,5 +1,5 @@
 Source: lintian
-Section: devel
+Section: dev
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
