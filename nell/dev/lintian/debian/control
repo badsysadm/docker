@@ -25,6 +25,7 @@ Build-Depends:
  liblist-compare-perl,
  liblist-someutils-perl,
  libmldbm-perl,
+ libnamespace-clean-perl,
  libpath-tiny-perl,
  libsyntax-keyword-try-perl,
  libterm-readkey-perl,
