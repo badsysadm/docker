@@ -21,8 +21,6 @@ Build-Depends:
  libdevel-size-perl,
  libdigest-sha-perl,
  libdistro-info-perl,
- distro-info-data,
- iso-codes,
  libdpkg-perl,
  libemail-address-xs-perl,
  libencode-perl,
@@ -67,5 +65,5 @@ Build-Depends:
 
 Package: lintian
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, distro-info-data, iso-codes
 Description: Debian package static analysis tool packaged with PAR::Packer
