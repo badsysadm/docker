@@ -34,13 +34,15 @@ RUN mkdir -p /src/target/usr/bin && \
     done; \
     TZ=UTC PERL_HASH_SEED=0 PERL_PERTURB_KEYS=0 \
     faketime -f '2020-01-01 00:00:00' \
-    pp -B -I lib -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames "$@" -o /src/target/usr/bin/lintian bin/lintian
+    PERL5LIB=/src/vendor/perl pp -B -I /src/vendor/perl -I lib -M namespace::clean -M IPC::Run3 -M Debian::DistroInfo -M _charnames "$@" -o /src/target/usr/bin/lintian bin/lintian
 
 # Lintian enumerates checks and reads tags, profiles and vendor databases at
 # runtime. These are essential inputs, not documentation.
 RUN mkdir -p /src/target/usr/share/lintian && \
     cp -a lib data tags profiles vendors private commands \
-        /src/target/usr/share/lintian/
+        /src/target/usr/share/lintian/ && \
+    mkdir -p /src/target/usr/share/distro-info && \
+    cp /usr/share/distro-info/debian.csv /src/target/usr/share/distro-info/
 
 FROM scratch AS bundle
 ARG VERSION
