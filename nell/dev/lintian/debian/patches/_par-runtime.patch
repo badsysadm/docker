@@ -1,0 +1,26 @@
+diff --git a/bin/lintian b/bin/lintian
+--- a/bin/lintian
++++ b/bin/lintian
+@@ -30,11 +30,11 @@
+ use Cwd qw(realpath);
+ use File::Basename qw(dirname);
+ 
+ # neither Path::This nor lib::relative are in Debian
+-use constant THISFILE => realpath __FILE__;
+-use constant THISDIR => dirname realpath __FILE__;
++use constant THISFILE => '/usr/bin/lintian';
++use constant THISDIR => '/usr/share/lintian';
+ 
+ # use Lintian modules that belong to this program
+-use lib THISDIR . '/../lib';
++use lib THISDIR . '/lib';
+ 
+ # substituted during package build
+@@ -117,6 +117,5 @@
+ $ENV{TZ} = $EMPTY;
+ 
+-$ENV{LINTIAN_BASE} = realpath(THISDIR . '/..')
+-  // die encode_utf8('Cannot resolve LINTIAN_BASE');
++$ENV{LINTIAN_BASE} = THISDIR;
+ 
+ $ENV{LINTIAN_VERSION} = $LINTIAN_VERSION // guess_version($ENV{LINTIAN_BASE});
