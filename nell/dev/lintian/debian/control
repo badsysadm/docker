@@ -1,0 +1,35 @@
+Source: lintian
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ perl,
+ libpar-packer-perl,
+ faketime,
+ libdpkg-perl,
+ libapt-pkg-perl,
+ libarchive-zip-perl,
+ libberkeleydb-perl,
+ libcapture-tiny-perl,
+ libclone-perl,
+ libconfig-tiny-perl,
+ libconst-fast-perl,
+ libcpanel-json-xs-perl,
+ libdata-dpath-perl,
+ libdata-validate-domain-perl,
+ libdata-validate-uri-perl,
+ libemail-address-xs-perl,
+ libfile-basedir-perl,
+ libio-interactive-perl,
+ liblist-compare-perl,
+ liblist-someutils-perl,
+ libmldbm-perl,
+ libpath-tiny-perl,
+ libsyntax-keyword-try-perl,
+ libterm-readkey-perl,
+ libunicode-utf8-perl
+
+Package: lintian
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Debian package static analysis tool packaged with PAR::Packer
