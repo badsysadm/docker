@@ -9,7 +9,7 @@ COPY debian/patches /src/patches/
 RUN git apply /src/patches/_par-runtime.patch
 
 # Populate the upstream version placeholder from the build argument.
-RUN sed -i "s/my \\$LINTIAN_VERSION;/my \\$LINTIAN_VERSION = '${VERSION}';/" bin/lintian
+RUN VERSION="${VERSION}" perl -pi -e 's/^my \$LINTIAN_VERSION;/my \$LINTIAN_VERSION = "$ENV{VERSION}";/' bin/lintian
 
 # Some checks are loaded dynamically by name: enumerate all Lintian modules
 # rather than relying solely on PAR's static dependency discovery.
