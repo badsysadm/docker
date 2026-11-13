@@ -3,7 +3,7 @@ ARG PYTHON_VERSION=3.14.7
 ARG RUST_VERSION=1.89.0
 
 FROM oci.badsysadm.local:80/src/www/synapse:${VERSION} AS src_image
-FROM 127.0.0.1:12670/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
+FROM oci.badsysadm.local:80/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 ARG RUST_VERSION
