@@ -18,6 +18,13 @@ Build-Depends:
  libpcre2-dev,
  libcap-ng-dev,
  libnet1-dev,
+ libnetfilter-queue-dev,
+ libnetfilter-log-dev,
+ libnfnetlink-dev,
+ libbpf-dev,
+ libelf-dev,
+ clang,
+ llvm,
  liblz4-dev,
  libmagic-dev,
  libevent-dev

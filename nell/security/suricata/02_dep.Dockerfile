@@ -31,10 +31,10 @@ RUN ./configure \
     --disable-gccmarch-native \
     --disable-suricata-update \
     --disable-python \
-    --disable-nfqueue \
-    --disable-nflog \
-    --disable-ebpf \
-    --disable-ebpf-build \
+    --enable-nfqueue \
+    --enable-nflog \
+    --enable-ebpf \
+    --enable-ebpf-build \
     --disable-af-xdp \
     --disable-dpdk \
     --disable-pfring \
