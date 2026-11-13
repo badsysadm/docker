@@ -6,7 +6,7 @@ ARG VERSION
 WORKDIR /src/suricata
 ENV CARGO_NET_OFFLINE=true
 ENV CARGO_BUILD_OFFLINE=true
-ENV RUSTFLAGS="-C debuginfo=0"
+ENV RUSTFLAGS="-C debuginfo=0 -C link-arg=-static-libgcc"
 
 RUN ./configure \
     --prefix=/usr \
@@ -25,7 +25,6 @@ RUN ./configure \
     --disable-pfring \
     --enable-libmagic \
     --enable-geoip \
-    PKG_CONFIG="pkg-config --static" \
     CFLAGS="-O2 -fPIC" \
     LDFLAGS="-static-libgcc -Wl,-z,relro,-z,now"
 

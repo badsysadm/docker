@@ -22,6 +22,12 @@ COPY --from=src_image /src/ /src/
 WORKDIR /src/suricata
 
 # Upstream autogen.sh removes rust/Cargo.lock; retain the tagged lockfile.
+# Suricata links its executable using src/Makefile.am rather than LDFLAGS alone.
+# Select static archives for its dependencies, then return to dynamic libc.
+RUN sed -i \
+    -e 's|^suricata_LDFLAGS = .*|suricata_LDFLAGS = -Wl,-Bstatic $(all_libraries) ${SECLDFLAGS}|' \
+    -e 's|^suricata_LDADD = .*|suricata_LDADD = $(LDADD_GENERIC) $(LIBS) -Wl,-Bdynamic|' \
+    src/Makefile.am
 RUN autoreconf -fvi
 RUN ./configure \
     --prefix=/usr \
