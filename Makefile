@@ -126,7 +126,7 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy cosign ca-certificates audit: section = security
+gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy suricata cosign ca-certificates audit: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 ca-certificates: version ?= 2026-11-05
@@ -134,6 +134,7 @@ krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
 audit: version ?= 4.2.1
 trivy: version ?= 0.76.2
+suricata: version ?= 8.0.8
 cosign: version ?= 3.1.4
 polkit: version ?= 127
 apparmor: version ?= 4.1.8

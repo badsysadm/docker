@@ -1,0 +1,28 @@
+Source: suricata
+Section: net
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ git,
+ autoconf,
+ automake,
+ libtool,
+ pkg-config,
+ rustc,
+ cargo,
+ cbindgen,
+ libpcap0.8-dev,
+ libyaml-dev,
+ libjansson-dev,
+ libpcre2-dev,
+ libcap-ng-dev,
+ libnet1-dev,
+ liblz4-dev,
+ libmagic-dev,
+ libevent-dev
+Package: suricata
+Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5), zlib (= 1.3.1)
+Depends: ${shlibs:Depends}
+Description: Suricata network intrusion detection and prevention engine
