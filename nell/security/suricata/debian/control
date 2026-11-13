@@ -27,6 +27,7 @@ Build-Depends:
  llvm,
  liblz4-dev,
  libmagic-dev,
+ libmaxminddb-dev,
  libevent-dev
 Package: suricata
 Architecture: amd64

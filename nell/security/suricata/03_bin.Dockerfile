@@ -24,8 +24,8 @@ RUN ./configure \
     --disable-af-xdp \
     --disable-dpdk \
     --disable-pfring \
-    --disable-libmagic \
-    --disable-geoip \
+    --enable-libmagic \
+    --enable-geoip \
     PKG_CONFIG="pkg-config --static" \
     CFLAGS="-O2 -fPIC" \
     LDFLAGS="-static-libgcc -Wl,-z,relro,-z,now"

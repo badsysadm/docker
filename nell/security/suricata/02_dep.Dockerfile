@@ -38,8 +38,8 @@ RUN ./configure \
     --disable-af-xdp \
     --disable-dpdk \
     --disable-pfring \
-    --disable-libmagic \
-    --disable-geoip
+    --enable-libmagic \
+    --enable-geoip
 
 # Download crates during dependency preparation, never during binary build.
 RUN cd rust && cargo vendor --locked vendor > /tmp/suricata-cargo-vendor.toml
