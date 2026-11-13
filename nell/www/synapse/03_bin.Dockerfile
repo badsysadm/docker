@@ -5,7 +5,7 @@ ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
 
 FROM oci.badsysadm.local:80/pkg/dev/python3.14:${PYTHON_VERSION} AS python_image
-FROM oci.badsysadm.local:80/libs/glibc:${GLIBC_VERSION} AS glibc_image
+FROM oci.badsysadm.local:80/bin/system/glibc:${GLIBC_VERSION} AS glibc_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/dep/www/synapse:${VERSION} AS build
