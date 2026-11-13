@@ -19,7 +19,7 @@ binary-security-check: version ?= 1.3.1
 fsverity-utils: version ?= 1.7
 
 git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt lintian dpkg-cvecheck: section = dev
-git: version ?= 2.56.0
+git: version ?= 2.56.1
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
 autoconf: version ?= 2.73
