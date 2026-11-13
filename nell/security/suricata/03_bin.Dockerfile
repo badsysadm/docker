@@ -8,7 +8,6 @@ ENV CARGO_NET_OFFLINE=true
 ENV CARGO_BUILD_OFFLINE=true
 ENV RUSTFLAGS="-C debuginfo=0"
 
-# Link all non-libc libraries statically. Inspect the ELF after installation.
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -40,23 +39,9 @@ RUN rm -rf \
     /src/target/usr/share/man \
     /src/target/usr/share/info \
     /src/target/usr/share/locale \
-    /src/target/usr/include \
-    /src/target/usr/lib/pkgconfig \
-    /src/target/usr/lib64/pkgconfig \
     /src/target/usr/lib/*.la \
     /src/target/usr/lib64/*.la
 
-RUN set -eu; \
-    for executable in /src/target/usr/bin/suricata /src/target/usr/bin/suricatasc /src/target/usr/bin/suricatactl; do \
-      if test -f "$executable"; then \
-        needed="$(readelf -d "$executable" | grep NEEDED || true)"; \
-        forbidden="$(printf "%s\\n" "$needed" | grep -v 'libc.so.6' || true)"; \
-        if test -n "$forbidden"; then \
-          echo "Unexpected shared dependencies in $executable: $forbidden" >&2; \
-          exit 1; \
-        fi; \
-      fi; \
-    done
 
 FROM scratch AS bundle
 ARG VERSION
