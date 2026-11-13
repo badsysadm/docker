@@ -1,4 +1,4 @@
-FROM 127.0.0.1:80/distro/debian:trixie AS build
+FROM oci.badsysadm.local:80/distro/debian:trixie AS build
 ARG PYTHON_VERSION=3.14.7
 
 RUN apt-get update && apt-get install -y -qq --no-install-recommends \
