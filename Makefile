@@ -145,3 +145,4 @@ buildbot: version ?= 4.3.0
 
 include mk/core.mk
 include mk/bs.mk
+include mk/deps.mk
