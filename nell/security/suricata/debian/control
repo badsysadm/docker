@@ -27,6 +27,7 @@ Build-Depends:
  llvm,
  liblz4-dev,
  libmagic-dev,
+ libmagic-mgc,
  libmaxminddb-dev,
  libevent-dev
 Package: suricata
