@@ -28,8 +28,7 @@ RUN ./configure \
     --disable-geoip \
     PKG_CONFIG="pkg-config --static" \
     CFLAGS="-O2 -fPIC" \
-    LDFLAGS="-Wl,-Bstatic -static-libgcc" \
-    LIBS="-Wl,-Bdynamic"
+    LDFLAGS="-static-libgcc -Wl,-z,relro,-z,now"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
@@ -47,9 +46,15 @@ RUN rm -rf \
     /src/target/usr/lib/*.la \
     /src/target/usr/lib64/*.la
 
-RUN for executable in /src/target/usr/bin/suricata /src/target/usr/bin/suricatasc /src/target/usr/bin/suricatactl; do \
+RUN set -eu; \
+    for executable in /src/target/usr/bin/suricata /src/target/usr/bin/suricatasc /src/target/usr/bin/suricatactl; do \
       if test -f "$executable"; then \
-        readelf -d "$executable" | grep NEEDED | grep -v 'libc.so.6' && exit 1 || true; \
+        needed="$(readelf -d "$executable" | grep NEEDED || true)"; \
+        forbidden="$(printf "%s\\n" "$needed" | grep -v 'libc.so.6' || true)"; \
+        if test -n "$forbidden"; then \
+          echo "Unexpected shared dependencies in $executable: $forbidden" >&2; \
+          exit 1; \
+        fi; \
       fi; \
     done
 
