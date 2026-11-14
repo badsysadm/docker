@@ -28,8 +28,9 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --enable-libmagic \
     --enable-geoip \
     CFLAGS="-O2 -fPIC" \
-    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now" \
-    LIBS="-Wl,-Bstatic -Wl,--start-group \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,-Bstatic" \
+    LIBS="-Wl,--start-group \
     -lpcap -lyaml -ljansson -lpcre2-8 \
     -lbpf -lelf -lzstd -lz \
     -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink -lmnl \
