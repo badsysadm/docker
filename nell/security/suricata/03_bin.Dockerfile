@@ -43,9 +43,6 @@ RUN make install-conf DESTDIR=/src/target
 
 RUN install -d /src/target/usr/libexec/suricata/ebpf && \
     install -m 0644 ebpf/*.bpf /src/target/usr/libexec/suricata/ebpf/
-RUN install -D -m 0644 /usr/share/file/magic.mgc /src/target/usr/share/file/magic.mgc && \
-    install -d /src/target/usr/share/misc && \
-    ln -s ../file/magic.mgc /src/target/usr/share/misc/magic.mgc
 
 # Only runtime artifacts and real configuration files belong in the bundle.
 RUN rm -rf \
