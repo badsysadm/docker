@@ -6,8 +6,7 @@ ARG VERSION
 WORKDIR /src/bzip2
 
 RUN make -j$(nproc) libbz2.a CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
-RUN gcc -shared -Wl,-soname,libbz2.so.1.0 -o libbz2.so.1.0.8 \
-    blocksort.o huffman.o crctable.o randtable.o compress.o decompress.o bzlib.o
+RUN make -f Makefile-libbz2_so CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
 
 RUN install -D -m 0644 bzlib.h /src/target/usr/include/bzlib.h
 RUN install -D -m 0644 libbz2.a /src/target/usr/lib/libbz2.a
