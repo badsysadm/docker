@@ -1,0 +1,11 @@
+Source: libxxhash
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential
+
+Package: libxxhash
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: xxHash extremely fast non-cryptographic hashing library

@@ -45,7 +45,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     /usr/lib/x86_64-linux-gnu/libmagic.a \
     /usr/lib/x86_64-linux-gnu/libmaxminddb.a \
     /usr/local/lib/libcrypto.a \
-    /usr/lib/x86_64-linux-gnu/libxxhash.a \
+    /usr/local/lib/libxxhash.a \
     /usr/local/lib/libdbus-1.a \
     -lm -ldl -lpthread \
     -Wl,--end-group -Wl,-Bdynamic"
