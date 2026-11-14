@@ -28,7 +28,7 @@ RUN ./configure \
     --enable-libmagic \
     --enable-geoip \
     CFLAGS="-O2 -fPIC" \
-    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now" \
     LIBS="-Wl,-Bstatic -Wl,--start-group \
     -lpcap -lyaml -ljansson -lpcre2-8 \
     -lbpf -lelf -lzstd -lz \

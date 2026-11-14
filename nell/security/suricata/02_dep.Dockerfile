@@ -12,7 +12,7 @@ RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
-COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
+COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto.a
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
