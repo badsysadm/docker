@@ -8,8 +8,8 @@ WORKDIR /src/libmnl
 RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 
 RUN ./configure \
-    --prefix=/usr/local \
-    --libdir=/usr/local/lib \
+    --prefix=/usr \
+    --libdir=/usr/lib/x86_64-linux-gnu \
     --enable-static \
     --enable-shared \
     --with-pic \
@@ -22,7 +22,7 @@ RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
     /src/target/usr/share/info
-RUN rm -f /src/target/usr/local/lib/*.la
+RUN rm -f /src/target/usr/lib/x86_64-linux-gnu/*.la
 
 FROM scratch AS bundle
 ARG VERSION

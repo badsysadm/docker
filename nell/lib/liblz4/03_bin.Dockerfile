@@ -10,8 +10,8 @@ RUN make -j$(nproc) -C lib all \
     LDFLAGS="-Wl,-z,relro,-z,now -Wl,--gc-sections"
 
 RUN make -C lib install \
-    PREFIX=/usr/local \
-    LIBDIR=/usr/local/lib \
+    PREFIX=/usr \
+    LIBDIR=/usr/lib/x86_64-linux-gnu \
     DESTDIR=/src/target
 
 FROM scratch AS bundle

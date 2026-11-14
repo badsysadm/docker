@@ -11,11 +11,11 @@ COPY debian ./debian/
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
-COPY --from=libnfnetlink_image /target/usr/local/include/ /usr/local/include/
-COPY --from=libnfnetlink_image /target/usr/local/lib/libnfnetlink.a /usr/local/lib/libnfnetlink.a
-COPY --from=libnfnetlink_image /target/usr/local/lib/pkgconfig/ /usr/local/lib/pkgconfig/
-COPY --from=libmnl_image /target/usr/local/include/ /usr/local/include/
-COPY --from=libmnl_image /target/usr/local/lib/libmnl.a /usr/local/lib/libmnl.a
-COPY --from=libmnl_image /target/usr/local/lib/pkgconfig/ /usr/local/lib/pkgconfig/
+COPY --from=libnfnetlink_image /target/usr/include/ /usr/local/include/
+COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/libnfnetlink.a /usr/local/lib/libnfnetlink.a
+COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libnfnetlink.pc /usr/local/lib/pkgconfig/libnfnetlink.pc
+COPY --from=libmnl_image /target/usr/include/ /usr/local/include/
+COPY --from=libmnl_image /target/usr/lib/x86_64-linux-gnu/libmnl.a /usr/local/lib/libmnl.a
+COPY --from=libmnl_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libmnl.pc /usr/local/lib/pkgconfig/libmnl.pc
 
 COPY --from=src_image /src/ /src/
