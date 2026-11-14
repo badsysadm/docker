@@ -35,10 +35,10 @@ COPY --from=zstd_image /target/usr/include/ /usr/local/include/
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 COPY --from=liblz4_image /target/usr/include/ /usr/local/include/
 COPY --from=liblz4_image /target/usr/lib/liblz4.a /usr/local/lib/liblz4.a
-COPY --from=dbus_image /target/usr/lib/libdbus-1.a /usr/local/lib/libdbus-1.a
+COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
 COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
-COPY --from=elfutils_image /target/usr/lib/libelf.a /usr/local/lib/libelf.a
-COPY --from=elfutils_image /target/usr/lib/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
+COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a
+COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 
 COPY --from=libmnl_image /target/usr/include/ /usr/local/include/
 COPY --from=libmnl_image /target/usr/lib/libmnl.a /usr/local/lib/libmnl.a
