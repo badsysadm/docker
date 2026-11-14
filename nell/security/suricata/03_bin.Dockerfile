@@ -8,6 +8,13 @@ ENV CARGO_NET_OFFLINE=true
 ENV CARGO_BUILD_OFFLINE=true
 ENV RUSTFLAGS="-C debuginfo=0 -C link-arg=-static-libgcc"
 
+# Set Suricata's static link flags before generating the build scripts.
+RUN sed -i \
+    -e 's|^suricata_LDFLAGS = .*|suricata_LDFLAGS = -Wl,-Bstatic $(all_libraries) ${SECLDFLAGS}|' \
+    -e 's|^suricata_LDADD = .*|suricata_LDADD = $(LDADD_GENERIC) $(LIBS) -Wl,-Bdynamic|' \
+    src/Makefile.am
+RUN autoreconf -fvi
+
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \

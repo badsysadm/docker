@@ -21,31 +21,12 @@ COPY --from=src_image /src/ /src/
 
 WORKDIR /src/suricata
 
-# Upstream autogen.sh removes rust/Cargo.lock; retain the tagged lockfile.
-# Suricata links its executable using src/Makefile.am rather than LDFLAGS alone.
-# Select static archives for its dependencies, then return to dynamic libc.
-RUN sed -i \
-    -e 's|^suricata_LDFLAGS = .*|suricata_LDFLAGS = -Wl,-Bstatic $(all_libraries) ${SECLDFLAGS}|' \
-    -e 's|^suricata_LDADD = .*|suricata_LDADD = $(LDADD_GENERIC) $(LIBS) -Wl,-Bdynamic|' \
-    src/Makefile.am
-RUN autoreconf -fvi
-RUN ./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --localstatedir=/var \
-    --disable-unittests \
-    --disable-gccmarch-native \
-    --disable-suricata-update \
-    --disable-python \
-    --enable-nfqueue \
-    --enable-nflog \
-    --enable-ebpf \
-    --enable-ebpf-build \
-    --disable-af-xdp \
-    --disable-dpdk \
-    --disable-pfring \
-    --enable-libmagic \
-    --enable-geoip
+# Prepare Cargo manifests from upstream templates without configuring the C build.
+ARG VERSION
+RUN for manifest in rust/Cargo.toml.in rust/derive/Cargo.toml.in rust/sys/Cargo.toml.in rust/htp/Cargo.toml.in rust/suricatactl/Cargo.toml.in rust/suricatasc/Cargo.toml.in; do \
+        sed "s/@PACKAGE_VERSION@/${VERSION}/g" "$manifest" > "${manifest%.in}"; \
+    done && \
+    cp rust/Cargo.lock.in rust/Cargo.lock
 
 # Download crates during dependency preparation, never during binary build.
 RUN cd rust && cargo vendor --locked vendor > /tmp/suricata-cargo-vendor.toml
