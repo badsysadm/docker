@@ -13,7 +13,8 @@ RUN ./configure \
     --enable-static \
     --enable-shared \
     --with-pic \
-    CFLAGS="-O2 -fPIC"
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-Wl,--gc-sections"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target

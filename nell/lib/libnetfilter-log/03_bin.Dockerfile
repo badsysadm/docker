@@ -15,7 +15,8 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --with-pic \
     --disable-man-pages \
     --disable-html-doc \
-    CFLAGS="-O2 -fPIC"
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-Wl,--gc-sections"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
