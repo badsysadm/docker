@@ -7,6 +7,7 @@ WORKDIR /src/bzip2
 
 COPY debian/patches /src/patches/
 RUN patch -p1 -i /src/patches/_build.patch
+RUN patch -p1 -i /src/patches/_links.patch
 
 RUN make -j$(nproc) libbz2.a libbz2.so bzip2 bzip2recover CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
 RUN make install PREFIX=/src/target/usr CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
