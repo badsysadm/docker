@@ -16,6 +16,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     --localstatedir=/var \
     --disable-unittests \
     --disable-gccmarch-native \
+    --disable-python \
     --enable-nfqueue \
     --enable-nflog \
     --enable-ebpf \
