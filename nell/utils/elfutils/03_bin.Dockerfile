@@ -17,6 +17,7 @@ RUN mkdir -p /src/static-libs && \
     cp "$(gcc -print-file-name=libstdc++.a)" /src/static-libs/
 
 RUN PKG_CONFIG="pkg-config --static" \
+    CFLAGS="-O2 -fPIC" \
     ./configure \
         --prefix=/usr \
         --libdir=/usr/lib/x86_64-linux-gnu \
