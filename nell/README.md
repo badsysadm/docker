@@ -53,6 +53,22 @@ upstream; в остальных случаях указывается `"${VERSIO
 
 ### `02_dep.Dockerfile`
 
+Все аргументы, используемые в `FROM` (включая версии зависимостей),
+объявляются **до первого `FROM`**. `ARG`, объявленный внутри стадии,
+не доступен для подстановки в `FROM` следующих стадий. Например:
+
+```dockerfile
+ARG VERSION=1.0.0
+ARG ZLIB_VERSION=1.3.1
+
+FROM oci.badsysadm.local:80/src/lib/example:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
+FROM oci.badsysadm.local:80/get/dep:latest AS build
+```
+
+При необходимости использовать аргумент в инструкциях конкретной стадии
+его повторно объявляют через `ARG NAME` после соответствующего `FROM`.
+
 Устанавливает build-зависимости из `debian/control` через `mk-build-deps`.
 
 Для библиотечных зависимостей приоритет имеют существующие профили `nell`:
