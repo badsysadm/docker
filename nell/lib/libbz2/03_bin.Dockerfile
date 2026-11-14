@@ -8,9 +8,9 @@ WORKDIR /src/bzip2
 COPY debian/patches /src/patches/
 RUN patch -p1 -i /src/patches/_build.patch
 
-RUN make -j$(nproc) libbz2.a libbz2.so CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
+RUN make -j$(nproc) libbz2.a libbz2.so bzip2 bzip2recover CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
 RUN make install PREFIX=/src/target/usr CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
-RUN rm -rf /src/target/usr/bin /src/target/usr/man
+RUN rm -rf /src/target/usr/man
 
 FROM scratch AS bundle
 ARG VERSION

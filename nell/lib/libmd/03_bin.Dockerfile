@@ -12,9 +12,8 @@ RUN CFLAGS="-O2 -fPIC" ./configure \
     --enable-static \
     --enable-shared
 
-RUN make -C src -j$(nproc)
-RUN make -C src install DESTDIR=/src/target
-RUN make -C include install DESTDIR=/src/target
+RUN make -j$(nproc) SUBDIRS="include src"
+RUN make install DESTDIR=/src/target SUBDIRS="include src"
 RUN find /src/target -type f -name '*.la' -delete
 
 FROM scratch AS bundle
