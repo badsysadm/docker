@@ -12,7 +12,7 @@ RUN cmake -S . -B build-static \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -DBUILD_SHARED_LIBS=OFF \
     -DBUILD_TESTING=OFF \
-    -DPERL=PERL-NOTFOUND
+    -DPERL:FILEPATH=""
 
 RUN cmake --build build-static -j$(nproc)
 RUN DESTDIR=/src/target cmake --install build-static
@@ -25,7 +25,7 @@ RUN cmake -S . -B build-shared \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_TESTING=OFF \
     -DMAXMINDDB_BUILD_BINARIES=OFF \
-    -DPERL=PERL-NOTFOUND
+    -DPERL:FILEPATH=""
 
 RUN cmake --build build-shared -j$(nproc)
 RUN DESTDIR=/src/target cmake --install build-shared

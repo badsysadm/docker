@@ -26,6 +26,7 @@ RUN sed -i 's|^libdir=.*|libdir=/usr/local/lib|' \
 RUN printf '%s\n' \
     '#!/bin/sh' \
     'if [ "$1" = "--libs" ]; then' \
+    '    printf "%s " "-Wl,-Bstatic"' \
     '    pkg-config --static "$@"' \
     '    printf " -Wl,-Bdynamic\\n"' \
     'else' \
