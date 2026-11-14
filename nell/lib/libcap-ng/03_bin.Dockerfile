@@ -18,6 +18,8 @@ RUN ./configure \
     LDFLAGS="-static-libgcc"
 
 RUN make -j$(nproc)
+RUN make -C utils clean
+RUN make -j$(nproc) -C utils LDADD=../src/.libs/libcap-ng.a
 RUN make install DESTDIR=/src/target
 
 RUN rm -rf \
