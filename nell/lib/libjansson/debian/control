@@ -4,7 +4,8 @@ Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
- cmake
+ cmake,
+ git
 
 Package: libjansson
 Architecture: amd64
