@@ -20,18 +20,4 @@ COPY --from=zlib_image /target/usr/include/ /usr/local/include/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/local/lib/pkgconfig/zlib.pc
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
-RUN sed -i 's|^libdir=.*|libdir=/usr/local/lib|' \
-    /usr/local/lib/pkgconfig/libelf.pc \
-    /usr/local/lib/pkgconfig/zlib.pc
-RUN printf '%s\n' \
-    '#!/bin/sh' \
-    'if [ "$1" = "--libs" ]; then' \
-    '    printf "%s " "-Wl,-Bstatic"' \
-    '    pkg-config --static "$@"' \
-    '    printf " -Wl,-Bdynamic\\n"' \
-    'else' \
-    '    exec pkg-config "$@"' \
-    'fi' > /usr/local/bin/nell-libbpf-pkg-config && \
-    chmod 0755 /usr/local/bin/nell-libbpf-pkg-config
-
 COPY --from=src_image /src/ /src/
