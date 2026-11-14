@@ -27,9 +27,9 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --disable-pfring \
     --enable-libmagic \
     --enable-geoip \
-    CFLAGS="-O2 -fPIC" \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     CPPFLAGS="-I/usr/local/include" \
-    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,-Bstatic" \
+    LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,--gc-sections -Wl,-Bstatic" \
     LIBS="-Wl,--start-group \
     -lpcap -lyaml -ljansson -lpcre2-8 \
     -lbpf -lelf -lzstd -lz \

@@ -13,6 +13,8 @@ RUN meson setup build \
     --buildtype=release \
     --default-library=both \
     -Db_staticpic=true \
+    -Dc_args="-ffunction-sections -fdata-sections" \
+    -Dc_link_args="-Wl,--gc-sections" \
     --wrap-mode=nodownload \
     -Dprefer_static=true \
     -Dauto_features=disabled \
