@@ -62,3 +62,7 @@ Package: dpkg-divert
 Architecture: amd64
 Depends: ${shlibs:Depends}
 Description: Manage dpkg file diversions
+
+Package: libdpkg-static
+Architecture: amd64
+Description: Static dpkg library
