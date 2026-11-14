@@ -17,7 +17,13 @@ RUN CFLAGS="-O2 -fPIC" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
-    --enable-shared \
+    --disable-shared \
+    --with-libz=static \
+    --with-libz-ng=no \
+    --with-liblzma=static \
+    --with-libzstd=static \
+    --with-libbz2=static \
+    --without-libselinux \
     --enable-static \
     --disable-dselect \
     --disable-start-stop-daemon \
