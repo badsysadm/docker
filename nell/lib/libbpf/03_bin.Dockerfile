@@ -9,6 +9,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
     make -j$(nproc) -C src \
     PREFIX=/usr \
     LIBDIR=/usr/lib \
+    PKG_CONFIG=/usr/local/bin/nell-libbpf-pkg-config \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-Bstatic" \
     all
