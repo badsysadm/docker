@@ -1,7 +1,7 @@
 FROM oci.badsysadm.local:80/get/source:latest AS build
 ARG VERSION=1.8.0
 
-RUN git clone -q --single-branch --branch "v1.8.0" --depth 1 \
+RUN git clone -q --single-branch --branch "v${VERSION}" --depth 1 \
     https://github.com/libbpf/libbpf.git /src/libbpf
 
 FROM scratch
