@@ -1,0 +1,14 @@
+Source: libpcre2
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ cmake,
+ zlib1g-dev,
+ libbz2-dev
+
+Package: libpcre2
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Perl-compatible regular expressions library

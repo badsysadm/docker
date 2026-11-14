@@ -31,18 +31,18 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,--gc-sections -Wl,-Bstatic" \
     LIBS="-Wl,-Bstatic -Wl,--start-group \
     /usr/lib/x86_64-linux-gnu/libpcap.a \
-    /usr/lib/x86_64-linux-gnu/libyaml.a \
-    /usr/lib/x86_64-linux-gnu/libjansson.a \
-    /usr/lib/x86_64-linux-gnu/libpcre2-8.a \
-    /usr/lib/x86_64-linux-gnu/libbpf.a \
+    /usr/local/lib/libyaml.a \
+    /usr/local/lib/libjansson.a \
+    /usr/local/lib/libpcre2-8.a \
+    /usr/local/lib/libbpf.a \
     /usr/local/lib/libelf.a /usr/local/lib/libzstd.a /usr/local/lib/libz.a \
-    /usr/lib/x86_64-linux-gnu/libcap-ng.a \
-    /usr/lib/x86_64-linux-gnu/libnet.a \
+    /usr/local/lib/libcap-ng.a \
+    /usr/local/lib/libnet.a \
     /usr/local/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_queue.a \
     /usr/local/lib/libnfnetlink.a /usr/local/lib/libmnl.a \
     /usr/local/lib/liblz4.a \
     /usr/lib/x86_64-linux-gnu/libmagic.a \
-    /usr/lib/x86_64-linux-gnu/libmaxminddb.a \
+    /usr/local/lib/libmaxminddb.a \
     /usr/local/lib/libcrypto.a \
     /usr/local/lib/libxxhash.a \
     /usr/local/lib/libdbus-1.a \

@@ -4,6 +4,13 @@ ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
 ARG LIBLZ4_VERSION=1.10.0
 ARG LIBXXHASH_VERSION=0.8.3
+ARG LIBMAXMINDDB_VERSION=1.14.1
+ARG LIBBPF_VERSION=1.8.0
+ARG LIBCAP_NG_VERSION=0.8.5
+ARG LIBNET_VERSION=1.3
+ARG LIBJANSSON_VERSION=2.14.1
+ARG LIBYAML_VERSION=0.2.5
+ARG LIBPCRE2_VERSION=10.49
 ARG DBUS_VERSION=1.16.2
 ARG ELFUTILS_VERSION=0.196
 ARG LIBMNL_VERSION=1.0.5
@@ -17,6 +24,13 @@ FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
 FROM oci.badsysadm.local:80/bin/lib/liblz4:${LIBLZ4_VERSION} AS liblz4_image
 FROM oci.badsysadm.local:80/bin/lib/libxxhash:${LIBXXHASH_VERSION} AS libxxhash_image
+FROM oci.badsysadm.local:80/bin/lib/libmaxminddb:${LIBMAXMINDDB_VERSION} AS libmaxminddb_image
+FROM oci.badsysadm.local:80/bin/lib/libbpf:${LIBBPF_VERSION} AS libbpf_image
+FROM oci.badsysadm.local:80/bin/lib/libcap-ng:${LIBCAP_NG_VERSION} AS libcap_ng_image
+FROM oci.badsysadm.local:80/bin/lib/libnet:${LIBNET_VERSION} AS libnet_image
+FROM oci.badsysadm.local:80/bin/lib/libjansson:${LIBJANSSON_VERSION} AS libjansson_image
+FROM oci.badsysadm.local:80/bin/lib/libyaml:${LIBYAML_VERSION} AS libyaml_image
+FROM oci.badsysadm.local:80/bin/lib/libpcre2:${LIBPCRE2_VERSION} AS libpcre2_image
 FROM oci.badsysadm.local:80/bin/system/dbus:${DBUS_VERSION} AS dbus_image
 FROM oci.badsysadm.local:80/bin/utils/elfutils:${ELFUTILS_VERSION} AS elfutils_image
 FROM oci.badsysadm.local:80/bin/lib/libmnl:${LIBMNL_VERSION} AS libmnl_image
@@ -39,6 +53,20 @@ COPY --from=liblz4_image /target/usr/include/ /usr/local/include/
 COPY --from=liblz4_image /target/usr/lib/liblz4.a /usr/local/lib/liblz4.a
 COPY --from=libxxhash_image /target/usr/include/ /usr/local/include/
 COPY --from=libxxhash_image /target/usr/lib/libxxhash.a /usr/local/lib/libxxhash.a
+COPY --from=libmaxminddb_image /target/usr/include/ /usr/local/include/
+COPY --from=libmaxminddb_image /target/usr/lib/libmaxminddb.a /usr/local/lib/libmaxminddb.a
+COPY --from=libbpf_image /target/usr/include/ /usr/local/include/
+COPY --from=libbpf_image /target/usr/lib/libbpf.a /usr/local/lib/libbpf.a
+COPY --from=libcap_ng_image /target/usr/include/ /usr/local/include/
+COPY --from=libcap_ng_image /target/usr/lib/libcap-ng.a /usr/local/lib/libcap-ng.a
+COPY --from=libnet_image /target/usr/include/ /usr/local/include/
+COPY --from=libnet_image /target/usr/lib/libnet.a /usr/local/lib/libnet.a
+COPY --from=libjansson_image /target/usr/include/ /usr/local/include/
+COPY --from=libjansson_image /target/usr/lib/libjansson.a /usr/local/lib/libjansson.a
+COPY --from=libyaml_image /target/usr/include/ /usr/local/include/
+COPY --from=libyaml_image /target/usr/lib/libyaml.a /usr/local/lib/libyaml.a
+COPY --from=libpcre2_image /target/usr/include/ /usr/local/include/
+COPY --from=libpcre2_image /target/usr/lib/libpcre2-8.a /usr/local/lib/libpcre2-8.a
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
 COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a

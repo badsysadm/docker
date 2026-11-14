@@ -13,20 +13,13 @@ Build-Depends:
  cargo,
  cbindgen,
  libpcap0.8-dev,
- libyaml-dev,
- libjansson-dev,
- libpcre2-dev,
- libcap-ng-dev,
- libnet1-dev,
- libbpf-dev,
  libelf-dev,
  clang,
  llvm,
  libmagic-dev,
- libmaxminddb-dev,
  libevent-dev
 Package: suricata
 Architecture: amd64
-Static-Built-Using: openssl (= 3.6.5), zlib (= 1.3.1), zstd (= 1.5.7), liblz4 (= 1.10.0), libxxhash (= 0.8.3), dbus (= 1.16.2), elfutils (= 0.196), libmnl (= 1.0.5), libnfnetlink (= 1.0.2), libnetfilter-log (= 1.0.2), libnetfilter-queue (= 1.0.5)
+Static-Built-Using: openssl (= 3.6.5), zlib (= 1.3.1), zstd (= 1.5.7), liblz4 (= 1.10.0), libxxhash (= 0.8.3), dbus (= 1.16.2), elfutils (= 0.196), libmnl (= 1.0.5), libnfnetlink (= 1.0.2), libnetfilter-log (= 1.0.2), libnetfilter-queue (= 1.0.5), libmaxminddb (= 1.14.1), libbpf (= 1.8.0), libcap-ng (= 0.8.5), libnet (= 1.3), libjansson (= 2.14.1), libyaml (= 0.2.5), libpcre2 (= 10.49)
 Depends: ${shlibs:Depends}, libmagic-mgc
 Description: Suricata network intrusion detection and prevention engine

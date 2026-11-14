@@ -1,0 +1,12 @@
+Source: libmaxminddb
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ cmake
+
+Package: libmaxminddb
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: MaxMind DB lookup library
