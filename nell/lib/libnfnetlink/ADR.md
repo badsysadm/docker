@@ -1,26 +1,26 @@
-# ADR: libnfnetlink library profile
+# ADR: Использование собственной сборки libnfnetlink
 
-## Status
+## Статус
 
-Accepted
+Принято.
 
-## Context
+## Контекст
 
-libnfnetlink is required as a reusable library dependency for statically linked NELL applications.
+В используемом окружении Debian пакет `libnfnetlink-dev` не содержит `libnfnetlink.a`. Эта библиотека необходима для статической линковки Suricata.
 
-## Decision
+## Решение
 
-Build the upstream library as a reusable NELL profile and export its headers, libraries and pkg-config metadata without embedding them into consumer bundles.
+Использовать отдельный профиль libnfnetlink как источник библиотеки и её интерфейсов для зависимых проектов.
 
-## Consequences
+## Последствия
 
-Consumers can link against the static archive while shared libraries and development metadata remain available from the same image.
+Suricata получает libnfnetlink из NELL, не полагаясь на наличие статического архива в Debian. Версия библиотеки управляется профилем.
 
-## Alternatives considered
+## Рассмотренные альтернативы
 
-Relying on Debian development packages was rejected because the required static archive is not available in the target build environment.
+Использование Debian `libnfnetlink-dev` отвергнуто ввиду отсутствия статического архива в целевом окружении.
 
-## References
+## Ссылки
 
-- [NELL build contract](../../README.md)
-- [Build implementation](03_bin.Dockerfile)
+- [Правила сборки NELL](../../README.md)
+- [Реализация профиля](03_bin.Dockerfile)

@@ -9,12 +9,7 @@ COPY debian ./debian/
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
-COPY --from=libnfnetlink_image /target/usr/include/ /usr/local/include/
-COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
-RUN sed -i \
-    -e 's|^prefix=.*|prefix=/usr/local|' \
-    -e 's|^libdir=.*|libdir=/usr/local/lib|' \
-    -e 's|^includedir=.*|includedir=/usr/local/include|' \
-    /usr/local/lib/pkgconfig/libnfnetlink.pc
+COPY --from=libnfnetlink_image /target/usr/local/include/ /usr/local/include/
+COPY --from=libnfnetlink_image /target/usr/local/lib/ /usr/local/lib/
 
 COPY --from=src_image /src/ /src/

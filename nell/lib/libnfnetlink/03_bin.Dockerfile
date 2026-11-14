@@ -6,8 +6,8 @@ ARG VERSION
 WORKDIR /src/libnfnetlink
 
 RUN ./configure \
-    --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --prefix=/usr/local \
+    --libdir=/usr/local/lib \
     --enable-static \
     --enable-shared \
     --with-pic \
@@ -19,7 +19,7 @@ RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
     /src/target/usr/share/info
-RUN rm -f /src/target/usr/lib/x86_64-linux-gnu/*.la
+RUN rm -f /src/target/usr/local/lib/*.la
 
 FROM scratch AS bundle
 ARG VERSION

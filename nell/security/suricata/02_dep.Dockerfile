@@ -21,17 +21,10 @@ COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 
-COPY --from=libnfnetlink_image /target/usr/include/ /usr/local/include/
-COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
-COPY --from=libnetfilter_log_image /target/usr/include/ /usr/local/include/
-COPY --from=libnetfilter_log_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
-RUN sed -i \
-    -e 's|^prefix=.*|prefix=/usr/local|' \
-    -e 's|^libdir=.*|libdir=/usr/local/lib|' \
-    -e 's|^includedir=.*|includedir=/usr/local/include|' \
-    /usr/local/lib/pkgconfig/libnfnetlink.pc \
-    /usr/local/lib/pkgconfig/libnetfilter_log.pc \
-    /usr/local/lib/pkgconfig/libnetfilter_log_libipulog.pc
+COPY --from=libnfnetlink_image /target/usr/local/include/ /usr/local/include/
+COPY --from=libnfnetlink_image /target/usr/local/lib/ /usr/local/lib/
+COPY --from=libnetfilter_log_image /target/usr/local/include/ /usr/local/include/
+COPY --from=libnetfilter_log_image /target/usr/local/lib/ /usr/local/lib/
 
 COPY --from=src_image /src/ /src/
 
