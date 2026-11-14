@@ -23,16 +23,12 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
 COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto.a
-COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
-COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
+COPY --from=zlib_image /target/usr/include/ /usr/local/include/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
-COPY --from=zstd_image /target/usr/include/zstd.h /usr/local/include/zstd.h
-COPY --from=zstd_image /target/usr/include/zdict.h /usr/local/include/zdict.h
-COPY --from=zstd_image /target/usr/include/zstd_errors.h /usr/local/include/zstd_errors.h
+COPY --from=zstd_image /target/usr/include/ /usr/local/include/
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
-COPY --from=elfutils_image /target/usr/include/libelf.h /usr/local/include/libelf.h
-COPY --from=elfutils_image /target/usr/include/gelf.h /usr/local/include/gelf.h
+COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 
