@@ -30,24 +30,24 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
 COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto.a
 COPY --from=zlib_image /target/usr/include/ /usr/local/include/
-COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/libz.a /usr/local/lib/libz.a
 COPY --from=zstd_image /target/usr/include/ /usr/local/include/
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 COPY --from=liblz4_image /target/usr/include/ /usr/local/include/
-COPY --from=liblz4_image /target/usr/lib/x86_64-linux-gnu/liblz4.a /usr/local/lib/liblz4.a
-COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
+COPY --from=liblz4_image /target/usr/lib/liblz4.a /usr/local/lib/liblz4.a
+COPY --from=dbus_image /target/usr/lib/libdbus-1.a /usr/local/lib/libdbus-1.a
 COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
-COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a
-COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
+COPY --from=elfutils_image /target/usr/lib/libelf.a /usr/local/lib/libelf.a
+COPY --from=elfutils_image /target/usr/lib/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 
 COPY --from=libmnl_image /target/usr/include/ /usr/local/include/
-COPY --from=libmnl_image /target/usr/lib/x86_64-linux-gnu/libmnl.a /usr/local/lib/libmnl.a
+COPY --from=libmnl_image /target/usr/lib/libmnl.a /usr/local/lib/libmnl.a
 COPY --from=libnfnetlink_image /target/usr/include/ /usr/local/include/
-COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/libnfnetlink.a /usr/local/lib/libnfnetlink.a
+COPY --from=libnfnetlink_image /target/usr/lib/libnfnetlink.a /usr/local/lib/libnfnetlink.a
 COPY --from=libnetfilter_queue_image /target/usr/include/ /usr/local/include/
-COPY --from=libnetfilter_queue_image /target/usr/lib/x86_64-linux-gnu/libnetfilter_queue.a /usr/local/lib/libnetfilter_queue.a
+COPY --from=libnetfilter_queue_image /target/usr/lib/libnetfilter_queue.a /usr/local/lib/libnetfilter_queue.a
 COPY --from=libnetfilter_log_image /target/usr/include/ /usr/local/include/
-COPY --from=libnetfilter_log_image /target/usr/lib/x86_64-linux-gnu/libnetfilter_log.a /usr/local/lib/libnetfilter_log.a
+COPY --from=libnetfilter_log_image /target/usr/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_log.a
 
 COPY --from=src_image /src/ /src/
 

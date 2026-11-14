@@ -11,7 +11,7 @@ RUN make -j$(nproc) -C lib all \
 
 RUN make -C lib install \
     PREFIX=/usr \
-    LIBDIR=/usr/lib/x86_64-linux-gnu \
+    LIBDIR=/usr/lib \
     DESTDIR=/src/target
 
 FROM scratch AS bundle

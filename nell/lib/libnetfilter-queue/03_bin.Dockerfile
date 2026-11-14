@@ -9,7 +9,7 @@ RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal
 
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --enable-static \
     --enable-shared \
     --with-pic \
@@ -22,7 +22,7 @@ RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
     /src/target/usr/share/info
-RUN rm -f /src/target/usr/lib/x86_64-linux-gnu/*.la
+RUN rm -f /src/target/usr/lib/*.la
 
 FROM scratch AS bundle
 ARG VERSION
