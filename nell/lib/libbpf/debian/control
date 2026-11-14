@@ -8,6 +8,6 @@ Build-Depends:
 
 Package: libbpf
 Architecture: amd64
-Static-Built-Using: elfutils (= 0.196), zlib (= 1.3.1)
+Static-Built-Using: elfutils (= 0.196), zlib (= 1.3.1), zstd (= 1.5.7)
 Depends: ${shlibs:Depends}
 Description: Linux BPF userspace library
