@@ -10,7 +10,6 @@ RUN mkdir -p /target
 COPY debian ./debian/
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
-RUN rm -f /src/debian/tmp/usr/lib/libdpkg.la
 RUN dh_testdir
 RUN dh_install
 RUN dh_installdebconf
