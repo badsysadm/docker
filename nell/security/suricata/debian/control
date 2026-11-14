@@ -18,6 +18,7 @@ Build-Depends:
  libpcre2-dev,
  libcap-ng-dev,
  libnet1-dev,
+ libmnl-dev,
  libnetfilter-queue-dev,
  libbpf-dev,
  libelf-dev,
