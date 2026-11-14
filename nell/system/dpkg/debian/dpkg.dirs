@@ -1,0 +1,5 @@
+etc/dpkg/dpkg.cfg.d
+var/lib/dpkg/alternatives
+var/lib/dpkg/info
+var/lib/dpkg/parts
+var/lib/dpkg/updates
