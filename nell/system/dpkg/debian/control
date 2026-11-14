@@ -19,9 +19,38 @@ Package: dpkg
 Architecture: amd64
 Static-Built-Using: gcc
 Depends: ${shlibs:Depends}
+Recommends:
+ dpkg-query (= ${binary:Version}),
+ dpkg-maintscript-helper (= ${binary:Version}),
+ update-alternatives (= ${binary:Version}),
+ dpkg-statoverride (= ${binary:Version}),
+ dpkg-divert (= ${binary:Version})
 Description: Low-level package manager
 
 Package: dpkg-dev
 Architecture: all
 Description: Debian package development tools
 
+Package: dpkg-query
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Query dpkg package database
+
+Package: dpkg-maintscript-helper
+Architecture: all
+Description: Helper for package maintainer scripts
+
+Package: update-alternatives
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Manage system command alternatives
+
+Package: dpkg-statoverride
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Manage dpkg file permission overrides
+
+Package: dpkg-divert
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Manage dpkg file diversions
