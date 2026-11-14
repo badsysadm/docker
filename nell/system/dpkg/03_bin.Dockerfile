@@ -34,8 +34,8 @@ RUN CFLAGS="-O2 -fPIC" \
     --disable-devel-docs \
     --disable-nls
 
-RUN make -j$(nproc) SUBDIRS="lib src utils scripts"
-RUN make install DESTDIR=/src/target SUBDIRS="lib src utils scripts"
+RUN make -j$(nproc) SUBDIRS="lib src utils scripts" MAKEOVERRIDES=
+RUN make install DESTDIR=/src/target SUBDIRS="lib src utils scripts" MAKEOVERRIDES=
 
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 RUN find /src/target -type f -name '*.la' -delete
