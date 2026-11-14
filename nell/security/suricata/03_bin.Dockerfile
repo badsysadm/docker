@@ -10,7 +10,7 @@ ENV RUSTFLAGS="-C debuginfo=0 -C link-arg=-static-libgcc"
 
 RUN autoreconf -fvi
 
-RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
+RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
