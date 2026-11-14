@@ -1,7 +1,7 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -47,16 +47,29 @@
+@@ -47,15 +47,28 @@
    src/maxminddb.c
    src/data-pool.c
  )
