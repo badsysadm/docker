@@ -5,9 +5,7 @@ Build-Depends:
  debhelper-compat (= 13),
  build-essential,
  pkg-config,
- libtool,
-
-
+ libtool
 
 Package: libnetfilter-log
 Architecture: amd64
