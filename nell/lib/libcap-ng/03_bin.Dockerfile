@@ -13,6 +13,7 @@ RUN ./configure \
     --enable-static \
     --enable-shared \
     --with-pic \
+    --without-python3 \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-static-libgcc"
 
