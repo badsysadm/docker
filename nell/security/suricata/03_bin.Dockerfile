@@ -21,6 +21,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     --enable-nflog \
     --enable-ebpf \
     --enable-ebpf-build \
+    --with-clang=/usr/bin/clang \
     --disable-af-xdp \
     --disable-dpdk \
     --disable-pfring \
