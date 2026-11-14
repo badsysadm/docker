@@ -1,2 +1,3 @@
+etc/alternatives/README
 usr/bin/update-alternatives
 usr/share/polkit-1/actions/org.dpkg.pkexec.update-alternatives.policy
