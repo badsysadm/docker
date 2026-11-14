@@ -13,7 +13,6 @@ RUN meson setup build \
     --buildtype=release \
     --default-library=both \
     -Db_staticpic=true \
-    -Db_lto=true \
     -Dc_args="-D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -fcf-protection=full -ftrivial-auto-var-init=zero -ffunction-sections -fdata-sections" \
     -Dc_link_args="-Wl,-z,relro,-z,now -Wl,--gc-sections" \
     --wrap-mode=nodownload \

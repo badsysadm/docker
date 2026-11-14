@@ -13,8 +13,8 @@ RUN ./configure \
     --enable-static \
     --enable-shared \
     --with-pic \
-    CFLAGS="-O2 -fPIC -flto=auto -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -fcf-protection=full -ftrivial-auto-var-init=zero -ffunction-sections -fdata-sections" \
-    LDFLAGS="-flto=auto -Wl,-z,relro,-z,now -Wl,--gc-sections"
+    CFLAGS="-O2 -fPIC -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -fcf-protection=full -ftrivial-auto-var-init=zero -ffunction-sections -fdata-sections" \
+    LDFLAGS="-Wl,-z,relro,-z,now -Wl,--gc-sections"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
