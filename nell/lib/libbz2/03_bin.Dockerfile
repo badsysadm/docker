@@ -5,14 +5,12 @@ ARG VERSION
 
 WORKDIR /src/bzip2
 
-RUN make -j$(nproc) libbz2.a CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
-RUN make -f Makefile-libbz2_so CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
+COPY debian/patches /src/patches/
+RUN git apply /src/patches/_build.patch
 
-RUN install -D -m 0644 bzlib.h /src/target/usr/include/bzlib.h
-RUN install -D -m 0644 libbz2.a /src/target/usr/lib/libbz2.a
-RUN install -D -m 0755 libbz2.so.1.0.8 /src/target/usr/lib/libbz2.so.1.0.8
-RUN ln -s libbz2.so.1.0.8 /src/target/usr/lib/libbz2.so.1.0
-RUN ln -s libbz2.so.1.0 /src/target/usr/lib/libbz2.so
+RUN make -j$(nproc) libbz2.a libbz2.so CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
+RUN make install PREFIX=/src/target/usr CFLAGS="-O2 -fPIC -D_FILE_OFFSET_BITS=64"
+RUN rm -rf /src/target/usr/bin /src/target/usr/man
 
 FROM scratch AS bundle
 ARG VERSION
