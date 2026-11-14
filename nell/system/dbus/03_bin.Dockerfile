@@ -11,7 +11,8 @@ ARG LDFLAGS="-Wl,-Bstatic -lcap -lsystemd -Wl,-Bdynamic"
 RUN meson setup build \
     --prefix=/usr \
     --buildtype=release \
-    --default-library=static \
+    --default-library=both \
+    -Db_staticpic=true \
     --wrap-mode=nodownload \
     -Dprefer_static=true \
     -Dauto_features=disabled \
