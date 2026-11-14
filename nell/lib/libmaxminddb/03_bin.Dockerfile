@@ -5,30 +5,20 @@ ARG VERSION
 
 WORKDIR /src/libmaxminddb
 
-RUN cmake -S . -B build-static \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    -DBUILD_SHARED_LIBS=OFF \
-    -DBUILD_TESTING=OFF \
-    -DPERL:FILEPATH=""
+COPY debian/patches /src/patches/
+RUN git apply /src/patches/_build-both.patch
 
-RUN cmake --build build-static -j$(nproc)
-RUN DESTDIR=/src/target cmake --install build-static
-
-RUN cmake -S . -B build-shared \
+RUN cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_TESTING=OFF \
-    -DMAXMINDDB_BUILD_BINARIES=OFF \
     -DPERL:FILEPATH=""
 
-RUN cmake --build build-shared -j$(nproc)
-RUN DESTDIR=/src/target cmake --install build-shared
+RUN cmake --build build -j$(nproc)
+RUN DESTDIR=/src/target cmake --install build
 
 RUN rm -rf \
     /src/target/usr/share/doc \

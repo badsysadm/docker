@@ -5,18 +5,10 @@ ARG VERSION
 
 WORKDIR /src/jansson
 
-RUN cmake -S . -B build-static \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    -DJANSSON_BUILD_SHARED_LIBS=OFF \
-    -DJANSSON_BUILD_DOCS=OFF \
-    -DJANSSON_WITHOUT_TESTS=ON
+COPY debian/patches /src/patches/
+RUN git apply /src/patches/_build-both.patch
 
-RUN cmake --build build-static -j$(nproc)
-RUN DESTDIR=/src/target cmake --install build-static
-
-RUN cmake -S . -B build-shared \
+RUN cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
@@ -24,8 +16,8 @@ RUN cmake -S . -B build-shared \
     -DJANSSON_BUILD_DOCS=OFF \
     -DJANSSON_WITHOUT_TESTS=ON
 
-RUN cmake --build build-shared -j$(nproc)
-RUN DESTDIR=/src/target cmake --install build-shared
+RUN cmake --build build -j$(nproc)
+RUN DESTDIR=/src/target cmake --install build
 
 RUN rm -rf \
     /src/target/usr/share/doc \
