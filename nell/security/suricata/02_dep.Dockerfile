@@ -30,6 +30,4 @@ RUN for manifest in rust/Cargo.toml.in rust/derive/Cargo.toml.in rust/sys/Cargo.
 
 # Download crates during dependency preparation, never during binary build.
 RUN cd rust && cargo vendor --locked vendor > /tmp/suricata-cargo-vendor.toml
-RUN test -s /tmp/suricata-cargo-vendor.toml && \
-    mkdir -p rust/.cargo && \
-    cp /tmp/suricata-cargo-vendor.toml rust/.cargo/config.toml
+RUN install -D -m 0644 /tmp/suricata-cargo-vendor.toml rust/.cargo/config.toml
