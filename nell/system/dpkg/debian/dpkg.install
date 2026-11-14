@@ -4,13 +4,9 @@ usr/bin/dpkg-deb
 usr/bin/dpkg-divert
 usr/bin/dpkg-maintscript-helper
 usr/bin/dpkg-query
-usr/bin/dpkg-realpath
-usr/bin/dpkg-split
 usr/bin/dpkg-statoverride
 usr/bin/dpkg-trigger
 usr/bin/update-alternatives
-usr/libexec/dpkg/dpkg-db-backup
-usr/libexec/dpkg/dpkg-db-keeper
 usr/sbin/dpkg-fsys-usrunmess
 usr/share/dpkg/abitable
 usr/share/dpkg/cputable

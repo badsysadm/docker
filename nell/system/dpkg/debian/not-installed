@@ -5,3 +5,7 @@ usr/lib/libdpkg.a
 usr/include/dpkg
 usr/lib/pkgconfig/libdpkg.pc
 usr/share/aclocal/dpkg-*.m4
+usr/bin/dpkg-realpath
+usr/bin/dpkg-split
+usr/libexec/dpkg/dpkg-db-backup
+usr/libexec/dpkg/dpkg-db-keeper
