@@ -5,7 +5,7 @@ ARG VERSION
 
 WORKDIR /src/xxhash
 
-RUN make -j$(nproc) lib \
+RUN make -j$(nproc) lib xxhsum \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-Wl,-z,relro,-z,now -Wl,--gc-sections"
 
@@ -13,7 +13,7 @@ RUN make \
     PREFIX=/usr \
     LIBDIR=/usr/lib \
     DESTDIR=/src/target \
-    install_libxxhash.a install_libxxhash install_libxxhash.includes install_libxxhash.pc
+    install_libxxhash.a install_libxxhash install_libxxhash.includes install_libxxhash.pc install_xxhsum
 
 FROM scratch AS bundle
 ARG VERSION
