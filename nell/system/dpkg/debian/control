@@ -33,8 +33,13 @@ Description: Debian package development tools
 
 Package: libdpkg-dev
 Architecture: amd64
+Depends: libdpkg-static (= ${binary:Version}), libdpkg-shared (= ${binary:Version})
 Description: Debian package management static library and headers
 
 Package: libdpkg-static
 Architecture: amd64
 Description: Debian package management static library
+
+Package: libdpkg-shared
+Architecture: amd64
+Description: Debian package management shared library
