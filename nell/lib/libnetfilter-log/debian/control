@@ -6,10 +6,11 @@ Build-Depends:
  build-essential,
  pkg-config,
  libtool,
- libmnl-dev (>= 1.0.3)
+
+
 
 Package: libnetfilter-log
 Architecture: amd64
-Static-Built-Using: libnfnetlink (= 1.0.2)
+Static-Built-Using: libnfnetlink (= 1.0.2), libmnl (= 1.0.5)
 Depends: ${shlibs:Depends}
 Description: libnetfilter_log library

@@ -4,7 +4,9 @@ ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
 ARG DBUS_VERSION=1.16.2
 ARG ELFUTILS_VERSION=0.196
+ARG LIBMNL_VERSION=1.0.5
 ARG LIBNFNETLINK_VERSION=1.0.2
+ARG LIBNETFILTER_QUEUE_VERSION=1.0.5
 ARG LIBNETFILTER_LOG_VERSION=1.0.2
 
 FROM oci.badsysadm.local:80/src/security/suricata:${VERSION} AS src_image
@@ -13,7 +15,9 @@ FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
 FROM oci.badsysadm.local:80/bin/system/dbus:${DBUS_VERSION} AS dbus_image
 FROM oci.badsysadm.local:80/bin/utils/elfutils:${ELFUTILS_VERSION} AS elfutils_image
+FROM oci.badsysadm.local:80/bin/lib/libmnl:${LIBMNL_VERSION} AS libmnl_image
 FROM oci.badsysadm.local:80/bin/lib/libnfnetlink:${LIBNFNETLINK_VERSION} AS libnfnetlink_image
+FROM oci.badsysadm.local:80/bin/lib/libnetfilter-queue:${LIBNETFILTER_QUEUE_VERSION} AS libnetfilter_queue_image
 FROM oci.badsysadm.local:80/bin/lib/libnetfilter-log:${LIBNETFILTER_LOG_VERSION} AS libnetfilter_log_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
@@ -32,10 +36,14 @@ COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 
+COPY --from=libmnl_image /target/usr/local/include/ /usr/local/include/
+COPY --from=libmnl_image /target/usr/local/lib/libmnl.a /usr/local/lib/libmnl.a
 COPY --from=libnfnetlink_image /target/usr/local/include/ /usr/local/include/
-COPY --from=libnfnetlink_image /target/usr/local/lib/ /usr/local/lib/
+COPY --from=libnfnetlink_image /target/usr/local/lib/libnfnetlink.a /usr/local/lib/libnfnetlink.a
+COPY --from=libnetfilter_queue_image /target/usr/local/include/ /usr/local/include/
+COPY --from=libnetfilter_queue_image /target/usr/local/lib/libnetfilter_queue.a /usr/local/lib/libnetfilter_queue.a
 COPY --from=libnetfilter_log_image /target/usr/local/include/ /usr/local/include/
-COPY --from=libnetfilter_log_image /target/usr/local/lib/ /usr/local/lib/
+COPY --from=libnetfilter_log_image /target/usr/local/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_log.a
 
 COPY --from=src_image /src/ /src/
 

@@ -30,13 +30,16 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     CPPFLAGS="-I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,--gc-sections -Wl,-Bstatic" \
-    LIBS="-Wl,--start-group \
+    LIBS="-Wl,-Bstatic -Wl,--start-group \
     -lpcap -lyaml -ljansson -lpcre2-8 \
-    -lbpf -lelf -lzstd -lz \
-    -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink -lmnl \
+    -lbpf /usr/local/lib/libelf.a /usr/local/lib/libzstd.a /usr/local/lib/libz.a \
+    -lcap-ng -lnet \
+    /usr/local/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_queue.a \
+    /usr/local/lib/libnfnetlink.a /usr/local/lib/libmnl.a \
     -llz4 -lmagic -lmaxminddb \
-    -lcrypto -lxxhash -ldbus-1 \
-    -Wl,--end-group -Wl,-Bdynamic -lm -ldl -lpthread"
+    /usr/local/lib/libcrypto.a -lxxhash /usr/local/lib/libdbus-1.a \
+    -lm -ldl -lpthread \
+    -Wl,--end-group -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
