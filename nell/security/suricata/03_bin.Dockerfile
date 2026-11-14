@@ -8,11 +8,6 @@ ENV CARGO_NET_OFFLINE=true
 ENV CARGO_BUILD_OFFLINE=true
 ENV RUSTFLAGS="-C debuginfo=0 -C link-arg=-static-libgcc"
 
-# Set Suricata's static link flags before generating the build scripts.
-RUN sed -i \
-    -e 's|^suricata_LDFLAGS = .*|suricata_LDFLAGS = -Wl,-Bstatic $(all_libraries) ${SECLDFLAGS}|' \
-    -e 's|^suricata_LDADD = .*|suricata_LDADD = $(LDADD_GENERIC) $(LIBS) -Wl,-Bdynamic|' \
-    src/Makefile.am
 RUN autoreconf -fvi
 
 RUN ./configure \
@@ -33,7 +28,14 @@ RUN ./configure \
     --enable-libmagic \
     --enable-geoip \
     CFLAGS="-O2 -fPIC" \
-    LDFLAGS="-static-libgcc -Wl,-z,relro,-z,now"
+    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now" \
+    LIBS="-Wl,-Bstatic -Wl,--start-group \
+    -lpcap -lyaml -ljansson -lpcre2-8 \
+    -lbpf -lelf -lzstd -lz \
+    -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink \
+    -llz4 -lmagic -lmaxminddb \
+    -lcrypto -lxxhash \
+    -Wl,--end-group -Wl,-Bdynamic -lm -ldl -lpthread"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
