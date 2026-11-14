@@ -3,8 +3,7 @@ Section: lib
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
- build-essential,
- pkg-config
+ build-essential
 
 Package: libbpf
 Architecture: amd64

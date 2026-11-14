@@ -15,9 +15,7 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 
 COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a
-COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 COPY --from=zlib_image /target/usr/include/ /usr/local/include/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
-COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/local/lib/pkgconfig/zlib.pc
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 COPY --from=src_image /src/ /src/
