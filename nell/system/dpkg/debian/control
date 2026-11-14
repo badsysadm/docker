@@ -13,7 +13,13 @@ Build-Depends:
  autopoint,
  libtool,
  flex,
- bison
+ bison,
+ perl,
+ libpar-packer-perl,
+ faketime,
+ libalgorithm-merge-perl,
+ libfile-fcntllock-perl,
+ liblocale-gettext-perl
 
 Package: dpkg
 Architecture: amd64
@@ -28,8 +34,8 @@ Recommends:
 Description: Low-level package manager
 
 Package: dpkg-dev
-Architecture: all
-Depends: perl
+Architecture: amd64
+Depends: ${shlibs:Depends}
 Description: Debian package development tools
 
 Package: dpkg-query
