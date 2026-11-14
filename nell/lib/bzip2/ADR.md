@@ -4,7 +4,8 @@
 Принято.
 
 ## Решение
-- Использовать upstream Git-тег bzip2 1.0.8.
+- Для стабильной ветки 1.0.x использовать официальный upstream Sourceware (https://sourceware.org/git/bzip2.git), тег `bzip2-1.0.8`. На 15 ноября 2026 года 1.0.8 остаётся последним опубликованным стабильным релизом: https://sourceware.org/bzip2/downloads.html
+- Разработка будущей ветки 1.1+ ведётся отдельно на GitLab (https://gitlab.com/tansys/bzip2); релиз 1.1.x не подтверждён, поэтому экспериментальную ветку не использовать. Репозиторий https://github.com/libarchive/bzip2 — зеркало, не официальный источник стабильной ветки.
 - Применять `debian/patches/_build.patch`, взятый из Debian bzip2 1.0.8-6 (`debian/patches/makefile.diff`): https://sources.debian.org/patches/bzip2/1.0.8-6/makefile.diff/
 - Патч дополняет штатный Makefile сборкой и установкой разделяемой библиотеки и поддержкой флагов компиляции.
 - Собирать `libbz2.a`, `libbz2.so`, `bzip2` и `bzip2recover` с PIC для библиотек; устанавливать через штатный `make install`.
