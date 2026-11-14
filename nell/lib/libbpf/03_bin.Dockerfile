@@ -8,7 +8,6 @@ WORKDIR /src/libbpf
 RUN make -j$(nproc) -C src \
     PREFIX=/usr \
     LIBDIR=/usr/lib \
-    NO_PKG_CONFIG=1 \
     CFLAGS="-O2 -fPIC -I/usr/local/include -ffunction-sections -fdata-sections" \
     LDFLAGS="-static-libgcc -Wl,-Bstatic -Wl,--start-group /usr/local/lib/libelf.a /usr/local/lib/libz.a /usr/local/lib/libzstd.a -Wl,--end-group -Wl,-Bdynamic" \
     all
@@ -16,7 +15,6 @@ RUN make -j$(nproc) -C src \
 RUN make -C src \
     PREFIX=/usr \
     LIBDIR=/usr/lib \
-    NO_PKG_CONFIG=1 \
     DESTDIR=/src/target \
     install
 
