@@ -1,2 +1,3 @@
 usr/share/perl5/Dpkg
 usr/share/perl5/Dpkg.pm
+usr/share/dpkg/*.specs

@@ -17,7 +17,5 @@ usr/bin/dpkg-scansources
 usr/bin/dpkg-shlibdeps
 usr/bin/dpkg-source
 usr/bin/dpkg-vendor
-usr/share/aclocal/dpkg-*.m4
 usr/share/dpkg/*.mk
-usr/share/dpkg/*.specs
 usr/share/zsh/vendor-completions/_dpkg-parsechangelog
