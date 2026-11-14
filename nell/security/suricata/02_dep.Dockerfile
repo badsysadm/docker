@@ -21,13 +21,19 @@ COPY --from=src_image /src/ /src/
 
 WORKDIR /src/suricata
 
-# Prepare Cargo manifests from upstream templates without configuring the C build.
+# Prepare Cargo manifests for vendoring.
 ARG VERSION
-RUN for manifest in rust/Cargo.toml.in rust/derive/Cargo.toml.in rust/sys/Cargo.toml.in rust/htp/Cargo.toml.in rust/suricatactl/Cargo.toml.in rust/suricatasc/Cargo.toml.in; do \
+RUN for manifest in \
+        rust/Cargo.toml.in \
+        rust/derive/Cargo.toml.in \
+        rust/sys/Cargo.toml.in \
+        rust/htp/Cargo.toml.in \
+        rust/suricatactl/Cargo.toml.in \
+        rust/suricatasc/Cargo.toml.in; do \
         sed "s/@PACKAGE_VERSION@/${VERSION}/g" "$manifest" > "${manifest%.in}"; \
     done && \
-    cp rust/Cargo.lock.in rust/Cargo.lock
+    install -m 0644 rust/Cargo.lock.in rust/Cargo.lock
 
-# Download crates during dependency preparation, never during binary build.
+# Download crates during dependency preparation.
 RUN cd rust && cargo vendor --locked vendor > /tmp/suricata-cargo-vendor.toml
 RUN install -D -m 0644 /tmp/suricata-cargo-vendor.toml rust/.cargo/config.toml
