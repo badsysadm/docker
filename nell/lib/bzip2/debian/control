@@ -1,4 +1,4 @@
-Source: libbz2
+Source: bzip2
 Section: lib
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
@@ -6,7 +6,7 @@ Build-Depends:
  build-essential,
  patch
 
-Package: libbz2
+Package: bzip2
 Architecture: amd64
 Depends: ${shlibs:Depends}
 Description: Bzip2 compression library

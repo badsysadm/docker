@@ -1,6 +1,6 @@
 ARG VERSION=1.0.8
 
-FROM oci.badsysadm.local:80/src/lib/libbz2:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/lib/bzip2:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/

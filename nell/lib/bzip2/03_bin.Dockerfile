@@ -1,6 +1,6 @@
 ARG VERSION=1.0.8
 
-FROM oci.badsysadm.local:80/dep/lib/libbz2:${VERSION} AS build
+FROM oci.badsysadm.local:80/dep/lib/bzip2:${VERSION} AS build
 ARG VERSION
 
 WORKDIR /src/bzip2
@@ -14,7 +14,7 @@ RUN rm -rf /src/target/usr/man
 
 FROM scratch AS bundle
 ARG VERSION
-LABEL org.opencontainers.image.title="libbz2"
+LABEL org.opencontainers.image.title="bzip2"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
 LABEL org.opencontainers.image.description="Bzip2 static and shared compression libraries"
