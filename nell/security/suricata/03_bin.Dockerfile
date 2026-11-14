@@ -10,7 +10,7 @@ ENV RUSTFLAGS="-C debuginfo=0 -C link-arg=-static-libgcc"
 
 RUN autoreconf -fvi
 
-RUN ./configure \
+RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
@@ -32,7 +32,7 @@ RUN ./configure \
     LIBS="-Wl,-Bstatic -Wl,--start-group \
     -lpcap -lyaml -ljansson -lpcre2-8 \
     -lbpf -lelf -lzstd -lz \
-    -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink \
+    -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink -lmnl \
     -llz4 -lmagic -lmaxminddb \
     -lcrypto -lxxhash \
     -Wl,--end-group -Wl,-Bdynamic -lm -ldl -lpthread"

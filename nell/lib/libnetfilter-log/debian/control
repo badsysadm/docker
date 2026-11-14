@@ -1,0 +1,15 @@
+Source: libnetfilter-log
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ libtool,
+ libmnl-dev (>= 1.0.3)
+
+Package: libnetfilter-log
+Architecture: amd64
+Static-Built-Using: libnfnetlink (= 1.0.2)
+Depends: ${shlibs:Depends}
+Description: libnetfilter_log library

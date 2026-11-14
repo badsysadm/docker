@@ -1,10 +1,14 @@
 ARG VERSION=8.0.8
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
+ARG LIBNFNETLINK_VERSION=1.0.2
+ARG LIBNETFILTER_LOG_VERSION=1.0.2
 
 FROM oci.badsysadm.local:80/src/security/suricata:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
+FROM oci.badsysadm.local:80/bin/lib/libnfnetlink:${LIBNFNETLINK_VERSION} AS libnfnetlink_image
+FROM oci.badsysadm.local:80/bin/lib/libnetfilter-log:${LIBNETFILTER_LOG_VERSION} AS libnetfilter_log_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
@@ -16,6 +20,18 @@ COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+
+COPY --from=libnfnetlink_image /target/usr/include/ /usr/local/include/
+COPY --from=libnfnetlink_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
+COPY --from=libnetfilter_log_image /target/usr/include/ /usr/local/include/
+COPY --from=libnetfilter_log_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
+RUN sed -i \
+    -e 's|^prefix=.*|prefix=/usr/local|' \
+    -e 's|^libdir=.*|libdir=/usr/local/lib|' \
+    -e 's|^includedir=.*|includedir=/usr/local/include|' \
+    /usr/local/lib/pkgconfig/libnfnetlink.pc \
+    /usr/local/lib/pkgconfig/libnetfilter_log.pc \
+    /usr/local/lib/pkgconfig/libnetfilter_log_libipulog.pc
 
 COPY --from=src_image /src/ /src/
 

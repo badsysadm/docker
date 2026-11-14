@@ -55,8 +55,10 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl ncurses glib gnutls zlib libunwind: section = lib
+libnftnl libnfnetlink libnetfilter-log ncurses glib gnutls zlib libunwind: section = lib
 libnftnl: version ?= 1.3.2
+libnfnetlink: version ?= 1.0.2
+libnetfilter-log: version ?= 1.0.2
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13
