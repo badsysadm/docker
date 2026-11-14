@@ -1,0 +1,83 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -47,15 +47,28 @@
+   src/maxminddb.c
+   src/data-pool.c
+ )
++if(BUILD_SHARED_LIBS)
++  add_library(maxminddb_static STATIC
++    src/maxminddb.c
++    src/data-pool.c
++  )
++  set_target_properties(maxminddb_static PROPERTIES
++    OUTPUT_NAME maxminddb
++    POSITION_INDEPENDENT_CODE ON)
++  set(MAXMINDDB_TARGETS maxminddb maxminddb_static)
++else()
++  set(MAXMINDDB_TARGETS maxminddb)
++endif()
+ add_library(maxminddb::maxminddb ALIAS maxminddb)
+ 
+ set_target_properties(maxminddb PROPERTIES VERSION ${MAXMINDDB_SOVERSION})
+ 
+-target_compile_definitions(maxminddb PRIVATE PACKAGE_VERSION="${PROJECT_VERSION}")
+-
+-if(NOT IS_BIG_ENDIAN)
+-  target_compile_definitions(maxminddb PRIVATE MMDB_LITTLE_ENDIAN=1)
+-endif()
++foreach(target IN LISTS MAXMINDDB_TARGETS)
++  target_compile_definitions(${target} PRIVATE PACKAGE_VERSION="${PROJECT_VERSION}")
++  if(NOT IS_BIG_ENDIAN)
++    target_compile_definitions(${target} PRIVATE MMDB_LITTLE_ENDIAN=1)
++  endif()
++endforeach()
+ 
+ if(MSVC)
+   target_compile_definitions(maxminddb PRIVATE _CRT_SECURE_NO_WARNINGS)
+@@ -79,12 +92,14 @@
+   endif()
+ endif()
+ 
+-target_include_directories(maxminddb PUBLIC
+-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
+-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+-  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
+-  $<INSTALL_INTERFACE:include>
+-)
++foreach(target IN LISTS MAXMINDDB_TARGETS)
++  target_include_directories(${target} PUBLIC
++    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
++    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
++    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
++    $<INSTALL_INTERFACE:include>
++  )
++endforeach()
+ 
+ set(MAXMINDB_HEADERS
+   include/maxminddb.h
+@@ -93,7 +108,7 @@
+ set_target_properties(maxminddb PROPERTIES PUBLIC_HEADER "${MAXMINDB_HEADERS}")
+ 
+ if (MAXMINDDB_INSTALL)
+-  install(TARGETS maxminddb
++  install(TARGETS ${MAXMINDDB_TARGETS}
+     EXPORT maxminddb)
+ 
+   # This is required to work with FetchContent
+diff --git a/bin/CMakeLists.txt b/bin/CMakeLists.txt
+--- a/bin/CMakeLists.txt
++++ b/bin/CMakeLists.txt
+@@ -13,7 +13,11 @@
+ 
+   target_compile_definitions(mmdblookup PRIVATE PACKAGE_VERSION="${PROJECT_VERSION}")
+ 
+-  target_link_libraries(mmdblookup maxminddb pthread)
++  if(BUILD_SHARED_LIBS)
++    target_link_libraries(mmdblookup maxminddb_static pthread)
++  else()
++    target_link_libraries(mmdblookup maxminddb pthread)
++  endif()
+ 
+   if (MAXMINDDB_INSTALL)
+     install(

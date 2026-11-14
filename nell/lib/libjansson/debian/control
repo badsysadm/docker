@@ -1,0 +1,13 @@
+Source: libjansson
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ cmake,
+ git
+
+Package: libjansson
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: JSON library

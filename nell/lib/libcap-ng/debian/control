@@ -1,0 +1,15 @@
+Source: libcap-ng
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ pkg-config
+
+Package: libcap-ng
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Linux capabilities library and utilities

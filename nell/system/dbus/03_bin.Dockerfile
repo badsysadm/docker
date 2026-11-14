@@ -11,7 +11,10 @@ ARG LDFLAGS="-Wl,-Bstatic -lcap -lsystemd -Wl,-Bdynamic"
 RUN meson setup build \
     --prefix=/usr \
     --buildtype=release \
-    --default-library=static \
+    --default-library=both \
+    -Db_staticpic=true \
+    -Dc_args="-D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -fcf-protection=full -ftrivial-auto-var-init=zero -ffunction-sections -fdata-sections" \
+    -Dc_link_args="-Wl,-z,relro,-z,now -Wl,--gc-sections" \
     --wrap-mode=nodownload \
     -Dprefer_static=true \
     -Dauto_features=disabled \

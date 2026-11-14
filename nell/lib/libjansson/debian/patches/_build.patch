@@ -1,0 +1,32 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -347,6 +347,14 @@
+    set_target_properties(jansson PROPERTIES
+       VERSION ${JANSSON_VERSION}
+       SOVERSION ${JANSSON_SOVERSION})
++
++   add_library(jansson_static STATIC
++      ${JANSSON_SRC}
++      ${JANSSON_HDR_PRIVATE}
++      ${JANSSON_HDR_PUBLIC})
++   set_target_properties(jansson_static PROPERTIES
++      OUTPUT_NAME jansson
++      POSITION_INDEPENDENT_CODE true)
+ else()
+    add_library(jansson STATIC
+       ${JANSSON_SRC}
+@@ -632,7 +640,12 @@
+ #
+ option(JANSSON_INSTALL "Generate installation target" ON)
+ if (JANSSON_INSTALL)
+-  install(TARGETS jansson
++  if(JANSSON_BUILD_SHARED_LIBS)
++    set(JANSSON_INSTALL_TARGETS jansson jansson_static)
++  else()
++    set(JANSSON_INSTALL_TARGETS jansson)
++  endif()
++  install(TARGETS ${JANSSON_INSTALL_TARGETS}
+           EXPORT janssonTargets
+           LIBRARY DESTINATION "lib"
+           ARCHIVE DESTINATION "lib"
