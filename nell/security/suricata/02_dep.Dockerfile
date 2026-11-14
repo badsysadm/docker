@@ -2,6 +2,7 @@ ARG VERSION=8.0.8
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
+ARG LIBLZ4_VERSION=1.10.0
 ARG DBUS_VERSION=1.16.2
 ARG ELFUTILS_VERSION=0.196
 ARG LIBMNL_VERSION=1.0.5
@@ -13,6 +14,7 @@ FROM oci.badsysadm.local:80/src/security/suricata:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
+FROM oci.badsysadm.local:80/bin/lib/liblz4:${LIBLZ4_VERSION} AS liblz4_image
 FROM oci.badsysadm.local:80/bin/system/dbus:${DBUS_VERSION} AS dbus_image
 FROM oci.badsysadm.local:80/bin/utils/elfutils:${ELFUTILS_VERSION} AS elfutils_image
 FROM oci.badsysadm.local:80/bin/lib/libmnl:${LIBMNL_VERSION} AS libmnl_image
@@ -31,6 +33,8 @@ COPY --from=zlib_image /target/usr/include/ /usr/local/include/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
 COPY --from=zstd_image /target/usr/include/ /usr/local/include/
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
+COPY --from=liblz4_image /target/usr/local/include/ /usr/local/include/
+COPY --from=liblz4_image /target/usr/local/lib/liblz4.a /usr/local/lib/liblz4.a
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
 COPY --from=elfutils_image /target/usr/include/ /usr/local/include/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/lib/libelf.a

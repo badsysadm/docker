@@ -41,7 +41,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     /usr/lib/x86_64-linux-gnu/libnet.a \
     /usr/local/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_queue.a \
     /usr/local/lib/libnfnetlink.a /usr/local/lib/libmnl.a \
-    /usr/lib/x86_64-linux-gnu/liblz4.a \
+    /usr/local/lib/liblz4.a \
     /usr/lib/x86_64-linux-gnu/libmagic.a \
     /usr/lib/x86_64-linux-gnu/libmaxminddb.a \
     /usr/local/lib/libcrypto.a \
