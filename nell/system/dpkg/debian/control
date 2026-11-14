@@ -35,6 +35,10 @@ Package: libdpkg-dev
 Architecture: amd64
 Description: Debian package management static library and headers
 
+Package: libdpkg-static
+Architecture: amd64
+Description: Debian package management static library
+
 Package: libdpkg-perl
 Architecture: all
 Description: Perl modules for dpkg
