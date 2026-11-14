@@ -66,7 +66,7 @@ Description: handle build flags and build a shared library.
 +	LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH \
  	./bzip2 -d  < sample1.bz2 > sample1.tst
 +	LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH \
- 	./bzip2 -ds < sample2.bz2 > sample2.tst
+ 	./bzip2 -d  < sample2.bz2 > sample2.tst
 +	LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH \
  	./bzip2 -ds < sample3.bz2 > sample3.tst
  	cmp sample1.bz2 sample1.rb2 
