@@ -13,11 +13,11 @@ RUN git apply /src/patches/_pax.patch
 
 RUN autoreconf -f -i
 
-RUN ./configure \
+RUN CFLAGS="-O2 -fPIC" ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
-    --disable-shared \
+    --enable-shared \
     --enable-static \
     --disable-dselect \
     --disable-start-stop-daemon \

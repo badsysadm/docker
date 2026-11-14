@@ -1,3 +1,4 @@
 usr/include/dpkg
+usr/lib/libdpkg.so*
 usr/lib/pkgconfig/libdpkg.pc
 usr/share/aclocal/dpkg-*.m4
