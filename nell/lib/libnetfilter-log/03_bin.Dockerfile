@@ -5,6 +5,8 @@ ARG VERSION
 
 WORKDIR /src/libnetfilter_log
 
+RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --prefix=/usr/local \
     --libdir=/usr/local/lib \
