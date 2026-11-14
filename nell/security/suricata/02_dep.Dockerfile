@@ -1,12 +1,14 @@
 ARG VERSION=8.0.8
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
+ARG DBUS_VERSION=1.16.2
 ARG LIBNFNETLINK_VERSION=1.0.2
 ARG LIBNETFILTER_LOG_VERSION=1.0.2
 
 FROM oci.badsysadm.local:80/src/security/suricata:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
+FROM oci.badsysadm.local:80/bin/system/dbus:${DBUS_VERSION} AS dbus_image
 FROM oci.badsysadm.local:80/bin/lib/libnfnetlink:${LIBNFNETLINK_VERSION} AS libnfnetlink_image
 FROM oci.badsysadm.local:80/bin/lib/libnetfilter-log:${LIBNETFILTER_LOG_VERSION} AS libnetfilter_log_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
@@ -20,6 +22,7 @@ COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
 
 COPY --from=libnfnetlink_image /target/usr/local/include/ /usr/local/include/
 COPY --from=libnfnetlink_image /target/usr/local/lib/ /usr/local/lib/

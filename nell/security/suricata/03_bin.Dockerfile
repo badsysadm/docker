@@ -35,7 +35,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     -lbpf -lelf -lzstd -lz \
     -lcap-ng -lnet -lnetfilter_log -lnetfilter_queue -lnfnetlink -lmnl \
     -llz4 -lmagic -lmaxminddb \
-    -lcrypto -lxxhash \
+    -lcrypto -lxxhash -ldbus-1 \
     -Wl,--end-group -Wl,-Bdynamic -lm -ldl -lpthread"
 
 RUN make -j$(nproc)
