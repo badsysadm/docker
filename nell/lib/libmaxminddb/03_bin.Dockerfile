@@ -6,7 +6,7 @@ ARG VERSION
 WORKDIR /src/libmaxminddb
 
 COPY debian/patches /src/patches/
-RUN git apply /src/patches/_build-both.patch
+RUN git apply /src/patches/_build.patch
 
 RUN cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
