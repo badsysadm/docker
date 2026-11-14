@@ -1,3 +1,7 @@
 usr/share/perl5/Dpkg
 usr/share/perl5/Dpkg.pm
 usr/share/dpkg/*.specs
+usr/lib/libdpkg.a
+usr/include/dpkg
+usr/lib/pkgconfig/libdpkg.pc
+usr/share/aclocal/dpkg-*.m4
