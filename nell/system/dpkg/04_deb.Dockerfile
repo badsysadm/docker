@@ -11,7 +11,7 @@ COPY debian ./debian/
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
 RUN dh_testdir
-RUN dh_install
+RUN dh_install --sourcedir=debian/tmp
 RUN dh_installdebconf
 RUN dh_installdeb
 RUN dh_installdirs
