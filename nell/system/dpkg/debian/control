@@ -18,7 +18,7 @@ Build-Depends:
 Package: dpkg
 Architecture: amd64
 Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, bash
 Recommends:
  dpkg-query (= ${binary:Version}),
  dpkg-maintscript-helper (= ${binary:Version}),
@@ -29,6 +29,7 @@ Description: Low-level package manager
 
 Package: dpkg-dev
 Architecture: all
+Depends: perl
 Description: Debian package development tools
 
 Package: dpkg-query
@@ -38,6 +39,7 @@ Description: Query dpkg package database
 
 Package: dpkg-maintscript-helper
 Architecture: all
+Depends: bash
 Description: Helper for package maintainer scripts
 
 Package: update-alternatives
