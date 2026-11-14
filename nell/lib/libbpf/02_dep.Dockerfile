@@ -16,5 +16,9 @@ COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/libelf.a /usr/local/
 COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/local/lib/pkgconfig/libelf.pc
 COPY --from=zlib_image /target/usr/include/ /usr/local/include/
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/local/lib/pkgconfig/zlib.pc
+RUN sed -i 's|^libdir=.*|libdir=/usr/local/lib|' \
+    /usr/local/lib/pkgconfig/libelf.pc \
+    /usr/local/lib/pkgconfig/zlib.pc
 
 COPY --from=src_image /src/ /src/

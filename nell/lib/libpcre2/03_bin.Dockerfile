@@ -15,6 +15,9 @@ RUN cmake -S . -B build-static \
     -DPCRE2_STATIC_PIC=ON \
     -DPCRE2_BUILD_TESTS=OFF \
     -DPCRE2_SUPPORT_JIT=ON \
+    -DZLIB_INCLUDE_DIR=/usr/local/include \
+    -DZLIB_LIBRARY=/usr/local/lib/libz.a \
+    -DBZIP2_LIBRARY_RELEASE=/usr/lib/x86_64-linux-gnu/libbz2.a \
     -DPCRE2_SUPPORT_LIBREADLINE=OFF
 
 RUN cmake --build build-static -j$(nproc)
