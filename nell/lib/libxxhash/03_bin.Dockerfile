@@ -6,8 +6,7 @@ ARG VERSION
 WORKDIR /src/xxhash
 
 RUN make -j$(nproc) lib xxhsum \
-    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
-    LDFLAGS="-Wl,-z,relro,-z,now -Wl,--gc-sections"
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections"
 
 RUN make \
     PREFIX=/usr \
