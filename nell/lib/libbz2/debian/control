@@ -3,7 +3,8 @@ Section: lib
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
- build-essential
+ build-essential,
+ patch
 
 Package: libbz2
 Architecture: amd64
