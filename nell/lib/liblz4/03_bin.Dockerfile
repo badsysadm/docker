@@ -5,7 +5,7 @@ ARG VERSION
 
 WORKDIR /src/lz4
 
-RUN make -j$(nproc) -C lib all \
+RUN make -j$(nproc) lib-release lz4-release \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-Wl,-z,relro,-z,now -Wl,--gc-sections"
 
@@ -13,6 +13,10 @@ RUN make -C lib install \
     PREFIX=/usr \
     LIBDIR=/usr/lib \
     DESTDIR=/src/target
+RUN make -C programs install \
+    PREFIX=/usr \
+    DESTDIR=/src/target
+RUN rm -rf /src/target/usr/share/man
 
 FROM scratch AS bundle
 ARG VERSION
