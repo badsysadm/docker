@@ -31,13 +31,22 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ac_cv_lib_unwind_unw_backtrace=no .
     CPPFLAGS="-I/usr/local/include" \
     LDFLAGS="-L/usr/local/lib -static-libgcc -Wl,-z,relro,-z,now -Wl,--gc-sections -Wl,-Bstatic" \
     LIBS="-Wl,-Bstatic -Wl,--start-group \
-    -lpcap -lyaml -ljansson -lpcre2-8 \
-    -lbpf /usr/local/lib/libelf.a /usr/local/lib/libzstd.a /usr/local/lib/libz.a \
-    -lcap-ng -lnet \
+    /usr/lib/x86_64-linux-gnu/libpcap.a \
+    /usr/lib/x86_64-linux-gnu/libyaml.a \
+    /usr/lib/x86_64-linux-gnu/libjansson.a \
+    /usr/lib/x86_64-linux-gnu/libpcre2-8.a \
+    /usr/lib/x86_64-linux-gnu/libbpf.a \
+    /usr/local/lib/libelf.a /usr/local/lib/libzstd.a /usr/local/lib/libz.a \
+    /usr/lib/x86_64-linux-gnu/libcap-ng.a \
+    /usr/lib/x86_64-linux-gnu/libnet.a \
     /usr/local/lib/libnetfilter_log.a /usr/local/lib/libnetfilter_queue.a \
     /usr/local/lib/libnfnetlink.a /usr/local/lib/libmnl.a \
-    -llz4 -lmagic -lmaxminddb \
-    /usr/local/lib/libcrypto.a -lxxhash /usr/local/lib/libdbus-1.a \
+    /usr/lib/x86_64-linux-gnu/liblz4.a \
+    /usr/lib/x86_64-linux-gnu/libmagic.a \
+    /usr/lib/x86_64-linux-gnu/libmaxminddb.a \
+    /usr/local/lib/libcrypto.a \
+    /usr/lib/x86_64-linux-gnu/libxxhash.a \
+    /usr/local/lib/libdbus-1.a \
     -lm -ldl -lpthread \
     -Wl,--end-group -Wl,-Bdynamic"
 
