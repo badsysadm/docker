@@ -55,7 +55,7 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl libmnl libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 ncurses glib gnutls zlib libunwind: section = lib
+libnftnl libmnl libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 libbz2 libmd ncurses glib gnutls zlib libunwind: section = lib
 libnftnl: version ?= 1.3.2
 libmnl: version ?= 1.0.5
 libnfnetlink: version ?= 1.0.2
@@ -70,6 +70,8 @@ libnet: version ?= 1.3
 libjansson: version ?= 2.14.1
 libyaml: version ?= 0.2.5
 libpcre2: version ?= 10.49
+libbz2: version ?= 1.0.8
+libmd: version ?= 1.3.0
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
 gnutls: version ?= 3.8.13

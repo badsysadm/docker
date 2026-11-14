@@ -8,12 +8,15 @@ ARG VERSION
 WORKDIR /src/dpkg
 
 COPY debian/patches /src/patches/
-RUN git apply /src/patches/_build.patch
 RUN git apply /src/patches/_pax.patch
 
 RUN autoreconf -f -i
 
-RUN CFLAGS="-O2 -fPIC" ./configure \
+RUN CFLAGS="-O2 -fPIC" \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib" \
+    LIBS="-Wl,-Bstatic -Wl,--start-group /usr/local/lib/libmd.a /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/libz.a -Wl,--end-group -Wl,-Bdynamic" \
+    ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
@@ -31,8 +34,8 @@ RUN CFLAGS="-O2 -fPIC" ./configure \
     --disable-devel-docs \
     --disable-nls
 
-RUN make -j$(nproc)
-RUN make install DESTDIR=/src/target
+RUN make -j$(nproc) SUBDIRS="lib src utils scripts"
+RUN make install DESTDIR=/src/target SUBDIRS="lib src utils scripts"
 
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 RUN find /src/target -type f -name '*.la' -delete

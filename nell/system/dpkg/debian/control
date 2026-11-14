@@ -13,13 +13,7 @@ Build-Depends:
  autopoint,
  libtool,
  flex,
- bison,
- liblzma-dev,
- libzstd-dev,
- libbz2-dev,
- liblz4-dev,
- zlib1g-dev,
- libmd-dev
+ bison
 
 Package: dpkg
 Architecture: amd64
