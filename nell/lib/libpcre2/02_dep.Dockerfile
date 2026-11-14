@@ -1,7 +1,7 @@
 ARG VERSION=10.49
+ARG ZLIB_VERSION=1.3.1
 
 FROM oci.badsysadm.local:80/src/lib/libpcre2:${VERSION} AS src_image
-ARG ZLIB_VERSION=1.3.1
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 

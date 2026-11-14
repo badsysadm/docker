@@ -1,9 +1,9 @@
 ARG VERSION=1.8.0
-
-FROM oci.badsysadm.local:80/src/lib/libbpf:${VERSION} AS src_image
 ARG ELFUTILS_VERSION=0.196
 ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
+
+FROM oci.badsysadm.local:80/src/lib/libbpf:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/utils/elfutils:${ELFUTILS_VERSION} AS elfutils_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
