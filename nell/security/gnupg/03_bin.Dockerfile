@@ -10,6 +10,7 @@ RUN ./configure \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --enable-maintainer-mode \
+    --disable-doc \
     --disable-nls \
     --disable-scdaemon \
     --disable-gpgsm \
