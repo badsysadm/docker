@@ -3,6 +3,7 @@ Section: lib
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
+ git,
  build-essential,
  autoconf,
  automake,
