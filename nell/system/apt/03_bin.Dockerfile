@@ -27,8 +27,9 @@ RUN cmake .. \
   -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib64/libcrypto.a \
   -DCMAKE_C_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
   -DCMAKE_CXX_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections -std=c++23 -I/usr/local/include" \
-  -DCMAKE_EXE_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
-  -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++"
+  -DCMAKE_EXE_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++" \
+  -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++" \
+  -DCMAKE_CXX_STANDARD_LIBRARIES="-Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -Wl,-Bdynamic -ldl -pthread"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
