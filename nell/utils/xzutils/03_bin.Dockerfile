@@ -9,6 +9,8 @@ WORKDIR /src/xzutils
 RUN cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_C_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     -DBUILD_SHARED_LIBS=OFF \
     -DENABLE_NLS=OFF \
     -DXZ_DOC=OFF \
