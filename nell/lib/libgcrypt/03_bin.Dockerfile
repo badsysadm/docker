@@ -15,7 +15,7 @@ RUN ./configure \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-Wl,--gc-sections -Wl,-z,relro,-z,now"
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) mpicalc_LDADD=".libs/libgcrypt.a -lgpg-error"
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share/doc \
            /src/target/usr/share/man \
