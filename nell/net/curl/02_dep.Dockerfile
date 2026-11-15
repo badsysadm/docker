@@ -31,8 +31,7 @@ COPY --from=zstd_image /target/usr/include/zstd_errors.h /usr/local/include/zstd
 COPY --from=zstd_image /target/usr/include/zdict.h /usr/local/include/zdict.h
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 
-COPY --from=libssh2_image /target/usr/include/libssh2.h /usr/local/include/libssh2.h
-COPY --from=libssh2_image /target/usr/include/libssh2_publickey.h /usr/local/include/libssh2_publickey.h
+COPY --from=libssh2_image /target/usr/include/ /usr/local/include/
 COPY --from=libssh2_image /target/usr/lib/libssh2.a /usr/local/lib/libssh2.a
 COPY --from=nghttp2_image /target/usr/include/nghttp2/ /usr/local/include/nghttp2/
 COPY --from=nghttp2_image /target/usr/lib/libnghttp2.a /usr/local/lib/libnghttp2.a
