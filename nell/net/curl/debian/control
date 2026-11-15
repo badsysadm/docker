@@ -24,7 +24,7 @@ Description: URL transfer command-line utility
 
 Package: wcurl
 Architecture: all
-Depends: curl (= ${binary:Version}), dash, ${misc:Depends}
+Depends: curl (= ${binary:Version}), bash, ${misc:Depends}
 Description: POSIX shell wrapper for downloading files with curl
 
 Package: libcurl-shared
