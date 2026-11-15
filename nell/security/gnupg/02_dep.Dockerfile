@@ -16,8 +16,10 @@ FROM oci.badsysadm.local:80/bin/lib/npth:${NPTH_VERSION} AS npth_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/lib/bzip2:${BZIP2_VERSION} AS bzip2_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
+ARG VERSION
 
 COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
