@@ -9,6 +9,7 @@ RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
+    --enable-maintainer-mode \
     --disable-nls \
     --disable-scdaemon \
     --disable-gpgsm \
