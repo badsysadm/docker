@@ -1,0 +1,9 @@
+usr/share/perl5/Dpkg
+usr/share/perl5/Dpkg.pm
+usr/share/dpkg/*.specs
+usr/include/dpkg
+usr/lib/pkgconfig/libdpkg.pc
+usr/share/aclocal/dpkg-*.m4
+usr/bin/dpkg-realpath
+usr/libexec/dpkg/dpkg-db-backup
+usr/libexec/dpkg/dpkg-db-keeper

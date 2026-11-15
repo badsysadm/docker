@@ -1,0 +1,18 @@
+--- a/Makefile
++++ b/Makefile
+@@ -96,2 +96,2 @@
+-	ln -s -f $(PREFIX)/bin/bzip2 $(PREFIX)/bin/bunzip2
+-	ln -s -f $(PREFIX)/bin/bzip2 $(PREFIX)/bin/bzcat
++	ln -s -f bzip2 $(PREFIX)/bin/bunzip2
++	ln -s -f bzip2 $(PREFIX)/bin/bzcat
+@@ -116,2 +116,2 @@
+-	ln -s -f $(PREFIX)/bin/bzgrep $(PREFIX)/bin/bzegrep
+-	ln -s -f $(PREFIX)/bin/bzgrep $(PREFIX)/bin/bzfgrep
++	ln -s -f bzgrep $(PREFIX)/bin/bzegrep
++	ln -s -f bzgrep $(PREFIX)/bin/bzfgrep
+@@ -122 +122 @@
+-	ln -s -f $(PREFIX)/bin/bzmore $(PREFIX)/bin/bzless
++	ln -s -f bzmore $(PREFIX)/bin/bzless
+@@ -125 +125 @@
+-	ln -s -f $(PREFIX)/bin/bzdiff $(PREFIX)/bin/bzcmp
++	ln -s -f bzdiff $(PREFIX)/bin/bzcmp

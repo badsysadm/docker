@@ -111,6 +111,46 @@ FROM scratch AS bundle
 COPY --from=build /src/target/ /target/
 ```
 
+## Генерация Debian-пакетов (`04_deb.Dockerfile`)
+
+Для проектов с Debian-пакетами **стандартное правило** — хранить
+`debian/changelog` в репозитории с маркером `@VERSION@` вместо
+upstream-версии. Debian-ревизия (`-1`, `-2` и т. д.), описание
+изменений, дата и сопровождающий остаются в самом changelog.
+
+Пример `debian/changelog`:
+
+```text
+example (@VERSION@-1) unstable; urgency=medium
+
+  * Initial NELL packaging.
+
+ -- badsysadm <me@badsysadm.com>  Sun, 15 Nov 2026 00:00:00 +0000
+```
+
+В `04_deb.Dockerfile`, непосредственно после `COPY debian ./debian/`,
+до любых вызовов `dpkg-parsechangelog`, `dch`, `dh_*`, `dpkg-vexgen`
+или других инструментов, читающих changelog, выполняется:
+
+```dockerfile
+ARG VERSION
+WORKDIR /src
+COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
+```
+
+`VERSION` передаётся через существующий аргумент сборки Dockerfile.
+Например, при `VERSION=1.22.22` запись `@VERSION@-1` превращается
+в `1.22.22-1`. Для новой Debian-ревизии меняют только суффикс в
+changelog: `@VERSION@-2`. Нельзя дублировать upstream-версию в
+changelog или генерировать новую запись через `dch --create` вместо
+подстановки. В готовый `.deb` и экспортируемый changelog попадает
+уже подставленная версия.
+
+До подстановки `@VERSION@` не является корректной Debian-версией:
+любые проверки и генераторы метаданных, требующие `debian/changelog`,
+должны исполняться после этой команды.
+
 ## Добавление проекта в Makefile
 
 Проект необходимо добавить в соответствующую `section`:

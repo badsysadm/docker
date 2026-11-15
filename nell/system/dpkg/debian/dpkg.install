@@ -1,0 +1,9 @@
+usr/bin/dpkg
+usr/bin/dpkg-deb
+usr/bin/dpkg-split
+usr/bin/dpkg-trigger
+usr/share/dpkg/abitable
+usr/share/dpkg/cputable
+usr/share/dpkg/ostable
+usr/share/dpkg/tupletable
+usr/share/dpkg/sh/dpkg-error.sh
