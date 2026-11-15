@@ -1,4 +1,4 @@
-ARG VERSION=1.6.7
+ARG VERSION=1.8.1
 
 FROM oci.badsysadm.local:80/dep/lib/libksba:${VERSION} AS build
 ARG VERSION
