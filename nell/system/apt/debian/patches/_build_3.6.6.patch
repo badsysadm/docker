@@ -26,7 +26,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 --- a/apt-pkg/CMakeLists.txt
 +++ b/apt-pkg/CMakeLists.txt
-@@ -88,6 +88,17 @@
+@@ -88,7 +88,18 @@
  # Create the shared library from the object library and set the SONAME
  add_library(apt-pkg SHARED)
  target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
@@ -44,6 +44,7 @@ diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 +    /usr/local/lib/libz.a /usr/local/lib/libxxhash.a
 +    -ldb -lgcrypt /usr/local/lib64/libcrypto.a
 +    "-Wl,--end-group" "-Wl,-Bdynamic")
+ 
 @@ -96,3 +107,4 @@
  # Install the library and the header files
  install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
