@@ -42,3 +42,8 @@ Package: libapt-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}
 Description: APT package management shared library
+
+Package: libapt-dev
+Architecture: amd64
+Depends: libapt-static (= ${binary:Version}), libapt-shared (= ${binary:Version})
+Description: APT development headers and pkg-config metadata
