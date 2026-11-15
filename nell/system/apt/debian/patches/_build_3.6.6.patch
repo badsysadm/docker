@@ -26,44 +26,55 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 --- a/apt-pkg/CMakeLists.txt
 +++ b/apt-pkg/CMakeLists.txt
-@@ -88,6 +88,10 @@
+@@ -88,10 +88,15 @@
  # Create the shared library from the object library and set the SONAME
- add_library(apt-pkg SHARED)
- target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
+-add_library(apt-pkg SHARED)
++add_library(apt-pkg STATIC)
++add_library(apt-pkg-shared SHARED)
++set_target_properties(apt-pkg-shared PROPERTIES OUTPUT_NAME apt-pkg)
 +set_property(TARGET apt-pkg-object PROPERTY POSITION_INDEPENDENT_CODE ON)
-+add_library(apt-pkg-static STATIC)
-+target_link_libraries(apt-pkg-static PRIVATE apt-pkg-object)
-+set_target_properties(apt-pkg-static PROPERTIES OUTPUT_NAME apt-pkg)
- set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
- set_target_properties(apt-pkg PROPERTIES SOVERSION ${MAJOR})
- target_link_libraries(apt-pkg PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
-@@ -96,3 +100,4 @@
+ target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
+-set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
+-set_target_properties(apt-pkg PROPERTIES SOVERSION ${MAJOR})
+-target_link_libraries(apt-pkg PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
++target_link_libraries(apt-pkg-shared PRIVATE apt-pkg-object)
++set_target_properties(apt-pkg-shared PROPERTIES VERSION ${MAJOR}.${MINOR})
++set_target_properties(apt-pkg-shared PROPERTIES SOVERSION ${MAJOR})
++target_link_libraries(apt-pkg-shared PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
+ 
  # Install the library and the header files
- install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+install(TARGETS apt-pkg-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
++install(TARGETS apt-pkg-shared LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
++install(TARGETS apt-pkg ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
  install(FILES ${headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/apt-pkg)
 diff --git a/apt-private/CMakeLists.txt b/apt-private/CMakeLists.txt
 --- a/apt-private/CMakeLists.txt
 +++ b/apt-private/CMakeLists.txt
-@@ -17,16 +17,21 @@
+@@ -17,16 +17,22 @@
  set_target_properties(apt-private-object PROPERTIES CXX_VISIBILITY_PRESET hidden)
 +set_property(TARGET apt-private-object PROPERTY POSITION_INDEPENDENT_CODE ON)
  
  # Create the shared library from the object library and set the SONAME
- add_library(apt-private SHARED)
+-add_library(apt-private SHARED)
++add_library(apt-private STATIC)
++add_library(apt-private-shared SHARED)
++set_target_properties(apt-private-shared PROPERTIES OUTPUT_NAME apt-private)
  target_link_libraries(apt-private PRIVATE apt-private-object)
  target_link_libraries(apt-private PUBLIC apt-pkg)
-+add_library(apt-private-static STATIC)
-+target_link_libraries(apt-private-static PRIVATE apt-private-object apt-pkg-static)
-+set_target_properties(apt-private-static PROPERTIES OUTPUT_NAME apt-private)
- set_target_properties(apt-private PROPERTIES VERSION ${MAJOR}.${MINOR})
- set_target_properties(apt-private PROPERTIES SOVERSION ${MAJOR})
- add_version_script(apt-private)
+-set_target_properties(apt-private PROPERTIES VERSION ${MAJOR}.${MINOR})
+-set_target_properties(apt-private PROPERTIES SOVERSION ${MAJOR})
+-add_version_script(apt-private)
++target_link_libraries(apt-private-shared PRIVATE apt-private-object)
++target_link_libraries(apt-private-shared PUBLIC apt-pkg-shared)
++set_target_properties(apt-private-shared PROPERTIES VERSION ${MAJOR}.${MINOR})
++set_target_properties(apt-private-shared PROPERTIES SOVERSION ${MAJOR})
++add_version_script(apt-private-shared)
  
  # Install the library and the headers
- install(TARGETS apt-private
+-install(TARGETS apt-private
++install(TARGETS apt-private-shared
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          NAMELINK_SKIP)
-+install(TARGETS apt-private-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
++install(TARGETS apt-private ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
  
  flatify(${PROJECT_BINARY_DIR}/include/apt-private/ "${headers}")
