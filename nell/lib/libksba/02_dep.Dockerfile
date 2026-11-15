@@ -1,5 +1,5 @@
 ARG VERSION=1.6.7
-ARG LIBGPG_ERROR_VERSION=1.51
+ARG LIBGPG_ERROR_VERSION=1.61
 
 FROM oci.badsysadm.local:80/src/lib/libksba:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/lib/libgpg-error:${LIBGPG_ERROR_VERSION} AS libgpg_error_image

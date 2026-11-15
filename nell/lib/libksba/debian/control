@@ -15,6 +15,6 @@ Build-Depends:
 
 Package: libksba
 Architecture: amd64
-Static-Built-Using: libgpg-error (= 1.51)
+Static-Built-Using: libgpg-error (= 1.61)
 Depends: ${shlibs:Depends}
 Description: libksba static and shared libraries

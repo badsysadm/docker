@@ -1,4 +1,4 @@
-ARG VERSION=1.11.0
+ARG VERSION=1.12.4
 
 FROM oci.badsysadm.local:80/dep/lib/libgcrypt:${VERSION} AS build
 ARG VERSION

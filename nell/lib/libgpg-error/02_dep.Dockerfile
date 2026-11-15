@@ -1,4 +1,4 @@
-ARG VERSION=1.51
+ARG VERSION=1.61
 
 FROM oci.badsysadm.local:80/src/lib/libgpg-error:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build

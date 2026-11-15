@@ -1,4 +1,4 @@
-ARG VERSION=2.4.7
+ARG VERSION=2.5.24
 
 FROM oci.badsysadm.local:80/dep/security/gnupg:${VERSION} AS build
 ARG VERSION

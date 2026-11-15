@@ -1,4 +1,4 @@
-ARG VERSION=1.51
+ARG VERSION=1.61
 
 FROM oci.badsysadm.local:80/dep/lib/libgpg-error:${VERSION} AS build
 ARG VERSION

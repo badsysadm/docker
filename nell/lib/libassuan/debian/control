@@ -14,6 +14,6 @@ Build-Depends:
 
 Package: libassuan
 Architecture: amd64
-Static-Built-Using: libgpg-error (= 1.51)
+Static-Built-Using: libgpg-error (= 1.61)
 Depends: ${shlibs:Depends}
 Description: libassuan static and shared libraries

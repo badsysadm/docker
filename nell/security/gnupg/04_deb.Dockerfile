@@ -1,4 +1,4 @@
-ARG VERSION=2.4.7
+ARG VERSION=2.5.24
 
 FROM oci.badsysadm.local:80/bin/security/gnupg:${VERSION} AS bin_image
 
