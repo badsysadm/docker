@@ -22,7 +22,7 @@ RUN ./configure \
     --without-tpm \
     --without-tpm2 \
     --disable-doc \
-    --disable-tools \
+    --enable-tools \
     --disable-tests \
     --disable-nls
 
