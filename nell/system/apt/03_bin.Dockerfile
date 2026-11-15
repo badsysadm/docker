@@ -10,12 +10,15 @@ WORKDIR /src/apt
 
 COPY debian/patches /src/patches/
 RUN git apply /src/patches/_build_3.6.6.patch
+RUN git apply /src/patches/_shared.patch
 RUN git apply /src/patches/_pax.patch
 
 WORKDIR /src/apt/.build
 
 RUN cmake .. \
   -DCMAKE_INSTALL_PREFIX=/usr \
+  -DCMAKE_INSTALL_LIBDIR=lib \
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
   -DCMAKE_BUILD_TYPE=Release \
   -DUSE_NLS=OFF \
   -DWITH_DOC=OFF \
@@ -23,8 +26,10 @@ RUN cmake .. \
   -DOPENSSL_USE_STATIC_LIBS=TRUE \
   -DOPENSSL_SSL_LIBRARY=/usr/local/lib64/libssl.a \
   -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib64/libcrypto.a \
-  -DCMAKE_CXX_FLAGS="-std=c++23 -I/usr/local/include" \
-  -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -ldl -pthread -Wl,-Bdynamic"
+  -DCMAKE_C_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+  -DCMAKE_CXX_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections -std=c++23 -I/usr/local/include" \
+  -DCMAKE_EXE_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
+  -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--gc-sections -static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -Wl,-Bdynamic -ldl -pthread"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target

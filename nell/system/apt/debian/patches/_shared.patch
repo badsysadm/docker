@@ -1,0 +1,25 @@
+diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
+--- a/apt-pkg/CMakeLists.txt
++++ b/apt-pkg/CMakeLists.txt
+@@ -89,2 +89,8 @@
+ add_library(apt-pkg STATIC)
+ target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
++add_library(apt-pkg-shared SHARED)
++target_link_libraries(apt-pkg-shared PRIVATE apt-pkg-object)
++set_target_properties(apt-pkg-shared PROPERTIES OUTPUT_NAME apt-pkg VERSION ${MAJOR}.${MINOR} SOVERSION ${MAJOR})
++target_link_libraries(apt-pkg-shared PRIVATE "-Wl,-version-script=${CMAKE_CURRENT_BINARY_DIR}/versionscript")
++
++install(TARGETS apt-pkg-shared LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/apt-private/CMakeLists.txt b/apt-private/CMakeLists.txt
+--- a/apt-private/CMakeLists.txt
++++ b/apt-private/CMakeLists.txt
+@@ -18,2 +18,9 @@
+ add_library(apt-private STATIC)
+ target_link_libraries(apt-private PRIVATE apt-private-object)
++add_library(apt-private-shared SHARED)
++target_link_libraries(apt-private-shared PRIVATE apt-private-object)
++target_link_libraries(apt-private-shared PUBLIC apt-pkg-shared)
++set_target_properties(apt-private-shared PROPERTIES OUTPUT_NAME apt-private VERSION ${MAJOR}.${MINOR} SOVERSION ${MAJOR} CXX_VISIBILITY_PRESET hidden)
++add_version_script(apt-private-shared)
++install(TARGETS apt-private-shared LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} NAMELINK_SKIP)
++

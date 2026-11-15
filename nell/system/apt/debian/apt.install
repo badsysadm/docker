@@ -4,6 +4,8 @@ usr/bin/apt-cdrom
 usr/bin/apt-config
 usr/bin/apt-get
 usr/bin/apt-mark
+usr/lib/libapt-private.so.0.0
+usr/lib/libapt-private.so.0.0.0
 usr/lib/apt/apt-helper
 usr/lib/apt/apt-extracttemplates
 usr/lib/apt/methods
