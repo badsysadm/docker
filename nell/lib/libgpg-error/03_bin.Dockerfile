@@ -16,7 +16,7 @@ RUN ./configure \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-Wl,--gc-sections -Wl,-z,relro,-z,now"
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) gpg_error_LDFLAGS="-static-libtool-libs"
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share/doc \
            /src/target/usr/share/man \
