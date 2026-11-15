@@ -13,18 +13,21 @@ RUN find . -type f \( \
         -o -name "config.h.in" \
     \) -exec touch {} +
 
-RUN CFLAGS="-O2 -fPIC" ./configure \
+RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
     --enable-static \
     --enable-shared \
+    --with-pic \
     --without-p11-kit \
     --without-tpm \
     --without-tpm2 \
     --disable-doc \
     --enable-tools \
     --disable-tests \
-    --disable-nls
+    --disable-nls \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-Wl,--gc-sections"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
