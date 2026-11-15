@@ -9,6 +9,8 @@ WORKDIR /src/dpkg
 
 COPY debian/patches /src/patches/
 RUN git apply /src/patches/_pax.patch
+RUN echo "${VERSION}" > .dist-version && \
+    git rev-parse HEAD > .dist-vcs-id
 
 RUN autoreconf -f -i
 
