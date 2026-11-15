@@ -12,13 +12,6 @@ RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
-RUN mkdir -p /src/debian/tmp/git-http/usr/libexec/git-core && \
-    mv /src/debian/tmp/usr/libexec/git-core/git-remote-http \
-       /src/debian/tmp/usr/libexec/git-core/git-remote-https \
-       /src/debian/tmp/usr/libexec/git-core/git-remote-ftp \
-       /src/debian/tmp/usr/libexec/git-core/git-remote-ftps \
-       /src/debian/tmp/git-http/usr/libexec/git-core/
-
 RUN dh_testdir
 RUN dh_install
 RUN dh_installdebconf

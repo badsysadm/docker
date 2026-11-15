@@ -1,4 +1,40 @@
-usr/bin/git-* usr/bin/
-usr/bin/scalar usr/bin/
-usr/libexec/git-core usr/libexec/
-usr/share/git-core usr/share/
+usr/bin/scalar
+usr/bin/git-receive-pack
+usr/bin/git-shell
+usr/bin/git-upload-archive
+usr/bin/git-upload-pack
+usr/libexec/git-core/git
+usr/libexec/git-core/scalar
+usr/libexec/git-core/git-receive-pack
+usr/libexec/git-core/git-shell
+usr/libexec/git-core/git-upload-archive
+usr/libexec/git-core/git-upload-pack
+usr/libexec/git-core/git-daemon
+usr/libexec/git-core/git-http-backend
+usr/libexec/git-core/git-http-fetch
+usr/libexec/git-core/git-imap-send
+usr/libexec/git-core/git-sh-i18n--envsubst
+usr/libexec/git-core/git-instaweb
+usr/libexec/git-core/git-difftool--helper
+usr/libexec/git-core/git-filter-branch
+usr/libexec/git-core/git-merge-octopus
+usr/libexec/git-core/git-merge-one-file
+usr/libexec/git-core/git-merge-resolve
+usr/libexec/git-core/git-mergetool
+usr/libexec/git-core/git-quiltimport
+usr/libexec/git-core/git-request-pull
+usr/libexec/git-core/git-submodule
+usr/libexec/git-core/git-web--browse
+usr/libexec/git-core/git-mergetool--lib
+usr/libexec/git-core/git-sh-i18n
+usr/libexec/git-core/git-sh-setup
+usr/libexec/git-core/git-archimport
+usr/libexec/git-core/git-cvsexportcommit
+usr/libexec/git-core/git-cvsimport
+usr/libexec/git-core/git-cvsserver
+usr/libexec/git-core/git-send-email
+usr/libexec/git-core/git-svn
+usr/libexec/git-core/git-p4
+usr/libexec/git-core/mergetools
+usr/share/git-core/templates
+usr/share/bash-completion/completions/git
