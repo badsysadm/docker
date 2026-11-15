@@ -36,6 +36,7 @@ COPY --from=libksba_image /target/usr/include/ /usr/include/
 COPY --from=libksba_image /target/usr/lib/pkgconfig/ksba.pc /usr/lib/pkgconfig/ksba.pc
 COPY --from=npth_image /target/usr/lib/libnpth.a /usr/lib/libnpth.a
 COPY --from=npth_image /target/usr/include/ /usr/include/
+COPY --from=npth_image /target/usr/lib/pkgconfig/npth.pc /usr/lib/pkgconfig/npth.pc
 
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/lib/libz.a
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/include/zlib.h
