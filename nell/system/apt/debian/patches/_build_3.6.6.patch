@@ -44,7 +44,7 @@ diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 +    /usr/local/lib/libz.a /usr/local/lib/libxxhash.a
 +    -ldb -lgcrypt /usr/local/lib64/libcrypto.a
 +    "-Wl,--end-group" "-Wl,-Bdynamic")
-@@ -96,3 +117,4 @@
+@@ -96,3 +107,4 @@
  # Install the library and the header files
  install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 +install(TARGETS apt-pkg-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
