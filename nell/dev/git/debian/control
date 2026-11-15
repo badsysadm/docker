@@ -12,4 +12,22 @@ Static-Built-Using: curl (= 8.23.0), openssl (= 3.6.5),
  zlib (= 1.3.1), zstd (= 1.5.7), libssh2 (= 1.11.1),
  nghttp2 (= 1.71.0)
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: git-http (= ${binary:Version})
 Description: Git distributed version control system
+
+Package: git-http
+Architecture: amd64
+Static-Built-Using: curl (= 8.23.0), openssl (= 3.6.5),
+ zlib (= 1.3.1), zstd (= 1.5.7), libssh2 (= 1.11.1),
+ nghttp2 (= 1.71.0)
+Depends: git (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Git HTTP, HTTPS, FTP and FTPS transport helpers
+
+Package: git-tools
+Architecture: amd64
+Static-Built-Using: curl (= 8.23.0), openssl (= 3.6.5),
+ zlib (= 1.3.1), zstd (= 1.5.7), libssh2 (= 1.11.1),
+ nghttp2 (= 1.71.0)
+Depends: git (= ${binary:Version}), git-http (= ${binary:Version}),
+ ${shlibs:Depends}, ${misc:Depends}
+Description: Additional Git commands, helpers and templates

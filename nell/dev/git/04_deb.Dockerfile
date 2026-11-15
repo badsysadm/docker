@@ -12,6 +12,41 @@ RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
+RUN find /src/debian/tmp -type f -o -type l | \
+    sed 's#^/src/debian/tmp/##' | \
+    grep -v -E '^(usr/bin/git|usr/libexec/git-core/git-remote-(http|https|ftp|ftps))
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
 
 RUN dh_testdir
 RUN dh_install
