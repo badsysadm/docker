@@ -1,4 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6f91a6c..40273cc 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,3 +1,4 @@
@@ -6,60 +7,49 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
  # Copyright (C) 2009, 2016 Software Freedom Conservancy
  # Licensed under the same terms as APT; i.e. GPL 2 or later.
  
-@@ -19,3 +20,3 @@
- option(WITH_TESTS "Build tests" ON)
--option(WITH_HEGEL_TESTS "Build Hegel property-based tests (downloads Hegel and libhegel at configure time)" ON)
-+option(WITH_HEGEL_TESTS "Build Hegel property-based tests (downloads Hegel and libhegel at configure time)" OFF)
- option(USE_NLS "Localisation support." ON)
-@@ -42,4 +43,6 @@
+@@ -39,7 +40,9 @@ include(CheckFunctionExists)
+ include(CheckStructHasMember)
  include(GNUInstallDirs)
  include(TestBigEndian)
 +set(CMAKE_FIND_LIBRARY_SUFFIXES ".so" ".a")
  find_package(Threads REQUIRED)
 +set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
  find_package(LFS REQUIRED)
-@@ -265,4 +268,3 @@
+ find_package(Iconv REQUIRED)
+ 
+@@ -255,7 +258,6 @@ add_subdirectory(doc)
+ add_subdirectory(dselect)
+ add_subdirectory(ftparchive)
  add_subdirectory(methods)
 -add_subdirectory(test)
  
  if (USE_NLS)
+ add_subdirectory(po)
 diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
+index 7aaacd9..7a5aff6 100644
 --- a/apt-pkg/CMakeLists.txt
 +++ b/apt-pkg/CMakeLists.txt
-@@ -88,6 +88,10 @@
- # Create the shared library from the object library and set the SONAME
- add_library(apt-pkg SHARED)
- target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
-+set_property(TARGET apt-pkg-object PROPERTY POSITION_INDEPENDENT_CODE ON)
-+add_library(apt-pkg-static STATIC)
-+target_link_libraries(apt-pkg-static PRIVATE apt-pkg-object)
-+set_target_properties(apt-pkg-static PROPERTIES OUTPUT_NAME apt-pkg)
- set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
- set_target_properties(apt-pkg PROPERTIES SOVERSION ${MAJOR})
- target_link_libraries(apt-pkg PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
-@@ -96,3 +100,4 @@
- # Install the library and the header files
- install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+install(TARGETS apt-pkg-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
- install(FILES ${headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/apt-pkg)
+@@ -45,7 +45,8 @@ file(GLOB_RECURSE library "*.cc"  "${CMAKE_CURRENT_BINARY_DIR}/tagfile-keys.cc")
+ file(GLOB_RECURSE headers "*.h")
+ 
+ # Create a library using the C++ files
+-add_library(apt-pkg SHARED ${library})
++add_library(apt-pkg STATIC ${library})
++set_property(TARGET apt-pkg PROPERTY POSITION_INDEPENDENT_CODE ON)
+ # Link the library and set the SONAME
+ target_include_directories(apt-pkg
+                            PRIVATE ${ZLIB_INCLUDE_DIRS}
 diff --git a/apt-private/CMakeLists.txt b/apt-private/CMakeLists.txt
+index 88a8f97..5afa2a5 100644
 --- a/apt-private/CMakeLists.txt
 +++ b/apt-private/CMakeLists.txt
-@@ -17,3 +17,4 @@
- set_target_properties(apt-private-object PROPERTIES CXX_VISIBILITY_PRESET hidden)
-+set_property(TARGET apt-private-object PROPERTY POSITION_INDEPENDENT_CODE ON)
+@@ -9,7 +9,8 @@ file(GLOB_RECURSE library "*.cc")
+ file(GLOB_RECURSE headers "*.h")
  
- # Create the shared library from the object library and set the SONAME
-@@ -20,3 +21,6 @@
- add_library(apt-private SHARED)
- target_link_libraries(apt-private PRIVATE apt-private-object)
+ # Create a library using the C++ files
+-add_library(apt-private SHARED ${library})
++add_library(apt-private STATIC ${library})
++set_property(TARGET apt-private PROPERTY POSITION_INDEPENDENT_CODE ON)
+ 
+ # Link the library and set the SONAME
  target_link_libraries(apt-private PUBLIC apt-pkg)
-+add_library(apt-private-static STATIC)
-+target_link_libraries(apt-private-static PRIVATE apt-private-object apt-pkg-static)
-+set_target_properties(apt-private-static PROPERTIES OUTPUT_NAME apt-private)
-@@ -27,4 +31,5 @@
- install(TARGETS apt-private
-         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-         NAMELINK_SKIP)
-+install(TARGETS apt-private-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
- 
