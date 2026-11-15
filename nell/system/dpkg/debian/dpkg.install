@@ -1,7 +1,6 @@
 usr/bin/dpkg
 usr/bin/dpkg-deb
 usr/bin/dpkg-trigger
-usr/sbin/dpkg-fsys-usrunmess
 usr/share/dpkg/abitable
 usr/share/dpkg/cputable
 usr/share/dpkg/ostable
