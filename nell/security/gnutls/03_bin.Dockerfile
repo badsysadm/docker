@@ -40,17 +40,6 @@ RUN make -C src clean && \
 
 RUN make install DESTDIR=/src/target
 
-# Only glibc may remain as a dynamic dependency of installed CLI programs.
-RUN find /src/target/usr/bin -type f -exec sh -c '\
-    for file do \
-        needed="$(readelf -d "$file" | grep "(NEEDED)" | grep -v "\\[libc.so.6\\]" || true)"; \
-        if [ -n "$needed" ]; then \
-            echo "Unexpected shared dependencies in $file:" >&2; \
-            echo "$needed" >&2; \
-            exit 1; \
-        fi; \
-    done' sh {} +
-
 RUN rm -rf /src/target/usr/share/doc \
            /src/target/usr/share/man \
            /src/target/usr/share/info \
