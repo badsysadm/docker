@@ -1,4 +1,4 @@
-ARG VERSION=1.22.11
+ARG VERSION=1.22.22
 
 FROM oci.badsysadm.local:80/bin/system/dpkg:${VERSION} AS bin_image
 
