@@ -14,7 +14,11 @@ RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
 RUN find /src/debian/tmp -type f -o -type l | \
     sed 's#^/src/debian/tmp/##' | \
-    grep -v -e '^usr/bin/git
+    awk '$0 != "usr/bin/git" && \
+         $0 != "usr/libexec/git-core/git-remote-http" && \
+         $0 != "usr/libexec/git-core/git-remote-https" && \
+         $0 != "usr/libexec/git-core/git-remote-ftp" && \
+         $0 != "usr/libexec/git-core/git-remote-ftps"' | \
     tee /src/debian/git-tools.install
 RUN dh_testdir
 RUN dh_install
