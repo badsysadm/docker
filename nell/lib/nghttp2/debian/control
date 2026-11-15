@@ -1,0 +1,13 @@
+Source: nghttp2
+Section: libs
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ autoconf, automake, libtool, pkg-config
+
+Package: nghttp2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: HTTP/2 library (static and shared)

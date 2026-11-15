@@ -30,8 +30,8 @@ RUN make -j$(nproc) \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
     OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
-    CFLAGS="-O2 -I/usr/local/include" \
-    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections -I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc -Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     LIBS='$(filter-out %.o,$(GITLIBS)) -Wl,-Bstatic $(EXTLIBS) -lzstd -Wl,-Bdynamic'
 
 RUN make install \
@@ -60,8 +60,8 @@ RUN make install \
         -Wl,--end-group -Wl,-Bdynamic -ldl -pthread" \
     OPENSSLDIR=/usr/local \
     ZLIB_PATH=/usr/local \
-    CFLAGS="-O2 -I/usr/local/include" \
-    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc" \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections -I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib64 -L/usr/local/lib -static-libgcc -Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     LIBS='$(filter-out %.o,$(GITLIBS)) -Wl,-Bstatic $(EXTLIBS) -lzstd -Wl,-Bdynamic'
 
 RUN rm -rf \

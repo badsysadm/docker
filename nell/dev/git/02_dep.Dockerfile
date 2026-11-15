@@ -1,12 +1,15 @@
 ARG VERSION=2.56.0
 ARG CURL_VERSION=8.23.0
+ARG LIBSSH2_VERSION=1.11.1
+ARG NGHTTP2_VERSION=1.71.0
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
 
 FROM oci.badsysadm.local:80/src/dev/git:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/net/curl:${CURL_VERSION} AS curl_image
-FROM oci.badsysadm.local:80/dep/net/curl:${CURL_VERSION} AS curl_dep_image
+FROM oci.badsysadm.local:80/bin/lib/libssh2:${LIBSSH2_VERSION} AS libssh2_image
+FROM oci.badsysadm.local:80/bin/lib/nghttp2:${NGHTTP2_VERSION} AS nghttp2_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
@@ -21,8 +24,8 @@ RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="
 COPY --from=curl_image /target/usr/include/curl/ /usr/local/include/curl/
 COPY --from=curl_image /target/usr/lib/libcurl.a /usr/local/lib/libcurl.a
 COPY --from=curl_image /target/usr/bin/curl-config /usr/local/bin/curl-config
-COPY --from=curl_dep_image /usr/local/lib/libssh2.a /usr/local/lib/libssh2.a
-COPY --from=curl_dep_image /usr/local/lib/libnghttp2.a /usr/local/lib/libnghttp2.a
+COPY --from=libssh2_image /target/usr/lib/libssh2.a /usr/local/lib/libssh2.a
+COPY --from=nghttp2_image /target/usr/lib/libnghttp2.a /usr/local/lib/libnghttp2.a
 
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
 COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/local/lib64/libssl.a

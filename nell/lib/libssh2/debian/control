@@ -1,0 +1,13 @@
+Source: libssh2
+Section: libs
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config,
+ cmake, ninja-build, libssl-dev
+
+Package: libssh2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SSH2 client library (static and shared)

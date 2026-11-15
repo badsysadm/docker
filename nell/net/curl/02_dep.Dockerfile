@@ -1,9 +1,13 @@
 ARG VERSION=8.23.0
+ARG LIBSSH2_VERSION=1.11.1
+ARG NGHTTP2_VERSION=1.71.0
 ARG OPENSSL_VERSION=3.6.5
 ARG ZLIB_VERSION=1.3.1
 ARG ZSTD_VERSION=1.5.7
 
 FROM oci.badsysadm.local:80/src/net/curl:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/bin/lib/libssh2:${LIBSSH2_VERSION} AS libssh2_image
+FROM oci.badsysadm.local:80/bin/lib/nghttp2:${NGHTTP2_VERSION} AS nghttp2_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
@@ -27,27 +31,11 @@ COPY --from=zstd_image /target/usr/include/zstd_errors.h /usr/local/include/zstd
 COPY --from=zstd_image /target/usr/include/zdict.h /usr/local/include/zdict.h
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 
+COPY --from=libssh2_image /target/usr/include/libssh2.h /usr/local/include/libssh2.h
+COPY --from=libssh2_image /target/usr/include/libssh2_publickey.h /usr/local/include/libssh2_publickey.h
+COPY --from=libssh2_image /target/usr/lib/libssh2.a /usr/local/lib/libssh2.a
+COPY --from=nghttp2_image /target/usr/include/nghttp2/ /usr/local/include/nghttp2/
+COPY --from=nghttp2_image /target/usr/lib/libnghttp2.a /usr/local/lib/libnghttp2.a
+
 COPY --from=src_image /src/ /src/
 
-RUN cmake -S /src/libssh2 -B /src/libssh2/build -G Ninja \
-    -DCMAKE_INSTALL_PREFIX=/usr/local \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DBUILD_SHARED_LIBS=OFF \
-    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    -DBUILD_TESTING=OFF \
-    -DBUILD_EXAMPLES=OFF \
-    -DCRYPTO_BACKEND=OpenSSL \
-    -DOPENSSL_ROOT_DIR=/usr/local \
-    -DOPENSSL_USE_STATIC_LIBS=TRUE \
-    -DOPENSSL_SSL_LIBRARY=/usr/local/lib64/libssl.a \
-    -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib64/libcrypto.a && \
-    cmake --build /src/libssh2/build -j$(nproc) && \
-    cmake --install /src/libssh2/build
-
-RUN cd /src/nghttp2 && \
-    autoreconf -i && \
-    CFLAGS="-O2 -fPIC" ./configure \
-    --prefix=/usr/local --libdir=/usr/local/lib \
-    --enable-static --disable-shared --disable-app \
-    --disable-hpack-tools --disable-examples --disable-python-bindings && \
-    make -j$(nproc) && make install
