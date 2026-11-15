@@ -24,4 +24,14 @@ Package: apt
 Architecture: amd64
 Static-Built-Using: gcc
 Depends: ${shlibs:Depends}
+Recommends: apt-utils (= ${binary:Version})
 Description: High-level package manager
+
+Package: apt-utils
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: APT package management utilities
+
+Package: libapt-pkg-static
+Architecture: amd64
+Description: Static APT libraries

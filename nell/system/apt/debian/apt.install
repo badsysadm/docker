@@ -1,1 +1,16 @@
-*
+usr/bin/apt
+usr/bin/apt-cache
+usr/bin/apt-cdrom
+usr/bin/apt-config
+usr/bin/apt-get
+usr/bin/apt-mark
+usr/lib/apt/apt-helper
+usr/lib/apt/apt-extracttemplates
+usr/lib/apt/methods
+usr/lib/apt/planners/dump
+usr/lib/apt/solvers/dump
+etc/apt
+usr/share/apt
+usr/share/bash-completion/completions/apt
+usr/share/bash-completion/completions/apt-cache
+usr/share/bash-completion/completions/apt-get
