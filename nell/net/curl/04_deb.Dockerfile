@@ -12,7 +12,6 @@ RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
-RUN rm -rf /src/debian/tmp/usr/include /src/debian/tmp/usr/lib /src/debian/tmp/usr/lib64 /src/debian/tmp/usr/share /src/debian/tmp/usr/bin/curl-config
 RUN dh_testdir
 RUN dh_install
 RUN dh_installdebconf
