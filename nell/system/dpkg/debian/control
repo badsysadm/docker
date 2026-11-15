@@ -66,8 +66,3 @@ Description: Manage dpkg file diversions
 Package: libdpkg-static
 Architecture: amd64
 Description: Static dpkg library
-
-Package: dpkg-split
-Architecture: amd64
-Depends: ${shlibs:Depends}
-Description: Split and join Debian binary packages
