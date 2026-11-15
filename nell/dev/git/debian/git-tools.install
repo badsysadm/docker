@@ -6,10 +6,7 @@ usr/bin/git-upload-archive
 usr/bin/git-upload-pack
 usr/libexec/git-core/git
 usr/libexec/git-core/scalar
-usr/libexec/git-core/git-receive-pack
 usr/libexec/git-core/git-shell
-usr/libexec/git-core/git-upload-archive
-usr/libexec/git-core/git-upload-pack
 usr/libexec/git-core/git-daemon
 usr/libexec/git-core/git-http-backend
 usr/libexec/git-core/git-http-fetch
