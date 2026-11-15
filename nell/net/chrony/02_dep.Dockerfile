@@ -12,10 +12,10 @@ COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
     /usr/include/gnutls/
 
 COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
-    /target/usr/lib/x86_64-linux-gnu/libgnutls.a \
-    /usr/lib/x86_64-linux-gnu/libgnutls.a
+    /target/usr/lib/libgnutls.a \
+    /usr/lib/libgnutls.a
 COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
-    /target/usr/lib/x86_64-linux-gnu/pkgconfig/gnutls.pc \
-    /usr/lib/x86_64-linux-gnu/pkgconfig/gnutls.pc
+    /target/usr/lib/pkgconfig/gnutls.pc \
+    /usr/lib/pkgconfig/gnutls.pc
 
 COPY --from=src_image /src/ /src/

@@ -15,7 +15,7 @@ RUN find . -type f \( \
 
 RUN ./configure \
     --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --enable-static \
     --enable-shared \
     --without-p11-kit \
