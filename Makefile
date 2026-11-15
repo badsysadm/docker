@@ -55,7 +55,7 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl libmnl libgpg-error libgcrypt libassuan libksba npth libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 bzip2 libmd ncurses glib zlib libunwind: section = lib
+libnftnl libmnl libgpg-error libgcrypt libassuan libksba npth libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 libssh2 nghttp2 bzip2 libmd ncurses glib zlib libunwind: section = lib
 libnftnl: version ?= 1.3.2
 libmnl: version ?= 1.0.5
 libgpg-error: version ?= 1.61
@@ -75,6 +75,8 @@ libnet: version ?= 1.3
 libjansson: version ?= 2.14.1
 libyaml: version ?= 0.2.5
 libpcre2: version ?= 10.49
+libssh2: version ?= 1.11.1
+nghttp2: version ?= 1.71.0
 bzip2: version ?= 1.0.8
 libmd: version ?= 1.3.0
 ncurses: version ?= 6.6

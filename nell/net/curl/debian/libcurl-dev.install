@@ -1,0 +1,4 @@
+usr/include/curl
+usr/bin/curl-config
+usr/lib/pkgconfig/libcurl.pc
+usr/lib/cmake/CURL

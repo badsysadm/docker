@@ -1,0 +1,5 @@
+curl (@VERSION@-1) unstable; urgency=medium
+
+  * Package NELL curl and wcurl CLI binaries for Debian.
+
+ -- badsysadm <me@badsysadm.com>  Sun, 15 Nov 2026 00:00:00 +0000

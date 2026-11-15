@@ -9,6 +9,9 @@ RUN cmake -S . -B build -G Ninja \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_PREFIX_PATH=/usr/local \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_C_FLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_STATIC_LIBS=ON \
     -DBUILD_STATIC_CURL=ON \
@@ -32,7 +35,7 @@ RUN cmake -S . -B build -G Ninja \
     -DENABLE_CURL_MANUAL=OFF \
     -DBUILD_LIBCURL_DOCS=OFF \
     -DBUILD_MISC_DOCS=OFF \
-    -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc" \
+    -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     -DCMAKE_C_STANDARD_LIBRARIES=/usr/local/lib/libzstd.a
 
 RUN cmake --build build -j$(nproc)
