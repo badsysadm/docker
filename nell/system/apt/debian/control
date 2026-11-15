@@ -11,13 +11,7 @@ Build-Depends:
  gettext,
  texinfo,
  triehash,
- liblzma-dev,
- libzstd-dev,
- libbz2-dev,
- liblz4-dev,
- zlib1g-dev,
  libgcrypt20-dev,
- libxxhash-dev,
  libdb-dev
 
 Package: apt

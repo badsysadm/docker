@@ -6,13 +6,6 @@ FROM dep_image AS build
 ARG VERSION
 ENV SOURCE_DATE_EPOCH=1700000000
 
-WORKDIR /src/openssl
-
-RUN ./config no-shared no-tests --prefix=/usr/local
-RUN make -j$(nproc)
-RUN make build_libs
-RUN make install_sw
-
 WORKDIR /src/apt
 
 COPY debian/patches /src/patches/
@@ -28,8 +21,10 @@ RUN cmake .. \
   -DWITH_DOC=OFF \
   -DOPENSSL_ROOT_DIR=/usr/local \
   -DOPENSSL_USE_STATIC_LIBS=TRUE \
-  -DCMAKE_CXX_FLAGS="-std=c++23" \
-  -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -Wl,-Bstatic -llzma -lzstd -lbz2 -llz4 -lz -lxxhash -ldb -lgcrypt /usr/local/lib64/libcrypto.a -ldl -pthread -Wl,-Bdynamic"
+  -DOPENSSL_SSL_LIBRARY=/usr/local/lib64/libssl.a \
+  -DOPENSSL_CRYPTO_LIBRARY=/usr/local/lib64/libcrypto.a \
+  -DCMAKE_CXX_FLAGS="-std=c++23 -I/usr/local/include" \
+  -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--start-group /usr/local/lib/liblzma.a /usr/local/lib/libzstd.a /usr/local/lib/libbz2.a /usr/local/lib/liblz4.a /usr/local/lib/libz.a /usr/local/lib/libxxhash.a -ldb -lgcrypt /usr/local/lib64/libcrypto.a -Wl,--end-group -ldl -pthread -Wl,-Bdynamic"
 
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
