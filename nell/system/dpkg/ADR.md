@@ -5,7 +5,7 @@
 
 ## Решение
 - Собирать dpkg из upstream Git-тега и применять локальный PAX-патч.
-- Собирать `libdpkg.a` с `-fPIC`; разделяемую `libdpkg.so` не выпускать. В upstream dpkg 1.22.11 отсутствует стабильный ABI `libdpkg`: `configure.ac` намеренно использует `LT_INIT([disable-shared])`, а `DPKG_BUILD_SHARED_LIBS` запрещает `--enable-shared` вне режима `AUTHOR_TESTING`. Режим тестирования авторов не является обязательством совместимости ABI, поэтому для `libdpkg` принимается исключение из общего требования NELL о выпуске `.a` и `.so`.
+- Собирать `libdpkg.a` с `-fPIC`; разделяемую `libdpkg.so` не выпускать. В upstream dpkg 1.22.22 отсутствует стабильный ABI `libdpkg`: `configure.ac` намеренно использует `LT_INIT([disable-shared])`, а `DPKG_BUILD_SHARED_LIBS` запрещает `--enable-shared` вне режима `AUTHOR_TESTING`. Режим тестирования авторов не является обязательством совместимости ABI, поэтому для `libdpkg` принимается исключение из общего требования NELL о выпуске `.a` и `.so`.
 - Отключать dselect, start-stop-daemon, developer docs и NLS.
 - `update-alternatives` оставлять включённым.
 - Инструменты `dpkg-dev` на Perl упаковывать в самостоятельные исполняемые файлы через PAR::Packer (`pp -B`) по образцу профилей `equivs` и `lintian`; в архив включать модули `Dpkg::*` и динамически загружаемые модули, использовать фиксированное время и настройки хеширования для воспроизводимости.
