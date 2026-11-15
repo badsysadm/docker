@@ -10,6 +10,7 @@ Build-Depends:
  libcrypt-dev,
  libgdbm-dev,
  libgmp-dev,
+ libidn2-dev,
  libgsasl-dev,
  libltdl-dev,
  libncurses-dev,

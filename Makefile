@@ -74,7 +74,6 @@ bzip2: version ?= 1.0.8
 libmd: version ?= 1.3.0
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
-gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 libunwind: version ?= 1.8.3
 zstd: version ?= 1.5.7
@@ -143,6 +142,7 @@ acl: version ?= 2.4.0
 
 gnupg openssl krb5 gnutls aide acl polkit apparmor cracklib vault ots trivy suricata cosign ca-certificates audit: section = security
 gnupg: version ?= 2.4.7
+gnutls: version ?= 3.8.13
 openssl: version ?= 3.6.5
 ca-certificates: version ?= 2026-11-05
 krb5: version ?= 1.22.2
