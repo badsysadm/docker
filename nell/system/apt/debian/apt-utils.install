@@ -1,2 +1,5 @@
 usr/bin/apt-sortpkgs
 usr/lib/apt/planners/apt
+usr/lib/apt/apt-extracttemplates
+usr/lib/apt/solvers/apt
+usr/lib/apt/solvers/solver3
