@@ -33,7 +33,7 @@ COPY --from=libassuan_image /target/usr/include/ /usr/include/
 COPY --from=libassuan_image /target/usr/lib/pkgconfig/libassuan.pc /usr/lib/pkgconfig/libassuan.pc
 COPY --from=libksba_image /target/usr/lib/libksba.a /usr/lib/libksba.a
 COPY --from=libksba_image /target/usr/include/ /usr/include/
-COPY --from=libksba_image /target/usr/lib/pkgconfig/libksba.pc /usr/lib/pkgconfig/libksba.pc
+COPY --from=libksba_image /target/usr/lib/pkgconfig/ksba.pc /usr/lib/pkgconfig/ksba.pc
 COPY --from=npth_image /target/usr/lib/libnpth.a /usr/lib/libnpth.a
 COPY --from=npth_image /target/usr/include/ /usr/include/
 
