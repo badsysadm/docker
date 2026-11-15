@@ -45,21 +45,25 @@ diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 diff --git a/apt-private/CMakeLists.txt b/apt-private/CMakeLists.txt
 --- a/apt-private/CMakeLists.txt
 +++ b/apt-private/CMakeLists.txt
-@@ -17,3 +17,4 @@
+@@ -17,16 +17,21 @@
  set_target_properties(apt-private-object PROPERTIES CXX_VISIBILITY_PRESET hidden)
 +set_property(TARGET apt-private-object PROPERTY POSITION_INDEPENDENT_CODE ON)
  
  # Create the shared library from the object library and set the SONAME
-@@ -20,3 +21,6 @@
  add_library(apt-private SHARED)
  target_link_libraries(apt-private PRIVATE apt-private-object)
  target_link_libraries(apt-private PUBLIC apt-pkg)
 +add_library(apt-private-static STATIC)
 +target_link_libraries(apt-private-static PRIVATE apt-private-object apt-pkg-static)
 +set_target_properties(apt-private-static PROPERTIES OUTPUT_NAME apt-private)
-@@ -27,4 +31,5 @@
+ set_target_properties(apt-private PROPERTIES VERSION ${MAJOR}.${MINOR})
+ set_target_properties(apt-private PROPERTIES SOVERSION ${MAJOR})
+ add_version_script(apt-private)
+ 
+ # Install the library and the headers
  install(TARGETS apt-private
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          NAMELINK_SKIP)
 +install(TARGETS apt-private-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
  
+ flatify(${PROJECT_BINARY_DIR}/include/apt-private/ "${headers}")
