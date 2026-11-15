@@ -1,47 +1,10 @@
 ARG VERSION=2.4.7
 
-FROM oci.badsysadm.local:80/dep/security/gnupg:${VERSION} AS dep_image
-
-FROM dep_image AS build
+FROM oci.badsysadm.local:80/dep/security/gnupg:${VERSION} AS build
 ARG VERSION
 
-WORKDIR /src/libgpg-error
-RUN ./autogen.sh
-RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
-RUN make
-RUN make install
-
-WORKDIR /src/libgcrypt
-RUN ./autogen.sh
-RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
-RUN make
-RUN make install
-
-WORKDIR /src/libassuan
-RUN ./autogen.sh
-RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
-RUN make
-RUN make install
-
-WORKDIR /src/libksba
-RUN ./autogen.sh
-RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode --with-libgpg-error-prefix=/usr/local
-RUN make
-RUN make install
-
-WORKDIR /src/npth
-RUN ./autogen.sh
-RUN ./configure --prefix=/usr/local --enable-static --disable-shared --enable-maintainer-mode
-RUN make
-RUN make install
-
 WORKDIR /src/gnupg
-
-RUN sed -i 's/ZLIBS="-lz"/ZLIBS="\/usr\/lib\/x86_64-linux-gnu\/libz.a"/g' configure.ac
-RUN sed -i 's/ZLIBS="$ZLIBS -lbz2"/ZLIBS="$ZLIBS \/usr\/lib\/x86_64-linux-gnu\/libbz2.a"/g' configure.ac
-
 RUN ./autogen.sh
-
 RUN ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -50,21 +13,24 @@ RUN ./configure \
     --disable-scdaemon \
     --disable-gpgsm \
     --disable-dirmngr \
-    --enable-maintainer-mode \
-    --with-libgpg-error-prefix=/usr/local \
-    --with-libgcrypt-prefix=/usr/local \
-    --with-libassuan-prefix=/usr/local \
-    --with-libksba-prefix=/usr/local \
-    --with-npth-prefix=/usr/local \
-    CFLAGS="-O2" \
-    LDFLAGS="-static-libgcc -static-libstdc++"
+    --with-libgpg-error-prefix=/usr \
+    --with-libgcrypt-prefix=/usr \
+    --with-libassuan-prefix=/usr \
+    --with-libksba-prefix=/usr \
+    --with-npth-prefix=/usr \
+    CFLAGS="-O2 -ffunction-sections -fdata-sections" \
+    LDFLAGS="-static-libgcc -Wl,--gc-sections -Wl,-Bstatic" \
+    LIBS="-Wl,-Bdynamic -ldl -lm -pthread"
 
-RUN make
+RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
-
-RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc /src/target/usr/share/gnupg
+RUN rm -rf /src/target/usr/share/man \
+           /src/target/usr/share/info \
+           /src/target/usr/share/doc \
+           /src/target/usr/share/gnupg
 
 FROM scratch AS bundle
+ARG VERSION
 LABEL org.opencontainers.image.title="gnupg"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"

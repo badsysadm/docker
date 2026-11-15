@@ -1,0 +1,15 @@
+ARG VERSION=1.11.0
+ARG LIBGPG_ERROR_VERSION=1.51
+
+FROM oci.badsysadm.local:80/src/lib/libgcrypt:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/bin/lib/libgpg-error:${LIBGPG_ERROR_VERSION} AS libgpg_error_image
+FROM oci.badsysadm.local:80/get/dep:latest AS build
+
+COPY debian ./debian/
+RUN apt-get -qq update
+RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
+
+COPY --from=libgpg_error_image /target/usr/ /usr/
+RUN rm -f /usr/lib/libgpg-error.so*
+
+COPY --from=src_image /src/ /src/
