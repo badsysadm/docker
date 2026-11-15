@@ -1,0 +1,4 @@
+usr/bin/gpg-agent usr/bin/
+usr/libexec/gpg-check-pattern usr/lib/gnupg/
+usr/libexec/gpg-preset-passphrase usr/lib/gnupg/
+usr/libexec/gpg-protect-tool usr/lib/gnupg/

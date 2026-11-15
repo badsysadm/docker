@@ -1,0 +1,18 @@
+Source: npth
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ gettext,
+ autopoint,
+ pkg-config
+
+Package: npth
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: npth static and shared libraries

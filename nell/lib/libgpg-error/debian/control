@@ -1,0 +1,18 @@
+Source: libgpg-error
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ gettext,
+ autopoint,
+ pkg-config
+
+Package: libgpg-error
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: libgpg-error static and shared libraries

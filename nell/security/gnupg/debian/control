@@ -1,4 +1,4 @@
-Source: gnupg
+Source: gnupg2
 Section: security
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
@@ -7,21 +7,58 @@ Build-Depends:
  build-essential,
  pkg-config,
  gettext,
- texinfo,
  autoconf,
  automake,
  autopoint,
  libtool,
- bison,
- fig2dev,
- imagemagick,
- librsvg2-bin,
- bzip2,
- zlib1g-dev,
- libbz2-dev
+ bison
+
+Package: gpgv
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNU Privacy Guard signature verification tool
+
+Package: gpg
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: gnupg (= ${binary:Version})
+Description: GNU Privacy Guard public key operations
+
+Package: gpg-agent
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, gpgconf (= ${binary:Version}), pinentry-curses | pinentry
+Description: GNU Privacy Guard cryptographic agent
+
+Package: gpgconf
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNU Privacy Guard core configuration utilities
+
+Package: gnupg-utils
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNU Privacy Guard utility programs
+
+Package: gpg-wks-client
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, gpg (= ${binary:Version})
+Description: GNU Privacy Guard Web Key Service client
+
+Package: gpg-wks-server
+Section: utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNU Privacy Guard Web Key Service server
 
 Package: gnupg
-Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
-Description: Cryptographic software suite
+Section: utils
+Architecture: all
+Depends: ${misc:Depends}, gpg (= ${binary:Version}), gpg-agent (= ${binary:Version}), gpgconf (= ${binary:Version}), gpgv (= ${binary:Version})
+Recommends: gnupg-utils (= ${binary:Version}), gpg-wks-client (= ${binary:Version}), gpg-wks-server (= ${binary:Version})
+Description: GNU Privacy Guard complete available tool suite

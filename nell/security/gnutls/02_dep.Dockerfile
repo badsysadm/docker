@@ -1,6 +1,6 @@
 ARG VERSION=3.8.13
 
-FROM oci.badsysadm.local:80/src/lib/gnutls:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/src/security/gnutls:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
