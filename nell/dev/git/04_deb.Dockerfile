@@ -14,7 +14,336 @@ RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
 RUN find /src/debian/tmp -type f -o -type l | \
     sed 's#^/src/debian/tmp/##' | \
-    awk '$0 != "usr/bin/git" && $0 !~ /^usr\\/libexec\\/git-core\\/git-remote-(http|https|ftp|ftps)$/' | \
+    grep -v -e '^usr/bin/git
+    tee /src/debian/git-tools.install
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
+
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+        -e '^usr/libexec/git-core/git-remote-http
+    tee /src/debian/git-tools.install
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
+
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+        -e '^usr/libexec/git-core/git-remote-https
+    tee /src/debian/git-tools.install
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
+
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+        -e '^usr/libexec/git-core/git-remote-ftp
+    tee /src/debian/git-tools.install
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
+
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+        -e '^usr/libexec/git-core/git-remote-ftps
+    tee /src/debian/git-tools.install
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ \
+    > /src/debian/git-tools.install
+
+RUN dh_testdir
+RUN dh_install
+RUN dh_installdebconf
+RUN dh_installdeb
+RUN dh_installdirs
+RUN dh_installlogcheck
+RUN dh_installlogrotate
+RUN dh_installmodules
+RUN dh_installpam
+RUN dh_installsystemd
+RUN dh_installsystemduser
+RUN dh_installsysusers
+RUN dh_installtmpfiles
+RUN dh_installudev
+RUN dh_link
+RUN dh_strip
+RUN dh_fixperms
+RUN dh_missing
+RUN dh_strip_nondeterminism
+RUN dh_makeshlibs
+RUN dh_shlibdeps
+RUN dh_perl
+RUN dh_ucf
+RUN dh_md5sums
+RUN dh_gencontrol
+RUN dh_builddeb --destdir=/target -- -Zxz -z9
+
+FROM scratch
+COPY --from=build /target/ /deb
+COPY --from=build /src/debian/changelog /deb/changelog
+ | \
     tee /src/debian/git-tools.install
 RUN dh_testdir
 RUN dh_install
