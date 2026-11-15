@@ -13,7 +13,7 @@ RUN find . -type f \( \
         -o -name "config.h.in" \
     \) -exec touch {} +
 
-RUN ./configure \
+RUN CFLAGS="-O2 -fPIC" ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
     --enable-static \
