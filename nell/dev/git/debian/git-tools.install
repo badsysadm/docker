@@ -1,0 +1,4 @@
+usr/bin/git-* usr/bin/
+usr/bin/scalar usr/bin/
+usr/libexec/git-core usr/libexec/
+usr/share/git-core usr/share/

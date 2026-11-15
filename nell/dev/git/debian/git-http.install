@@ -1,4 +1,4 @@
-usr/libexec/git-core/git-remote-http usr/libexec/git-core/
-usr/libexec/git-core/git-remote-https usr/libexec/git-core/
-usr/libexec/git-core/git-remote-ftp usr/libexec/git-core/
-usr/libexec/git-core/git-remote-ftps usr/libexec/git-core/
+git-http/usr/libexec/git-core/git-remote-http usr/libexec/git-core/
+git-http/usr/libexec/git-core/git-remote-https usr/libexec/git-core/
+git-http/usr/libexec/git-core/git-remote-ftp usr/libexec/git-core/
+git-http/usr/libexec/git-core/git-remote-ftps usr/libexec/git-core/
