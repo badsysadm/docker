@@ -1,0 +1,5 @@
+umoci (@VERSION@-1) unstable; urgency=medium
+
+  * Package NELL umoci binary for Debian.
+
+ -- badsysadm <me@badsysadm.com>  Sun, 15 Nov 2026 00:00:00 +0000
