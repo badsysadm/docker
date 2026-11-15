@@ -1,4 +1,5 @@
 usr/bin/scalar
+usr/bin/git-cvsserver
 usr/bin/git-receive-pack
 usr/bin/git-shell
 usr/bin/git-upload-archive
