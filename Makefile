@@ -55,7 +55,7 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl libmnl libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 bzip2 libmd ncurses glib gnutls zlib libunwind: section = lib
+libnftnl libmnl libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 bzip2 libmd ncurses glib zlib libunwind: section = lib
 libnftnl: version ?= 1.3.2
 libmnl: version ?= 1.0.5
 libnfnetlink: version ?= 1.0.2
@@ -141,7 +141,7 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy suricata cosign ca-certificates audit: section = security
+gnupg openssl krb5 gnutls aide acl polkit apparmor cracklib vault ots trivy suricata cosign ca-certificates audit: section = security
 gnupg: version ?= 2.4.7
 openssl: version ?= 3.6.5
 ca-certificates: version ?= 2026-11-05

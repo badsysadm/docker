@@ -20,4 +20,15 @@ COPY --from=oci.badsysadm.local:80/bin/security/openssl:3.6.5 \
     /target/usr/include/openssl \
     /usr/include/openssl
 
+COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
+    /target/usr/include/gnutls/ \
+    /usr/include/gnutls/
+COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
+    /target/usr/lib/x86_64-linux-gnu/libgnutls.a \
+    /usr/lib/x86_64-linux-gnu/libgnutls.a
+COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
+    /target/usr/lib/x86_64-linux-gnu/pkgconfig/gnutls.pc \
+    /usr/lib/x86_64-linux-gnu/pkgconfig/gnutls.pc
+
 COPY --from=src_image /src/ /src
+RUN patch -d /src/systemd -p1 -i /debian/patches/_gnutls-static.patch

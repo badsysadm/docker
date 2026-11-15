@@ -1,6 +1,6 @@
 ARG VERSION=3.8.13
 
-FROM oci.badsysadm.local:80/dep/lib/gnutls:${VERSION} AS dep_image
+FROM oci.badsysadm.local:80/dep/security/gnutls:${VERSION} AS dep_image
 FROM dep_image AS build
 ARG VERSION
 

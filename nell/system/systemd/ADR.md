@@ -8,7 +8,8 @@
 - Не устанавливать тесты; man и HTML документацию отключать.
 - Сохранять PAM, NSS, resolver, audit, SELinux, AppArmor, seccomp, cryptsetup, TPM2, networkd, resolved, logind и остальные явно включённые системные интеграции.
 - Полную статическую сборку не использовать, так как systemd зависит от PAM, NSS, resolver и других динамических системных интерфейсов.
-- Собственный OpenSSL использовать из `bin/security/openssl:3.6.5`; Debian `libssl-dev` не использовать.
+- Собственный OpenSSL использовать из NELL-профиля `security/openssl`; Debian `libssl-dev` не использовать.
+- GnuTLS использовать из NELL-профиля `security/gnutls` и линковать статически.
 - kmod использовать из Debian build-зависимости `libkmod-dev`, как в исходной рабочей сборке.
 - `libsystemd` собирать статически с PIC, сохраняя существующие shared-link режимы для компонентов, явно заданные исходным профилем.
 - После установки удалять man, info и doc из конечного bundle.

@@ -1,0 +1,8 @@
+diff --git a/meson.build b/meson.build
+--- a/meson.build
++++ b/meson.build
+@@ -1215,3 +1215,4 @@
+ libgnutls = dependency('gnutls',
+                        version : '>= 3.1.4',
++                       static : true,
+                        required : get_option('gnutls'))
