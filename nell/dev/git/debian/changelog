@@ -1,4 +1,4 @@
-git (@VERSION@-1) unstable; urgency=medium
+git (1:@VERSION@-1) unstable; urgency=medium
 
   * Split NELL Git into git, git-http and git-tools Debian packages.
 
