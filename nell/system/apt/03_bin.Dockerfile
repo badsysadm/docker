@@ -1,4 +1,4 @@
-ARG VERSION=3.3.3
+ARG VERSION=3.3.7
 
 FROM oci.badsysadm.local:80/dep/system/apt:${VERSION} AS dep_image
 
