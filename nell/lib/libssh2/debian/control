@@ -5,9 +5,11 @@ Build-Depends:
  debhelper-compat (= 13),
  build-essential,
  pkg-config,
- cmake, ninja-build, libssl-dev
+ cmake,
+ ninja-build
 
 Package: libssh2
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Static-Built-Using: openssl (= 3.6.5)
 Description: SSH2 client library (static and shared)
