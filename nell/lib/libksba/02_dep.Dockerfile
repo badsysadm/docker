@@ -9,7 +9,9 @@ COPY debian ./debian/
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
-COPY --from=libgpg_error_image /target/usr/ /usr/
-RUN rm -f /usr/lib/libgpg-error.so*
+COPY --from=libgpg_error_image /target/usr/lib/libgpg-error.a /usr/lib/libgpg-error.a
+COPY --from=libgpg_error_image /target/usr/include/ /usr/include/
+COPY --from=libgpg_error_image /target/usr/lib/pkgconfig/gpg-error.pc /usr/lib/pkgconfig/gpg-error.pc
+COPY --from=libgpg_error_image /target/usr/bin/gpgrt-config /usr/bin/gpgrt-config
 
 COPY --from=src_image /src/ /src/

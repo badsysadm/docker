@@ -21,11 +21,21 @@ COPY debian ./debian/
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
-COPY --from=libgpg_error_image /target/usr/ /usr/
-COPY --from=libgcrypt_image /target/usr/ /usr/
-COPY --from=libassuan_image /target/usr/ /usr/
-COPY --from=libksba_image /target/usr/ /usr/
-COPY --from=npth_image /target/usr/ /usr/
+COPY --from=libgpg_error_image /target/usr/lib/libgpg-error.a /usr/lib/libgpg-error.a
+COPY --from=libgpg_error_image /target/usr/include/ /usr/include/
+COPY --from=libgpg_error_image /target/usr/lib/pkgconfig/gpg-error.pc /usr/lib/pkgconfig/gpg-error.pc
+COPY --from=libgpg_error_image /target/usr/bin/gpgrt-config /usr/bin/gpgrt-config
+COPY --from=libgcrypt_image /target/usr/lib/libgcrypt.a /usr/lib/libgcrypt.a
+COPY --from=libgcrypt_image /target/usr/include/ /usr/include/
+COPY --from=libgcrypt_image /target/usr/lib/pkgconfig/libgcrypt.pc /usr/lib/pkgconfig/libgcrypt.pc
+COPY --from=libassuan_image /target/usr/lib/libassuan.a /usr/lib/libassuan.a
+COPY --from=libassuan_image /target/usr/include/ /usr/include/
+COPY --from=libassuan_image /target/usr/lib/pkgconfig/libassuan.pc /usr/lib/pkgconfig/libassuan.pc
+COPY --from=libksba_image /target/usr/lib/libksba.a /usr/lib/libksba.a
+COPY --from=libksba_image /target/usr/include/ /usr/include/
+COPY --from=libksba_image /target/usr/lib/pkgconfig/libksba.pc /usr/lib/pkgconfig/libksba.pc
+COPY --from=npth_image /target/usr/lib/libnpth.a /usr/lib/libnpth.a
+COPY --from=npth_image /target/usr/include/ /usr/include/
 
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/lib/libz.a
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/include/zlib.h
