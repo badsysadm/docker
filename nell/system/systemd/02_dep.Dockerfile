@@ -31,4 +31,4 @@ COPY --from=oci.badsysadm.local:80/bin/security/gnutls:3.8.13 \
     /usr/lib/x86_64-linux-gnu/pkgconfig/gnutls.pc
 
 COPY --from=src_image /src/ /src
-RUN patch -d /src/systemd -p1 -i debian/patches/_gnutls-static.patch
+RUN patch -d /src/systemd -p1 -i "$(pwd)/debian/patches/_gnutls-static.patch"
