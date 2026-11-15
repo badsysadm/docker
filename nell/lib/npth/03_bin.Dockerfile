@@ -11,6 +11,7 @@ RUN ./configure \
     --enable-static \
     --enable-shared \
     --with-pic \
+    --disable-tests \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-Wl,--gc-sections -Wl,-z,relro,-z,now"
 
