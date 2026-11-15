@@ -26,7 +26,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 --- a/apt-pkg/CMakeLists.txt
 +++ b/apt-pkg/CMakeLists.txt
-@@ -88,6 +88,11 @@
+@@ -88,6 +88,10 @@
  # Create the shared library from the object library and set the SONAME
  add_library(apt-pkg SHARED)
  target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
@@ -37,7 +37,7 @@ diff --git a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
  set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
  set_target_properties(apt-pkg PROPERTIES SOVERSION ${MAJOR})
  target_link_libraries(apt-pkg PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
-@@ -96,3 +101,4 @@
+@@ -96,3 +100,4 @@
  # Install the library and the header files
  install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 +install(TARGETS apt-pkg-static ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
