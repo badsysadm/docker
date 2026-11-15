@@ -1,4 +1,4 @@
-trivy (0.76.2-1) unstable; urgency=medium
+trivy (@VERSION@-1) unstable; urgency=medium
 
   * Initial packaging of Trivy.
 

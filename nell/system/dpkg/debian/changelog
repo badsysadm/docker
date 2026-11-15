@@ -1,4 +1,4 @@
-dpkg (1.22.11-1) unstable; urgency=medium
+dpkg (@VERSION@-1) unstable; urgency=medium
 
   * Initial NELL packaging of dpkg.
 

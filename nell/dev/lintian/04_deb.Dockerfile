@@ -8,6 +8,7 @@ ARG VERSION
 WORKDIR /src
 RUN mkdir -p /target
 COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 RUN dh_prep
 COPY --from=bin_image /target/ /src/debian/tmp/
 RUN dh_testdir

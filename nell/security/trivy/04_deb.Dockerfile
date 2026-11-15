@@ -10,6 +10,7 @@ ARG VERSION
 WORKDIR /src
 RUN mkdir -p /target
 COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 COPY --from=cve_image /deb/ /tmp/dpkg-cvecheck/
 RUN apt-get -qq update && \
     apt-get -y -qq install /tmp/dpkg-cvecheck/dpkg-cvecheck_*.deb
