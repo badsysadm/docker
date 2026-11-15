@@ -11,8 +11,10 @@ FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_i
 FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
 FROM oci.badsysadm.local:80/bin/utils/zstd:${ZSTD_VERSION} AS zstd_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
+ARG VERSION
 
 COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
