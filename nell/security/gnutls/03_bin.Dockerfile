@@ -30,7 +30,26 @@ RUN ./configure \
     LDFLAGS="-Wl,--gc-sections"
 
 RUN make -j$(nproc)
+
+# Re-link CLI programs against the static libtool archives while preserving
+# both libgnutls.a and libgnutls.so for external consumers.
+RUN make -C src clean && \
+    make -j$(nproc) -C src \
+        LDFLAGS="-static-libtool-libs -static-libgcc -Wl,--gc-sections -Wl,-Bstatic" \
+        LIBS="-Wl,-Bstatic $(sed -n 's/^LIBS = //p' src/Makefile) -Wl,-Bdynamic"
+
 RUN make install DESTDIR=/src/target
+
+# Only glibc may remain as a dynamic dependency of installed CLI programs.
+RUN find /src/target/usr/bin -type f -exec sh -c '\
+    for file do \
+        needed="$(readelf -d "$file" | grep "(NEEDED)" | grep -v "\\[libc.so.6\\]" || true)"; \
+        if [ -n "$needed" ]; then \
+            echo "Unexpected shared dependencies in $file:" >&2; \
+            echo "$needed" >&2; \
+            exit 1; \
+        fi; \
+    done' sh {} +
 
 RUN rm -rf /src/target/usr/share/doc \
            /src/target/usr/share/man \
