@@ -1,0 +1,14 @@
+Source: checksec
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git
+
+Package: checksec
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Executable hardening and security property checker

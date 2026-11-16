@@ -1,0 +1,20 @@
+Source: libksba
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ gettext,
+ autopoint,
+ pkg-config,
+ bison
+
+Package: libksba
+Architecture: amd64
+Static-Built-Using: libgpg-error (= 1.61)
+Depends: ${shlibs:Depends}
+Description: libksba static and shared libraries

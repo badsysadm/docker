@@ -1,0 +1,15 @@
+Source: libmd
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ pkg-config
+
+Package: libmd
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: BSD message digest library

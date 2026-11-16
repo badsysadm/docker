@@ -1,0 +1,2 @@
+usr/bin/trivy usr/bin/
+usr/share/vex/trivy.vex.json usr/share/vex/

@@ -1,0 +1,19 @@
+Source: libgcrypt
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ gettext,
+ autopoint,
+ pkg-config
+
+Package: libgcrypt
+Architecture: amd64
+Static-Built-Using: libgpg-error (= 1.51)
+Depends: ${shlibs:Depends}
+Description: libgcrypt static and shared libraries

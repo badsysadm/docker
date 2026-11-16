@@ -16,18 +16,14 @@ RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
 COPY --from=ncurses_image /target/usr/include/ /usr/local/include/
-COPY --from=ncurses_image /target/lib/x86_64-linux-gnu/ /usr/local/lib/
+COPY --from=ncurses_image /target/usr/lib/ /usr/local/lib/
 
-RUN cp /usr/lib/x86_64-linux-gnu/libcap.a \
-       /usr/lib/x86_64-linux-gnu/libhwloc.a \
-       /usr/lib/x86_64-linux-gnu/liblzma.a \
-       /usr/lib/x86_64-linux-gnu/libxml2.a \
-       /usr/lib/x86_64-linux-gnu/libnuma.a \
-       /usr/lib/x86_64-linux-gnu/libltdl.a \
-       /usr/local/lib/
+RUN for lib in libcap.a libhwloc.a liblzma.a libxml2.a libnuma.a libltdl.a; do \
+        install -D "/usr/lib/x86_64-linux-gnu/$lib" "/usr/local/lib/$lib" || exit 1; \
+    done
 
 COPY --from=libunwind_image /target/usr/include/ /usr/local/include/
-COPY --from=libunwind_image /target/usr/lib/x86_64-linux-gnu/ /usr/local/lib/
+COPY --from=libunwind_image /target/usr/lib/ /usr/local/lib/
 
 COPY --from=systemd_image /target/usr/lib/x86_64-linux-gnu/libudev.a /usr/local/lib/libudev.a
 

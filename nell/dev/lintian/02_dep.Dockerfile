@@ -1,0 +1,16 @@
+ARG VERSION=2.142.0
+
+FROM oci.badsysadm.local:80/src/dev/lintian:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/get/dep:latest AS build
+ARG VERSION
+
+COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
+RUN apt-get -qq update
+RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
+
+COPY --from=src_image /src/ /src/
+
+# Vendor the upstream Perl module; the Trixie package is older than Lintian requires.
+RUN mkdir -p /src/vendor/perl/Debian && \
+    cp /src/distro-info/perl/Debian/DistroInfo.pm /src/vendor/perl/Debian/DistroInfo.pm

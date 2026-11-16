@@ -1,0 +1,11 @@
+Source: liblz4
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential
+
+Package: liblz4
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: LZ4 lossless compression library

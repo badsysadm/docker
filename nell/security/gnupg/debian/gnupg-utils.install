@@ -1,0 +1,12 @@
+usr/bin/gpg-mail-tube usr/bin/
+usr/bin/gpgparsemail usr/bin/
+usr/bin/gpgscm usr/bin/
+usr/bin/gpgsplit usr/bin/
+usr/bin/gpgtar usr/bin/
+usr/bin/kbxutil usr/bin/
+usr/bin/watchgnupg usr/bin/
+usr/bin/gpg-card usr/bin/
+usr/libexec/gpg-auth usr/lib/gnupg/
+usr/libexec/gpg-pair-tool usr/lib/gnupg/
+usr/sbin/addgnupghome usr/sbin/
+usr/sbin/applygnupgdefaults usr/sbin/

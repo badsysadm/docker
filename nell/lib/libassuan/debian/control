@@ -1,0 +1,19 @@
+Source: libassuan
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ git,
+ build-essential,
+ autoconf,
+ automake,
+ libtool,
+ gettext,
+ autopoint,
+ pkg-config
+
+Package: libassuan
+Architecture: amd64
+Static-Built-Using: libgpg-error (= 1.61)
+Depends: ${shlibs:Depends}
+Description: libassuan static and shared libraries

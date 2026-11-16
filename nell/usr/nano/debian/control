@@ -6,11 +6,10 @@ Build-Depends:
  build-essential,
  ca-certificates,
  wget,
- xz-utils,
- pkg-config,
- libncurses-dev
+ pkg-config
 
 Package: nano
 Architecture: amd64
+Static-Built-Using: ncurses (= 6.6)
 Depends: ${shlibs:Depends}
 Description: GNU nano text editor

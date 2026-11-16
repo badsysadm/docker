@@ -8,13 +8,18 @@ SKOPEO_CMD := skopeo copy --dest-tls-verify=false oci:.build/rootfs/kaniko/oci
 
 FORCE:
 
-hyperfine: section = test
+hyperfine nnd binsider bats checksec binary-security-check: section = test
 fsverity-utils: section = kernel
 hyperfine: version ?= 2.0.0
+nnd: version ?= 0.80
+binsider: version ?= 0.3.2
+bats: version ?= 1.14.0
+checksec: version ?= 3.2.0
+binary-security-check: version ?= 1.3.1
 fsverity-utils: version ?= 1.7
 
-git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt: section = dev
-git: version ?= 2.56.0
+git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt lintian dpkg-cvecheck: section = dev
+git: version ?= 2.56.1
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
 autoconf: version ?= 2.73
@@ -31,11 +36,13 @@ devscripts: version ?= 2.26.13
 debhelper: version ?= 14.5
 equivs: version ?= 2.3.3
 quilt: version ?= 0.69
+lintian: version ?= 2.142.0
+dpkg-cvecheck: version ?= 0.1.0
 
 glibc dpkg apt openssh kmod systemd grub pam sudo logrotate rsyslog dbus shadow: section = system
 glibc: version ?= 2.44
-dpkg: version ?= 1.22.11
-apt: version ?= 3.3.6
+dpkg: version ?= 1.22.22
+apt: version ?= 3.3.7
 openssh: version ?= 10.5p1
 kmod: version ?= 34.2
 systemd: version ?= 261
@@ -48,11 +55,32 @@ dbus: version ?= 1.16.2
 shadow: version ?= 4.20.3
 chrony: version ?= 4.9
 
-libnftnl ncurses glib gnutls zlib libunwind: section = lib
+libnftnl libmnl libgpg-error libgcrypt libassuan libksba npth libnfnetlink libnetfilter-log libnetfilter-queue liblz4 libxxhash libmaxminddb libbpf libcap-ng libnet libjansson libyaml libpcre2 libssh2 nghttp2 bzip2 libmd ncurses glib zlib libunwind: section = lib
 libnftnl: version ?= 1.3.2
+libmnl: version ?= 1.0.5
+libgpg-error: version ?= 1.61
+libgcrypt: version ?= 1.12.4
+libassuan: version ?= 3.0.2
+libksba: version ?= 1.8.1
+npth: version ?= 1.8
+libnfnetlink: version ?= 1.0.2
+libnetfilter-log: version ?= 1.0.2
+libnetfilter-queue: version ?= 1.0.5
+liblz4: version ?= 1.10.0
+libxxhash: version ?= 0.8.3
+libmaxminddb: version ?= 1.14.1
+libbpf: version ?= 1.8.0
+libcap-ng: version ?= 0.8.5
+libnet: version ?= 1.3
+libjansson: version ?= 2.14.1
+libyaml: version ?= 0.2.5
+libpcre2: version ?= 10.49
+libssh2: version ?= 1.11.1
+nghttp2: version ?= 1.71.0
+bzip2: version ?= 1.0.8
+libmd: version ?= 1.3.0
 ncurses: version ?= 6.6
 glib: version ?= 2.84.4
-gnutls: version ?= 3.8.13
 zlib: version ?= 1.3.1
 libunwind: version ?= 1.8.3
 zstd: version ?= 1.5.7
@@ -119,14 +147,16 @@ procps: version ?= 4.0.7
 quota: version ?= 4.11
 acl: version ?= 2.4.0
 
-gnupg openssl krb5 aide acl polkit apparmor cracklib vault ots trivy cosign ca-certificates audit: section = security
-gnupg: version ?= 2.4.7
+gnupg openssl krb5 gnutls aide acl polkit apparmor cracklib vault ots trivy suricata cosign ca-certificates audit: section = security
+gnupg: version ?= 2.5.24
+gnutls: version ?= 3.8.13
 openssl: version ?= 3.6.5
 ca-certificates: version ?= 2026-11-05
 krb5: version ?= 1.22.2
 aide: version ?= 0.19.4
 audit: version ?= 4.2.1
 trivy: version ?= 0.76.2
+suricata: version ?= 8.0.8
 cosign: version ?= 3.1.4
 polkit: version ?= 127
 apparmor: version ?= 4.1.8
@@ -138,3 +168,4 @@ buildbot: version ?= 4.3.0
 
 include mk/core.mk
 include mk/bs.mk
+include mk/deps.mk

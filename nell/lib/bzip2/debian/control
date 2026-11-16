@@ -1,0 +1,12 @@
+Source: bzip2
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ patch
+
+Package: bzip2
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Bzip2 compression library

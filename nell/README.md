@@ -27,7 +27,47 @@ nell/<section>/<project>/
 
 Получает исходники указанной версии из официального upstream и помещает их в `/src`.
 
+Для архивов используется потоковая загрузка через `wget` с тремя попытками,
+выводом ошибок в файл и показом ошибки при неудачной распаковке:
+
+```dockerfile
+ARG VERSION=1.0.0
+
+RUN mkdir -p /src/project && \
+    wget --tries=3 -nv -O- "https://example.org/project-${VERSION}.tar.gz" 2>/tmp/project-wget.err | \
+    tar -xzf - -C /src/project --strip-components=1 || { cat /tmp/project-wget.err >&2; exit 1; }
+```
+
+Для исходников из Git (в том числе GitHub) используется `git clone` с
+`-q --single-branch --branch --depth 1`, с явным указанием версии и каталога:
+
+```dockerfile
+ARG VERSION=1.0.0
+
+RUN git clone -q --single-branch --branch "v${VERSION}" --depth 1 \
+    https://github.com/owner/project.git /src/project
+```
+
+Префикс `v` в имени тега используется только если он принят у конкретного
+upstream; в остальных случаях указывается `"${VERSION}"`.
+
 ### `02_dep.Dockerfile`
+
+Все аргументы, используемые в `FROM` (включая версии зависимостей),
+объявляются **до первого `FROM`**. `ARG`, объявленный внутри стадии,
+не доступен для подстановки в `FROM` следующих стадий. Например:
+
+```dockerfile
+ARG VERSION=1.0.0
+ARG ZLIB_VERSION=1.3.1
+
+FROM oci.badsysadm.local:80/src/lib/example:${VERSION} AS src_image
+FROM oci.badsysadm.local:80/bin/lib/zlib:${ZLIB_VERSION} AS zlib_image
+FROM oci.badsysadm.local:80/get/dep:latest AS build
+```
+
+При необходимости использовать аргумент в инструкциях конкретной стадии
+его повторно объявляют через `ARG NAME` после соответствующего `FROM`.
 
 Устанавливает build-зависимости из `debian/control` через `mk-build-deps`.
 
@@ -50,6 +90,12 @@ nell/<section>/<project>/
 динамические (`.so`)**. Наличие только одного варианта не соответствует
 правилам сборки `nell`.
 
+**Все библиотеки (`.a` и `.so`) обязательно собирать с position-independent code (`-fPIC`).**
+Статические архивы должны быть пригодны для включения в разделяемые библиотеки;
+наличия PIC только у объектов, используемых для `.so`, недостаточно.
+Для сборок на GCC обычно задаётся `CFLAGS="-O2 -fPIC"` (для C++ также
+`CXXFLAGS`), с проверкой, что флаг применяется и к объектам статических архивов.
+
 При линковке сторонние библиотеки переключаются в static mode, а `libc` остаётся динамической, например:
 
 ```text
@@ -64,6 +110,46 @@ nell/<section>/<project>/
 FROM scratch AS bundle
 COPY --from=build /src/target/ /target/
 ```
+
+## Генерация Debian-пакетов (`04_deb.Dockerfile`)
+
+Для проектов с Debian-пакетами **стандартное правило** — хранить
+`debian/changelog` в репозитории с маркером `@VERSION@` вместо
+upstream-версии. Debian-ревизия (`-1`, `-2` и т. д.), описание
+изменений, дата и сопровождающий остаются в самом changelog.
+
+Пример `debian/changelog`:
+
+```text
+example (@VERSION@-1) unstable; urgency=medium
+
+  * Initial NELL packaging.
+
+ -- badsysadm <me@badsysadm.com>  Sun, 15 Nov 2026 00:00:00 +0000
+```
+
+В `04_deb.Dockerfile`, непосредственно после `COPY debian ./debian/`,
+до любых вызовов `dpkg-parsechangelog`, `dch`, `dh_*`, `dpkg-vexgen`
+или других инструментов, читающих changelog, выполняется:
+
+```dockerfile
+ARG VERSION
+WORKDIR /src
+COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
+```
+
+`VERSION` передаётся через существующий аргумент сборки Dockerfile.
+Например, при `VERSION=1.22.22` запись `@VERSION@-1` превращается
+в `1.22.22-1`. Для новой Debian-ревизии меняют только суффикс в
+changelog: `@VERSION@-2`. Нельзя дублировать upstream-версию в
+changelog или генерировать новую запись через `dch --create` вместо
+подстановки. В готовый `.deb` и экспортируемый changelog попадает
+уже подставленная версия.
+
+До подстановки `@VERSION@` не является корректной Debian-версией:
+любые проверки и генераторы метаданных, требующие `debian/changelog`,
+должны исполняться после этой команды.
 
 ## Добавление проекта в Makefile
 

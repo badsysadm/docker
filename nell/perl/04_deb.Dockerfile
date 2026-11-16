@@ -11,6 +11,7 @@ ARG SOURCE_DATE_EPOCH=728438400
 WORKDIR /src
 RUN mkdir -p /target
 COPY debian ./debian/
+RUN sed -i "1s/@VERSION@/${VERSION}/" debian/changelog
 RUN dh_prep
 COPY --from=bin_image /target/* /src/debian/tmp/
 RUN dh_testdir
@@ -37,7 +38,6 @@ RUN dh_shlibdeps
 RUN dh_perl
 RUN dh_ucf
 RUN dh_md5sums
-RUN dch --create --empty --package $(sed -ne 's/^Source: //p' debian/control | head -n1) --newversion ${VERSION}-1 -D stable "Automated pipeline build."
 RUN dh_gencontrol
 RUN dh_builddeb --destdir=/target -- -Zxz -z9
 

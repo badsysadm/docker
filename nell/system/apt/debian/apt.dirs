@@ -1,0 +1,5 @@
+var/lib/apt/lists/partial
+var/cache/apt/archives/partial
+var/lib/apt/mirrors/partial
+var/lib/apt/periodic
+var/log/apt

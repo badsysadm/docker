@@ -1,0 +1,13 @@
+Source: bats
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ bash,
+ coreutils,
+ git
+
+Package: bats
+Architecture: all
+Depends: bash, ${misc:Depends}
+Description: Bash Automated Testing System and helper libraries

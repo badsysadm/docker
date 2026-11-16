@@ -1,0 +1,15 @@
+Source: binsider
+Section: devel
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ ca-certificates,
+ curl,
+ git,
+ pkg-config
+
+Package: binsider
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Terminal ELF static and dynamic analysis tool

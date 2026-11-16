@@ -1,0 +1,23 @@
+pkg:protego/openjdk-17 pkg:deb/debian_openjdk-17 pkg:nvd/redhat_java-17-openjdk pkg:nvd/canonical_openjdk-17
+pkg:protego/openjdk-21 pkg:deb/debian_openjdk-21 pkg:nvd/redhat_java-21-openjdk-main pkg:nvd/canonical_openjdk-21 pkg:nvd/redhat_java-21-openjdk-portable pkg:nvd/redhat_java-21-openjdk-portable-main pkg:nvd/redhat_java-21-openjdk-portable-rhel7 pkg:nvd/redhat_java-21-openjdk-vanilla
+pkg:protego/python pkg:nvd/redhat_python3.11 pkg:nvd/python_cpython pkg:nvd/pythonsoftwarefoundation_cpython pkg:nvd/python_software_foundation_cpython pkg:bdu/pythonsoftwarefoundation_cpython
+pkg:protego/openssl pkg:nvd/openssl_openssl pkg:nvd/redhat_openssl pkg:nvd/opensslsoftwarefoundation_openssl pkg:deb/debian_openssl pkg:bdu/сообществосвободногопрограммногообеспечения_openssl_encrypt pkg:bdu/сообществосвободногопрограммногообеспечения_perl-crypt-openssl-aes pkg:bdu/opensslsoftwarefoundation_openssl
+
+pkg:protego/acl pkg:deb/debian_acl pkg:nvd/aclproject_acl
+pkg:protego/aide pkg:deb/debian_aide pkg:nvd/aide_aide
+pkg:protego/apt pkg:nvd/apt_apt pkg:deb/debian_apt
+pkg:protego/dpkg pkg:bdu/сообществосвободногопрограммногообеспечения_dpkg pkg:deb/debian_dpkg pkg:deb/debian_dpkg-cross pkg:nvd/debian_dpkg-dev
+pkg:protego/gnupg2 pkg:bdu/сообществосвободногопрограммногообеспечения_gnupg pkg:bdu/сообществосвободногопрограммногообеспечения_gnuprivacyguard_gnupg_ pkg:deb/debian_gnupg2 pkg:nvd/gnu_gnupg pkg:nvd/gnupg pkg:nvd/gnupg_gnupg pkg:nvd/gnupg_libgcrypt pkg:nvd/gnupg_libksba pkg:nvd/redhat_gnupg2
+
+pkg:protego/trivy pkg:chainguard/trivy pkg:wolfi/trivy pkg:bdu/aquasecuritysoftwareltd._setup-trivy pkg:bdu/aquasecuritysoftwareltd._trivy pkg:bdu/aquasecuritysoftwareltd._trivy-action pkg:nvd/aquasec_setup-trivy pkg:nvd/aquasec_trivy pkg:nvd/aquasec_trivy_action pkg:nvd/aquasecurity_setup-trivy pkg:nvd/aquasecurity_trivy pkg:nvd/aquasecurity_trivy-action pkg:nvd/aquasecurity_trivy-vscode-extension pkg:nvd/redhat_trivy pkg:nvd/redhat_trivy-main
+pkg:protego/coredns pkg:bdu/сообществосвободногопрограммногообеспечения_coredns pkg:nvd/coredns pkg:nvd/coredns.io_coredns pkg:nvd/coredns_coredns pkg:nvd/redhat_coredns-container pkg:nvd/redhat_openshift4_ose-coredns pkg:nvd/redhat_rhacm2_lighthouse-coredns-rhel9 pkg:nvd/redhat_rhcl-1_coredns-rhel9
+pkg:protego/cilium pkg:bdu/сообществосвободногопрограммногообеспечения_cilium pkg:deb/debian_golang-github-cilium-ebpf pkg:nvd/cilium_cilium pkg:nvd/cilium_ebpf pkg:nvd/cilium_hubble
+pkg:protego/cri-o pkg:bdu/сообществосвободногопрограммногообеспечения_cri-o pkg:nvd/redhat_ose-crio-credential-provider pkg:nvd/cri-o pkg:nvd/kubernetes_cri-o pkg:nvd/redhat_cri-o
+pkg:protego/conmon pkg:bdu/сообществосвободногопрограммногообеспечения_conmon pkg:nvd/redhat_conmon pkg:nvd/redhat_container-tools_4.0_conmon pkg:nvd/redhat_container-tools_rhel8_conmon
+pkg:protego/runc pkg:bdu/dockerinc._runc pkg:bdu/сообществосвободногопрограммногообеспечения_runc pkg:deb/debian_runc pkg:nvd/cloudfoundry_garden-runc pkg:nvd/linuxfoundation_runc pkg:nvd/opencontainers_runc pkg:nvd/redhat_container-tools_4.0_runc pkg:nvd/redhat_container-tools_rhel8_runc pkg:nvd/redhat_runc 
+pkg:protego/cni-plugins pkg:bdu/cloudnativecomputingfoundation_cniplugins pkg:bdu/cloudnativecomputingfoundation_containernetworkinterface_cni_ pkg:deb/debian_golang-github-appc-cni pkg:nvd/containernetworking-cni pkg:nvd/linuxfoundation_cni_network_plugins
+pkg:protego/cosign pkg:bdu/сообществосвободногопрограммногообеспечения_sigstorecosign pkg:deb/debian_cosign pkg:nvd/cosign_cosign pkg:nvd/redhat_rhtas_cosign-rhel9 pkg:nvd/sigstore_cosign
+pkg:protego/lxc pkg:bdu/сообществосвободногопрограммногообеспечения_lxc pkg:deb/debian_lxc pkg:deb/debian_lxc-templates pkg:nvd/linuxcontainers_lxc pkg:nvd/lxc pkg:nvd/lxc_incus pkg:nvd/lxc_lxc
+pkg:protego/lxcfs pkg:deb/debian_lxcfs pkg:nvd/canonical_lxcfs 
+pkg:protego/skopeo pkg:nvd/redhat_container-tools_4.0_skopeo pkg:nvd/redhat_container-tools_rhel8_skopeo pkg:nvd/redhat_rhel10_skopeo pkg:nvd/redhat_rhel8_skopeo pkg:nvd/redhat_skopeo pkg:nvd/redhat_ubi10_skopeo pkg:nvd/redhat_ubi8_skopeo pkg:nvd/redhat_ubi9_skopeo pkg:nvd/skopeo_project_skopeo
+pkg:protego/umoci pkg:deb/debian_umoci pkg:nvd/linuxfoundation_umoci

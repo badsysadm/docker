@@ -59,3 +59,14 @@ and engineering requirements belong to the linked documentation, not here.
 - Report what was actually verified separately from proposed commands,
   user-reported results and checks not performed. Never imply that a build
   or test was run when it was not.
+
+## Pre-commit review
+
+Before every commit, review the full diff against the user's request and
+the rules linked above. In particular:
+
+- Do not put tests, diagnostics or artifact checks in build Dockerfiles.
+- Do not remove installed headers, libraries, pkg-config metadata or runtime
+  data without establishing that they are unnecessary.
+
+Do not commit changes that violate these requirements.

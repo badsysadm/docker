@@ -8,6 +8,5 @@ Build-Depends:
 
 Package: ncurses
 Architecture: amd64
-Static-Built-Using: gcc
 Depends: ${shlibs:Depends}
 Description: ncurses libraries and terminal utilities
