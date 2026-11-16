@@ -9,13 +9,15 @@ WORKDIR /src/fsverity-utils
 # Link crypto/compression dependencies statically, leaving libc dynamic.
 RUN make -j$(nproc) \
     PREFIX=/usr LIBDIR=/usr/lib PKGCONF=false \
-    LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64" \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64 -Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     LDLIBS="-Wl,-Bstatic -lcrypto -lz -lzstd -Wl,-Bdynamic"
 
 RUN make install \
     PREFIX=/usr LIBDIR=/usr/lib DESTDIR=/src/target \
     PKGCONF=false \
-    LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64" \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-static-libgcc -L/usr/lib -L/usr/lib64 -Wl,--gc-sections -Wl,--exclude-libs,ALL" \
     LDLIBS="-Wl,-Bstatic -lcrypto -lz -lzstd -Wl,-Bdynamic"
 
 RUN rm -rf \
