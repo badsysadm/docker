@@ -1,28 +1,23 @@
-# ADR: debootstrap runtime layout
+# ADR: Сохранение штатной модели исполнения debootstrap
 
-## Status
-Accepted.
+## Статус
+Принято.
 
-## Context
-debootstrap is primarily a shell program with optional Perl helpers.
-Wrapping the program in PAR::Packer would change the established upstream
-execution model.
+## Контекст
+debootstrap представляет собой набор shell-скриптов и вспомогательных обработчиков. Упаковка через PAR::Packer потребовала бы создания дополнительной обёртки и изменения штатной модели исполнения upstream.
 
-## Decision
-Install the upstream shell scripts and runtime library in their original
-layout using upstream `make install`. Keep the Perl interpreter as an
-external runtime dependency. Apply the local, narrowly scoped OpenPGP
-InRelease whitespace patch without changing repository signatures.
+## Решение
+- Сохранять структуру и способ запуска компонентов debootstrap, предусмотренные upstream.
+- Устанавливать компоненты посредством штатного `make install`, без упаковки shell-скриптов и Perl-обработчиков в единый бинарный файл.
+- Использовать системный интерпретатор Perl.
 
-## Consequences
-The resulting bundle requires external runtime tools and an installed
-Perl interpreter rather than providing a bundled executable.
+## Последствия
+- Сохраняется совместимость со штатной структурой каталогов и взаимодействием компонентов debootstrap.
+- Готовый пакет зависит от внешних системных утилит и интерпретатора Perl; автономный исполняемый файл не создаётся.
 
-## Alternatives considered
-PAR::Packer was rejected because packaging the shell entrypoint as
-a Perl executable would not preserve the upstream execution model.
+## Альтернативы
+- **PAR::Packer** — отклонён, поскольку добавляет нестандартную обёртку и усложняет сопровождение без необходимости менять upstream-модель исполнения.
 
-## References
-- `03_bin.Dockerfile`
-- `patches/nell-inrelease-trailing-whitespace.patch`
-- `../../README.md`
+## Ссылки
+- [Профиль сборки](03_bin.Dockerfile)
+- [Правила NELL](../../README.md)
