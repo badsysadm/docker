@@ -58,11 +58,11 @@
 +		$ver = $1;
 +		next;
  	} elsif (/^$/) {
--		$in = 0;
+-                $in = 0;
 +		save_package();
 +		undef $pkg;
- 		next;
- 	}
+                 next;
+         }
 -	$in = 1 if $seen{$pkg};
 -	if ($in and (/^Depends: (.*)$/ or /^Pre-Depends: (.*)$/)) {
 +	if (defined $pkg && $seen{$pkg} &&
