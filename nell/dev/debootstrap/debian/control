@@ -9,7 +9,9 @@ Build-Depends:
 Package: debootstrap
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, wget, distro-info, perl, gpgv, mount
+Depends: ${misc:Depends}, wget, distro-info
+Recommends: sopv | sqv | gpgv, mount, debian-archive-keyring, arch-test (>= 0.11~)
+Suggests: squid-deb-proxy-client, ubuntu-archive-keyring, binutils, xz-utils, zstd
 Description: Bootstrap a Debian base system using upstream shell scripts
  Installs debootstrap and its runtime script library, including a fix
  for OpenPGP InRelease trailing whitespace canonicalization.
