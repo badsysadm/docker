@@ -1,11 +1,10 @@
 --- a/functions
 +++ b/functions
-@@ -1608,17 +1608,22 @@
- 
-         pkgdetails_field () {
-                 # uniq field mirror Packages values...
--                perl -le '
-+                perl -MDpkg::Version -le '
+@@ -1629,16 +1629,21 @@
+ 	pkgdetails_field () {
+ 		# uniq field mirror Packages values...
+-		perl -le '
++		perl -MDpkg::Version -le '
  $unique = shift @ARGV; $field = lc(shift @ARGV); $mirror = shift @ARGV;
  %expected = map { $_, 0 } @ARGV;
  %outputs;
@@ -14,74 +13,74 @@
  $chksumfield = lc($ENV{DEBOOTSTRAP_CHECKSUM_FIELD}).":";
  
  sub emit_or_store_pkg {
-         if ($unique && defined $output_val) {
-                 # Store the output for deduplicated emission later
--                $outputs{$output_val} = $output;
-+                if (!exists $versions{$output_val} ||
-+                    Dpkg::Version->new($ver) > Dpkg::Version->new($versions{$output_val})) {
-+                        $outputs{$output_val} = $output;
-+                        $versions{$output_val} = $ver;
-+                }
-         } else {
-                 print $output if defined $output;
-         }
-@@ -1629,7 +1634,7 @@
-                 $f = lc($1); $v = $2;
-                 if ($f eq "package:") {
-                         $pkg = $v;
--                        if ($pkg ne $prevpkg) {
-+                        if ($unique || $pkg ne $prevpkg) {
-                                 emit_or_store_pkg;
-                                 $prevpkg = $pkg;
-                         }
-@@ -1707,26 +1712,45 @@
-                 elif [ "$1" = "GETDEPS" ]; then
-                         local pkgdest="$2"; shift; shift
+ 	if ($unique && defined $output_val) {
+ 		# Store the output for deduplicated emission later
+-		$outputs{$output_val} = $output;
++		if (!exists $versions{$output_val} ||
++		    Dpkg::Version->new($ver) > Dpkg::Version->new($versions{$output_val})) {
++			$outputs{$output_val} = $output;
++			$versions{$output_val} = $ver;
++		}
+ 	} else {
+ 		print $output if defined $output;
+ 	}
+@@ -1649,7 +1654,7 @@
+ 		$f = lc($1); $v = $2;
+ 		if ($f eq "package:") {
+ 			$pkg = $v;
+-			if ($pkg ne $prevpkg) {
++			if ($unique || $pkg ne $prevpkg) {
+ 				emit_or_store_pkg;
+ 				$prevpkg = $pkg;
+ 			}
+@@ -1707,26 +1707,45 @@
+ 		elif [ "$1" = "GETDEPS" ]; then
+ 			local pkgdest="$2"; shift; shift
 -LC_ALL=C grep "$gropt" '^$|^Package:|^Depends:|^Pre-Depends:' "${pkgdest}" | perl -e '
 +LC_ALL=C grep "$gropt" '^$|^Package:|^Version:|^Depends:|^Pre-Depends:' "${pkgdest}" | perl -MDpkg::Version -e '
  %seen = map { $_ => 1 } @ARGV;
 +sub save_package {
-+        return unless defined $pkg && $seen{$pkg} && defined $ver;
-+        if (!exists $versions{$pkg} ||
-+            Dpkg::Version->new($ver) > Dpkg::Version->new($versions{$pkg})) {
-+                $versions{$pkg} = $ver;
-+                $package_deps{$pkg} = { %stanza_deps };
-+        }
++	return unless defined $pkg && $seen{$pkg} && defined $ver;
++	if (!exists $versions{$pkg} ||
++	    Dpkg::Version->new($ver) > Dpkg::Version->new($versions{$pkg})) {
++		$versions{$pkg} = $ver;
++		$package_deps{$pkg} = { %stanza_deps };
++	}
 +}
  while (<STDIN>) {
-         if (/^Package: (.*)$/) {
-+                save_package();
-                 $pkg = $1;
-+                undef $ver;
-+                %stanza_deps = ();
-                 next;
-+        } elsif (/^Version: (.*)$/) {
-+                $ver = $1;
-+                next;
-         } elsif (/^$/) {
--                $in = 0;
-+                save_package();
-+                undef $pkg;
-                 next;
-         }
--        $in = 1 if $seen{$pkg};
--        if ($in and (/^Depends: (.*)$/ or /^Pre-Depends: (.*)$/)) {
-+        if (defined $pkg && $seen{$pkg} &&
-+            (/^Depends: (.*)$/ or /^Pre-Depends: (.*)$/)) {
-                 for $d (split /\s*,\s*/, $1) {
-                         $d =~ s/\s*[|].*$//;
-                         $d =~ s/\s*[(].*[)]\s*//;
-                         $d =~ s/:.*//;
--                        $depends{$d} = 1;
-+                        $stanza_deps{$d} = 1;
-                 }
-         }
+ 	if (/^Package: (.*)$/) {
++		save_package();
+ 		$pkg = $1;
++		undef $ver;
++		%stanza_deps = ();
+ 		next;
++	} elsif (/^Version: (.*)$/) {
++		$ver = $1;
++		next;
+ 	} elsif (/^$/) {
+-		$in = 0;
++		save_package();
++		undef $pkg;
+ 		next;
+ 	}
+-	$in = 1 if $seen{$pkg};
+-	if ($in and (/^Depends: (.*)$/ or /^Pre-Depends: (.*)$/)) {
++	if (defined $pkg && $seen{$pkg} &&
++	    (/^Depends: (.*)$/ or /^Pre-Depends: (.*)$/)) {
+ 		for $d (split /\s*,\s*/, $1) {
+ 			$d =~ s/\s*[|].*$//;
+ 			$d =~ s/\s*[(].*[)]\s*//;
+ 			$d =~ s/:.*//;
+-			$depends{$d} = 1;
++			$stanza_deps{$d} = 1;
+ 		}
+ 	}
  }
 +save_package();
 +foreach $pkg (keys %package_deps) {
-+        $depends{$_} = 1 for keys %{ $package_deps{$pkg} };
++	$depends{$_} = 1 for keys %{ $package_deps{$pkg} };
 +}
-         foreach (sort keys %depends) {
-           print "$_\n";
-         }
+ 	foreach (sort keys %depends) {
+ 	  print "$_\n";
+ 	}
  ' "$@"
