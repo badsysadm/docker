@@ -1,0 +1,15 @@
+Source: debootstrap
+Section: admin
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ make,
+ patch
+
+Package: debootstrap
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, wget, distro-info, perl, gpgv, mount
+Description: Bootstrap a Debian base system using upstream shell scripts
+ Installs debootstrap and its runtime script library, including a fix
+ for OpenPGP InRelease trailing whitespace canonicalization.

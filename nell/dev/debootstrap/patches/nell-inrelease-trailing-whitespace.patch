@@ -1,0 +1,11 @@
+--- a/functions
++++ b/functions
+@@ -651,6 +651,8 @@
+                                 printf "%s\n" "${line}" > "$relsigdest"
+                                 state="signature"
+                         else
++                                # OpenPGP canonical text signatures ignore trailing spaces and tabs.
++                                line="${line%"${line##*[![:blank:]]}"}"
+                                 printf "${nl}%s" "${line}" >> "$reldest"
+                                 nl="\n"
+                         fi

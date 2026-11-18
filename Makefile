@@ -18,7 +18,8 @@ checksec: version ?= 3.2.0
 binary-security-check: version ?= 1.3.1
 fsverity-utils: version ?= 1.7
 
-git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt lintian dpkg-cvecheck: section = dev
+debootstrap git m4 make autoconf automake ninja bison meson flex gettext patch libtool cmake devscripts debhelper equivs quilt lintian dpkg-cvecheck: section = dev
+debootstrap: version ?= 1.0.145
 git: version ?= 2.56.1
 m4: version ?= 1.4.21
 make: version ?= 4.4.1
