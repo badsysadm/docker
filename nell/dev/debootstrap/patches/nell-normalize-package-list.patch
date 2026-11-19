@@ -6,7 +6,7 @@
  	m1="${MIRRORS%% *}"
 +
 +	# Normalize whitespace and deduplicate before counting packages.
-+	set -- $(printf '%s\n' "$*" | tr '[:space:]' '\n' | sed '/^$/d' | LC_ALL=C sort -u)
++	set -- $(printf '%s\n' "$@" | tr '[:space:]' '\n' | sed '/^$/d' | LC_ALL=C sort -u)
  
  	numdebs="$#"
  
