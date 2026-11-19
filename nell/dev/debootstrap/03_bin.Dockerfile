@@ -6,8 +6,10 @@ ARG VERSION
 WORKDIR /src/debootstrap
 COPY patches/nell-inrelease-trailing-whitespace.patch /src/patches/nell-inrelease-trailing-whitespace.patch
 COPY patches/nell-newest-debian-version.patch /src/patches/nell-newest-debian-version.patch
+COPY patches/nell-normalize-package-list.patch /src/patches/nell-normalize-package-list.patch
 RUN patch -p1 < /src/patches/nell-inrelease-trailing-whitespace.patch
 RUN patch -p1 < /src/patches/nell-newest-debian-version.patch
+RUN patch -p1 < /src/patches/nell-normalize-package-list.patch
 RUN make install DESTDIR=/src/target
 
 FROM scratch AS bundle
