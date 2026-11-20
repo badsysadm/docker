@@ -1,4 +1,4 @@
-ARG VERSION=3.3.7
+ARG VERSION=3.3.8
 
 FROM oci.badsysadm.local:80/bin/system/apt:${VERSION} AS bin_image
 

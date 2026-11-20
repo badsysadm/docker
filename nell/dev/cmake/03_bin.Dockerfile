@@ -1,4 +1,4 @@
-ARG VERSION=4.4.5
+ARG VERSION=4.5.1
 
 FROM oci.badsysadm.local:80/dep/dev/cmake:${VERSION} AS build
 ARG VERSION
@@ -9,7 +9,8 @@ RUN mkdir build
 WORKDIR /src/cmake/build
 
 RUN PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" \
-    CXXFLAGS="-O2" \
+    CFLAGS="-O2 -fPIC" \
+    CXXFLAGS="-O2 -fPIC" \
     LDFLAGS="-static-libstdc++ -static-libgcc" \
     ../bootstrap \
     --prefix=/usr \
@@ -17,6 +18,7 @@ RUN PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" \
     --no-system-libs \
     -- \
     -DBUILD_TESTING=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -DCMAKE_USE_OPENSSL=ON \
     -DOPENSSL_ROOT_DIR=/usr/local \
     -DOPENSSL_USE_STATIC_LIBS=ON \

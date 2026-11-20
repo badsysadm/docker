@@ -1,4 +1,4 @@
-ARG VERSION=3.8.13
+ARG VERSION=3.8.14
 
 FROM oci.badsysadm.local:80/dep/security/gnutls:${VERSION} AS dep_image
 FROM dep_image AS build
@@ -48,6 +48,7 @@ RUN rm -rf /src/target/usr/share/doc \
     find /src/target -type f -name '*.la' -delete
 
 FROM scratch AS bundle
+ARG VERSION
 LABEL org.opencontainers.image.title="gnutls"
 LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.authors="Egor Artemov <me@badsysadm.com>"
