@@ -17,9 +17,9 @@ RUN ./configure \
     --http-log-path=/var/log/angie/accept.log \
     --pid-path=/var/run/angie/angie.pid \
     --lock-path=/var/run/angie/angie.lock \
-    --http-client-body-temp-path=/tmp/angie/client-body \
-    --http-proxy-temp-path=/tmp/angie/proxy \
-    --http-uwsgi-temp-path=/tmp/angie/uwsgi \
+    --http-client-body-temp-path=/tmp/client-body \
+    --http-proxy-temp-path=/tmp/proxy \
+    --http-uwsgi-temp-path=/tmp/uwsgi \
     --with-threads \
     --with-file-aio \
     --with-http_addition_module \
