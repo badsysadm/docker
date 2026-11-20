@@ -1,0 +1,4 @@
+usr/bin/cmake usr/bin/
+usr/bin/ctest usr/bin/
+usr/bin/cpack usr/bin/
+usr/share/cmake-* usr/share/
