@@ -1,5 +1,5 @@
 FROM oci.badsysadm.local:80/get/source:latest AS build
-ARG VERSION=4.4.5
+ARG VERSION=4.5.1
 
 RUN mkdir -p /src/cmake && \
     wget --tries=3 -nv -O- "https://cmake.org/files/v${VERSION%.*}/cmake-${VERSION}.tar.gz" 2>/tmp/cmake-wget.err | \

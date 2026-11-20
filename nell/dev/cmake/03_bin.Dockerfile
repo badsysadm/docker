@@ -1,4 +1,4 @@
-ARG VERSION=4.4.5
+ARG VERSION=4.5.1
 
 FROM oci.badsysadm.local:80/dep/dev/cmake:${VERSION} AS build
 ARG VERSION
