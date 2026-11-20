@@ -1,4 +1,4 @@
-ARG VERSION=3.7.3
+ARG VERSION=3.7.4
 
 FROM oci.badsysadm.local:80/dep/db/etcd:${VERSION} AS build
 ARG VERSION

@@ -103,7 +103,7 @@ angie: version ?= 1.12.4
 radicale: version ?= 3.9.0
 calino: version ?= 0.42.0
 synapse: version ?= 1.164.2
-etcd: version ?= 3.7.3
+etcd: version ?= 3.7.4
 skopeo: version ?= 1.24.1
 umoci: version ?= 0.6.0
 
