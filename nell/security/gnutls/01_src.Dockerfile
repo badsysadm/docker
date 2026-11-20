@@ -1,5 +1,5 @@
 FROM oci.badsysadm.local:80/get/source:latest AS build
-ARG VERSION=3.8.13
+ARG VERSION=3.8.14
 
 RUN mkdir -p /src/gnutls && \
     SERIES="${VERSION%.*}" && \

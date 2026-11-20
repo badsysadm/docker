@@ -1,4 +1,4 @@
-ARG VERSION=3.8.13
+ARG VERSION=3.8.14
 
 FROM oci.badsysadm.local:80/src/security/gnutls:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
