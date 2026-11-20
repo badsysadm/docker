@@ -1,0 +1,11 @@
+--- a/functions
++++ b/functions
+@@ -1791,7 +1791,7 @@
+ resolve_deps () {
+ 	local m1="${MIRRORS%% *}"
+ 
+-	local PKGS="$*"
++	local PKGS="$(printf '%s\n' "$@" | tr '[:space:]' '\n' | sed '/^$/d' | LC_ALL=C sort -u)"
+ 	local ALLPKGS="$PKGS";
+ 	local ALLPKGS2="";
+ 	local s c a

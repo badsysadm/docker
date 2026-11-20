@@ -1,0 +1,2 @@
+usr/sbin/debootstrap usr/sbin/
+usr/share/debootstrap usr/share/

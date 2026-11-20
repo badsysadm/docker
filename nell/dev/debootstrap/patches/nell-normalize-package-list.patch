@@ -1,0 +1,22 @@
+--- a/functions
++++ b/functions
+@@ -879,6 +879,9 @@
+ 	local m1 numdebs countdebs totaldebs leftoverdebs path pkgdest \
+ 	      dloaddebs s c a m
+ 	m1="${MIRRORS%% *}"
++
++	# Normalize whitespace and deduplicate before counting packages.
++	set -- $(printf '%s\n' "$@" | tr '[:space:]' '\n' | sed '/^$/d' | LC_ALL=C sort -u)
+ 
+ 	numdebs="$#"
+ 
+@@ -888,9 +891,6 @@
+ 	totaldebs=0
+ 	leftoverdebs="$*"
+ 
+-	# Fix possible duplicate package names, which would screw up counts:
+-	leftoverdebs=$(printf "%s" "$leftoverdebs"|tr ' ' '\n'|sort -u|tr '\n' ' ')
+-	numdebs=$(printf "%s" "$leftoverdebs"|wc -w)
+ 
+ 	for s in $SUITE $EXTRA_SUITES; do
+ 		for a in $(all_if_supported_in_suite "$s") $ARCH; do
