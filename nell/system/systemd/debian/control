@@ -252,23 +252,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: DNS resolver
  NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-standalone-shutdown
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Standalone shutdown binary
- NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-standalone-sysusers
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Standalone sysusers utility
- NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-standalone-tmpfiles
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Standalone tmpfiles utility
- NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-sysv
 Architecture: amd64

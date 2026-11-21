@@ -1,5 +1,4 @@
 usr/bin/systemd-repart
-usr/bin/systemd-repart.standalone
 usr/lib/systemd/repart/definitions/confext.repart.d/10-root.conf
 usr/lib/systemd/repart/definitions/confext.repart.d/20-root-verity.conf
 usr/lib/systemd/repart/definitions/confext.repart.d/30-root-verity-sig.conf
