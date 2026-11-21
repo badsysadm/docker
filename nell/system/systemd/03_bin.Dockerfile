@@ -8,11 +8,12 @@ ARG SOURCE_DATE_EPOCH=0
 
 WORKDIR /src/systemd
 
-RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" \
+RUN PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" \
     meson setup build \
     --prefix=/usr \
     --libdir=/usr/lib \
     --buildtype=release \
+    -Dprefer_static=true \
     -Dinstall-tests=false \
     -Drpmmacrosdir=no \
     -Dmode=release \
