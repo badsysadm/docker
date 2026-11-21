@@ -71,7 +71,6 @@ usr/lib/udev/hwdb.d/70-touchpad.hwdb
 usr/lib/udev/hwdb.d/70-vsock.hwdb
 usr/lib/udev/hwdb.d/80-ieee1394-unit-function.hwdb
 usr/lib/udev/hwdb.d/82-net-auto-link-local.hwdb
-usr/lib/udev/hwdb.d/README
 usr/lib/udev/iocost
 usr/lib/udev/mtd_probe
 usr/lib/udev/rules.d/50-udev-default.rules
@@ -118,6 +117,5 @@ usr/lib/udev/rules.d/90-image-dissect.rules
 usr/lib/udev/rules.d/90-iocost.rules
 usr/lib/udev/rules.d/90-vconsole.rules
 usr/lib/udev/rules.d/99-systemd.rules
-usr/lib/udev/rules.d/README
 usr/lib/udev/scsi_id
 usr/lib/udev/v4l_id

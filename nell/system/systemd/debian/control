@@ -132,6 +132,7 @@ Description: System and service manager
 Package: systemd-boot
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: systemd-boot-utils (= ${binary:Version}), systemd-boot-efi (= ${binary:Version}), systemd-ukify (= ${binary:Version})
 Description: UEFI boot integration and kernel-install hooks
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -269,7 +270,7 @@ Description: Network time synchronisation daemon
 
 Package: systemd-ukify
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, python3-pefile
 Description: Unified kernel image builder
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -324,9 +325,9 @@ Description: System locale and keyboard layout management service
 Package: systemd-utils
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
-Recommends: systemd-bash-completion, systemd-zsh-completion
+Suggests: systemd-bash-completion, systemd-zsh-completion
 Description: systemd command-line management and diagnostic utilities
- User-facing administration and diagnostic commands and shell completions.
+ User-facing administration and diagnostic commands and supporting utilities.
 
 Package: systemd-bash-completion
 Architecture: all
@@ -385,3 +386,15 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: Optional systemd metrics reporting services
  Metrics collector, basic and cgroup metric providers, and their socket
  activated services.
+
+Package: systemd-sysext
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: System extension image management
+ systemd-sysext, socket-activated extension management and initrd services.
+
+Package: systemd-confext
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Configuration extension image management
+ systemd-confext and its system and initrd services.

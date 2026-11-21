@@ -17,7 +17,6 @@ usr/lib/tmpfiles.d/20-systemd-osc-context.conf
 usr/lib/tmpfiles.d/20-systemd-shell-extra.conf
 usr/lib/tmpfiles.d/20-systemd-stub.conf
 usr/lib/tmpfiles.d/20-systemd-varlink.conf
-usr/lib/tmpfiles.d/README
 usr/lib/tmpfiles.d/credstore.conf
 usr/lib/tmpfiles.d/etc.conf
 usr/lib/tmpfiles.d/home.conf

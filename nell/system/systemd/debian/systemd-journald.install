@@ -18,6 +18,7 @@ usr/lib/systemd/catalog/systemd.ru.catalog
 usr/lib/systemd/catalog/systemd.sr.catalog
 usr/lib/systemd/catalog/systemd.zh_CN.catalog
 usr/lib/systemd/catalog/systemd.zh_TW.catalog
+usr/lib/systemd/system/initrd.target.wants/systemd-bsod.service
 usr/lib/systemd/system/sockets.target.wants/systemd-journald-dev-log.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-journald.socket
 usr/lib/systemd/system/sysinit.target.wants/systemd-journal-catalog-update.service

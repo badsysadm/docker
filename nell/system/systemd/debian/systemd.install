@@ -24,12 +24,10 @@ usr/bin/systemd-tty-ask-password-agent
 usr/lib/binfmt.d
 usr/lib/credstore
 usr/lib/environment.d/99-environment.conf
-usr/lib/modprobe.d/README
 usr/lib/modprobe.d/systemd.conf
 usr/lib/modules-load.d
 usr/lib/sysctl.d/50-default.conf
 usr/lib/sysctl.d/50-pid-max.conf
-usr/lib/sysctl.d/README
 usr/lib/systemd/profile.d/70-systemd-shell-extra.sh
 usr/lib/systemd/profile.d/80-systemd-osc-context.sh
 usr/lib/systemd/system-environment-generators

@@ -1,0 +1,9 @@
+usr/bin/systemd-sysext
+usr/lib/systemd/system/initrd.target.wants/systemd-sysext-initrd.service
+usr/lib/systemd/system/sockets.target.wants/systemd-sysext.socket
+usr/lib/systemd/system/systemd-sysext-initrd.service
+usr/lib/systemd/system/systemd-sysext-sysroot.service
+usr/lib/systemd/system/systemd-sysext.service
+usr/lib/systemd/system/systemd-sysext.socket
+usr/lib/systemd/system/systemd-sysext@.service
+usr/share/polkit-1/actions/io.systemd.sysext.policy
