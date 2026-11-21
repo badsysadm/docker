@@ -98,6 +98,7 @@ COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/lib/x86
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/lib/x86_64-linux-gnu/libz.a
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/lib/x86_64-linux-gnu/libzstd.a
 COPY --from=xzutils_image /target/usr/lib/x86_64-linux-gnu/liblzma.a /usr/lib/x86_64-linux-gnu/liblzma.a
+COPY --from=xzutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/liblzma.pc /usr/lib/x86_64-linux-gnu/pkgconfig/liblzma.pc
 
 COPY --from=libgcrypt_image /target/usr/lib/libgcrypt.a /usr/lib/x86_64-linux-gnu/libgcrypt.a
 COPY --from=libgpg_error_image /target/usr/lib/libgpg-error.a /usr/lib/x86_64-linux-gnu/libgpg-error.a

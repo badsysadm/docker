@@ -48,7 +48,6 @@ Build-Depends:
  libglib2.0-dev,
  libgnutls28-dev,
  liblz4-dev,
- liblzma-dev,
  libmount-dev,
  libpcre2-dev,
  libzstd-dev,
