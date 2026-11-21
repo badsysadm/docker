@@ -119,4 +119,3 @@ usr/lib/udev/rules.d/90-vconsole.rules
 usr/lib/udev/rules.d/99-systemd.rules
 usr/lib/udev/scsi_id
 usr/lib/udev/v4l_id
-usr/share/pkgconfig/udev.pc

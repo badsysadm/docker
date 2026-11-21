@@ -18,3 +18,4 @@ usr/include/systemd/sd-varlink-idl.h
 usr/include/systemd/sd-varlink.h
 usr/lib/libsystemd.so
 usr/lib/pkgconfig/libsystemd.pc
+usr/share/pkgconfig/systemd.pc

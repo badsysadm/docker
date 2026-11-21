@@ -176,7 +176,6 @@ usr/share/factory/etc/nsswitch.conf
 usr/share/factory/etc/pam.d/other
 usr/share/factory/etc/pam.d/system-auth
 usr/share/mime/packages/io.systemd.xml
-usr/share/pkgconfig/systemd.pc
 usr/share/polkit-1/actions/io.systemd.ask-password.policy
 usr/share/polkit-1/actions/io.systemd.credentials.policy
 usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
