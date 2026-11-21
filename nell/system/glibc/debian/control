@@ -6,42 +6,56 @@ Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, 
 Package: glibc-ld
 Architecture: amd64
 Depends: ${misc:Depends}
+Breaks: libc6, libc-bin
+Replaces: libc6, libc-bin
 Description: GNU C Library x86-64 dynamic loader
  ELF interpreter for 64-bit programs.
 
 Package: glibc-libc
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-ld (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library shared library libc.so.6
  Installs libc.so.6 for x86-64.
 
 Package: glibc-math
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library mathematical shared objects
  Mathematical and vector mathematical functions in libm.so.6 and libmvec.so.1.
 
 Package: glibc-libnsl
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library shared library libnsl.so.1
  Installs libnsl.so.1 for x86-64.
 
 Package: glibc-libnss
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-libresolv (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library NSS modules
  Name Service Switch modules for compatibility, databases, DNS, files and Hesiod.
 
 Package: glibc-libresolv
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library shared library libresolv.so.2
  Installs libresolv.so.2 for x86-64.
 
 Package: glibc-compat
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library ABI compatibility shared objects
  Legacy libanl, libBrokenLocale, libdl, libpthread, librt and libutil
  shared objects, preserved for existing binary dependencies.
@@ -49,6 +63,8 @@ Description: GNU C Library ABI compatibility shared objects
 Package: glibc-debug
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library debugging and profiling shared objects
  malloc debugging, memory and program counter profiling, and thread
  debugging support shared libraries.
@@ -56,12 +72,16 @@ Description: GNU C Library debugging and profiling shared objects
 Package: glibc-gconv
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
 Description: GNU C Library character conversion modules
  NELL glibc component package.
 
 Package: glibc-audit
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc-devtools
+Replaces: libc-devtools
 Description: GNU C Library audit library
  NELL glibc component package.
 
@@ -74,30 +94,40 @@ Description: GNU C Library complete runtime metapackage
 Package: glibc-dev
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Breaks: libc6-dev
+Replaces: libc6-dev
 Description: GNU C Library development headers and static libraries
  NELL glibc component package.
 
 Package: glibc-tools
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Breaks: libc-bin, libc-dev-bin, libc-devtools, nscd
+Replaces: libc-bin, libc-dev-bin, libc-devtools, nscd
 Description: GNU C Library command-line utilities
  NELL glibc component package.
 
 Package: glibc-locales-data
 Architecture: all
 Depends: ${misc:Depends}, glibc-tools (= ${binary:Version}), glibc-gconv (= ${binary:Version})
+Breaks: locales, libc-l10n
+Replaces: locales, libc-l10n
 Description: GNU C Library locale generation source data
  NELL glibc component package.
 
 Package: glibc-locale-en-us
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
 Description: GNU C Library compiled American English UTF-8 locale
  NELL glibc component package.
 
 Package: glibc-locale-ru-ru
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
 Description: GNU C Library compiled Russian UTF-8 locale
  NELL glibc component package.
 
