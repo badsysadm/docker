@@ -32,7 +32,7 @@ RUN dh_fixperms
 RUN dh_missing
 RUN dh_strip_nondeterminism
 RUN dh_makeshlibs
-RUN dh_shlibdeps
+RUN dh_shlibdeps -l/src/debian/libsystemd-shared/usr/lib/systemd
 RUN dh_perl
 RUN dh_ucf
 RUN dh_md5sums
