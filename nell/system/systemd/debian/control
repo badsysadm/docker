@@ -59,6 +59,7 @@ Build-Depends:
 
 Package: libpam-systemd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version}), systemd-logind (= ${binary:Version})
 Description: PAM integration for systemd
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -73,6 +74,7 @@ Description: systemd utility development headers and libraries
 
 Package: libsystemd-shared
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}
 Multi-Arch: same
 Description: systemd private shared libraries
@@ -80,6 +82,7 @@ Description: systemd private shared libraries
 
 Package: libsystemd0-shared
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}
 Multi-Arch: same
 Description: systemd utility shared library
@@ -95,6 +98,7 @@ Description: libudev development files
 
 Package: libudev1-shared
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}
 Multi-Arch: same
 Description: libudev shared library
@@ -102,7 +106,7 @@ Description: libudev shared library
 
 Package: systemd
 Architecture: amd64
-Static-Built-Using: gcc
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, libsystemd0-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1-shared (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version}), systemd-sysusers (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -116,6 +120,7 @@ Description: UEFI boot integration and kernel-install hooks
 
 Package: systemd-boot-efi
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}
 Description: systemd-boot EFI binaries
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -129,6 +134,7 @@ Description: systemd UEFI boot utilities
 
 Package: systemd-nspawn
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Container execution using systemd-nspawn
@@ -137,6 +143,7 @@ Description: Container execution using systemd-nspawn
 
 Package: systemd-machined
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Machine registration and management daemon
@@ -145,6 +152,7 @@ Description: Machine registration and management daemon
 
 Package: systemd-importd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Container and virtual machine image import daemon
@@ -153,6 +161,7 @@ Description: Container and virtual machine image import daemon
 
 Package: systemd-portabled
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Portable services management daemon
@@ -161,6 +170,7 @@ Description: Portable services management daemon
 
 Package: systemd-vmspawn
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Virtual machine execution using systemd-vmspawn
  NELL systemd component packaged from the existing build artifacts.
@@ -168,6 +178,7 @@ Description: Virtual machine execution using systemd-vmspawn
 
 Package: systemd-mountfsd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: File system mount service
@@ -176,6 +187,7 @@ Description: File system mount service
 
 Package: systemd-nsresourced
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Namespace resource management daemon
@@ -184,6 +196,7 @@ Description: Namespace resource management daemon
 
 Package: systemd-storage
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Storage block and file system services
  NELL systemd component packaged from the existing build artifacts.
@@ -191,42 +204,49 @@ Description: Storage block and file system services
 
 Package: systemd-coredump
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Core dump management
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-cryptsetup
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Encrypted volume utilities
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-homed
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version}), libpam-systemd (= ${binary:Version})
 Description: Home directory manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-journal-remote
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Remote journal transfer
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-oomd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Out of memory manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-repart
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}
 Description: Partition creation tools
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-resolved
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: libnss-resolve (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: DNS resolver
@@ -243,6 +263,7 @@ Description: SysV init compatibility links
 
 Package: systemd-timesyncd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Network time synchronisation daemon
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -255,60 +276,70 @@ Description: Unified kernel image builder
 
 Package: systemd-userdbd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Dynamic user and group database
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: udev
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, libudev1-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Device and hotplug management daemon
  NELL systemd 261 component packaged from the existing build artifacts.
 
 Package: systemd-journald
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, libsystemd-shared (= ${binary:Version})
 Description: System journal logging service
  NELL systemd service component packaged from the existing build artifacts.
 
 Package: systemd-hostnamed
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: System hostname management service
  NELL systemd service component packaged from the existing build artifacts.
 
 Package: systemd-logind
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: User login and session management service
  NELL systemd service component packaged from the existing build artifacts.
 
 Package: systemd-timedated
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: System time and timezone management service
  NELL systemd service component packaged from the existing build artifacts.
 
 Package: systemd-networkd
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Network configuration service
  NELL systemd component packaged from the existing build artifacts.
 
 Package: systemd-localed
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: System locale and keyboard layout management service
  NELL systemd component packaged from the existing build artifacts.
 
 Package: systemd-run
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Run commands in transient systemd units
  systemd-run command used to launch transient services and scopes.
 
 Package: systemd-utils
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version}), systemd-run (= ${binary:Version})
 Suggests: systemd-bash-completion, systemd-zsh-completion
@@ -329,6 +360,7 @@ Description: Zsh completion helpers for systemd commands
 
 Package: systemd-sysupdate
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: systemd system image and OS update services
@@ -336,12 +368,14 @@ Description: systemd system image and OS update services
 
 Package: systemd-tmpfiles
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, libsystemd0-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Temporary file and directory management utilities
  systemd-tmpfiles, system and user service units, and tmpfiles configuration.
 
 Package: systemd-tpm2
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Optional TPM 2.0 and PCR management components for systemd
  TPM2 setup, PCR measurement, PCRLock, NvPCR, boot integration and
@@ -349,6 +383,7 @@ Description: Optional TPM 2.0 and PCR management components for systemd
 
 Package: systemd-ssh
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Recommends: systemd-userdbd (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version})
 Description: Optional SSH socket and proxy integration for systemd
@@ -357,18 +392,21 @@ Description: Optional SSH socket and proxy integration for systemd
 
 Package: systemd-sysusers
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, libsystemd0-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: System user and group allocation manager
  systemd-sysusers, early boot unit, and base sysusers definitions.
 
 Package: systemd-sysinstall
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: System installation and provisioning utility
  systemd-sysinstall CLI, installation service and system-install target.
 
 Package: systemd-metrics
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Optional systemd metrics reporting services
  Metrics collector, basic and cgroup metric providers, and their socket
@@ -376,6 +414,7 @@ Description: Optional systemd metrics reporting services
 
 Package: systemd-sysext
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: System extension image management
  systemd-sysext, socket-activated extension management and initrd services.
@@ -402,6 +441,7 @@ Description: Static libudev development library
 
 Package: systemd-filesystem
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Optional systemd file system maintenance helpers
  File system checking, growing, formatting, quota validation, and
@@ -409,6 +449,7 @@ Description: Optional systemd file system maintenance helpers
 
 Package: systemd-kernel
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Optional systemd kernel configuration and integration services
  Kernel module loading, sysctl, binfmt, pstore, and kernel interface mounts.
@@ -422,6 +463,7 @@ Description: XDG desktop autostart integration for systemd
 
 Package: systemd-battery
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Battery and AC power management helpers for systemd
  AC power state detection and early boot battery level checking with
@@ -429,6 +471,7 @@ Description: Battery and AC power management helpers for systemd
 
 Package: systemd-firstboot
 Architecture: amd64
+Static-Built-Using: openssl (= 3.6.5)
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: First boot and initial host configuration helpers
  Initial system setup, machine ID initialization and persistence,
