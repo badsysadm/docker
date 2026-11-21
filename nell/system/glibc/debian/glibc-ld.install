@@ -1,1 +1,2 @@
-usr/lib*/ld-linux*.so*
+lib64/ld-linux-x86-64.so.2
+usr/bin/ld.so

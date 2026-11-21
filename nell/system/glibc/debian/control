@@ -6,29 +6,174 @@ Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, 
 Package: glibc-ld
 Architecture: amd64
 Depends: ${misc:Depends}
-Description: GNU C Library dynamic loader
- ELF interpreter for x86-64 applications.
+Description: GNU C Library x86-64 dynamic loader
+ ELF interpreter for 64-bit programs.
+
+Package: glibc-libc
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-ld (= ${binary:Version})
+Description: GNU C Library shared library libc.so.6
+ Installs libc.so.6 for x86-64.
+
+Package: glibc-libm
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libm.so.6
+ Installs libm.so.6 for x86-64.
+
+Package: glibc-libmvec
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libm (= ${binary:Version})
+Description: GNU C Library shared library libmvec.so.1
+ Installs libmvec.so.1 for x86-64.
+
+Package: glibc-libanl
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libanl.so.1
+ Installs libanl.so.1 for x86-64.
+
+Package: glibc-libbrokenlocale
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libBrokenLocale.so.1
+ Installs libBrokenLocale.so.1 for x86-64.
+
+Package: glibc-libc-malloc-debug
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libc_malloc_debug.so.0
+ Installs libc_malloc_debug.so.0 for x86-64.
+
+Package: glibc-libdl
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libdl.so.2
+ Installs libdl.so.2 for x86-64.
+
+Package: glibc-libmemusage
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libmemusage.so
+ Installs libmemusage.so for x86-64.
+
+Package: glibc-libnsl
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnsl.so.1
+ Installs libnsl.so.1 for x86-64.
+
+Package: glibc-libnss-compat
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnss_compat.so.2
+ Installs libnss_compat.so.2 for x86-64.
+
+Package: glibc-libnss-db
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnss_db.so.2
+ Installs libnss_db.so.2 for x86-64.
+
+Package: glibc-libnss-dns
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnss_dns.so.2
+ Installs libnss_dns.so.2 for x86-64.
+
+Package: glibc-libnss-files
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnss_files.so.2
+ Installs libnss_files.so.2 for x86-64.
+
+Package: glibc-libnss-hesiod
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libnss_hesiod.so.2
+ Installs libnss_hesiod.so.2 for x86-64.
+
+Package: glibc-libpcprofile
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libpcprofile.so
+ Installs libpcprofile.so for x86-64.
+
+Package: glibc-libpthread
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libpthread.so.0
+ Installs libpthread.so.0 for x86-64.
+
+Package: glibc-libresolv
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libresolv.so.2
+ Installs libresolv.so.2 for x86-64.
+
+Package: glibc-librt
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library librt.so.1
+ Installs librt.so.1 for x86-64.
+
+Package: glibc-libthread-db
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libthread_db.so.1
+ Installs libthread_db.so.1 for x86-64.
+
+Package: glibc-libutil
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library shared library libutil.so.1
+ Installs libutil.so.1 for x86-64.
+
+Package: glibc-gconv
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library character conversion modules
+ NELL glibc component package.
+
+Package: glibc-audit
+Architecture: amd64
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library audit library
+ NELL glibc component package.
 
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, glibc-ld (= ${binary:Version})
-Description: GNU C Library runtime shared libraries
- Runtime libraries and name-service conversion modules.
+Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-libm (= ${binary:Version}), glibc-libmvec (= ${binary:Version}), glibc-libanl (= ${binary:Version}), glibc-libbrokenlocale (= ${binary:Version}), glibc-libc-malloc-debug (= ${binary:Version}), glibc-libdl (= ${binary:Version}), glibc-libmemusage (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libnss-compat (= ${binary:Version}), glibc-libnss-db (= ${binary:Version}), glibc-libnss-dns (= ${binary:Version}), glibc-libnss-files (= ${binary:Version}), glibc-libnss-hesiod (= ${binary:Version}), glibc-libpcprofile (= ${binary:Version}), glibc-libpthread (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-librt (= ${binary:Version}), glibc-libthread-db (= ${binary:Version}), glibc-libutil (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
+Description: GNU C Library complete runtime metapackage
+ Dependency-only package assembling individual NELL glibc libraries.
 
 Package: glibc-dev
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
-Description: GNU C Library development files
- C headers, static libraries, startup objects and linker scripts.
+Description: GNU C Library development headers and static libraries
+ NELL glibc component package.
 
 Package: glibc-tools
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, glibc-runtime (= ${binary:Version})
-Description: GNU C Library administration tools
- Installed glibc command-line utilities and helper executables.
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-runtime (= ${binary:Version})
+Description: GNU C Library command-line utilities
+ NELL glibc component package.
 
-Package: glibc-locales
+Package: glibc-locales-data
+Architecture: all
+Depends: ${misc:Depends}, glibc-tools (= ${binary:Version}), glibc-gconv (= ${binary:Version})
+Description: GNU C Library locale generation source data
+ NELL glibc component package.
+
+Package: glibc-locale-en-us
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
-Description: GNU C Library locale data
- Locale definitions and the prebuilt locales selected in the NELL profile.
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library compiled American English UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-ru-ru
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Description: GNU C Library compiled Russian UTF-8 locale
+ NELL glibc component package.
+
