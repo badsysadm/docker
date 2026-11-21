@@ -4,6 +4,7 @@ etc/udev/rules.d
 etc/udev/udev.conf
 usr/bin/systemd-hwdb
 usr/bin/udevadm
+usr/lib/systemd/network/99-default.link
 usr/lib/systemd/system/breakpoint-pre-udev.service
 usr/lib/systemd/system/sockets.target.wants/systemd-udevd-control.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-udevd-kernel.socket

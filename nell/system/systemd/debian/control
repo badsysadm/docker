@@ -308,3 +308,15 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: System time and timezone management service
  NELL systemd service component packaged from the existing build artifacts.
+
+Package: systemd-networkd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Network configuration service
+ NELL systemd component packaged from the existing build artifacts.
+
+Package: systemd-localed
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: System locale and keyboard layout management service
+ NELL systemd component packaged from the existing build artifacts.

@@ -1,0 +1,12 @@
+usr/bin/localectl
+usr/lib/systemd/system/dbus-org.freedesktop.locale1.service
+usr/lib/systemd/system/systemd-localed.service
+usr/lib/systemd/systemd-localed
+usr/share/bash-completion/completions/localectl
+usr/share/dbus-1/interfaces/org.freedesktop.locale1.xml
+usr/share/dbus-1/system-services/org.freedesktop.locale1.service
+usr/share/dbus-1/system.d/org.freedesktop.locale1.conf
+usr/share/factory/etc/locale.conf
+usr/share/factory/etc/vconsole.conf
+usr/share/polkit-1/actions/org.freedesktop.locale1.policy
+usr/share/zsh/site-functions/_localectl
