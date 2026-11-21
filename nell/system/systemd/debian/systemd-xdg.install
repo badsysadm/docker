@@ -1,0 +1,4 @@
+etc/xdg/systemd/user
+usr/lib/systemd/systemd-xdg-autostart-condition
+usr/lib/systemd/user-generators/systemd-xdg-autostart-generator
+usr/lib/systemd/user/xdg-desktop-autostart.target

@@ -7,7 +7,6 @@ etc/systemd/system
 etc/systemd/system.conf
 etc/systemd/user
 etc/systemd/user.conf
-etc/xdg/systemd/user
 usr/bin/systemd-ac-power
 usr/bin/systemd-ask-password
 usr/bin/systemd-firstboot
@@ -162,9 +161,7 @@ usr/lib/systemd/systemd-shutdown
 usr/lib/systemd/systemd-sleep
 usr/lib/systemd/systemd-socket-proxyd
 usr/lib/systemd/systemd-update-utmp
-usr/lib/systemd/systemd-xdg-autostart-condition
 usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator
-usr/lib/systemd/user-generators/systemd-xdg-autostart-generator
 usr/lib/systemd/user-preset/90-systemd.preset
 usr/lib/systemd/user/app.slice
 usr/lib/systemd/user/background.slice
@@ -187,7 +184,6 @@ usr/lib/systemd/user/systemd-ask-password.socket
 usr/lib/systemd/user/systemd-ask-password@.service
 usr/lib/systemd/user/systemd-exit.service
 usr/lib/systemd/user/timers.target
-usr/lib/systemd/user/xdg-desktop-autostart.target
 usr/lib/systemd/varlink-bridges
 usr/lib/x86_64-linux-gnu/libnss_myhostname.so.2
 usr/lib/x86_64-linux-gnu/libnss_systemd.so.2

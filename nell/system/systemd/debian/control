@@ -401,3 +401,10 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: Optional systemd kernel configuration and integration services
  Kernel module loading, sysctl, binfmt, pstore, and kernel interface mounts.
+
+Package: systemd-xdg
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: XDG desktop autostart integration for systemd
+ User session generator, autostart condition helper, desktop autostart
+ target and XDG user configuration directory.
