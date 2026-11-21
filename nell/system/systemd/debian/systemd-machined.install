@@ -8,6 +8,7 @@ usr/lib/systemd/user/dbus-org.freedesktop.machine1.service
 usr/lib/systemd/user/sockets.target.wants/systemd-machined.socket
 usr/lib/systemd/user/systemd-machined.service
 usr/lib/systemd/user/systemd-machined.socket
+usr/lib/x86_64-linux-gnu/libnss_mymachines.so.2
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Image.xml
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Machine.xml
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Manager.xml

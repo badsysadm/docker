@@ -57,30 +57,6 @@ Build-Depends:
  libcrypt-dev,
  libdbus-1-dev
 
-Package: libnss-myhostname
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: NSS hostname fallback module
- NELL systemd 261 component packaged from the existing build artifacts.
-
-Package: libnss-mymachines
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-machined (= ${binary:Version})
-Description: NSS container hostname module
- NELL systemd 261 component packaged from the existing build artifacts.
-
-Package: libnss-resolve
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-resolved (= ${binary:Version})
-Description: NSS resolver module
- NELL systemd 261 component packaged from the existing build artifacts.
-
-Package: libnss-systemd
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: NSS dynamic user and group resolution
- NELL systemd 261 component packaged from the existing build artifacts.
-
 Package: libpam-systemd
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), systemd-logind (= ${binary:Version})
@@ -398,3 +374,17 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: Configuration extension image management
  systemd-confext and its system and initrd services.
+
+Package: libsystemd-static
+Architecture: amd64
+Depends: ${misc:Depends}, libsystemd-dev (= ${binary:Version})
+Multi-Arch: same
+Description: Static libsystemd development library
+ Position-independent static libsystemd archive for NELL builds.
+
+Package: libudev-static
+Architecture: amd64
+Depends: ${misc:Depends}, libudev-dev (= ${binary:Version})
+Multi-Arch: same
+Description: Static libudev development library
+ Position-independent static libudev archive for NELL builds.
