@@ -23,7 +23,6 @@ usr/lib/systemd/system/initrd-switch-root.target
 usr/lib/systemd/system/initrd-udevadm-cleanup-db.service
 usr/lib/systemd/system/initrd-usr-fs.target
 usr/lib/systemd/system/initrd.target
-usr/lib/systemd/system/initrd.target.wants/systemd-battery-check.service
 usr/lib/systemd/system/sockets.target.wants/systemd-factory-reset.socket
 usr/lib/systemd/system/systemd-bless-boot.service
 usr/lib/systemd/system/systemd-boot-check-no-failures.service
