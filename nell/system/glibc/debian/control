@@ -23,7 +23,7 @@ Description: GNU C Library shared library libm.so.6
 
 Package: glibc-libmvec
 Architecture: amd64
-Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libm (= ${binary:Version})
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libm (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
 Description: GNU C Library shared library libmvec.so.1
  Installs libmvec.so.1 for x86-64.
 
@@ -41,7 +41,7 @@ Description: GNU C Library shared library libBrokenLocale.so.1
 
 Package: glibc-libc-malloc-debug
 Architecture: amd64
-Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
 Description: GNU C Library shared library libc_malloc_debug.so.0
  Installs libc_malloc_debug.so.0 for x86-64.
 
@@ -89,7 +89,7 @@ Description: GNU C Library shared library libnss_files.so.2
 
 Package: glibc-libnss-hesiod
 Architecture: amd64
-Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version})
+Depends: ${misc:Depends}, ${shlibs:Depends}, glibc-libc (= ${binary:Version}), glibc-libresolv (= ${binary:Version})
 Description: GNU C Library shared library libnss_hesiod.so.2
  Installs libnss_hesiod.so.2 for x86-64.
 
