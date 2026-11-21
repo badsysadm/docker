@@ -65,7 +65,7 @@ Description: NSS hostname fallback module
 
 Package: libnss-mymachines
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-container (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-machined (= ${binary:Version})
 Description: NSS container hostname module
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -147,11 +147,62 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: systemd UEFI boot utilities
  NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-container
+
+Package: systemd-nspawn
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
-Description: Container and portable service tools
- NELL systemd 261 component packaged from the existing build artifacts.
+Description: Container execution using systemd-nspawn
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-machined
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Machine registration and management daemon
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-importd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Container and virtual machine image import daemon
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-portabled
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Portable services management daemon
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-vmspawn
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Virtual machine execution using systemd-vmspawn
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-mountfsd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: File system mount service
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-nsresourced
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Namespace resource management daemon
+ NELL systemd component packaged from the existing build artifacts.
+
+
+Package: systemd-storage
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Storage block and file system services
+ NELL systemd component packaged from the existing build artifacts.
+
 
 Package: systemd-coredump
 Architecture: amd64

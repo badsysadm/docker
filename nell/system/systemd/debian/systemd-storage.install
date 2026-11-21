@@ -1,0 +1,13 @@
+usr/lib/systemd/system/sockets.target.wants/systemd-storage-block.socket
+usr/lib/systemd/system/sockets.target.wants/systemd-storage-fs.socket
+usr/lib/systemd/system/systemd-storage-block.socket
+usr/lib/systemd/system/systemd-storage-block@.service
+usr/lib/systemd/system/systemd-storage-fs.socket
+usr/lib/systemd/system/systemd-storage-fs@.service
+usr/lib/systemd/system/systemd-storagetm.service
+usr/lib/systemd/systemd-storage-block
+usr/lib/systemd/systemd-storage-fs
+usr/lib/systemd/systemd-storagetm
+usr/lib/systemd/user/sockets.target.wants/systemd-storage-fs.socket
+usr/lib/systemd/user/systemd-storage-fs.socket
+usr/lib/systemd/user/systemd-storage-fs@.service

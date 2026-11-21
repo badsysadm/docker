@@ -1,0 +1,12 @@
+usr/bin/portablectl
+usr/lib/systemd/system/dbus-org.freedesktop.portable1.service
+usr/lib/systemd/system/systemd-portabled.service
+usr/lib/systemd/systemd-portabled
+usr/lib/systemd/user/dbus-org.freedesktop.portable1.service
+usr/lib/systemd/user/systemd-portabled.service
+usr/share/dbus-1/interfaces/org.freedesktop.portable1.Image.xml
+usr/share/dbus-1/interfaces/org.freedesktop.portable1.Manager.xml
+usr/share/dbus-1/services/org.freedesktop.portable1.service
+usr/share/dbus-1/system-services/org.freedesktop.portable1.service
+usr/share/dbus-1/system.d/org.freedesktop.portable1.conf
+usr/share/polkit-1/actions/org.freedesktop.portable1.policy
