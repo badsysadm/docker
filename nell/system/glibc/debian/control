@@ -113,6 +113,7 @@ Description: GNU C Library locale generation source data
 
 Package: glibc-locale-en-us
 Architecture: amd64
+Provides: locale-en (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
@@ -121,6 +122,7 @@ Description: GNU C Library compiled American English UTF-8 locale
 
 Package: glibc-locale-ru-ru
 Architecture: amd64
+Provides: locale-ru (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
@@ -137,6 +139,7 @@ Description: GNU C Library compiled C UTF-8 locale
 
 Package: glibc-locale-de-de
 Architecture: amd64
+Provides: locale-de (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
@@ -145,6 +148,7 @@ Description: GNU C Library compiled German UTF-8 locale
 
 Package: glibc-locale-fr-fr
 Architecture: amd64
+Provides: locale-fr (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
