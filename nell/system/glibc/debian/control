@@ -3,27 +3,18 @@ Section: system
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, bison, python3, linux-libc-dev
 
-Package: glibc-ld
+Package: glibc-libc
 Architecture: amd64
 Essential: yes
 Depends: ${misc:Depends}
 Breaks: libc6, libc-bin
 Replaces: libc6, libc-bin
-Description: GNU C Library x86-64 dynamic loader
- ELF interpreter for 64-bit programs.
-
-Package: glibc-libc
-Architecture: amd64
-Essential: yes
-Depends: ${misc:Depends}, glibc-ld (= ${binary:Version})
-Breaks: libc6
-Replaces: libc6
 Description: GNU C Library shared library libc.so.6
  Installs libc.so.6 for x86-64.
 
 Package: glibc-math
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: libc6
 Replaces: libc6
 Description: GNU C Library mathematical shared objects
@@ -64,7 +55,7 @@ Description: GNU C Library ABI compatibility shared objects
 
 Package: glibc-debug
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: libc6
 Replaces: libc6
 Description: GNU C Library debugging and profiling shared objects
@@ -89,7 +80,7 @@ Description: GNU C Library audit library
 
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-debug (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-debug (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
 Description: GNU C Library complete runtime metapackage
  Dependency-only package assembling individual NELL glibc libraries.
 
@@ -103,6 +94,7 @@ Description: GNU C Library development headers and static libraries
 
 Package: glibc-tools
 Architecture: amd64
+Provides: libc-bin (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
 Breaks: libc-bin, libc-dev-bin, libc-devtools, nscd
 Replaces: libc-bin, libc-dev-bin, libc-devtools, nscd
