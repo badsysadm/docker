@@ -69,8 +69,6 @@ usr/lib/systemd/system/graphical.target
 usr/lib/systemd/system/halt.target
 usr/lib/systemd/system/hibernate.target
 usr/lib/systemd/system/hybrid-sleep.target
-usr/lib/systemd/system/imports-pre.target
-usr/lib/systemd/system/imports.target
 usr/lib/systemd/system/kexec.target
 usr/lib/systemd/system/kmod-static-nodes.service
 usr/lib/systemd/system/ldconfig.service
@@ -78,8 +76,6 @@ usr/lib/systemd/system/local-fs-pre.target
 usr/lib/systemd/system/local-fs.target
 usr/lib/systemd/system/local-fs.target.wants/tmp.mount
 usr/lib/systemd/system/machine.slice
-usr/lib/systemd/system/machines.target
-usr/lib/systemd/system/machines.target.wants/var-lib-machines.mount
 usr/lib/systemd/system/modprobe@.service
 usr/lib/systemd/system/multi-user.target
 usr/lib/systemd/system/multi-user.target.wants/getty.target
@@ -99,7 +95,6 @@ usr/lib/systemd/system/quotaon@.service
 usr/lib/systemd/system/reboot.target
 usr/lib/systemd/system/remote-fs-pre.target
 usr/lib/systemd/system/remote-fs.target
-usr/lib/systemd/system/remote-fs.target.wants/var-lib-machines.mount
 usr/lib/systemd/system/rescue.service
 usr/lib/systemd/system/rescue.target
 usr/lib/systemd/system/rpcbind.target
@@ -121,7 +116,6 @@ usr/lib/systemd/system/sockets.target.wants/systemd-ask-password.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-mute-console.socket
 usr/lib/systemd/system/soft-reboot.target
 usr/lib/systemd/system/sound.target
-usr/lib/systemd/system/storage-target-mode.target
 usr/lib/systemd/system/suspend-then-hibernate.target
 usr/lib/systemd/system/suspend.target
 usr/lib/systemd/system/swap.target
@@ -132,7 +126,6 @@ usr/lib/systemd/system/sys-kernel-tracing.mount
 usr/lib/systemd/system/sysinit.target
 usr/lib/systemd/system/sysinit.target.wants/dev-hugepages.mount
 usr/lib/systemd/system/sysinit.target.wants/dev-mqueue.mount
-usr/lib/systemd/system/sysinit.target.wants/imports.target
 usr/lib/systemd/system/sysinit.target.wants/kmod-static-nodes.service
 usr/lib/systemd/system/sysinit.target.wants/ldconfig.service
 usr/lib/systemd/system/sysinit.target.wants/proc-sys-fs-binfmt_misc.automount
@@ -199,7 +192,6 @@ usr/lib/systemd/system/tmp.mount
 usr/lib/systemd/system/umount.target
 usr/lib/systemd/system/usb-gadget.target
 usr/lib/systemd/system/user-.slice.d/10-defaults.conf
-usr/lib/systemd/system/var-lib-machines.mount
 usr/lib/systemd/systemd
 usr/lib/systemd/systemd-battery-check
 usr/lib/systemd/systemd-binfmt
@@ -237,7 +229,6 @@ usr/lib/systemd/user/exit.target
 usr/lib/systemd/user/graphical-session-pre.target
 usr/lib/systemd/user/graphical-session.target
 usr/lib/systemd/user/machine.slice
-usr/lib/systemd/user/machines.target
 usr/lib/systemd/user/paths.target
 usr/lib/systemd/user/printer.target
 usr/lib/systemd/user/shutdown.target

@@ -2,6 +2,7 @@ usr/bin/storagectl
 usr/bin/systemd-mstack
 usr/lib/systemd/system/sockets.target.wants/systemd-storage-block.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-storage-fs.socket
+usr/lib/systemd/system/storage-target-mode.target
 usr/lib/systemd/system/systemd-storage-block.socket
 usr/lib/systemd/system/systemd-storage-block@.service
 usr/lib/systemd/system/systemd-storage-fs.socket
