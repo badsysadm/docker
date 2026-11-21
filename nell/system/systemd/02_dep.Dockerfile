@@ -6,6 +6,9 @@ ARG UTIL_LINUX_VERSION=2.42.2
 ARG ACL_VERSION=2.4.0
 ARG APPARMOR_VERSION=4.1.8
 ARG AUDIT_VERSION=4.2.1
+ARG LIBCAP_NG_VERSION=0.8.5
+ARG BZIP2_VERSION=1.0.8
+ARG CRACKLIB_VERSION=2.10.3
 ARG CURL_VERSION=8.23.0
 ARG ELFUTILS_VERSION=0.196
 ARG GLIB_VERSION=2.84.4
@@ -26,6 +29,9 @@ FROM oci.badsysadm.local:80/bin/utils/util-linux:${UTIL_LINUX_VERSION} AS util_l
 FROM oci.badsysadm.local:80/bin/security/acl:${ACL_VERSION} AS acl_image
 FROM oci.badsysadm.local:80/bin/security/apparmor:${APPARMOR_VERSION} AS apparmor_image
 FROM oci.badsysadm.local:80/bin/security/audit:${AUDIT_VERSION} AS audit_image
+FROM oci.badsysadm.local:80/bin/lib/libcap-ng:${LIBCAP_NG_VERSION} AS libcap_ng_image
+FROM oci.badsysadm.local:80/bin/lib/bzip2:${BZIP2_VERSION} AS bzip2_image
+FROM oci.badsysadm.local:80/bin/security/cracklib:${CRACKLIB_VERSION} AS cracklib_image
 FROM oci.badsysadm.local:80/bin/net/curl:${CURL_VERSION} AS curl_image
 FROM oci.badsysadm.local:80/bin/utils/elfutils:${ELFUTILS_VERSION} AS elfutils_image
 FROM oci.badsysadm.local:80/bin/lib/glib:${GLIB_VERSION} AS glib_image
@@ -51,11 +57,20 @@ COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/lib64/libssl.a
 COPY --from=openssl_image /target/usr/lib64/pkgconfig/ /usr/lib64/pkgconfig/
 COPY --from=acl_image /target/usr/include/sys/acl.h /usr/local/include/sys/acl.h
 COPY --from=acl_image /target/usr/lib/x86_64-linux-gnu/libacl.a /usr/local/lib/libacl.a
+COPY --from=acl_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libacl.pc /usr/local/lib/pkgconfig/libacl.pc
 COPY --from=apparmor_image /target/usr/include/sys/apparmor.h /usr/local/include/sys/apparmor.h
 COPY --from=apparmor_image /target/usr/lib/x86_64-linux-gnu/libapparmor.a /usr/lib/x86_64-linux-gnu/libapparmor.a
 COPY --from=apparmor_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libapparmor.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libapparmor.pc
 COPY --from=audit_image /target/usr/include/libaudit.h /usr/local/include/libaudit.h
 COPY --from=audit_image /target/usr/lib/libaudit.a /usr/local/lib/libaudit.a
+COPY --from=audit_image /target/usr/lib/pkgconfig/audit.pc /usr/local/lib/pkgconfig/audit.pc
+COPY --from=libcap_ng_image /target/usr/include/cap-ng.h /usr/local/include/cap-ng.h
+COPY --from=libcap_ng_image /target/usr/lib/libcap-ng.a /usr/local/lib/libcap-ng.a
+COPY --from=libcap_ng_image /target/usr/lib/pkgconfig/libcap-ng.pc /usr/local/lib/pkgconfig/libcap-ng.pc
+COPY --from=bzip2_image /target/usr/include/bzlib.h /usr/local/include/bzlib.h
+COPY --from=bzip2_image /target/usr/lib/libbz2.a /usr/local/lib/libbz2.a
+COPY --from=cracklib_image /target/usr/include/crack.h /usr/local/include/crack.h
+COPY --from=cracklib_image /target/usr/lib/libcrack.a /usr/local/lib/libcrack.a
 COPY --from=curl_image /target/usr/include/curl/ /usr/local/include/curl/
 COPY --from=curl_image /target/usr/lib/libcurl.a /usr/local/lib/libcurl.a
 COPY --from=curl_image /target/usr/lib/pkgconfig/libcurl.pc /usr/local/lib/pkgconfig/libcurl.pc
@@ -91,16 +106,20 @@ COPY --from=libbpf_image /target/usr/lib/pkgconfig/libbpf.pc /usr/lib/pkgconfig/
 COPY --from=dbus_image /target/usr/include/dbus-1.0/ /usr/local/include/dbus-1.0/
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/dbus-1.0/include/ /usr/local/lib/dbus-1.0/include/
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
+COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc /usr/local/lib/pkgconfig/dbus-1.pc
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/local/lib/libz.a
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/local/lib/pkgconfig/zlib.pc
 COPY --from=zstd_image /target/usr/include/zstd.h /usr/local/include/zstd.h
 COPY --from=zstd_image /target/usr/include/zdict.h /usr/local/include/zdict.h
 COPY --from=zstd_image /target/usr/include/zstd_errors.h /usr/local/include/zstd_errors.h
 COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
+COPY --from=zstd_image /target/usr/lib/pkgconfig/libzstd.pc /usr/local/lib/pkgconfig/libzstd.pc
 COPY --from=xzutils_image /target/usr/include/lzma.h /usr/local/include/lzma.h
 COPY --from=xzutils_image /target/usr/include/lzma/ /usr/local/include/lzma/
 COPY --from=xzutils_image /target/usr/lib/x86_64-linux-gnu/liblzma.a /usr/local/lib/liblzma.a
+COPY --from=xzutils_image /target/usr/lib/pkgconfig/liblzma.pc /usr/local/lib/pkgconfig/liblzma.pc
 
 COPY --from=libgcrypt_image /target/usr/include/gcrypt.h /usr/local/include/gcrypt.h
 COPY --from=libgcrypt_image /target/usr/lib/libgcrypt.a /usr/local/lib/libgcrypt.a
