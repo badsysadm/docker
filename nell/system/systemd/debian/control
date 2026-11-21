@@ -416,3 +416,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: First boot and initial host configuration helpers
  Initial system setup, machine ID initialization and persistence,
  and first-boot synchronization units.
+
+Package: systemd-run0
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-utils (= ${binary:Version}), libpam-systemd (= ${binary:Version})
+Description: Privileged command execution via systemd-run
+ run0 command, PAM service configuration, and empower Polkit rule.

@@ -179,6 +179,5 @@ usr/share/mime/packages/io.systemd.xml
 usr/share/polkit-1/actions/io.systemd.ask-password.policy
 usr/share/polkit-1/actions/io.systemd.credentials.policy
 usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
-usr/share/polkit-1/rules.d/empower.rules
 usr/share/systemd/kbd-model-map
 usr/share/systemd/language-fallback-map

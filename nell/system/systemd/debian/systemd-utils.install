@@ -1,5 +1,4 @@
 usr/bin/busctl
-usr/bin/run0
 usr/bin/systemctl
 usr/bin/systemd-analyze
 usr/bin/systemd-cgls
