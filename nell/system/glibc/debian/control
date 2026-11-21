@@ -15,17 +15,11 @@ Depends: ${misc:Depends}, glibc-ld (= ${binary:Version})
 Description: GNU C Library shared library libc.so.6
  Installs libc.so.6 for x86-64.
 
-Package: glibc-libm
+Package: glibc-math
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Description: GNU C Library shared library libm.so.6
- Installs libm.so.6 for x86-64.
-
-Package: glibc-libmvec
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libm (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
-Description: GNU C Library shared library libmvec.so.1
- Installs libmvec.so.1 for x86-64.
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-ld (= ${binary:Version})
+Description: GNU C Library mathematical shared objects
+ Mathematical and vector mathematical functions in libm.so.6 and libmvec.so.1.
 
 Package: glibc-libnsl
 Architecture: amd64
@@ -73,7 +67,7 @@ Description: GNU C Library audit library
 
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-libm (= ${binary:Version}), glibc-libmvec (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-debug (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-debug (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
 Description: GNU C Library complete runtime metapackage
  Dependency-only package assembling individual NELL glibc libraries.
 
