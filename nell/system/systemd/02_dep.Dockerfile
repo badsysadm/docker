@@ -93,6 +93,7 @@ COPY --from=gnutls_image /target/usr/lib/libgnutls.a /usr/lib/x86_64-linux-gnu/l
 COPY --from=liblz4_image /target/usr/lib/liblz4.a /usr/lib/x86_64-linux-gnu/liblz4.a
 COPY --from=libpcre2_image /target/usr/lib/libpcre2-8.a /usr/lib/x86_64-linux-gnu/libpcre2-8.a
 COPY --from=libbpf_image /target/usr/lib/libbpf.a /usr/lib/x86_64-linux-gnu/libbpf.a
+COPY --from=libbpf_image /target/usr/lib/pkgconfig/libbpf.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libbpf.pc
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/dbus-1.0/include/ /usr/lib/x86_64-linux-gnu/dbus-1.0/include/
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/lib/x86_64-linux-gnu/libdbus-1.a
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/libz.a /usr/lib/x86_64-linux-gnu/libz.a
