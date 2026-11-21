@@ -378,3 +378,10 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: System installation and provisioning utility
  systemd-sysinstall CLI, installation service and system-install target.
+
+Package: systemd-metrics
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Optional systemd metrics reporting services
+ Metrics collector, basic and cgroup metric providers, and their socket
+ activated services.

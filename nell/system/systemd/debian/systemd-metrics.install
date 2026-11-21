@@ -1,0 +1,7 @@
+usr/lib/systemd/system/systemd-report-basic.socket
+usr/lib/systemd/system/systemd-report-basic@.service
+usr/lib/systemd/system/systemd-report-cgroup.socket
+usr/lib/systemd/system/systemd-report-cgroup@.service
+usr/lib/systemd/systemd-report
+usr/lib/systemd/systemd-report-basic
+usr/lib/systemd/systemd-report-cgroup

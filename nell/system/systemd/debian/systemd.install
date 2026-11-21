@@ -191,10 +191,6 @@ usr/lib/systemd/system/systemd-quotacheck@.service
 usr/lib/systemd/system/systemd-random-seed.service
 usr/lib/systemd/system/systemd-reboot.service
 usr/lib/systemd/system/systemd-remount-fs.service
-usr/lib/systemd/system/systemd-report-basic.socket
-usr/lib/systemd/system/systemd-report-basic@.service
-usr/lib/systemd/system/systemd-report-cgroup.socket
-usr/lib/systemd/system/systemd-report-cgroup@.service
 usr/lib/systemd/system/systemd-soft-reboot.service
 usr/lib/systemd/system/systemd-suspend-then-hibernate.service
 usr/lib/systemd/system/systemd-suspend.service
@@ -226,9 +222,6 @@ usr/lib/systemd/systemd-quotacheck
 usr/lib/systemd/systemd-random-seed
 usr/lib/systemd/systemd-remount-fs
 usr/lib/systemd/systemd-reply-password
-usr/lib/systemd/systemd-report
-usr/lib/systemd/systemd-report-basic
-usr/lib/systemd/systemd-report-cgroup
 usr/lib/systemd/systemd-shutdown
 usr/lib/systemd/systemd-sleep
 usr/lib/systemd/systemd-socket-proxyd
