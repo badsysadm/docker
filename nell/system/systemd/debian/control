@@ -388,3 +388,16 @@ Depends: ${misc:Depends}, libudev-dev (= ${binary:Version})
 Multi-Arch: same
 Description: Static libudev development library
  Position-independent static libudev archive for NELL builds.
+
+Package: systemd-filesystem
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Optional systemd file system maintenance helpers
+ File system checking, growing, formatting, quota validation, and
+ volatile root preparation with associated service units.
+
+Package: systemd-kernel
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Optional systemd kernel configuration and integration services
+ Kernel module loading, sysctl, binfmt, pstore, and kernel interface mounts.

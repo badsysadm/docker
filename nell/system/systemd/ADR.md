@@ -12,6 +12,7 @@
 - kmod использовать из Debian build-зависимости `libkmod-dev`, как в исходной рабочей сборке.
 - `libsystemd` собирать статически с PIC, сохраняя существующие shared-link режимы для компонентов, явно заданные исходным профилем.
 - После установки удалять man, info и doc из конечного bundle.
+- File-system maintenance helpers and kernel configuration services are split into optional `systemd-filesystem` and `systemd-kernel` Debian packages, so lightweight containers can omit host-only functionality without removing core service-manager units.
 - TPM2-специфичные исполняемые файлы, PCRLock/NvPCR-данные, systemd units и cryptsetup TPM2-плагин поставлять отдельным необязательным Debian-пакетом `systemd-tpm2`; `systemd` и `systemd-boot` не должны требовать его установки.
 
 ## Последствия
