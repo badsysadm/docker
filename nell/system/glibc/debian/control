@@ -63,35 +63,11 @@ Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Description: GNU C Library shared library libnsl.so.1
  Installs libnsl.so.1 for x86-64.
 
-Package: glibc-libnss-compat
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Description: GNU C Library shared library libnss_compat.so.2
- Installs libnss_compat.so.2 for x86-64.
-
-Package: glibc-libnss-db
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Description: GNU C Library shared library libnss_db.so.2
- Installs libnss_db.so.2 for x86-64.
-
-Package: glibc-libnss-dns
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Description: GNU C Library shared library libnss_dns.so.2
- Installs libnss_dns.so.2 for x86-64.
-
-Package: glibc-libnss-files
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Description: GNU C Library shared library libnss_files.so.2
- Installs libnss_files.so.2 for x86-64.
-
-Package: glibc-libnss-hesiod
+Package: glibc-libnss
 Architecture: amd64
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-libresolv (= ${binary:Version})
-Description: GNU C Library shared library libnss_hesiod.so.2
- Installs libnss_hesiod.so.2 for x86-64.
+Description: GNU C Library NSS modules
+ Name Service Switch modules for compatibility, databases, DNS, files and Hesiod.
 
 Package: glibc-libpcprofile
 Architecture: amd64
@@ -143,7 +119,7 @@ Description: GNU C Library audit library
 
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-libm (= ${binary:Version}), glibc-libmvec (= ${binary:Version}), glibc-libanl (= ${binary:Version}), glibc-libbrokenlocale (= ${binary:Version}), glibc-libc-malloc-debug (= ${binary:Version}), glibc-libdl (= ${binary:Version}), glibc-libmemusage (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libnss-compat (= ${binary:Version}), glibc-libnss-db (= ${binary:Version}), glibc-libnss-dns (= ${binary:Version}), glibc-libnss-files (= ${binary:Version}), glibc-libnss-hesiod (= ${binary:Version}), glibc-libpcprofile (= ${binary:Version}), glibc-libpthread (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-librt (= ${binary:Version}), glibc-libthread-db (= ${binary:Version}), glibc-libutil (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-ld (= ${binary:Version}), glibc-libc (= ${binary:Version}), glibc-libm (= ${binary:Version}), glibc-libmvec (= ${binary:Version}), glibc-libanl (= ${binary:Version}), glibc-libbrokenlocale (= ${binary:Version}), glibc-libc-malloc-debug (= ${binary:Version}), glibc-libdl (= ${binary:Version}), glibc-libmemusage (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libpcprofile (= ${binary:Version}), glibc-libpthread (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-librt (= ${binary:Version}), glibc-libthread-db (= ${binary:Version}), glibc-libutil (= ${binary:Version}), glibc-gconv (= ${binary:Version}), glibc-audit (= ${binary:Version})
 Description: GNU C Library complete runtime metapackage
  Dependency-only package assembling individual NELL glibc libraries.
 
