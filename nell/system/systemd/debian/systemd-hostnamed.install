@@ -4,9 +4,7 @@ usr/lib/systemd/system/sockets.target.wants/systemd-hostnamed.socket
 usr/lib/systemd/system/systemd-hostnamed.service
 usr/lib/systemd/system/systemd-hostnamed.socket
 usr/lib/systemd/systemd-hostnamed
-usr/share/bash-completion/completions/hostnamectl
 usr/share/dbus-1/interfaces/org.freedesktop.hostname1.xml
 usr/share/dbus-1/system-services/org.freedesktop.hostname1.service
 usr/share/dbus-1/system.d/org.freedesktop.hostname1.conf
 usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
-usr/share/zsh/site-functions/_hostnamectl

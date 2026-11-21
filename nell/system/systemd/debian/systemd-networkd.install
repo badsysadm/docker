@@ -36,7 +36,6 @@ usr/lib/systemd/systemd-networkd
 usr/lib/systemd/systemd-networkd-wait-online
 usr/lib/sysusers.d/systemd-network.conf
 usr/lib/tmpfiles.d/systemd-network.conf
-usr/share/bash-completion/completions/networkctl
 usr/share/dbus-1/interfaces/org.freedesktop.network1.DHCPServer.xml
 usr/share/dbus-1/interfaces/org.freedesktop.network1.DHCPv4Client.xml
 usr/share/dbus-1/interfaces/org.freedesktop.network1.DHCPv6Client.xml
@@ -47,4 +46,3 @@ usr/share/dbus-1/system-services/org.freedesktop.network1.service
 usr/share/dbus-1/system.d/org.freedesktop.network1.conf
 usr/share/polkit-1/actions/org.freedesktop.network1.policy
 usr/share/polkit-1/rules.d/systemd-networkd.rules
-usr/share/zsh/site-functions/_networkctl

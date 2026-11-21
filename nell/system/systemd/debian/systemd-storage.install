@@ -15,5 +15,3 @@ usr/lib/systemd/user/systemd-storage-fs.socket
 usr/lib/systemd/user/systemd-storage-fs@.service
 usr/sbin/mount.mstack
 usr/sbin/mount.storage
-usr/share/bash-completion/completions/storagectl
-usr/share/zsh/site-functions/_storagectl

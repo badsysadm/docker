@@ -1,4 +1,3 @@
 usr/bin/systemd-vmspawn
 usr/lib/systemd/system/systemd-vmspawn@.service
 usr/lib/systemd/user/systemd-vmspawn@.service
-usr/share/bash-completion/completions/systemd-vmspawn

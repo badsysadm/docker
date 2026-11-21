@@ -8,8 +8,6 @@ usr/lib/systemd/system/systemd-resolved.service
 usr/lib/systemd/systemd-resolved
 usr/lib/sysusers.d/systemd-resolve.conf
 usr/lib/tmpfiles.d/systemd-resolve.conf
-usr/share/bash-completion/completions/resolvectl
-usr/share/bash-completion/completions/systemd-resolve
 usr/share/dbus-1/interfaces/org.freedesktop.resolve1.DnsDelegate.xml
 usr/share/dbus-1/interfaces/org.freedesktop.resolve1.DnssdService.xml
 usr/share/dbus-1/interfaces/org.freedesktop.resolve1.Link.xml
@@ -17,4 +15,3 @@ usr/share/dbus-1/interfaces/org.freedesktop.resolve1.Manager.xml
 usr/share/dbus-1/system-services/org.freedesktop.resolve1.service
 usr/share/dbus-1/system.d/org.freedesktop.resolve1.conf
 usr/share/polkit-1/actions/org.freedesktop.resolve1.policy
-usr/share/zsh/site-functions/_resolvectl

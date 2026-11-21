@@ -8,7 +8,6 @@ usr/lib/systemd/user/dbus-org.freedesktop.machine1.service
 usr/lib/systemd/user/sockets.target.wants/systemd-machined.socket
 usr/lib/systemd/user/systemd-machined.service
 usr/lib/systemd/user/systemd-machined.socket
-usr/share/bash-completion/completions/machinectl
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Image.xml
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Machine.xml
 usr/share/dbus-1/interfaces/org.freedesktop.machine1.Manager.xml
@@ -16,4 +15,3 @@ usr/share/dbus-1/services/org.freedesktop.machine1.service
 usr/share/dbus-1/system-services/org.freedesktop.machine1.service
 usr/share/dbus-1/system.d/org.freedesktop.machine1.conf
 usr/share/polkit-1/actions/org.freedesktop.machine1.policy
-usr/share/zsh/site-functions/_machinectl

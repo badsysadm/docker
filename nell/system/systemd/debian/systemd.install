@@ -448,4 +448,3 @@ usr/share/systemd/gatewayd/browse.html
 usr/share/systemd/kbd-model-map
 usr/share/systemd/language-fallback-map
 usr/share/user-tmpfiles.d/20-systemd-varlink.conf
-usr/share/zsh/site-functions/_systemd-tmpfiles

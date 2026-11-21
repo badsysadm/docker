@@ -39,6 +39,3 @@ usr/lib/systemd/systemd-bsod
 usr/lib/systemd/systemd-journald
 usr/lib/sysusers.d/systemd-journal.conf
 usr/lib/tmpfiles.d/journal-nocow.conf
-usr/share/bash-completion/completions/journalctl
-usr/share/bash-completion/completions/systemd-cat
-usr/share/zsh/site-functions/_journalctl

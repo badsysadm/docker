@@ -324,5 +324,18 @@ Description: System locale and keyboard layout management service
 Package: systemd-utils
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Recommends: systemd-bash-completion, systemd-zsh-completion
 Description: systemd command-line management and diagnostic utilities
  User-facing administration and diagnostic commands and shell completions.
+
+Package: systemd-bash-completion
+Architecture: all
+Depends: ${misc:Depends}
+Description: Bash completion helpers for systemd commands
+ Bash command-line completion definitions for systemd and its utilities.
+
+Package: systemd-zsh-completion
+Architecture: all
+Depends: ${misc:Depends}
+Description: Zsh completion helpers for systemd commands
+ Zsh command-line completion definitions for systemd and its utilities.
