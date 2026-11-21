@@ -87,7 +87,8 @@ Description: GNU C Library complete runtime metapackage
 
 Package: glibc-dev
 Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-debug (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-libnss (= ${binary:Version})
+Suggests: glibc-debug (= ${binary:Version})
 Breaks: libc6-dev
 Replaces: libc6-dev
 Description: GNU C Library development headers and static libraries
@@ -124,5 +125,29 @@ Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
 Description: GNU C Library compiled Russian UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-c-utf8
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled C UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-de-de
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled German UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-fr-fr
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled French UTF-8 locale
  NELL glibc component package.
 

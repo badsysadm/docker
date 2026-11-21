@@ -10,7 +10,7 @@ RUN ../configure --prefix=/usr
 RUN make -j$(nproc)
 RUN make install DESTDIR=/src/target
 
-ARG LOCALES="C.UTF-8/UTF-8 en_US.UTF-8/UTF-8 ru_RU.UTF-8/UTF-8"
+ARG LOCALES="C.UTF-8/UTF-8 en_US.UTF-8/UTF-8 ru_RU.UTF-8/UTF-8 de_DE.UTF-8/UTF-8 fr_FR.UTF-8/UTF-8"
 RUN echo "SUPPORTED-LOCALES=\\" > ../localedata/SUPPORTED && \
     for loc in ${LOCALES}; do echo "$loc \\" >> ../localedata/SUPPORTED; done
 RUN make localedata/install-locale-files DESTDIR=/src/target

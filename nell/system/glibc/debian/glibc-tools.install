@@ -20,3 +20,4 @@ usr/sbin
 usr/libexec/getconf
 etc/rpc
 debian/conf/ld.so.conf etc/
+debian/conf/gai.conf etc/
