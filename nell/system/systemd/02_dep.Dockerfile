@@ -107,4 +107,26 @@ COPY --from=util_linux_image /target/usr/lib/libblkid.a /usr/lib/x86_64-linux-gn
 COPY --from=util_linux_image /target/usr/lib/libmount.a /usr/lib/x86_64-linux-gnu/libmount.a
 COPY --from=util_linux_image /target/usr/lib/libfdisk.a /usr/lib/x86_64-linux-gnu/libfdisk.a
 
+COPY --from=openssl_image /target/usr/lib64/pkgconfig/ /usr/lib64/pkgconfig/
+COPY --from=acl_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libacl.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libacl.pc
+COPY --from=apparmor_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libapparmor.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libapparmor.pc
+COPY --from=audit_image /target/usr/lib/pkgconfig/audit.pc /usr/lib/pkgconfig/audit.pc
+COPY --from=libcap_ng_image /target/usr/lib/pkgconfig/libcap-ng.pc /usr/lib/pkgconfig/libcap-ng.pc
+COPY --from=curl_image /target/usr/lib/pkgconfig/libcurl.pc /usr/lib/pkgconfig/libcurl.pc
+COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libelf.pc
+COPY --from=elfutils_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/libdw.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libdw.pc
+COPY --from=glib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/ /usr/lib/x86_64-linux-gnu/pkgconfig/
+COPY --from=gnutls_image /target/usr/lib/pkgconfig/gnutls.pc /usr/lib/pkgconfig/gnutls.pc
+COPY --from=liblz4_image /target/usr/lib/pkgconfig/liblz4.pc /usr/lib/pkgconfig/liblz4.pc
+COPY --from=libpcre2_image /target/usr/lib/pkgconfig/libpcre2-8.pc /usr/lib/pkgconfig/libpcre2-8.pc
+COPY --from=libbpf_image /target/usr/lib/pkgconfig/libbpf.pc /usr/lib/pkgconfig/libbpf.pc
+COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc
+COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc
+COPY --from=zstd_image /target/usr/lib/pkgconfig/libzstd.pc /usr/lib/pkgconfig/libzstd.pc
+COPY --from=libgcrypt_image /target/usr/lib/pkgconfig/libgcrypt.pc /usr/lib/pkgconfig/libgcrypt.pc
+COPY --from=libgpg_error_image /target/usr/lib/pkgconfig/gpg-error.pc /usr/lib/pkgconfig/gpg-error.pc
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/blkid.pc
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/mount.pc
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/fdisk.pc /usr/lib/pkgconfig/fdisk.pc
+
 COPY --from=src_image /src/ /src

@@ -37,24 +37,6 @@ Build-Depends:
  clang,
  bpftool,
  libcrypt-dev,
- libacl1-dev,
- libapparmor-dev,
- libaudit-dev,
- libblkid-dev,
- libcurl4-openssl-dev,
- libdw-dev,
- libelf-dev,
- libgcrypt20-dev,
- libglib2.0-dev,
- libgnutls28-dev,
- liblz4-dev,
- libmount-dev,
- libpcre2-dev,
- libzstd-dev,
- zlib1g-dev,
- libfdisk-dev,
- libdbus-1-dev
-
 
 Package: libpam-systemd
 Architecture: amd64
