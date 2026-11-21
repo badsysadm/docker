@@ -1,5 +1,8 @@
 ARG VERSION=262.2
 ARG OPENSSL_VERSION=3.6.5
+ARG LIBGCRYPT_VERSION=1.12.4
+ARG LIBGPG_ERROR_VERSION=1.61
+ARG UTIL_LINUX_VERSION=2.42.2
 ARG ACL_VERSION=2.4.0
 ARG APPARMOR_VERSION=4.1.8
 ARG AUDIT_VERSION=4.2.1
@@ -17,6 +20,9 @@ ARG XZUTILS_VERSION=5.6.2
 
 FROM oci.badsysadm.local:80/src/system/systemd:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/bin/security/openssl:${OPENSSL_VERSION} AS openssl_image
+FROM oci.badsysadm.local:80/bin/lib/libgcrypt:${LIBGCRYPT_VERSION} AS libgcrypt_image
+FROM oci.badsysadm.local:80/bin/lib/libgpg-error:${LIBGPG_ERROR_VERSION} AS libgpg_error_image
+FROM oci.badsysadm.local:80/bin/utils/util-linux:${UTIL_LINUX_VERSION} AS util_linux_image
 FROM oci.badsysadm.local:80/bin/security/acl:${ACL_VERSION} AS acl_image
 FROM oci.badsysadm.local:80/bin/security/apparmor:${APPARMOR_VERSION} AS apparmor_image
 FROM oci.badsysadm.local:80/bin/security/audit:${AUDIT_VERSION} AS audit_image
@@ -40,12 +46,12 @@ RUN apt-get -qq update
 RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
 
 COPY --from=openssl_image /target/usr/include/openssl/ /usr/local/include/openssl/
-COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/local/lib/libcrypto.a
-COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/local/lib/libssl.a
-COPY --from=openssl_image /target/usr/lib64/pkgconfig/ /usr/local/lib/pkgconfig/
-COPY --from=acl_image /target/usr/include/sys/acl.h /usr/local/include/acl.h
+COPY --from=openssl_image /target/usr/lib64/libcrypto.a /usr/lib64/libcrypto.a
+COPY --from=openssl_image /target/usr/lib64/libssl.a /usr/lib64/libssl.a
+COPY --from=openssl_image /target/usr/lib64/pkgconfig/ /usr/lib64/pkgconfig/
+COPY --from=acl_image /target/usr/include/sys/acl.h /usr/local/include/sys/acl.h
 COPY --from=acl_image /target/usr/lib/x86_64-linux-gnu/libacl.a /usr/local/lib/libacl.a
-COPY --from=apparmor_image /target/usr/include/sys/apparmor.h /usr/local/include/apparmor.h
+COPY --from=apparmor_image /target/usr/include/sys/apparmor.h /usr/local/include/sys/apparmor.h
 COPY --from=apparmor_image /target/usr/lib/x86_64-linux-gnu/libapparmor.a /usr/local/lib/libapparmor.a
 COPY --from=audit_image /target/usr/include/libaudit.h /usr/local/include/libaudit.h
 COPY --from=audit_image /target/usr/lib/libaudit.a /usr/local/lib/libaudit.a
@@ -82,6 +88,7 @@ COPY --from=libbpf_image /target/usr/include/bpf/ /usr/local/include/bpf/
 COPY --from=libbpf_image /target/usr/lib/libbpf.a /usr/local/lib/libbpf.a
 COPY --from=libbpf_image /target/usr/lib/pkgconfig/libbpf.pc /usr/local/lib/pkgconfig/libbpf.pc
 COPY --from=dbus_image /target/usr/include/dbus-1.0/ /usr/local/include/dbus-1.0/
+COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/dbus-1.0/include/ /usr/local/lib/dbus-1.0/include/
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/libdbus-1.a /usr/local/lib/libdbus-1.a
 COPY --from=zlib_image /target/usr/include/zlib.h /usr/local/include/zlib.h
 COPY --from=zlib_image /target/usr/include/zconf.h /usr/local/include/zconf.h
@@ -93,5 +100,21 @@ COPY --from=zstd_image /target/usr/lib/libzstd.a /usr/local/lib/libzstd.a
 COPY --from=xzutils_image /target/usr/include/lzma.h /usr/local/include/lzma.h
 COPY --from=xzutils_image /target/usr/include/lzma/ /usr/local/include/lzma/
 COPY --from=xzutils_image /target/usr/lib/x86_64-linux-gnu/liblzma.a /usr/local/lib/liblzma.a
+
+COPY --from=libgcrypt_image /target/usr/include/gcrypt.h /usr/local/include/gcrypt.h
+COPY --from=libgcrypt_image /target/usr/lib/libgcrypt.a /usr/local/lib/libgcrypt.a
+COPY --from=libgcrypt_image /target/usr/lib/pkgconfig/libgcrypt.pc /usr/local/lib/pkgconfig/libgcrypt.pc
+COPY --from=libgpg_error_image /target/usr/include/gpg-error.h /usr/local/include/gpg-error.h
+COPY --from=libgpg_error_image /target/usr/lib/libgpg-error.a /usr/local/lib/libgpg-error.a
+COPY --from=libgpg_error_image /target/usr/lib/pkgconfig/gpg-error.pc /usr/local/lib/pkgconfig/gpg-error.pc
+COPY --from=util_linux_image /target/usr/include/blkid/ /usr/local/include/blkid/
+COPY --from=util_linux_image /target/usr/include/libmount/ /usr/local/include/libmount/
+COPY --from=util_linux_image /target/usr/include/libfdisk/ /usr/local/include/libfdisk/
+COPY --from=util_linux_image /target/usr/lib/libblkid.a /usr/local/lib/libblkid.a
+COPY --from=util_linux_image /target/usr/lib/libmount.a /usr/local/lib/libmount.a
+COPY --from=util_linux_image /target/usr/lib/libfdisk.a /usr/local/lib/libfdisk.a
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/blkid.pc /usr/local/lib/pkgconfig/blkid.pc
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/mount.pc /usr/local/lib/pkgconfig/mount.pc
+COPY --from=util_linux_image /target/usr/lib/pkgconfig/fdisk.pc /usr/local/lib/pkgconfig/fdisk.pc
 
 COPY --from=src_image /src/ /src
