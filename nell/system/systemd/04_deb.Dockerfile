@@ -22,7 +22,7 @@ RUN dh_installlogrotate
 RUN dh_installmodules
 RUN dh_installpam
 RUN dh_installsystemd --no-enable --no-start
-RUN dh_installsystemduser --no-enable --no-start
+RUN dh_installsystemduser --no-enable
 RUN dh_installsysusers
 RUN dh_installtmpfiles
 RUN dh_installudev
