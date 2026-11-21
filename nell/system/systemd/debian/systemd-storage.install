@@ -15,3 +15,4 @@ usr/lib/systemd/user/systemd-storage-fs.socket
 usr/lib/systemd/user/systemd-storage-fs@.service
 usr/sbin/mount.mstack
 usr/sbin/mount.storage
+usr/share/polkit-1/actions/io.systemd.storage.policy

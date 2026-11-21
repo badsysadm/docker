@@ -86,6 +86,7 @@ usr/lib/systemd/system/sysinit.target.wants/systemd-tpm2-setup-early.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-tpm2-setup.service
 usr/lib/systemd/system/systemd-bless-boot.service
 usr/lib/systemd/system/systemd-boot-check-no-failures.service
+usr/lib/systemd/system/systemd-boot-clear-sysfail.service
 usr/lib/systemd/system/systemd-boot-random-seed.service
 usr/lib/systemd/system/systemd-boot-update.service
 usr/lib/systemd/system/systemd-bootctl.socket

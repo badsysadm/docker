@@ -2,3 +2,4 @@ usr/lib/systemd/system/systemd-nsresourced.service
 usr/lib/systemd/system/systemd-nsresourced.socket
 usr/lib/systemd/systemd-nsresourced
 usr/lib/systemd/systemd-nsresourcework
+usr/share/polkit-1/actions/io.systemd.namespace-resource.policy

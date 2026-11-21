@@ -21,6 +21,7 @@ usr/lib/systemd/user/portable/profile/nonetwork/service.conf
 usr/lib/systemd/user/portable/profile/strict/service.conf
 usr/lib/systemd/user/portable/profile/trusted/service.conf
 usr/lib/systemd/user/systemd-portabled.service
+usr/lib/tmpfiles.d/portables.conf
 usr/share/dbus-1/interfaces/org.freedesktop.portable1.Image.xml
 usr/share/dbus-1/interfaces/org.freedesktop.portable1.Manager.xml
 usr/share/dbus-1/services/org.freedesktop.portable1.service

@@ -8,3 +8,8 @@ usr/lib/systemd/repart/definitions/portable.repart.d/30-root-verity-sig.conf
 usr/lib/systemd/repart/definitions/sysext.repart.d/10-root.conf
 usr/lib/systemd/repart/definitions/sysext.repart.d/20-root-verity.conf
 usr/lib/systemd/repart/definitions/sysext.repart.d/30-root-verity-sig.conf
+usr/lib/systemd/system/sockets.target.wants/systemd-repart.socket
+usr/lib/systemd/system/sysinit.target.wants/systemd-repart.service
+usr/lib/systemd/system/systemd-repart.service
+usr/lib/systemd/system/systemd-repart.socket
+usr/lib/systemd/system/systemd-repart@.service
