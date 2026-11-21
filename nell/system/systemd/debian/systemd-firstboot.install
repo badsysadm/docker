@@ -1,0 +1,7 @@
+usr/bin/systemd-firstboot
+usr/bin/systemd-machine-id-setup
+usr/lib/systemd/system/first-boot-complete.target
+usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service
+usr/lib/systemd/system/sysinit.target.wants/systemd-machine-id-commit.service
+usr/lib/systemd/system/systemd-firstboot.service
+usr/lib/systemd/system/systemd-machine-id-commit.service

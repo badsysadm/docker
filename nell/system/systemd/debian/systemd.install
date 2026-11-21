@@ -8,8 +8,6 @@ etc/systemd/system.conf
 etc/systemd/user
 etc/systemd/user.conf
 usr/bin/systemd-ask-password
-usr/bin/systemd-firstboot
-usr/bin/systemd-machine-id-setup
 usr/bin/systemd-mute-console
 usr/bin/systemd-notify
 usr/bin/systemd-pty-forward
@@ -49,7 +47,6 @@ usr/lib/systemd/system/emergency.service
 usr/lib/systemd/system/emergency.target
 usr/lib/systemd/system/exit.target
 usr/lib/systemd/system/final.target
-usr/lib/systemd/system/first-boot-complete.target
 usr/lib/systemd/system/getty-pre.target
 usr/lib/systemd/system/getty.target
 usr/lib/systemd/system/getty@.service
@@ -106,9 +103,7 @@ usr/lib/systemd/system/sysinit.target.wants/dev-hugepages.mount
 usr/lib/systemd/system/sysinit.target.wants/dev-mqueue.mount
 usr/lib/systemd/system/sysinit.target.wants/ldconfig.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-ask-password-console.path
-usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-hibernate-clear.service
-usr/lib/systemd/system/sysinit.target.wants/systemd-machine-id-commit.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-update-utmp.service
 usr/lib/systemd/system/system-systemd\x2dmute\x2dconsole.slice
 usr/lib/systemd/system/system-update-cleanup.service
@@ -121,14 +116,12 @@ usr/lib/systemd/system/systemd-ask-password-wall.service
 usr/lib/systemd/system/systemd-ask-password.socket
 usr/lib/systemd/system/systemd-ask-password@.service
 usr/lib/systemd/system/systemd-exit.service
-usr/lib/systemd/system/systemd-firstboot.service
 usr/lib/systemd/system/systemd-halt.service
 usr/lib/systemd/system/systemd-hibernate-clear.service
 usr/lib/systemd/system/systemd-hibernate-resume.service
 usr/lib/systemd/system/systemd-hibernate.service
 usr/lib/systemd/system/systemd-hybrid-sleep.service
 usr/lib/systemd/system/systemd-kexec.service
-usr/lib/systemd/system/systemd-machine-id-commit.service
 usr/lib/systemd/system/systemd-mute-console.socket
 usr/lib/systemd/system/systemd-mute-console@.service
 usr/lib/systemd/system/systemd-poweroff.service
