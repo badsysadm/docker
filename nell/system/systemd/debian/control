@@ -59,6 +59,6 @@ Build-Depends:
 
 Package: systemd
 Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: system and service manager
+ NELL systemd service manager, utilities, libraries and system integrations.
