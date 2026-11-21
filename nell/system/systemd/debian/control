@@ -125,7 +125,7 @@ Description: libudev shared library
 Package: systemd
 Architecture: amd64
 Static-Built-Using: gcc
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version}), systemd-sysusers (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -362,6 +362,19 @@ Description: Optional TPM 2.0 and PCR management components for systemd
 Package: systemd-ssh
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Recommends: systemd-userdbd (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version})
 Description: Optional SSH socket and proxy integration for systemd
  SSH socket generator, SSH proxy and issue helpers, SSH configuration,
  SSH access target, and optional SSH user database integration.
+
+Package: systemd-sysusers
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
+Description: System user and group allocation manager
+ systemd-sysusers, early boot unit, and base sysusers definitions.
+
+Package: systemd-sysinstall
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: System installation and provisioning utility
+ systemd-sysinstall CLI, installation service and system-install target.

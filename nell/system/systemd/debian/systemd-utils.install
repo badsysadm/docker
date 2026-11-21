@@ -15,7 +15,6 @@ usr/bin/systemd-mount
 usr/bin/systemd-path
 usr/bin/systemd-run
 usr/bin/systemd-socket-activate
-usr/bin/systemd-sysinstall
 usr/bin/systemd-umount
 usr/bin/systemd-vpick
 usr/bin/varlinkctl
