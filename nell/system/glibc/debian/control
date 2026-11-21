@@ -156,3 +156,39 @@ Replaces: locales-all
 Description: GNU C Library compiled French UTF-8 locale
  NELL glibc component package.
 
+Package: glibc-locale-es-es
+Architecture: amd64
+Provides: locale-es (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Spanish UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-kk-kz
+Architecture: amd64
+Provides: locale-kk (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Kazakh UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-uk-ua
+Architecture: amd64
+Provides: locale-uk (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Ukrainian UTF-8 locale
+ NELL glibc component package.
+
+Package: glibc-locale-tr-tr
+Architecture: amd64
+Provides: locale-tr (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Turkish UTF-8 locale
+ NELL glibc component package.
+
