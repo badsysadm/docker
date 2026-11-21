@@ -151,7 +151,6 @@ usr/lib/systemd/system/sysinit.target.wants/systemd-machine-id-commit.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-modules-load.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-random-seed.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-sysctl.service
-usr/lib/systemd/system/sysinit.target.wants/systemd-update-done.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-update-utmp.service
 usr/lib/systemd/system/system-systemd\x2dmute\x2dconsole.slice
 usr/lib/systemd/system/system-update-cleanup.service
@@ -195,7 +194,6 @@ usr/lib/systemd/system/systemd-soft-reboot.service
 usr/lib/systemd/system/systemd-suspend-then-hibernate.service
 usr/lib/systemd/system/systemd-suspend.service
 usr/lib/systemd/system/systemd-sysctl.service
-usr/lib/systemd/system/systemd-update-done.service
 usr/lib/systemd/system/systemd-update-utmp.service
 usr/lib/systemd/system/systemd-validatefs@.service
 usr/lib/systemd/system/systemd-volatile-root.service
@@ -227,7 +225,6 @@ usr/lib/systemd/systemd-sleep
 usr/lib/systemd/systemd-socket-proxyd
 usr/lib/systemd/systemd-sysctl
 usr/lib/systemd/systemd-sysroot-fstab-check
-usr/lib/systemd/systemd-update-done
 usr/lib/systemd/systemd-update-utmp
 usr/lib/systemd/systemd-validatefs
 usr/lib/systemd/systemd-volatile-root

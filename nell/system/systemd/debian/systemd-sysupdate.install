@@ -1,13 +1,16 @@
 usr/bin/systemd-sysupdate
 usr/bin/updatectl
 usr/lib/systemd/system/dbus-org.freedesktop.sysupdate1.service
+usr/lib/systemd/system/sysinit.target.wants/systemd-update-done.service
 usr/lib/systemd/system/systemd-sysupdate-reboot.service
 usr/lib/systemd/system/systemd-sysupdate-reboot.timer
 usr/lib/systemd/system/systemd-sysupdate.service
 usr/lib/systemd/system/systemd-sysupdate.timer
 usr/lib/systemd/system/systemd-sysupdated.service
+usr/lib/systemd/system/systemd-update-done.service
 usr/lib/systemd/systemd-sysupdate
 usr/lib/systemd/systemd-sysupdated
+usr/lib/systemd/systemd-update-done
 usr/share/dbus-1/interfaces/org.freedesktop.sysupdate1.Job.xml
 usr/share/dbus-1/interfaces/org.freedesktop.sysupdate1.Manager.xml
 usr/share/dbus-1/interfaces/org.freedesktop.sysupdate1.Target.xml
