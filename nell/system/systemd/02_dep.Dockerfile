@@ -120,6 +120,7 @@ COPY --from=gnutls_image /target/usr/lib/pkgconfig/gnutls.pc /usr/lib/pkgconfig/
 COPY --from=liblz4_image /target/usr/lib/pkgconfig/liblz4.pc /usr/lib/pkgconfig/liblz4.pc
 COPY --from=libpcre2_image /target/usr/lib/pkgconfig/libpcre2-8.pc /usr/lib/pkgconfig/libpcre2-8.pc
 COPY --from=dbus_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc
+RUN sed -i '/^Requires.private: libsystemd/d' /usr/lib/x86_64-linux-gnu/pkgconfig/dbus-1.pc
 COPY --from=zlib_image /target/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc /usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc
 COPY --from=zstd_image /target/usr/lib/pkgconfig/libzstd.pc /usr/lib/pkgconfig/libzstd.pc
 COPY --from=libgcrypt_image /target/usr/lib/pkgconfig/libgcrypt.pc /usr/lib/pkgconfig/libgcrypt.pc
