@@ -339,3 +339,9 @@ Architecture: all
 Depends: ${misc:Depends}
 Description: Zsh completion helpers for systemd commands
  Zsh command-line completion definitions for systemd and its utilities.
+
+Package: systemd-sysupdate
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: systemd system image and OS update services
+ Command-line tools, update service, timers, D-Bus activation and policy.
