@@ -292,9 +292,15 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: System locale and keyboard layout management service
  NELL systemd component packaged from the existing build artifacts.
 
-Package: systemd-utils
+Package: systemd-run
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Run commands in transient systemd units
+ systemd-run command used to launch transient services and scopes.
+
+Package: systemd-utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), systemd-run (= ${binary:Version})
 Suggests: systemd-bash-completion, systemd-zsh-completion
 Description: systemd command-line management and diagnostic utilities
  User-facing administration and diagnostic commands and supporting utilities.
@@ -419,6 +425,6 @@ Description: First boot and initial host configuration helpers
 
 Package: systemd-run0
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-utils (= ${binary:Version}), libpam-systemd (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-run (= ${binary:Version}), libpam-systemd (= ${binary:Version})
 Description: Privileged command execution via systemd-run
  run0 command, PAM service configuration, and empower Polkit rule.
