@@ -15,3 +15,4 @@ usr/lib/systemd/user/sockets.target.wants/systemd-journalctl.socket
 usr/lib/systemd/user/systemd-journalctl.socket
 usr/lib/systemd/user/systemd-journalctl@.service
 usr/lib/sysusers.d/systemd-remote.conf
+var/log/journal/remote

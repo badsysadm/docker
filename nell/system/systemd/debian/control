@@ -83,7 +83,7 @@ Description: NSS dynamic user and group resolution
 
 Package: libpam-systemd
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), systemd-logind (= ${binary:Version})
 Description: PAM integration for systemd
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -125,7 +125,7 @@ Description: libudev shared library
 Package: systemd
 Architecture: amd64
 Static-Built-Using: gcc
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -284,3 +284,27 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Device and hotplug management daemon
  NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-journald
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd-shared (= ${binary:Version})
+Description: System journal logging service
+ NELL systemd service component packaged from the existing build artifacts.
+
+Package: systemd-hostnamed
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: System hostname management service
+ NELL systemd service component packaged from the existing build artifacts.
+
+Package: systemd-logind
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: User login and session management service
+ NELL systemd service component packaged from the existing build artifacts.
+
+Package: systemd-timedated
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: System time and timezone management service
+ NELL systemd service component packaged from the existing build artifacts.
