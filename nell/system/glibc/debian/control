@@ -3,13 +3,195 @@ Section: system
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, bison, python3, linux-libc-dev
 
-Package: glibc-ld
-Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
-Description: glibc dynamic loader
-
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${shlibs:Depends}
-Description: glibc runtime libs
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version})
+Description: GNU C Library complete runtime metapackage
+ Dependency-only package assembling individual NELL glibc libraries.
+
+Package: glibc-tools
+Architecture: amd64
+Provides: libc-bin (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Breaks: libc-bin, libc-dev-bin, libc-devtools, nscd
+Replaces: libc-bin, libc-dev-bin, libc-devtools, nscd
+Description: GNU C Library command-line utilities
+ Provides ldconfig, ldd, locale, localedef, getent and other utilities
+  for library configuration, localization and system diagnostics.
+
+Package: glibc-dev
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-libnss (= ${binary:Version})
+Suggests: glibc-debug (= ${binary:Version})
+Breaks: libc6-dev
+Replaces: libc6-dev
+Description: GNU C Library development headers and libraries
+ Header files, static libraries, linker scripts and startup objects
+  required for building applications against glibc.
+
+Package: glibc-debug
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library debugging and profiling shared objects
+ malloc debugging, memory and program counter profiling, and thread
+ debugging support shared libraries.
+
+Package: glibc-audit
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc-devtools
+Replaces: libc-devtools
+Description: GNU C Library runtime linker auditing module
+ Provides sotruss-lib.so for tracing dynamic linker activity.
+
+Package: glibc-libc
+Architecture: amd64
+Essential: yes
+Provides: libc6 (= ${binary:Version})
+Depends: ${misc:Depends}
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library and dynamic loader
+ Essential C runtime library and ELF dynamic loader for x86-64.
+
+Package: glibc-compat
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library ABI compatibility shared objects
+ Legacy libanl, libBrokenLocale, libdl, libpthread, librt and libutil
+ shared objects, preserved for existing binary dependencies.
+
+Package: glibc-math
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library mathematical shared objects
+ Mathematical and vector mathematical functions in libm.so.6 and libmvec.so.1.
+
+Package: glibc-libresolv
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library shared library libresolv.so.2
+ Installs libresolv.so.2 for x86-64.
+
+Package: glibc-libnss
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-libresolv (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library NSS modules
+ Name Service Switch modules for compatibility, databases, DNS, files and Hesiod.
+
+Package: glibc-gconv
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library character conversion modules
+ Character encoding conversion modules used by iconv and glibc.
+
+Package: glibc-libnsl
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library legacy NIS support
+ Provides the legacy libnsl.so.1 shared library for applications
+  using Network Information Service interfaces.
+
+Package: glibc-locales-data
+Architecture: all
+Depends: ${misc:Depends}, glibc-tools (= ${binary:Version}), glibc-gconv (= ${binary:Version})
+Breaks: locales, libc-l10n
+Replaces: locales, libc-l10n
+Description: GNU C Library locale source data and translations
+ Locale definitions, character maps and message catalogs used
+  by glibc localization tools.
+
+Package: glibc-locale-c-utf8
+Architecture: amd64
+Provides: locale-c (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled C UTF-8 locale
+ Precompiled C.UTF-8 locale data.
+
+Package: glibc-locale-en-us
+Architecture: amd64
+Provides: locale-en (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled American English UTF-8 locale
+ Precompiled en_US.UTF-8 locale data.
+
+Package: glibc-locale-de-de
+Architecture: amd64
+Provides: locale-de (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled German UTF-8 locale
+ Precompiled de_DE.UTF-8 locale data.
+
+Package: glibc-locale-fr-fr
+Architecture: amd64
+Provides: locale-fr (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled French UTF-8 locale
+ Precompiled fr_FR.UTF-8 locale data.
+
+Package: glibc-locale-es-es
+Architecture: amd64
+Provides: locale-es (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Spanish UTF-8 locale
+ Precompiled es_ES.UTF-8 locale data.
+
+Package: glibc-locale-ru-ru
+Architecture: amd64
+Provides: locale-ru (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Russian UTF-8 locale
+ Precompiled ru_RU.UTF-8 locale data.
+
+Package: glibc-locale-uk-ua
+Architecture: amd64
+Provides: locale-uk (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Ukrainian UTF-8 locale
+ Precompiled uk_UA.UTF-8 locale data.
+
+Package: glibc-locale-kk-kz
+Architecture: amd64
+Provides: locale-kk (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Kazakh UTF-8 locale
+ Precompiled kk_KZ.UTF-8 locale data.
+
+Package: glibc-locale-tr-tr
+Architecture: amd64
+Provides: locale-tr (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: locales-all
+Replaces: locales-all
+Description: GNU C Library compiled Turkish UTF-8 locale
+ Precompiled tr_TR.UTF-8 locale data.

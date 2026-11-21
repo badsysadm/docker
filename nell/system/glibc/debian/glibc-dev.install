@@ -1,0 +1,4 @@
+usr/include
+usr/lib64/*.a
+usr/lib64/*.o
+usr/lib64/*.so
