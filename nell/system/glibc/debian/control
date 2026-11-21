@@ -5,6 +5,7 @@ Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, 
 
 Package: glibc-ld
 Architecture: amd64
+Essential: yes
 Depends: ${misc:Depends}
 Breaks: libc6, libc-bin
 Replaces: libc6, libc-bin
@@ -13,6 +14,7 @@ Description: GNU C Library x86-64 dynamic loader
 
 Package: glibc-libc
 Architecture: amd64
+Essential: yes
 Depends: ${misc:Depends}, glibc-ld (= ${binary:Version})
 Breaks: libc6
 Replaces: libc6
