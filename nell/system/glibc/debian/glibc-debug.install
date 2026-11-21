@@ -1,0 +1,4 @@
+lib64/libc_malloc_debug.so.0
+lib64/libmemusage.so
+lib64/libpcprofile.so
+lib64/libthread_db.so.1
