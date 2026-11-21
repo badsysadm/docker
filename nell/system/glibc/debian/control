@@ -3,6 +3,47 @@ Section: system
 Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, bison, python3, linux-libc-dev
 
+Package: glibc-runtime
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version})
+Description: GNU C Library complete runtime metapackage
+ Dependency-only package assembling individual NELL glibc libraries.
+
+Package: glibc-tools
+Architecture: amd64
+Provides: libc-bin (= ${binary:Version})
+Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Breaks: libc-bin, libc-dev-bin, libc-devtools, nscd
+Replaces: libc-bin, libc-dev-bin, libc-devtools, nscd
+Description: GNU C Library command-line utilities
+ NELL glibc component package.
+
+Package: glibc-dev
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-libnss (= ${binary:Version})
+Suggests: glibc-debug (= ${binary:Version})
+Breaks: libc6-dev
+Replaces: libc6-dev
+Description: GNU C Library development headers and static libraries
+ NELL glibc component package.
+
+Package: glibc-debug
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc6
+Replaces: libc6
+Description: GNU C Library debugging and profiling shared objects
+ malloc debugging, memory and program counter profiling, and thread
+ debugging support shared libraries.
+
+Package: glibc-audit
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
+Breaks: libc-devtools
+Replaces: libc-devtools
+Description: GNU C Library audit library
+ NELL glibc component package.
+
 Package: glibc-libc
 Architecture: amd64
 Essential: yes
@@ -61,47 +102,6 @@ Breaks: libc6
 Replaces: libc6
 Description: GNU C Library shared library libnsl.so.1
  Installs libnsl.so.1 for x86-64.
-
-Package: glibc-runtime
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnss (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-gconv (= ${binary:Version})
-Description: GNU C Library complete runtime metapackage
- Dependency-only package assembling individual NELL glibc libraries.
-
-Package: glibc-tools
-Architecture: amd64
-Provides: libc-bin (= ${binary:Version})
-Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
-Breaks: libc-bin, libc-dev-bin, libc-devtools, nscd
-Replaces: libc-bin, libc-dev-bin, libc-devtools, nscd
-Description: GNU C Library command-line utilities
- NELL glibc component package.
-
-Package: glibc-dev
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version}), glibc-math (= ${binary:Version}), glibc-compat (= ${binary:Version}), glibc-libnsl (= ${binary:Version}), glibc-libresolv (= ${binary:Version}), glibc-libnss (= ${binary:Version})
-Suggests: glibc-debug (= ${binary:Version})
-Breaks: libc6-dev
-Replaces: libc6-dev
-Description: GNU C Library development headers and static libraries
- NELL glibc component package.
-
-Package: glibc-debug
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Breaks: libc6
-Replaces: libc6
-Description: GNU C Library debugging and profiling shared objects
- malloc debugging, memory and program counter profiling, and thread
- debugging support shared libraries.
-
-Package: glibc-audit
-Architecture: amd64
-Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
-Breaks: libc-devtools
-Replaces: libc-devtools
-Description: GNU C Library audit library
- NELL glibc component package.
 
 Package: glibc-locales-data
 Architecture: all
