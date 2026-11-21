@@ -14,6 +14,8 @@ usr/bin/systemd-stdio-bridge
 usr/bin/systemd-tty-ask-password-agent
 usr/lib/credstore
 usr/lib/environment.d/99-environment.conf
+usr/lib/libnss_myhostname.so.2
+usr/lib/libnss_systemd.so.2
 usr/lib/systemd/profile.d/70-systemd-shell-extra.sh
 usr/lib/systemd/profile.d/80-systemd-osc-context.sh
 usr/lib/systemd/system-environment-generators
@@ -151,8 +153,6 @@ usr/lib/systemd/user/systemd-ask-password@.service
 usr/lib/systemd/user/systemd-exit.service
 usr/lib/systemd/user/timers.target
 usr/lib/systemd/varlink-bridges
-usr/lib/libnss_myhostname.so.2
-usr/lib/libnss_systemd.so.2
 usr/share/dbus-1/interfaces/org.freedesktop.LogControl1.xml
 usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Automount.xml
 usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Device.xml
@@ -176,6 +176,7 @@ usr/share/factory/etc/nsswitch.conf
 usr/share/factory/etc/pam.d/other
 usr/share/factory/etc/pam.d/system-auth
 usr/share/mime/packages/io.systemd.xml
+usr/share/pkgconfig/systemd.pc
 usr/share/polkit-1/actions/io.systemd.ask-password.policy
 usr/share/polkit-1/actions/io.systemd.credentials.policy
 usr/share/polkit-1/actions/org.freedesktop.systemd1.policy

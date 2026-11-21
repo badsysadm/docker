@@ -193,12 +193,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: Encrypted volume utilities
  NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-dev
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
-Description: systemd development metadata
- NELL systemd 261 component packaged from the existing build artifacts.
-
 Package: systemd-homed
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), libpam-systemd (= ${binary:Version})
