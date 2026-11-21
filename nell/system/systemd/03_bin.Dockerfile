@@ -1,4 +1,4 @@
-ARG VERSION=261
+ARG VERSION=262.2
 
 FROM oci.badsysadm.local:80/dep/system/systemd:${VERSION} AS dep_image
 

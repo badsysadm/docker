@@ -1,4 +1,4 @@
-ARG VERSION=261
+ARG VERSION=262.2
 
 FROM oci.badsysadm.local:80/src/system/systemd:${VERSION} AS src_image
 FROM oci.badsysadm.local:80/get/dep:latest AS build
