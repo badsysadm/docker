@@ -129,6 +129,7 @@ Description: systemd UEFI boot utilities
 
 Package: systemd-nspawn
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Container execution using systemd-nspawn
  NELL systemd component packaged from the existing build artifacts.
@@ -136,6 +137,7 @@ Description: Container execution using systemd-nspawn
 
 Package: systemd-machined
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Machine registration and management daemon
  NELL systemd component packaged from the existing build artifacts.
@@ -143,6 +145,7 @@ Description: Machine registration and management daemon
 
 Package: systemd-importd
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Container and virtual machine image import daemon
  NELL systemd component packaged from the existing build artifacts.
@@ -150,6 +153,7 @@ Description: Container and virtual machine image import daemon
 
 Package: systemd-portabled
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Portable services management daemon
  NELL systemd component packaged from the existing build artifacts.
@@ -164,6 +168,7 @@ Description: Virtual machine execution using systemd-vmspawn
 
 Package: systemd-mountfsd
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: File system mount service
  NELL systemd component packaged from the existing build artifacts.
@@ -171,6 +176,7 @@ Description: File system mount service
 
 Package: systemd-nsresourced
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: Namespace resource management daemon
  NELL systemd component packaged from the existing build artifacts.
@@ -221,6 +227,7 @@ Description: Partition creation tools
 
 Package: systemd-resolved
 Architecture: amd64
+Replaces: libnss-resolve (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: DNS resolver
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -302,6 +309,7 @@ Description: Run commands in transient systemd units
 
 Package: systemd-utils
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version}), systemd-run (= ${binary:Version})
 Suggests: systemd-bash-completion, systemd-zsh-completion
 Description: systemd command-line management and diagnostic utilities
@@ -321,6 +329,7 @@ Description: Zsh completion helpers for systemd commands
 
 Package: systemd-sysupdate
 Architecture: amd64
+Replaces: systemd-container (<< ${binary:Version})
 Depends: ${misc:Depends}, systemd (= ${binary:Version})
 Description: systemd system image and OS update services
  Command-line tools, update service, timers, D-Bus activation and policy.
@@ -430,3 +439,17 @@ Architecture: amd64
 Depends: ${misc:Depends}, systemd-run (= ${binary:Version}), libpam-systemd (= ${binary:Version})
 Description: Privileged command execution via systemd-run
  run0 command, PAM service configuration, and empower Polkit rule.
+
+Package: libnss-resolve
+Architecture: amd64
+Depends: ${misc:Depends}, systemd-resolved (= ${binary:Version})
+Description: Transitional package for systemd-resolved NSS integration
+ This transitional package preserves the libnss-resolve package name.
+ The NSS module is provided by systemd-resolved.
+
+Package: systemd-container
+Architecture: amd64
+Depends: ${misc:Depends}, systemd-nspawn (= ${binary:Version}), systemd-machined (= ${binary:Version}), systemd-importd (= ${binary:Version}), systemd-portabled (= ${binary:Version}), systemd-mountfsd (= ${binary:Version}), systemd-nsresourced (= ${binary:Version}), systemd-sysupdate (= ${binary:Version}), systemd-utils (= ${binary:Version})
+Description: Transitional package for split systemd container components
+ This transitional package preserves the Debian systemd-container name.
+ The former tools and services are supplied by separate NELL packages.
