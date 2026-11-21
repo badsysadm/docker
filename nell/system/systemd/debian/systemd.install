@@ -118,7 +118,6 @@ usr/lib/systemd/system/slices.target
 usr/lib/systemd/system/smartcard.target
 usr/lib/systemd/system/sockets.target
 usr/lib/systemd/system/sockets.target.wants/systemd-ask-password.socket
-usr/lib/systemd/system/sockets.target.wants/systemd-creds.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-mute-console.socket
 usr/lib/systemd/system/soft-reboot.target
 usr/lib/systemd/system/sound.target
@@ -162,8 +161,6 @@ usr/lib/systemd/system/systemd-ask-password.socket
 usr/lib/systemd/system/systemd-ask-password@.service
 usr/lib/systemd/system/systemd-battery-check.service
 usr/lib/systemd/system/systemd-binfmt.service
-usr/lib/systemd/system/systemd-creds.socket
-usr/lib/systemd/system/systemd-creds@.service
 usr/lib/systemd/system/systemd-exit.service
 usr/lib/systemd/system/systemd-firstboot.service
 usr/lib/systemd/system/systemd-fsck-root.service

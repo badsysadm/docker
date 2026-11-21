@@ -24,16 +24,9 @@ usr/lib/systemd/system/initrd-udevadm-cleanup-db.service
 usr/lib/systemd/system/initrd-usr-fs.target
 usr/lib/systemd/system/initrd.target
 usr/lib/systemd/system/initrd.target.wants/systemd-battery-check.service
-usr/lib/systemd/system/sockets.target.wants/systemd-bootctl.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-factory-reset.socket
-usr/lib/systemd/system/sysinit.target.wants/systemd-boot-random-seed.service
 usr/lib/systemd/system/systemd-bless-boot.service
 usr/lib/systemd/system/systemd-boot-check-no-failures.service
-usr/lib/systemd/system/systemd-boot-clear-sysfail.service
-usr/lib/systemd/system/systemd-boot-random-seed.service
-usr/lib/systemd/system/systemd-boot-update.service
-usr/lib/systemd/system/systemd-bootctl.socket
-usr/lib/systemd/system/systemd-bootctl@.service
 usr/lib/systemd/system/systemd-factory-reset-complete.service
 usr/lib/systemd/system/systemd-factory-reset-reboot.service
 usr/lib/systemd/system/systemd-factory-reset-request.service

@@ -1,2 +1,9 @@
 usr/bin/bootctl
+usr/lib/systemd/system/sockets.target.wants/systemd-bootctl.socket
+usr/lib/systemd/system/sysinit.target.wants/systemd-boot-random-seed.service
+usr/lib/systemd/system/systemd-boot-clear-sysfail.service
+usr/lib/systemd/system/systemd-boot-random-seed.service
+usr/lib/systemd/system/systemd-boot-update.service
+usr/lib/systemd/system/systemd-bootctl.socket
+usr/lib/systemd/system/systemd-bootctl@.service
 usr/lib/systemd/systemd-sbsign
