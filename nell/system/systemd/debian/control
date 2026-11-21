@@ -86,12 +86,12 @@ Description: systemd utility shared library
 
 Package: libudev-dev
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libudev-shared (= ${binary:Version})
 Multi-Arch: same
 Description: libudev development files
  NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: libudev1
+Package: libudev-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Multi-Arch: same
@@ -101,7 +101,7 @@ Description: libudev shared library
 Package: systemd
 Architecture: amd64
 Static-Built-Using: gcc
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version}), systemd-sysusers (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev-shared (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version}), systemd-sysusers (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -252,7 +252,7 @@ Description: Dynamic user and group database
 
 Package: udev
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libudev-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Device and hotplug management daemon
  NELL systemd 261 component packaged from the existing build artifacts.
 
