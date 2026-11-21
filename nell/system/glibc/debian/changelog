@@ -1,0 +1,6 @@
+glibc (@VERSION@-1) unstable; urgency=medium
+
+  * Package NELL glibc loader, shared libraries, tools, development files
+    and generated locale data separately.
+
+ -- badsysadm <me@badsysadm.com>  Sat, 21 Nov 2026 00:00:00 +0000

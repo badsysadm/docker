@@ -5,11 +5,30 @@ Build-Depends: debhelper-compat (= 13), build-essential, git, gawk, pkg-config, 
 
 Package: glibc-ld
 Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
-Description: glibc dynamic loader
+Depends: ${misc:Depends}
+Description: GNU C Library dynamic loader
+ ELF interpreter for x86-64 applications.
 
 Package: glibc-runtime
 Architecture: amd64
-Depends: ${shlibs:Depends}
-Description: glibc runtime libs
+Depends: ${shlibs:Depends}, ${misc:Depends}, glibc-ld (= ${binary:Version})
+Description: GNU C Library runtime shared libraries
+ Runtime libraries and name-service conversion modules.
+
+Package: glibc-dev
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Description: GNU C Library development files
+ C headers, static libraries, startup objects and linker scripts.
+
+Package: glibc-tools
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Description: GNU C Library administration tools
+ Installed glibc command-line utilities and helper executables.
+
+Package: glibc-locales
+Architecture: amd64
+Depends: ${misc:Depends}, glibc-runtime (= ${binary:Version})
+Description: GNU C Library locale data
+ Locale definitions and the prebuilt locales selected in the NELL profile.
