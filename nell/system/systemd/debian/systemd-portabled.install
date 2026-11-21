@@ -21,6 +21,7 @@ usr/lib/systemd/user/portable/profile/nonetwork/service.conf
 usr/lib/systemd/user/portable/profile/strict/service.conf
 usr/lib/systemd/user/portable/profile/trusted/service.conf
 usr/lib/systemd/user/systemd-portabled.service
+usr/share/bash-completion/completions/portablectl
 usr/share/bash-completion/completions/systemd-confext
 usr/share/bash-completion/completions/systemd-sysext
 usr/share/dbus-1/interfaces/org.freedesktop.portable1.Image.xml

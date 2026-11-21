@@ -4,6 +4,8 @@ usr/lib/systemd/system/systemd-oomd.service
 usr/lib/systemd/system/systemd-oomd.socket
 usr/lib/systemd/systemd-oomd
 usr/lib/sysusers.d/systemd-oom.conf
+usr/share/bash-completion/completions/oomctl
 usr/share/dbus-1/interfaces/org.freedesktop.oom1.Manager.xml
 usr/share/dbus-1/system-services/org.freedesktop.oom1.service
 usr/share/dbus-1/system.d/org.freedesktop.oom1.conf
+usr/share/zsh/site-functions/_oomctl

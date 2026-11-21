@@ -4,3 +4,5 @@ usr/lib/systemd/system/systemd-userdbd.service
 usr/lib/systemd/system/systemd-userdbd.socket
 usr/lib/systemd/systemd-userdbd
 usr/lib/systemd/systemd-userwork
+usr/share/bash-completion/completions/userdbctl
+usr/share/zsh/site-functions/_userdbctl

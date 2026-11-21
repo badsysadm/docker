@@ -320,3 +320,9 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: System locale and keyboard layout management service
  NELL systemd component packaged from the existing build artifacts.
+
+Package: systemd-utils
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: systemd command-line management and diagnostic utilities
+ User-facing administration and diagnostic commands and shell completions.

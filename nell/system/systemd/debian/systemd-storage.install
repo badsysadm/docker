@@ -1,3 +1,5 @@
+usr/bin/storagectl
+usr/bin/systemd-mstack
 usr/lib/systemd/system/sockets.target.wants/systemd-storage-block.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-storage-fs.socket
 usr/lib/systemd/system/systemd-storage-block.socket
@@ -11,3 +13,7 @@ usr/lib/systemd/systemd-storagetm
 usr/lib/systemd/user/sockets.target.wants/systemd-storage-fs.socket
 usr/lib/systemd/user/systemd-storage-fs.socket
 usr/lib/systemd/user/systemd-storage-fs@.service
+usr/sbin/mount.mstack
+usr/sbin/mount.storage
+usr/share/bash-completion/completions/storagectl
+usr/share/zsh/site-functions/_storagectl

@@ -5,3 +5,5 @@ usr/lib/systemd/system/system-update-pre.target.wants/systemd-coredump.socket
 usr/lib/systemd/system/systemd-coredump.socket
 usr/lib/systemd/system/systemd-coredump@.service
 usr/lib/systemd/systemd-coredump
+usr/share/bash-completion/completions/coredumpctl
+usr/share/zsh/site-functions/_coredumpctl

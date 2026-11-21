@@ -26,3 +26,4 @@ usr/lib/systemd/systemd-veritysetup
 usr/lib/x86_64-linux-gnu/cryptsetup/libcryptsetup-token-systemd-fido2.so
 usr/lib/x86_64-linux-gnu/cryptsetup/libcryptsetup-token-systemd-pkcs11.so
 usr/lib/x86_64-linux-gnu/cryptsetup/libcryptsetup-token-systemd-tpm2.so
+usr/share/bash-completion/completions/systemd-cryptenroll
