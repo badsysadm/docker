@@ -21,3 +21,5 @@ usr/bin/varlinkctl
 usr/lib/systemd/system/sockets.target.wants/systemd-creds.socket
 usr/lib/systemd/system/systemd-creds.socket
 usr/lib/systemd/system/systemd-creds@.service
+usr/lib/systemd/systemd-keyutil
+usr/lib/systemd/systemd-socket-proxyd

@@ -23,12 +23,15 @@ usr/lib/systemd/system/sysinit.target.wants/sys-kernel-debug.mount
 usr/lib/systemd/system/sysinit.target.wants/sys-kernel-tracing.mount
 usr/lib/systemd/system/sysinit.target.wants/systemd-binfmt.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-modules-load.service
+usr/lib/systemd/system/sysinit.target.wants/systemd-random-seed.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-sysctl.service
 usr/lib/systemd/system/systemd-binfmt.service
 usr/lib/systemd/system/systemd-modules-load.service
 usr/lib/systemd/system/systemd-pstore.service
+usr/lib/systemd/system/systemd-random-seed.service
 usr/lib/systemd/system/systemd-sysctl.service
 usr/lib/systemd/systemd-binfmt
 usr/lib/systemd/systemd-modules-load
 usr/lib/systemd/systemd-pstore
+usr/lib/systemd/systemd-random-seed
 usr/lib/systemd/systemd-sysctl
