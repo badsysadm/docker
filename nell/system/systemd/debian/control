@@ -125,7 +125,7 @@ Description: libudev shared library
 Package: systemd
 Architecture: amd64
 Static-Built-Using: gcc
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
@@ -345,3 +345,9 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: systemd system image and OS update services
  Command-line tools, update service, timers, D-Bus activation and policy.
+
+Package: systemd-tmpfiles
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
+Description: Temporary file and directory management utilities
+ systemd-tmpfiles, system and user service units, and tmpfiles configuration.
