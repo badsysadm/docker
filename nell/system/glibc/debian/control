@@ -131,6 +131,7 @@ Description: GNU C Library compiled Russian UTF-8 locale
 
 Package: glibc-locale-c-utf8
 Architecture: amd64
+Provides: locale-c (= ${binary:Version})
 Depends: ${misc:Depends}, glibc-libc (= ${binary:Version})
 Breaks: locales-all
 Replaces: locales-all
