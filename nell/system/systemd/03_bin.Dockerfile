@@ -42,6 +42,7 @@ RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/l
     -Dhomed=enabled \
     -Dhostnamed=true \
     -Dhtml=disabled \
+    -Dtranslations=false \
     -Dhwdb=true \
     -Dima=true \
     -Dimportd=enabled \
