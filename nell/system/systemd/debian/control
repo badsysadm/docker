@@ -65,7 +65,8 @@ Description: PAM integration for systemd
 
 Package: libsystemd-dev
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0-shared (= ${binary:Version})
+Depends: ${misc:Depends}
+Suggests: libsystemd0-shared (= ${binary:Version}), libsystemd-static (= ${binary:Version})
 Multi-Arch: same
 Description: systemd utility development headers and libraries
  NELL systemd 261 component packaged from the existing build artifacts.
@@ -86,7 +87,8 @@ Description: systemd utility shared library
 
 Package: libudev-dev
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1-shared (= ${binary:Version})
+Depends: ${misc:Depends}
+Suggests: libudev1-shared (= ${binary:Version}), libudev-static (= ${binary:Version})
 Multi-Arch: same
 Description: libudev development files
  NELL systemd 261 component packaged from the existing build artifacts.
