@@ -482,17 +482,3 @@ Architecture: amd64
 Depends: ${misc:Depends}, systemd-run (= ${binary:Version}), libpam-systemd (= ${binary:Version})
 Description: Privileged command execution via systemd-run
  run0 command, PAM service configuration, and empower Polkit rule.
-
-Package: libnss-resolve
-Architecture: amd64
-Depends: ${misc:Depends}, systemd-resolved (= ${binary:Version})
-Description: Transitional package for systemd-resolved NSS integration
- This transitional package preserves the libnss-resolve package name.
- The NSS module is provided by systemd-resolved.
-
-Package: systemd-container
-Architecture: amd64
-Depends: ${misc:Depends}, systemd-nspawn (= ${binary:Version}), systemd-machined (= ${binary:Version}), systemd-importd (= ${binary:Version}), systemd-portabled (= ${binary:Version}), systemd-mountfsd (= ${binary:Version}), systemd-nsresourced (= ${binary:Version}), systemd-sysupdate (= ${binary:Version}), systemd-utils (= ${binary:Version})
-Description: Transitional package for split systemd container components
- This transitional package preserves the Debian systemd-container name.
- The former tools and services are supplied by separate NELL packages.
