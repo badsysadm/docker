@@ -351,3 +351,10 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
 Description: Temporary file and directory management utilities
  systemd-tmpfiles, system and user service units, and tmpfiles configuration.
+
+Package: systemd-tpm2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
+Description: Optional TPM 2.0 and PCR management components for systemd
+ TPM2 setup, PCR measurement, PCRLock, NvPCR, boot integration and
+ the TPM2 cryptsetup token plugin.

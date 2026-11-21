@@ -1,3 +1,2 @@
 usr/bin/bootctl
-usr/lib/systemd/systemd-measure
 usr/lib/systemd/systemd-sbsign
