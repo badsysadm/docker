@@ -57,8 +57,194 @@ Build-Depends:
  libcrypt-dev,
  libdbus-1-dev
 
-Package: systemd
+Package: libnss-myhostname
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: system and service manager
- NELL systemd service manager, utilities, libraries and system integrations.
+Description: NSS hostname fallback module
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libnss-mymachines
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-container (= ${binary:Version})
+Description: NSS container hostname module
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libnss-resolve
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd-resolved (= ${binary:Version})
+Description: NSS resolver module
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libnss-systemd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: NSS dynamic user and group resolution
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libpam-systemd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: PAM integration for systemd
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libsystemd-dev
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version})
+Multi-Arch: same
+Description: systemd utility development headers and libraries
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libsystemd-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: systemd private shared libraries
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libsystemd0
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: systemd utility shared library
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libudev-dev
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1 (= ${binary:Version})
+Multi-Arch: same
+Description: libudev development files
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: libudev1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: libudev shared library
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd
+Architecture: amd64
+Static-Built-Using: gcc
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsystemd0 (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1 (= ${binary:Version})
+Description: System and service manager
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-boot
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: UEFI boot integration and kernel-install hooks
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-boot-efi
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: systemd-boot EFI binaries
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-boot-tools
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: systemd UEFI boot utilities
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-container
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Container and portable service tools
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-coredump
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Core dump management
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-cryptsetup
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Encrypted volume utilities
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-dev
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: systemd development metadata
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-homed
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), libpam-systemd (= ${binary:Version})
+Description: Home directory manager
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-journal-remote
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Remote journal transfer
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-oomd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Out of memory manager
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-repart
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Partition creation tools
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-resolved
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: DNS resolver
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-standalone-shutdown
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Standalone shutdown binary
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-standalone-sysusers
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Standalone sysusers utility
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-standalone-tmpfiles
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Standalone tmpfiles utility
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-sysv
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: SysV init compatibility links
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-timesyncd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Network time synchronisation daemon
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-ukify
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Unified kernel image builder
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: systemd-userdbd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Dynamic user and group database
+ NELL systemd 261 component packaged from the existing build artifacts.
+
+Package: udev
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libudev1 (= ${binary:Version}), libsystemd-shared (= ${binary:Version})
+Description: Device and hotplug management daemon
+ NELL systemd 261 component packaged from the existing build artifacts.

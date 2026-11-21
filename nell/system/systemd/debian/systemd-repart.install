@@ -1,0 +1,11 @@
+usr/bin/systemd-repart
+usr/bin/systemd-repart.standalone
+usr/lib/systemd/repart/definitions/confext.repart.d/10-root.conf
+usr/lib/systemd/repart/definitions/confext.repart.d/20-root-verity.conf
+usr/lib/systemd/repart/definitions/confext.repart.d/30-root-verity-sig.conf
+usr/lib/systemd/repart/definitions/portable.repart.d/10-root.conf
+usr/lib/systemd/repart/definitions/portable.repart.d/20-root-verity.conf
+usr/lib/systemd/repart/definitions/portable.repart.d/30-root-verity-sig.conf
+usr/lib/systemd/repart/definitions/sysext.repart.d/10-root.conf
+usr/lib/systemd/repart/definitions/sysext.repart.d/20-root-verity.conf
+usr/lib/systemd/repart/definitions/sysext.repart.d/30-root-verity-sig.conf

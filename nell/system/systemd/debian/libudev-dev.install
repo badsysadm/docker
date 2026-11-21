@@ -1,0 +1,4 @@
+usr/include/libudev.h
+usr/lib/x86_64-linux-gnu/libudev.a
+usr/lib/x86_64-linux-gnu/libudev.so
+usr/lib/x86_64-linux-gnu/pkgconfig/libudev.pc

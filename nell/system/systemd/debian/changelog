@@ -1,5 +1,5 @@
 systemd (@VERSION@-1) unstable; urgency=medium
 
-  * Package the NELL systemd build artifacts.
+  * Split NELL systemd artifacts into component Debian packages.
 
  -- badsysadm <me@badsysadm.com>  Sat, 21 Nov 2026 00:00:00 +0000

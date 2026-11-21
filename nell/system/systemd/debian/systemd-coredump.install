@@ -1,0 +1,7 @@
+etc/systemd/coredump.conf
+usr/bin/coredumpctl
+usr/lib/systemd/system/sockets.target.wants/systemd-coredump.socket
+usr/lib/systemd/system/system-update-pre.target.wants/systemd-coredump.socket
+usr/lib/systemd/system/systemd-coredump.socket
+usr/lib/systemd/system/systemd-coredump@.service
+usr/lib/systemd/systemd-coredump
