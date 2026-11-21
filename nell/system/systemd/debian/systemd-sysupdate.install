@@ -1,4 +1,3 @@
-usr/bin/systemd-sysupdate
 usr/bin/updatectl
 usr/lib/systemd/system/dbus-org.freedesktop.sysupdate1.service
 usr/lib/systemd/system/sysinit.target.wants/systemd-update-done.service

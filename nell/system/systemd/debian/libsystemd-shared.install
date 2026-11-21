@@ -1,2 +1,2 @@
-usr/lib/systemd/libsystemd-core-261.so
-usr/lib/systemd/libsystemd-shared-261.so
+usr/lib/systemd/libsystemd-core-*.so
+usr/lib/systemd/libsystemd-shared-*.so
