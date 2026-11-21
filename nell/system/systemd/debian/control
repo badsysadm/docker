@@ -141,7 +141,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: systemd-boot EFI binaries
  NELL systemd 261 component packaged from the existing build artifacts.
 
-Package: systemd-boot-tools
+Package: systemd-boot-utils
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: systemd UEFI boot utilities
