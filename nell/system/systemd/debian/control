@@ -358,3 +358,10 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version}), libs
 Description: Optional TPM 2.0 and PCR management components for systemd
  TPM2 setup, PCR measurement, PCRLock, NvPCR, boot integration and
  the TPM2 cryptsetup token plugin.
+
+Package: systemd-ssh
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Optional SSH socket and proxy integration for systemd
+ SSH socket generator, SSH proxy and issue helpers, SSH configuration,
+ SSH access target, and optional SSH user database integration.

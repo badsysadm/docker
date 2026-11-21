@@ -4,7 +4,6 @@ etc/credstore.encrypted
 etc/modules-load.d
 etc/profile.d/70-systemd-shell-extra.sh
 etc/profile.d/80-systemd-osc-context.sh
-etc/ssh/ssh_config.d/20-systemd-ssh-proxy.conf
 etc/sysctl.d
 etc/systemd/pstore.conf
 etc/systemd/sleep.conf
@@ -34,7 +33,6 @@ usr/lib/sysctl.d/50-pid-max.conf
 usr/lib/sysctl.d/README
 usr/lib/systemd/profile.d/70-systemd-shell-extra.sh
 usr/lib/systemd/profile.d/80-systemd-osc-context.sh
-usr/lib/systemd/ssh_config.d/20-systemd-ssh-proxy.conf
 usr/lib/systemd/system-environment-generators
 usr/lib/systemd/system-generators/systemd-debug-generator
 usr/lib/systemd/system-generators/systemd-fstab-generator
@@ -42,7 +40,6 @@ usr/lib/systemd/system-generators/systemd-getty-generator
 usr/lib/systemd/system-generators/systemd-gpt-auto-generator
 usr/lib/systemd/system-generators/systemd-hibernate-resume-generator
 usr/lib/systemd/system-generators/systemd-run-generator
-usr/lib/systemd/system-generators/systemd-ssh-generator
 usr/lib/systemd/system-generators/systemd-system-update-generator
 usr/lib/systemd/system-preset/90-systemd.preset
 usr/lib/systemd/system-shutdown
@@ -128,7 +125,6 @@ usr/lib/systemd/system/sockets.target.wants/systemd-creds.socket
 usr/lib/systemd/system/sockets.target.wants/systemd-mute-console.socket
 usr/lib/systemd/system/soft-reboot.target
 usr/lib/systemd/system/sound.target
-usr/lib/systemd/system/ssh-access.target
 usr/lib/systemd/system/storage-target-mode.target
 usr/lib/systemd/system/suspend-then-hibernate.target
 usr/lib/systemd/system/suspend.target
@@ -242,8 +238,6 @@ usr/lib/systemd/systemd-report-cgroup
 usr/lib/systemd/systemd-shutdown
 usr/lib/systemd/systemd-sleep
 usr/lib/systemd/systemd-socket-proxyd
-usr/lib/systemd/systemd-ssh-issue
-usr/lib/systemd/systemd-ssh-proxy
 usr/lib/systemd/systemd-sysctl
 usr/lib/systemd/systemd-sysroot-fstab-check
 usr/lib/systemd/systemd-update-done
