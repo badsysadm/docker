@@ -3,3 +3,4 @@ lib64/libnss_db.so.2
 lib64/libnss_dns.so.2
 lib64/libnss_files.so.2
 lib64/libnss_hesiod.so.2
+var/db/Makefile
