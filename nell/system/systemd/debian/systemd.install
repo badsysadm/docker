@@ -151,8 +151,8 @@ usr/lib/systemd/user/systemd-ask-password@.service
 usr/lib/systemd/user/systemd-exit.service
 usr/lib/systemd/user/timers.target
 usr/lib/systemd/varlink-bridges
-usr/lib/x86_64-linux-gnu/libnss_myhostname.so.2
-usr/lib/x86_64-linux-gnu/libnss_systemd.so.2
+usr/lib/libnss_myhostname.so.2
+usr/lib/libnss_systemd.so.2
 usr/share/dbus-1/interfaces/org.freedesktop.LogControl1.xml
 usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Automount.xml
 usr/share/dbus-1/interfaces/org.freedesktop.systemd1.Device.xml

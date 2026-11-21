@@ -65,4 +65,4 @@ usr/lib/systemd/systemd-pcrlock
 usr/lib/systemd/systemd-tpm2-clear
 usr/lib/systemd/systemd-tpm2-setup
 usr/lib/systemd/systemd-tpm2-swtpm
-usr/lib/x86_64-linux-gnu/cryptsetup/libcryptsetup-token-systemd-tpm2.so
+usr/lib/cryptsetup/libcryptsetup-token-systemd-tpm2.so

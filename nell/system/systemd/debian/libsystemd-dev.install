@@ -16,5 +16,5 @@ usr/include/systemd/sd-messages.h
 usr/include/systemd/sd-path.h
 usr/include/systemd/sd-varlink-idl.h
 usr/include/systemd/sd-varlink.h
-usr/lib/x86_64-linux-gnu/libsystemd.so
-usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc
+usr/lib/libsystemd.so
+usr/lib/pkgconfig/libsystemd.pc

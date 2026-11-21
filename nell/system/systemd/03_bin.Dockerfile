@@ -11,7 +11,7 @@ WORKDIR /src/systemd
 RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" \
     meson setup build \
     --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --buildtype=release \
     -Dinstall-tests=false \
     -Drpmmacrosdir=no \
