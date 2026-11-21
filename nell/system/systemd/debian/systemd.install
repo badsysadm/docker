@@ -7,7 +7,6 @@ etc/systemd/system
 etc/systemd/system.conf
 etc/systemd/user
 etc/systemd/user.conf
-usr/bin/systemd-ac-power
 usr/bin/systemd-ask-password
 usr/bin/systemd-firstboot
 usr/bin/systemd-machine-id-setup

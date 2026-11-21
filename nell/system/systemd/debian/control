@@ -408,3 +408,10 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
 Description: XDG desktop autostart integration for systemd
  User session generator, autostart condition helper, desktop autostart
  target and XDG user configuration directory.
+
+Package: systemd-battery
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd (= ${binary:Version})
+Description: Battery and AC power management helpers for systemd
+ AC power state detection and early boot battery level checking with
+ its initrd service and activation link.

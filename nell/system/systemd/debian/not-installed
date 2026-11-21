@@ -39,9 +39,6 @@ usr/lib/systemd/boot/hwids/aa64/x1p42100-lenovo-ideapad-slim-5-oled.json
 usr/lib/systemd/boot/hwids/aa64/x1p42100-lenovo-thinkbook-16.json
 usr/lib/systemd/boot/hwids/aa64/x1p42100-microsoft-surface-pro-12in.json
 usr/lib/systemd/boot/hwids/aa64/x1p64100-acer-swift-sf14-11.json
-usr/lib/systemd/system/initrd.target.wants/systemd-battery-check.service
-usr/lib/systemd/system/systemd-battery-check.service
-usr/lib/systemd/systemd-battery-check
 usr/lib/sysusers.d/README
 usr/lib/tmpfiles.d/README
 usr/lib/udev/hwdb.d/README

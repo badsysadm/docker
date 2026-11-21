@@ -1,0 +1,4 @@
+usr/bin/systemd-ac-power
+usr/lib/systemd/system/initrd.target.wants/systemd-battery-check.service
+usr/lib/systemd/system/systemd-battery-check.service
+usr/lib/systemd/systemd-battery-check
