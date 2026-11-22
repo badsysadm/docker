@@ -10,7 +10,7 @@ diff --git a/configure.ac b/configure.ac
  
  
  linux_os=no
-@@ -3124,18 +3122,10 @@
+@@ -3124,19 +3122,11 @@
  # more details.
  #
  AC_CONFIG_FILES([
