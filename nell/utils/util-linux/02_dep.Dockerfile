@@ -15,4 +15,4 @@ COPY --from=sqlite_image /target/usr/include/ /usr/local/include/
 COPY --from=sqlite_image /target/usr/lib/libsqlite3.a /usr/local/lib/libsqlite3.a
 COPY --from=sqlite_image /target/usr/lib/pkgconfig/sqlite3.pc /usr/local/lib/pkgconfig/sqlite3.pc
 
-COPY --from=src_image /src/util-linux/ /src/util-linux/
+COPY --from=src_image /src/ /src/
