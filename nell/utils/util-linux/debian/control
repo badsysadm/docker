@@ -12,7 +12,6 @@ Build-Depends: debhelper-compat (= 13),
  libtool,
  bison,
  flex,
- libsqlite3-dev,
  libjson-c-dev,
  libdevmapper-dev,
  libpam0g-dev,
@@ -21,6 +20,7 @@ Build-Depends: debhelper-compat (= 13),
 
 Package: util-linux
 Architecture: amd64
+Static-Built-Using: sqlite (= 3.54.1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: util-linux-bash-completion
 Description: Linux system management utilities

@@ -1,0 +1,13 @@
+Source: sqlite
+Section: lib
+Maintainer: badsysadm <me@badsysadm.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkg-config
+
+Package: sqlite
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: SQLite library and command-line shell
+ SQLite amalgamation packaged for the NELL build environment.
