@@ -1,9 +1,5 @@
 usr/bin/bits
 usr/bin/cal
-usr/bin/col
-usr/bin/colcrt
-usr/bin/colrm
-usr/bin/column
 usr/bin/copyfilerange
 usr/bin/enosys
 usr/bin/exch
@@ -17,12 +13,10 @@ usr/bin/hexdump
 usr/bin/isosize
 usr/bin/look
 usr/bin/mcookie
-usr/bin/mesg
 usr/bin/namei
 usr/bin/pipesz
 usr/bin/rename
 usr/bin/rev
-usr/bin/wall
 usr/sbin/ctrlaltdel
 usr/sbin/readprofile
 usr/sbin/zramctl

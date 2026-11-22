@@ -104,8 +104,21 @@ Description: Hardware information and control utilities
 Package: util-linux-log
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Kernel logging and terminal session recording utilities
- Tools for reading kernel messages, sending syslog messages and recording or replaying terminal sessions.
+Description: Kernel logging and syslog utilities
+ Tools for reading kernel messages and sending messages to syslog.
+
+Package: util-linux-term
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Terminal text formatting and messaging utilities
+ Tools for formatting terminal output and messaging terminal users.
+
+Package: util-linux-script
+Architecture: amd64
+Provides: script
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Terminal session recording and replay utilities
+ Tools for recording and replaying interactive terminal sessions.
 
 Package: util-linux-bash-completion
 Architecture: all
