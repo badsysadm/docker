@@ -26,8 +26,9 @@ Suggests: util-linux-bash-completion
 Description: Linux system management utilities
  Command-line tools, including optional static variants.
 
-Package: login
+Package: util-linux-login
 Architecture: amd64
+Provides: login
 Static-Built-Using: sqlite (= 3.54.1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: System login and login accounting utilities
@@ -51,8 +52,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Disk and filesystem management utilities
  Tools for partitioning, creating, checking and maintaining filesystems and block devices.
 
-Package: su
+Package: util-linux-su
 Architecture: amd64
+Provides: su
 Static-Built-Using: libxcrypt (= 1:4.4.38-1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: User switching and emergency login utilities
