@@ -1,0 +1,4 @@
+usr/bin/systemd-nspawn
+usr/lib/systemd/system/systemd-nspawn@.service
+usr/lib/systemd/user/systemd-nspawn@.service
+usr/lib/tmpfiles.d/systemd-nspawn.conf

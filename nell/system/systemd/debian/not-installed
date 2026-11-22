@@ -1,0 +1,7 @@
+usr/lib/modprobe.d/README
+usr/lib/sysctl.d/README
+usr/lib/systemd/boot/hwids/aa64/*.json
+usr/lib/sysusers.d/README
+usr/lib/tmpfiles.d/README
+usr/lib/udev/hwdb.d/README
+usr/lib/udev/rules.d/README

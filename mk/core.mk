@@ -49,6 +49,10 @@ kaniko:
 	$(LIST_ARTIFACTS) | xargs -0 sha256sum | sort > .sha256_2
 	diff .sha256_1 .sha256_2
 	$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/bin/$(section)/$@:$(version)
+	@if [ -f "nell/$(section)/$@/04_deb.Dockerfile" ]; then \
+		$(MAKE) nell/$(section)/$@/04_deb.Dockerfile version=$(version) && \
+		$(SKOPEO_CMD) docker://$(REGISTRY_BADSYSADM)/deb/$(section)/$@:$(version); \
+	fi
 
 run:
 	systemd-run -t \

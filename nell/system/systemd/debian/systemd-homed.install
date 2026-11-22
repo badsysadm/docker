@@ -1,0 +1,14 @@
+etc/systemd/homed.conf
+usr/bin/homectl
+usr/bin/systemd-home-fallback-shell
+usr/lib/systemd/system/systemd-homed-activate.service
+usr/lib/systemd/system/systemd-homed-firstboot.service
+usr/lib/systemd/system/systemd-homed.service
+usr/lib/systemd/systemd-homed
+usr/lib/systemd/systemd-homework
+usr/lib/security/pam_systemd_home.so
+usr/share/dbus-1/interfaces/org.freedesktop.home1.Home.xml
+usr/share/dbus-1/interfaces/org.freedesktop.home1.Manager.xml
+usr/share/dbus-1/system-services/org.freedesktop.home1.service
+usr/share/dbus-1/system.d/org.freedesktop.home1.conf
+usr/share/polkit-1/actions/org.freedesktop.home1.policy

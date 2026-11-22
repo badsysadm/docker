@@ -1,4 +1,4 @@
-ARG VERSION=261
+ARG VERSION=262.2
 
 FROM oci.badsysadm.local:80/dep/system/systemd:${VERSION} AS dep_image
 
@@ -11,8 +11,10 @@ WORKDIR /src/systemd
 RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" \
     meson setup build \
     --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
+    --libdir=/usr/lib \
     --buildtype=release \
+    -Dc_args="-ffunction-sections -fdata-sections" \
+    -Dc_link_args="-Wl,--gc-sections" \
     -Dinstall-tests=false \
     -Drpmmacrosdir=no \
     -Dmode=release \
@@ -42,6 +44,7 @@ RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/l
     -Dhomed=enabled \
     -Dhostnamed=true \
     -Dhtml=disabled \
+    -Dtranslations=false \
     -Dhwdb=true \
     -Dima=true \
     -Dimportd=enabled \
@@ -88,7 +91,7 @@ RUN PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/lib/x86_64-linux-gnu/pkgconfig:/usr/l
     -Dseccomp=enabled \
     -Dselinux=enabled \
     -Dsmack=true \
-    -Dstandalone-binaries=true \
+    -Dstandalone-binaries=false \
     -Dstatic-libsystemd=pic \
     -Dstatic-libudev=pic \
     -Dstoragetm=true \

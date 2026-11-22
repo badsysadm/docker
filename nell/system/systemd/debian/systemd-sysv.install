@@ -1,0 +1,5 @@
+usr/sbin/halt
+usr/sbin/init
+usr/sbin/poweroff
+usr/sbin/reboot
+usr/sbin/shutdown

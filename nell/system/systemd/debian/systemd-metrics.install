@@ -1,0 +1,4 @@
+usr/lib/systemd/system/systemd-journalctl-metrics.socket
+usr/lib/systemd/system/systemd-journalctl-metrics@.service
+usr/lib/systemd/system/systemd-report*
+usr/lib/systemd/systemd-report*

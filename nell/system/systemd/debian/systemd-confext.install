@@ -1,0 +1,5 @@
+usr/bin/systemd-confext
+usr/lib/systemd/system/initrd.target.wants/systemd-confext-initrd.service
+usr/lib/systemd/system/systemd-confext-initrd.service
+usr/lib/systemd/system/systemd-confext-sysroot.service
+usr/lib/systemd/system/systemd-confext.service
