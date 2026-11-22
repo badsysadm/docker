@@ -12,7 +12,7 @@ RUN patch -p1 < /src/patches/_build.patch
 RUN autoreconf -fi
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
-    LDFLAGS="-static-libgcc -L/usr/local/lib -Wl,--gc-sections" \
+    LDFLAGS="-static-libgcc -static-libtool-libs -L/usr/local/lib -Wl,--gc-sections" \
     --prefix=/usr \
     --bindir=/usr/bin \
     --sbindir=/usr/sbin \
