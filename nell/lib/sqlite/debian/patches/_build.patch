@@ -1,0 +1,14 @@
+diff --git a/ext/misc/diskused.c b/ext/misc/diskused.c
+--- a/ext/misc/diskused.c
++++ b/ext/misc/diskused.c
+@@ -600,9 +600,7 @@
+   if( ii==0 || nPage<=1 ){
+     ii = 0;
+   }else{
+-    double rPtrsPerPage = pgsz/5;
+-    double rAvPage = (nPage-1.0)/(rPtrsPerPage+1.0);
+-    ii = (sqlite3_int64)ceil(rAvPage);
++    ii = (nPage - 2) / (pgsz/5 + 1) + 1;
+   }
+   diskusedLine(&s, "Pages of auto-vacuum overhead", "%-11lld ", ii);
+   diskusedPercent(&s, ii, nPage);

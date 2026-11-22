@@ -5,6 +5,9 @@ ARG VERSION
 
 WORKDIR /src/sqlite
 
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/_build.patch
+
 RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
