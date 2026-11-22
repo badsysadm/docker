@@ -8,6 +8,7 @@ WORKDIR /src/sqlite
 RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
+    --disable-math \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-static-libgcc -Wl,--gc-sections"
 
