@@ -91,7 +91,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Linux namespace management utilities
  Tools for entering, creating and inspecting namespaces, including pivot_root.
 
-Package: util-linux-hardware
+Package: util-linux-hw
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Hardware information and control utilities
