@@ -12,7 +12,7 @@ RUN patch -p1 < /src/patches/_build.patch
 RUN autoreconf -fi
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
-    LDFLAGS="-static-libgcc -static-libtool-libs -L/usr/local/lib -Wl,--gc-sections" \
+    LDFLAGS="-static-libgcc -L/usr/local/lib -Wl,--gc-sections" \
     --prefix=/usr \
     --bindir=/usr/bin \
     --sbindir=/usr/sbin \
@@ -30,7 +30,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --without-cryptsetup \
     --enable-static-programs=blkid,fdisk,losetup,mount,nsenter,partx,sfdisk,umount,unshare
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) AM_LDFLAGS="-static-libtool-libs"
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 
