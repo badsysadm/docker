@@ -5,7 +5,7 @@ FROM oci.badsysadm.local:80/dep/utils/util-linux:${VERSION} AS dep_image
 FROM dep_image AS build
 ARG VERSION
 
-WORKDIR /src/util-linux
+WORKDIR /src
 
 COPY debian/patches /src/patches/
 RUN patch -p1 < /src/patches/_build.patch
