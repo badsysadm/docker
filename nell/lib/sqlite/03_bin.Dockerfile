@@ -5,9 +5,6 @@ ARG VERSION
 
 WORKDIR /src/sqlite
 
-COPY debian/patches /src/patches/
-RUN patch -p1 < /src/patches/_build.patch
-
 RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
@@ -15,7 +12,7 @@ RUN ./configure \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-static-libgcc -Wl,--gc-sections"
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) LDFLAGS.math=-l:libm.a
 RUN make install DESTDIR=/src/target
 RUN rm -rf \
     /src/target/usr/share/doc \
