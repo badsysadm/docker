@@ -26,6 +26,7 @@ RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     --enable-liblastlog2 \
     --enable-pam-lastlog2 \
     --without-systemd \
+    --without-udev \
     --without-selinux \
     --without-cryptsetup \
     --enable-static-programs=blkid,fdisk,losetup,mount,nsenter,partx,sfdisk,umount,unshare

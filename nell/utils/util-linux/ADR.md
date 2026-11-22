@@ -8,7 +8,7 @@
 
 ## Решение
 - Собирать из официального release archive kernel.org.
-- Отключать NLS, asciidoc, Python libmount, systemd, SELinux, cryptsetup и btrfs.
+- Отключать NLS, asciidoc, Python libmount, systemd, udev, SELinux, cryptsetup и btrfs.
 - Оставлять включёнными liblastlog2 и PAM lastlog2.
 - Использовать SQLite из профиля NELL с отключёнными математическими SQL-функциями (`--disable-math`); при линковке `liblastlog2` и `pam_lastlog2` не подключать `libm.a`.
 - Выбранные низкоуровневые утилиты собирать как static programs.
@@ -16,7 +16,7 @@
 - Тесты не запускать, документацию удалять.
 
 ## Последствия
-- Отключённые интеграции и bindings отсутствуют в bundle.
+- Отключённые интеграции и bindings отсутствуют в bundle; `lsblk` и `findmnt` используют резервное получение метаданных через libblkid без обращения к libudev.
 - Статические программы не требуют своих обычных shared-зависимостей.
 - PAM lastlog2 сохраняет системную интеграцию и соответствующие runtime-требования.
 - Исключается непригодная для разделяемых библиотек статическая зависимость от Debian `libm.a`; математические SQL-функции SQLite недоступны.
