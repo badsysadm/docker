@@ -1,2 +1,2 @@
 usr/lib/*.la
-lib/security/*.la
+usr/lib/security/*.la
