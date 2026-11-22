@@ -4,6 +4,7 @@ Maintainer: badsysadm <me@badsysadm.com>
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
+ tcl,
  pkg-config
 
 Package: sqlite
