@@ -9,7 +9,8 @@ WORKDIR /src/util-linux
 
 COPY debian/patches /src/patches/
 RUN patch -p1 < /src/patches/_build.patch
-RUN autoreconf -fi
+RUN automake --foreign Makefile
+RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 RUN ./configure \
     CFLAGS="-O2 -fPIC" \
     LDFLAGS="-static-libgcc" \
