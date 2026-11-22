@@ -36,12 +36,14 @@ Description: System login and login accounting utilities
 
 Package: util-linux-agetty
 Architecture: amd64
+Provides: agetty
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Getty for terminal login
  The agetty program for managing terminal login prompts.
 
 Package: util-linux-swap
 Architecture: amd64
+Provides: swap
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Swap space management utilities
  Tools for creating, identifying, enabling and disabling swap space.
@@ -68,12 +70,14 @@ Description: Mount and unmount utilities
 
 Package: util-linux-uuid
 Architecture: amd64
+Provides: uuid
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: UUID generation and management utilities
  Tools for generating, parsing and serving universally unique identifiers.
 
 Package: util-linux-whereis
 Architecture: amd64
+Provides: whereis
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Locate binary, source and manual files
  The whereis utility.
