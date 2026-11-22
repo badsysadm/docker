@@ -21,11 +21,48 @@ Build-Depends: debhelper-compat (= 13),
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: sqlite (= 3.54.1), libcap-ng (= 0.8.5), libxcrypt (= 1:4.4.38-1)
+Static-Built-Using: sqlite (= 3.54.1), libxcrypt (= 1:4.4.38-1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: util-linux-bash-completion
 Description: Linux system management utilities
  Command-line tools, including optional static variants.
+
+Package: util-linux-agetty
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Getty for terminal login
+ The agetty program for managing terminal login prompts.
+
+Package: util-linux-swap
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Swap space management utilities
+ Tools for creating, identifying, enabling and disabling swap space.
+
+Package: util-linux-mkfs
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Filesystem creation utilities
+ mkfs frontend and filesystem creation tools provided by util-linux.
+
+Package: util-linux-fdisk
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Disk partition management utilities
+ fdisk, sfdisk, partx and partition table management helpers.
+
+Package: util-linux-whereis
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Locate binary, source and manual files
+ The whereis utility.
+
+Package: util-linux-process
+Architecture: amd64
+Static-Built-Using: libcap-ng (= 0.8.5)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Process, scheduling, IPC and namespace utilities
+ Tools for signaling, scheduling, controlling and inspecting processes and namespaces.
 
 Package: util-linux-bash-completion
 Architecture: all

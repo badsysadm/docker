@@ -1,0 +1,12 @@
+usr/sbin/addpart
+usr/sbin/addpart.static
+usr/sbin/delpart
+usr/sbin/delpart.static
+usr/sbin/fdisk
+usr/sbin/fdisk.static
+usr/sbin/partx
+usr/sbin/partx.static
+usr/sbin/resizepart
+usr/sbin/resizepart.static
+usr/sbin/sfdisk
+usr/sbin/sfdisk.static
