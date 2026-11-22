@@ -44,7 +44,7 @@ Architecture: amd64
 Depends: ${misc:Depends}, libblkid-dev (= ${binary:Version})
 Multi-Arch: same
 Description: blkid static library
- Static archive and libtool metadata for blkid.
+ Static archive for blkid.
 
 Package: libblkid1-shared
 Architecture: amd64
@@ -66,7 +66,7 @@ Architecture: amd64
 Depends: ${misc:Depends}, libmount-dev (= ${binary:Version})
 Multi-Arch: same
 Description: mount static library
- Static archive and libtool metadata for mount.
+ Static archive for mount.
 
 Package: libmount1-shared
 Architecture: amd64
@@ -75,7 +75,7 @@ Multi-Arch: same
 Description: mount shared library
  Shared runtime library and linker symlink for mount.
 
-Package: uuid-dev
+Package: libuuid-dev
 Architecture: amd64
 Depends: ${misc:Depends}
 Suggests: libuuid1-shared (= ${binary:Version}), libuuid-static (= ${binary:Version})
@@ -85,10 +85,10 @@ Description: uuid development headers and metadata
 
 Package: libuuid-static
 Architecture: amd64
-Depends: ${misc:Depends}, uuid-dev (= ${binary:Version})
+Depends: ${misc:Depends}, libuuid-dev (= ${binary:Version})
 Multi-Arch: same
 Description: uuid static library
- Static archive and libtool metadata for uuid.
+ Static archive for uuid.
 
 Package: libuuid1-shared
 Architecture: amd64
@@ -110,7 +110,7 @@ Architecture: amd64
 Depends: ${misc:Depends}, libfdisk-dev (= ${binary:Version})
 Multi-Arch: same
 Description: fdisk static library
- Static archive and libtool metadata for fdisk.
+ Static archive for fdisk.
 
 Package: libfdisk1-shared
 Architecture: amd64
@@ -132,7 +132,7 @@ Architecture: amd64
 Depends: ${misc:Depends}, libsmartcols-dev (= ${binary:Version})
 Multi-Arch: same
 Description: smartcols static library
- Static archive and libtool metadata for smartcols.
+ Static archive for smartcols.
 
 Package: libsmartcols1-shared
 Architecture: amd64
@@ -154,7 +154,7 @@ Architecture: amd64
 Depends: ${misc:Depends}, liblastlog2-dev (= ${binary:Version})
 Multi-Arch: same
 Description: lastlog2 static library
- Static archive and libtool metadata for lastlog2.
+ Static archive for lastlog2.
 
 Package: liblastlog2-2-shared
 Architecture: amd64
