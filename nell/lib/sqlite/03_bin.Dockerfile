@@ -14,9 +14,9 @@ RUN ./configure \
 
 RUN make -j$(nproc) libsqlite3.a libsqlite3.so
 RUN make -j$(nproc) sqlite3 \
-    CFLAGS="-O2 -fno-pie -ffunction-sections -fdata-sections" \
+    CFLAGS="-O2 -fno-pie -fno-math-errno -fno-trapping-math -ffunction-sections -fdata-sections" \
     LDFLAGS.configure="-static-libgcc -no-pie -Wl,--gc-sections" \
-    LDFLAGS.math=-l:libm.a
+    LDFLAGS.math=
 RUN make install-lib install-dll install-headers install-pc install-shell-0 DESTDIR=/src/target
 RUN rm -rf \
     /src/target/usr/share/doc \
