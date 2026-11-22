@@ -7,7 +7,7 @@ FROM oci.badsysadm.local:80/get/dep:latest AS build
 
 COPY debian ./debian/
 RUN apt-get -qq update
-RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"'
+RUN mk-build-deps --install --remove --tool 'apt-get -y -qq -o Dpkg::Options::="--force-confnew"' debian/control
 
 COPY --from=sqlite_image /target/usr/include/ /usr/local/include/
 COPY --from=sqlite_image /target/usr/lib/libsqlite3.a /usr/local/lib/libsqlite3.a
