@@ -1,13 +1,11 @@
 usr/bin/bits
 usr/bin/cal
-usr/bin/chmem
 usr/bin/col
 usr/bin/colcrt
 usr/bin/colrm
 usr/bin/column
 usr/bin/copyfilerange
 usr/bin/dmesg
-usr/bin/eject
 usr/bin/enosys
 usr/bin/exch
 usr/bin/fadvise
@@ -20,10 +18,6 @@ usr/bin/hexdump
 usr/bin/isosize
 usr/bin/logger
 usr/bin/look
-usr/bin/lsclocks
-usr/bin/lscpu
-usr/bin/lsirq
-usr/bin/lsmem
 usr/bin/mcookie
 usr/bin/mesg
 usr/bin/namei
@@ -34,12 +28,6 @@ usr/bin/script
 usr/bin/scriptlive
 usr/bin/scriptreplay
 usr/bin/wall
-usr/bin/wdctl
-usr/sbin/chcpu
 usr/sbin/ctrlaltdel
-usr/sbin/hwclock
-usr/sbin/ldattach
 usr/sbin/readprofile
-usr/sbin/rfkill
-usr/sbin/rtcwake
 usr/sbin/zramctl
