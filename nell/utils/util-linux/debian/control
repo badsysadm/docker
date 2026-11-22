@@ -34,7 +34,7 @@ Description: Bash completion for util-linux commands
 
 Package: libpam-lastlog2
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblastlog2-2-shared (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: PAM integration for lastlog2
  PAM module for recording and displaying previous login information.
 

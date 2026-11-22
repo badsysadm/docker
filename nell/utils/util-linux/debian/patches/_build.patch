@@ -1,0 +1,25 @@
+diff --git a/liblastlog2/src/Makemodule.am b/liblastlog2/src/Makemodule.am
+--- a/liblastlog2/src/Makemodule.am
++++ b/liblastlog2/src/Makemodule.am
+@@ -11,7 +11,7 @@
+ EXTRA_liblastlog2_la_DEPENDENCIES = \
+ 	liblastlog2/src/liblastlog2.sym
+ 
+-liblastlog2_la_LIBADD = $(SQLITE3_LIBS)
++liblastlog2_la_LIBADD = -Wl,-Bstatic $(SQLITE3_LIBS) -lm -Wl,-Bdynamic
+ 
+ liblastlog2_la_CFLAGS = \
+ 	$(AM_CFLAGS) \
+diff --git a/pam_lastlog2/src/Makemodule.am b/pam_lastlog2/src/Makemodule.am
+--- a/pam_lastlog2/src/Makemodule.am
++++ b/pam_lastlog2/src/Makemodule.am
+@@ -11,7 +11,8 @@
+ 	 $(SOLIB_CFLAGS) \
+ 	 -I$(ul_liblastlog2_incdir)
+ 
+-pam_lastlog2_la_LIBADD = liblastlog2.la -lpam
++pam_lastlog2_la_DEPENDENCIES = liblastlog2.la
++pam_lastlog2_la_LIBADD = $(top_builddir)/.libs/liblastlog2.a -Wl,-Bstatic -lpam -lsqlite3 -laudit -lcap-ng -lm -Wl,-Bdynamic
+ 
+ pam_lastlog2_la_LDFLAGS = $(SOLIB_LDFLAGS) -module -avoid-version -shared
+ if HAVE_VSCRIPT

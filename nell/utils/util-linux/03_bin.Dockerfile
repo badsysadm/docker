@@ -7,8 +7,12 @@ ARG VERSION
 
 WORKDIR /src/util-linux
 
-RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/_build.patch
+RUN autoreconf -fi
 RUN ./configure \
+    CFLAGS="-O2 -fPIC" \
+    LDFLAGS="-static-libgcc" \
     --prefix=/usr \
     --bindir=/usr/bin \
     --sbindir=/usr/sbin \
