@@ -102,7 +102,7 @@ Description: libudev shared library
 Package: systemd
 Architecture: amd64
 Static-Built-Using: openssl (= 3.6.5)
-Depends: ${misc:Depends}, libsystemd0-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1-shared (= ${binary:Version}), systemd-journald (= ${binary:Version}), systemd-tmpfiles (= ${binary:Version}), systemd-sysusers (= ${binary:Version})
+Depends: ${misc:Depends}, libsystemd0-shared (= ${binary:Version}), libsystemd-shared (= ${binary:Version}), libudev1-shared (= ${binary:Version})
 Description: System and service manager
  NELL systemd 261 component packaged from the existing build artifacts.
 
