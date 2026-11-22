@@ -1,7 +1,7 @@
 diff --git a/configure.ac b/configure.ac
 --- a/configure.ac
 +++ b/configure.ac
-@@ -257,9 +257,7 @@
+@@ -257,8 +257,6 @@
  PKG_PROG_PKG_CONFIG
  PKG_INSTALLDIR(['${usrlib_execdir}/pkgconfig'])
  
@@ -10,7 +10,7 @@ diff --git a/configure.ac b/configure.ac
  
  
  linux_os=no
-@@ -3124,21 +3122,13 @@
+@@ -3124,18 +3122,10 @@
  # more details.
  #
  AC_CONFIG_FILES([
