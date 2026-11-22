@@ -33,8 +33,6 @@ usr/bin/rev
 usr/bin/script
 usr/bin/scriptlive
 usr/bin/scriptreplay
-usr/bin/uuidgen
-usr/bin/uuidparse
 usr/bin/wall
 usr/bin/wdctl
 usr/sbin/chcpu
@@ -44,5 +42,4 @@ usr/sbin/ldattach
 usr/sbin/readprofile
 usr/sbin/rfkill
 usr/sbin/rtcwake
-usr/sbin/uuidd
 usr/sbin/zramctl

@@ -64,6 +64,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Mount and unmount utilities
  Tools for mounting filesystems, inspecting mounts and switching root filesystems.
 
+Package: util-linux-uuid
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: UUID generation and management utilities
+ Tools for generating, parsing and serving universally unique identifiers.
+
 Package: util-linux-whereis
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
