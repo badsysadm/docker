@@ -10,6 +10,8 @@ WORKDIR /src/util-linux
 RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
 RUN ./configure \
     --prefix=/usr \
+    --bindir=/usr/bin \
+    --sbindir=/usr/sbin \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --disable-nls \
