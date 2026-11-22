@@ -7,9 +7,16 @@ ARG VERSION
 
 WORKDIR /src/util-linux
 
-RUN find . -type f \( -name "configure" -o -name "Makefile.in" -o -name "aclocal.m4" \) -exec touch {} +
-RUN ./configure \
+COPY debian/patches /src/patches/
+RUN patch -p1 < /src/patches/_build.patch
+RUN autoreconf -fi
+RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
+    CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
+    LDFLAGS="-static-libgcc -L/usr/local/lib -Wl,--gc-sections" \
     --prefix=/usr \
+    --bindir=/usr/bin \
+    --sbindir=/usr/sbin \
+    --libdir=/usr/lib \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --disable-nls \
@@ -19,11 +26,12 @@ RUN ./configure \
     --enable-liblastlog2 \
     --enable-pam-lastlog2 \
     --without-systemd \
+    --without-udev \
     --without-selinux \
     --without-cryptsetup \
     --enable-static-programs=blkid,fdisk,losetup,mount,nsenter,partx,sfdisk,umount,unshare
 
-RUN make -j$(nproc)
+RUN make -j$(nproc) AM_LDFLAGS="-static-libtool-libs"
 RUN make install DESTDIR=/src/target
 RUN rm -rf /src/target/usr/share/man /src/target/usr/share/info /src/target/usr/share/doc
 

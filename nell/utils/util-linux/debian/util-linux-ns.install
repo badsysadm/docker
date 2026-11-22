@@ -1,0 +1,4 @@
+usr/bin/lsns
+usr/bin/nsenter
+usr/bin/unshare
+usr/sbin/pivot_root

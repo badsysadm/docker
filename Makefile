@@ -84,6 +84,8 @@ ncurses: version ?= 6.6
 glib: version ?= 2.84.4
 zlib: version ?= 1.3.1
 libunwind: version ?= 1.8.3
+sqlite: section = lib
+sqlite: version ?= 3.54.1
 zstd: version ?= 1.5.7
 
 nftables iproute2 chrony curl tcpdump ethtool socat: section = net

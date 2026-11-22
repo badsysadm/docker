@@ -1,0 +1,12 @@
+usr/bin/chmem
+usr/bin/eject
+usr/bin/lsclocks
+usr/bin/lscpu
+usr/bin/lsirq
+usr/bin/lsmem
+usr/bin/wdctl
+usr/sbin/chcpu
+usr/sbin/hwclock
+usr/sbin/ldattach
+usr/sbin/rfkill
+usr/sbin/rtcwake

@@ -1,0 +1,4 @@
+usr/sbin/mkswap
+usr/sbin/swaplabel
+usr/sbin/swapoff
+usr/sbin/swapon

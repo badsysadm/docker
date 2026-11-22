@@ -1,0 +1,4 @@
+usr/lib/*.la
+usr/lib/security/*.la
+usr/bin/*.static
+usr/sbin/*.static

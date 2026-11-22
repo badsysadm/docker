@@ -1,0 +1,5 @@
+usr/bin/findmnt
+usr/bin/mount
+usr/bin/mountpoint
+usr/bin/umount
+usr/sbin/switch_root

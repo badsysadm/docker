@@ -1,0 +1,5 @@
+util-linux (@VERSION@-1) unstable; urgency=medium
+
+  * Initial NELL Debian packaging for utilities, libraries, and PAM integration.
+
+ -- badsysadm <me@badsysadm.com>  Sun, 22 Nov 2026 00:00:00 +0000

@@ -12,15 +12,254 @@ Build-Depends: debhelper-compat (= 13),
  libtool,
  bison,
  flex,
- libsqlite3-dev,
  libjson-c-dev,
  libdevmapper-dev,
  libpam0g-dev,
  libaudit-dev,
- libcap-ng-dev
+ libcap-ng-dev,
+ libcrypt-dev
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
-Description: util-linux binaries
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: util-linux-bash-completion
+Description: Linux system management utilities
+ Command-line tools, including optional static variants.
+
+Package: util-linux-login
+Architecture: amd64
+Provides: login
+Static-Built-Using: sqlite (= 3.54.1)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: System login and login accounting utilities
+ Login, account information, login history and session accounting tools.
+
+Package: util-linux-agetty
+Architecture: amd64
+Provides: agetty
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Getty for terminal login
+ The agetty program for managing terminal login prompts.
+
+Package: util-linux-swap
+Architecture: amd64
+Provides: swap
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Swap space management utilities
+ Tools for creating, identifying, enabling and disabling swap space.
+
+Package: util-linux-disk
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Disk and filesystem management utilities
+ Tools for partitioning, creating, checking and maintaining filesystems and block devices.
+
+Package: util-linux-su
+Architecture: amd64
+Provides: su
+Static-Built-Using: libxcrypt (= 1:4.4.38-1)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: User switching and emergency login utilities
+ su, runuser and sulogin for user switching and emergency system login.
+
+Package: util-linux-mount
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Mount and unmount utilities
+ Tools for mounting filesystems, inspecting mounts and switching root filesystems.
+
+Package: util-linux-uuid
+Architecture: amd64
+Provides: uuid
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: UUID generation and management utilities
+ Tools for generating, parsing and serving universally unique identifiers.
+
+Package: util-linux-whereis
+Architecture: amd64
+Provides: whereis
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Locate binary, source and manual files
+ The whereis utility.
+
+Package: util-linux-process
+Architecture: amd64
+Static-Built-Using: libcap-ng (= 0.8.5)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Process, scheduling and IPC utilities
+ Tools for signaling, scheduling, controlling and inspecting processes and IPC.
+
+Package: util-linux-ns
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Linux namespace management utilities
+ Tools for entering, creating and inspecting namespaces, including pivot_root.
+
+Package: util-linux-hw
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Hardware information and control utilities
+ Tools for CPU, memory, interrupts, clocks, radio devices and hardware control.
+
+Package: util-linux-log
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Kernel logging and syslog utilities
+ Tools for reading kernel messages and sending messages to syslog.
+
+Package: util-linux-term
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Terminal text formatting and messaging utilities
+ Tools for formatting terminal output and messaging terminal users.
+
+Package: util-linux-script
+Architecture: amd64
+Provides: script
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Terminal session recording and replay utilities
+ Tools for recording and replaying interactive terminal sessions.
+
+Package: util-linux-bash-completion
+Architecture: all
+Depends: ${misc:Depends}
+Description: Bash completion for util-linux commands
+ Bash command-line completion definitions for util-linux utilities.
+
+Package: libpam-lastlog2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PAM integration for lastlog2
+ PAM module for recording and displaying previous login information.
+
+Package: libblkid-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libblkid1-shared (= ${binary:Version}), libblkid-static (= ${binary:Version})
+Multi-Arch: same
+Description: blkid development headers and metadata
+ Public headers and pkg-config metadata for blkid.
+
+Package: libblkid-static
+Architecture: amd64
+Depends: ${misc:Depends}, libblkid-dev (= ${binary:Version})
+Multi-Arch: same
+Description: blkid static library
+ Static archive for blkid.
+
+Package: libblkid1-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: blkid shared library
+ Shared runtime library and linker symlink for blkid.
+
+Package: libmount-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libmount1-shared (= ${binary:Version}), libmount-static (= ${binary:Version})
+Multi-Arch: same
+Description: mount development headers and metadata
+ Public headers and pkg-config metadata for mount.
+
+Package: libmount-static
+Architecture: amd64
+Depends: ${misc:Depends}, libmount-dev (= ${binary:Version})
+Multi-Arch: same
+Description: mount static library
+ Static archive for mount.
+
+Package: libmount1-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: mount shared library
+ Shared runtime library and linker symlink for mount.
+
+Package: libuuid-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libuuid1-shared (= ${binary:Version}), libuuid-static (= ${binary:Version})
+Multi-Arch: same
+Description: uuid development headers and metadata
+ Public headers and pkg-config metadata for uuid.
+
+Package: libuuid-static
+Architecture: amd64
+Depends: ${misc:Depends}, libuuid-dev (= ${binary:Version})
+Multi-Arch: same
+Description: uuid static library
+ Static archive for uuid.
+
+Package: libuuid1-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: uuid shared library
+ Shared runtime library and linker symlink for uuid.
+
+Package: libfdisk-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libfdisk1-shared (= ${binary:Version}), libfdisk-static (= ${binary:Version})
+Multi-Arch: same
+Description: fdisk development headers and metadata
+ Public headers and pkg-config metadata for fdisk.
+
+Package: libfdisk-static
+Architecture: amd64
+Depends: ${misc:Depends}, libfdisk-dev (= ${binary:Version})
+Multi-Arch: same
+Description: fdisk static library
+ Static archive for fdisk.
+
+Package: libfdisk1-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: fdisk shared library
+ Shared runtime library and linker symlink for fdisk.
+
+Package: libsmartcols-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libsmartcols1-shared (= ${binary:Version}), libsmartcols-static (= ${binary:Version})
+Multi-Arch: same
+Description: smartcols development headers and metadata
+ Public headers and pkg-config metadata for smartcols.
+
+Package: libsmartcols-static
+Architecture: amd64
+Depends: ${misc:Depends}, libsmartcols-dev (= ${binary:Version})
+Multi-Arch: same
+Description: smartcols static library
+ Static archive for smartcols.
+
+Package: libsmartcols1-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: smartcols shared library
+ Shared runtime library and linker symlink for smartcols.
+
+Package: liblastlog2-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: liblastlog2-2-shared (= ${binary:Version}), liblastlog2-static (= ${binary:Version})
+Multi-Arch: same
+Description: lastlog2 development headers and metadata
+ Public headers and pkg-config metadata for lastlog2.
+
+Package: liblastlog2-static
+Architecture: amd64
+Depends: ${misc:Depends}, liblastlog2-dev (= ${binary:Version})
+Multi-Arch: same
+Description: lastlog2 static library
+ Static archive for lastlog2.
+
+Package: liblastlog2-2-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: lastlog2 shared library
+ Shared runtime library and linker symlink for lastlog2.

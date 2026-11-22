@@ -1,0 +1,143 @@
+diff --git a/configure.ac b/configure.ac
+--- a/configure.ac
++++ b/configure.ac
+@@ -257,8 +257,7 @@
+ PKG_PROG_PKG_CONFIG
+ PKG_INSTALLDIR(['${usrlib_execdir}/pkgconfig'])
+ 
+-GTK_DOC_CHECK([1.10])
+-AC_PATH_PROG([XSLTPROC], [xsltproc])
++AM_CONDITIONAL([ENABLE_GTK_DOC], [false])
+ 
+ 
+ linux_os=no
+@@ -3124,19 +3122,11 @@
+ # more details.
+ #
+ AC_CONFIG_FILES([
+ Makefile
+-libblkid/docs/Makefile
+-libblkid/docs/version.xml
+ libblkid/src/blkid.h
+-libfdisk/docs/Makefile
+-libfdisk/docs/version.xml
+ libfdisk/src/libfdisk.h
+ liblastlog2/src/lastlog2.h
+-libmount/docs/Makefile
+-libmount/docs/version.xml
+ libmount/src/libmount.h
+-libsmartcols/docs/Makefile
+-libsmartcols/docs/version.xml
+ libsmartcols/src/libsmartcols.h
+ po/Makefile.in
+ ])
+diff --git a/liblastlog2/src/Makemodule.am b/liblastlog2/src/Makemodule.am
+--- a/liblastlog2/src/Makemodule.am
++++ b/liblastlog2/src/Makemodule.am
+@@ -11,7 +11,7 @@
+ EXTRA_liblastlog2_la_DEPENDENCIES = \
+ 	liblastlog2/src/liblastlog2.sym
+ 
+-liblastlog2_la_LIBADD = $(SQLITE3_LIBS)
++liblastlog2_la_LIBADD = -l:libsqlite3.a
+ 
+ liblastlog2_la_CFLAGS = \
+ 	$(AM_CFLAGS) \
+diff --git a/pam_lastlog2/src/Makemodule.am b/pam_lastlog2/src/Makemodule.am
+--- a/pam_lastlog2/src/Makemodule.am
++++ b/pam_lastlog2/src/Makemodule.am
+@@ -11,7 +11,8 @@
+ 	 $(SOLIB_CFLAGS) \
+ 	 -I$(ul_liblastlog2_incdir)
+ 
+-pam_lastlog2_la_LIBADD = liblastlog2.la -lpam
++pam_lastlog2_la_DEPENDENCIES = liblastlog2.la
++pam_lastlog2_la_LIBADD = $(top_builddir)/.libs/liblastlog2.a -l:libpam.a -l:libsqlite3.a -l:libaudit.a -l:libcap-ng.a
+ 
+ pam_lastlog2_la_LDFLAGS = $(SOLIB_LDFLAGS) -module -avoid-version -shared
+ if HAVE_VSCRIPT
+diff --git a/libfdisk/src/Makemodule.am b/libfdisk/src/Makemodule.am
+--- a/libfdisk/src/Makemodule.am
++++ b/libfdisk/src/Makemodule.am
+@@ -31,7 +31,7 @@
+ 	libfdisk/src/bsd.c \
+ 	libfdisk/src/gpt.c
+ 
+-libfdisk_la_LIBADD = libcommon.la libuuid.la
++libfdisk_la_LIBADD = libcommon.la -L$(top_builddir)/.libs -l:libuuid.a
+ 
+ libfdisk_la_CFLAGS = \
+ 	$(AM_CFLAGS) \
+@@ -41,7 +41,8 @@
+ 	-I$(top_srcdir)/libfdisk/src
+ 
+ EXTRA_libfdisk_la_DEPENDENCIES = \
+-	libfdisk/src/libfdisk.sym
++	libfdisk/src/libfdisk.sym \
++	libuuid.la
+ 
+ libfdisk_la_LDFLAGS = $(SOLIB_LDFLAGS)
+ if HAVE_VSCRIPT
+@@ -51,7 +52,8 @@
+ 
+ 
+ if BUILD_LIBBLKID
+-libfdisk_la_LIBADD += libblkid.la
++libfdisk_la_LIBADD += -L$(top_builddir)/.libs -l:libblkid.a
++EXTRA_libfdisk_la_DEPENDENCIES += libblkid.la
+ libfdisk_la_CFLAGS += -I$(ul_libblkid_incdir)
+ endif
+ 
+diff --git a/libmount/src/Makemodule.am b/libmount/src/Makemodule.am
+--- a/libmount/src/Makemodule.am
++++ b/libmount/src/Makemodule.am
+@@ -57,7 +57,7 @@
+ 
+ libmount_la_LIBADD = \
+ 	libcommon.la \
+-	libblkid.la \
++	-L$(top_builddir)/.libs -l:libblkid.a \
+ 	$(SELINUX_LIBS) \
+ 	$(REALTIME_LIBS)
+ 
+@@ -82,7 +82,8 @@
+ 	-I$(top_srcdir)/libmount/src
+ 
+ EXTRA_libmount_la_DEPENDENCIES = \
+-	libmount/src/libmount.sym
++	libmount/src/libmount.sym \
++	libblkid.la
+ 
+ libmount_la_LDFLAGS = $(SOLIB_LDFLAGS)
+ if HAVE_VSCRIPT
+diff --git a/login-utils/Makemodule.am b/login-utils/Makemodule.am
+--- a/login-utils/Makemodule.am
++++ b/login-utils/Makemodule.am
+@@ -40,7 +40,7 @@
+ sulogin_LDADD = $(LDADD) libcommon.la
+ 
+ if HAVE_LIBCRYPT
+-sulogin_LDADD += -lcrypt
++sulogin_LDADD += -l:libcrypt.a
+ endif
+ if HAVE_SELINUX
+ sulogin_LDADD += -lselinux
+@@ -204,7 +204,7 @@
+ newgrp_LDFLAGS = $(SUID_LDFLAGS) $(AM_LDFLAGS)
+ newgrp_LDADD = $(LDADD)
+ if HAVE_LIBCRYPT
+-newgrp_LDADD += -lcrypt
++newgrp_LDADD += -l:libcrypt.a
+ endif
+ endif # BUILD_NEWGRP
+ 
+diff --git a/sys-utils/Makemodule.am b/sys-utils/Makemodule.am
+--- a/sys-utils/Makemodule.am
++++ b/sys-utils/Makemodule.am
+@@ -597,5 +597,5 @@
+ if HAVE_LINUX_LANDLOCK_H
+ setpriv_SOURCES += sys-utils/setpriv-landlock.c
+ endif
+-setpriv_LDADD = $(LDADD) -lcap-ng libcommon.la libcommon_logindefs.la
++setpriv_LDADD = $(LDADD) -l:libcap-ng.a libcommon.la libcommon_logindefs.la
+ endif # BUILD_SETPRIV
