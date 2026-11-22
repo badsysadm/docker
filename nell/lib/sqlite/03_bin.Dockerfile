@@ -8,11 +8,16 @@ WORKDIR /src/sqlite
 RUN ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \
+    --disable-math \
     CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections" \
     LDFLAGS="-static-libgcc -Wl,--gc-sections"
 
-RUN make -j$(nproc) LDFLAGS.math=-l:libm.a
-RUN make install DESTDIR=/src/target
+RUN make -j$(nproc) libsqlite3.a libsqlite3.so
+RUN make -j$(nproc) sqlite3 \
+    CFLAGS="-O2 -fno-pie -ffunction-sections -fdata-sections" \
+    LDFLAGS.configure="-static-libgcc -no-pie -Wl,--gc-sections" \
+    LDFLAGS.math=-l:libm.a
+RUN make install-lib install-dll install-headers install-pc install-shell-0 DESTDIR=/src/target
 RUN rm -rf \
     /src/target/usr/share/doc \
     /src/target/usr/share/man \
