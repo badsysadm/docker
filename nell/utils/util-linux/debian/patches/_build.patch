@@ -64,7 +64,7 @@ diff --git a/libfdisk/src/Makemodule.am b/libfdisk/src/Makemodule.am
  	libfdisk/src/gpt.c
  
 -libfdisk_la_LIBADD = libcommon.la libuuid.la
-+libfdisk_la_LIBADD = libcommon.la $(top_builddir)/.libs/libuuid.a
++libfdisk_la_LIBADD = libcommon.la -L$(top_builddir)/.libs -l:libuuid.a
  
  libfdisk_la_CFLAGS = \
  	$(AM_CFLAGS) \
@@ -83,7 +83,7 @@ diff --git a/libfdisk/src/Makemodule.am b/libfdisk/src/Makemodule.am
  
  if BUILD_LIBBLKID
 -libfdisk_la_LIBADD += libblkid.la
-+libfdisk_la_LIBADD += $(top_builddir)/.libs/libblkid.a
++libfdisk_la_LIBADD += -L$(top_builddir)/.libs -l:libblkid.a
 +EXTRA_libfdisk_la_DEPENDENCIES += libblkid.la
  libfdisk_la_CFLAGS += -I$(ul_libblkid_incdir)
  endif
@@ -96,7 +96,7 @@ diff --git a/libmount/src/Makemodule.am b/libmount/src/Makemodule.am
  libmount_la_LIBADD = \
  	libcommon.la \
 -	libblkid.la \
-+	$(top_builddir)/.libs/libblkid.a \
++	-L$(top_builddir)/.libs -l:libblkid.a \
  	$(SELINUX_LIBS) \
  	$(REALTIME_LIBS)
  
