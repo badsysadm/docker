@@ -110,3 +110,34 @@ diff --git a/libmount/src/Makemodule.am b/libmount/src/Makemodule.am
  
  libmount_la_LDFLAGS = $(SOLIB_LDFLAGS)
  if HAVE_VSCRIPT
+diff --git a/login-utils/Makemodule.am b/login-utils/Makemodule.am
+--- a/login-utils/Makemodule.am
++++ b/login-utils/Makemodule.am
+@@ -40,7 +40,7 @@
+ sulogin_LDADD = $(LDADD) libcommon.la
+ 
+ if HAVE_LIBCRYPT
+-sulogin_LDADD += -lcrypt
++sulogin_LDADD += -l:libcrypt.a
+ endif
+ if HAVE_SELINUX
+ sulogin_LDADD += -lselinux
+@@ -204,7 +204,7 @@
+ newgrp_LDFLAGS = $(SUID_LDFLAGS) $(AM_LDFLAGS)
+ newgrp_LDADD = $(LDADD)
+ if HAVE_LIBCRYPT
+-newgrp_LDADD += -lcrypt
++newgrp_LDADD += -l:libcrypt.a
+ endif
+ endif # BUILD_NEWGRP
+ 
+diff --git a/sys-utils/Makemodule.am b/sys-utils/Makemodule.am
+--- a/sys-utils/Makemodule.am
++++ b/sys-utils/Makemodule.am
+@@ -597,5 +597,5 @@
+ if HAVE_LINUX_LANDLOCK_H
+ setpriv_SOURCES += sys-utils/setpriv-landlock.c
+ endif
+-setpriv_LDADD = $(LDADD) -lcap-ng libcommon.la libcommon_logindefs.la
++setpriv_LDADD = $(LDADD) -l:libcap-ng.a libcommon.la libcommon_logindefs.la
+ endif # BUILD_SETPRIV

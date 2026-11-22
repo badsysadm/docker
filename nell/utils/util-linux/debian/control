@@ -16,11 +16,12 @@ Build-Depends: debhelper-compat (= 13),
  libdevmapper-dev,
  libpam0g-dev,
  libaudit-dev,
- libcap-ng-dev
+ libcap-ng-dev,
+ libcrypt-dev
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: sqlite (= 3.54.1)
+Static-Built-Using: sqlite (= 3.54.1), libcap-ng (= 0.8.5), libxcrypt (= 1:4.4.38-1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: util-linux-bash-completion
 Description: Linux system management utilities
