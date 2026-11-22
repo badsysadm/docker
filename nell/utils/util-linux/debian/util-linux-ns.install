@@ -1,6 +1,4 @@
 usr/bin/lsns
 usr/bin/nsenter
-usr/bin/nsenter.static
 usr/bin/unshare
-usr/bin/unshare.static
 usr/sbin/pivot_root
