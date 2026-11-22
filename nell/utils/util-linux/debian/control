@@ -39,17 +39,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Swap space management utilities
  Tools for creating, identifying, enabling and disabling swap space.
 
-Package: util-linux-mkfs
+Package: util-linux-disk
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Filesystem creation utilities
- mkfs frontend and filesystem creation tools provided by util-linux.
-
-Package: util-linux-fdisk
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Disk partition management utilities
- fdisk, sfdisk, partx and partition table management helpers.
+Description: Disk partitioning and filesystem creation utilities
+ fdisk, sfdisk, partx, partition table helpers, mkfs and filesystem creation tools.
 
 Package: util-linux-whereis
 Architecture: amd64

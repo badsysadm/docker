@@ -4,6 +4,9 @@ usr/sbin/delpart
 usr/sbin/delpart.static
 usr/sbin/fdisk
 usr/sbin/fdisk.static
+usr/sbin/mkfs
+usr/sbin/mkfs.bfs
+usr/sbin/mkfs.minix
 usr/sbin/partx
 usr/sbin/partx.static
 usr/sbin/resizepart
