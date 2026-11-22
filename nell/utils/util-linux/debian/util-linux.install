@@ -5,7 +5,6 @@ usr/bin/colcrt
 usr/bin/colrm
 usr/bin/column
 usr/bin/copyfilerange
-usr/bin/dmesg
 usr/bin/enosys
 usr/bin/exch
 usr/bin/fadvise
@@ -16,7 +15,6 @@ usr/bin/getopt
 usr/bin/hardlink
 usr/bin/hexdump
 usr/bin/isosize
-usr/bin/logger
 usr/bin/look
 usr/bin/mcookie
 usr/bin/mesg
@@ -24,9 +22,6 @@ usr/bin/namei
 usr/bin/pipesz
 usr/bin/rename
 usr/bin/rev
-usr/bin/script
-usr/bin/scriptlive
-usr/bin/scriptreplay
 usr/bin/wall
 usr/sbin/ctrlaltdel
 usr/sbin/readprofile

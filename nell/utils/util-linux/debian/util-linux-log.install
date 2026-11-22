@@ -1,0 +1,5 @@
+usr/bin/dmesg
+usr/bin/logger
+usr/bin/script
+usr/bin/scriptlive
+usr/bin/scriptreplay

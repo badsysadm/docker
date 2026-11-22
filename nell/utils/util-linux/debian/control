@@ -101,6 +101,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Hardware information and control utilities
  Tools for CPU, memory, interrupts, clocks, radio devices and hardware control.
 
+Package: util-linux-log
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Kernel logging and terminal session recording utilities
+ Tools for reading kernel messages, sending syslog messages and recording or replaying terminal sessions.
+
 Package: util-linux-bash-completion
 Architecture: all
 Depends: ${misc:Depends}
