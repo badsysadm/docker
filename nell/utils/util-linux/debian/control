@@ -21,6 +21,90 @@ Build-Depends: debhelper-compat (= 13),
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: gcc
-Depends: ${shlibs:Depends}
-Description: util-linux binaries
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Linux system management utilities
+ Utilities and command-line tools from the NELL util-linux build.
+
+Package: libpam-lastlog2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblastlog2-2 (= ${binary:Version})
+Description: PAM integration for lastlog2
+ PAM module for recording and displaying previous login information.
+
+Package: libblkid1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: blkid shared library
+ Shared blkid library from util-linux.
+
+Package: libblkid-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libblkid1 (= ${binary:Version})
+Description: blkid development files
+ Headers, static library and linker metadata for blkid.
+
+Package: libmount1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: mount shared library
+ Shared mount library from util-linux.
+
+Package: libmount-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libmount1 (= ${binary:Version})
+Description: mount development files
+ Headers, static library and linker metadata for mount.
+
+Package: libuuid1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: uuid shared library
+ Shared uuid library from util-linux.
+
+Package: uuid-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libuuid1 (= ${binary:Version})
+Description: uuid development files
+ Headers, static library and linker metadata for uuid.
+
+Package: libfdisk1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: fdisk shared library
+ Shared fdisk library from util-linux.
+
+Package: libfdisk-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libfdisk1 (= ${binary:Version})
+Description: fdisk development files
+ Headers, static library and linker metadata for fdisk.
+
+Package: libsmartcols1
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: smartcols shared library
+ Shared smartcols library from util-linux.
+
+Package: libsmartcols-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: libsmartcols1 (= ${binary:Version})
+Description: smartcols development files
+ Headers, static library and linker metadata for smartcols.
+
+Package: liblastlog2-2
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: lastlog2 shared library
+ Shared lastlog2 library from util-linux.
+
+Package: liblastlog2-dev
+Architecture: amd64
+Depends: ${misc:Depends}
+Suggests: liblastlog2-2 (= ${binary:Version})
+Description: lastlog2 development files
+ Headers, static library and linker metadata for lastlog2.

@@ -1,0 +1,5 @@
+usr/include/liblastlog2*
+usr/lib/liblastlog2.a
+usr/lib/liblastlog2.so
+usr/lib/liblastlog2.la
+usr/lib/pkgconfig/lastlog2.pc
