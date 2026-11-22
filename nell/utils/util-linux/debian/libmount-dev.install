@@ -1,5 +1,2 @@
-usr/include/libmount*
-usr/lib/libmount.a
-usr/lib/libmount.so
-usr/lib/libmount.la
+usr/include/libmount/*
 usr/lib/pkgconfig/mount.pc

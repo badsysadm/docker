@@ -23,88 +23,142 @@ Package: util-linux
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Linux system management utilities
- Utilities and command-line tools from the NELL util-linux build.
+ Command-line tools, including optional static variants.
 
 Package: libpam-lastlog2
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblastlog2-2 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblastlog2-2-shared (= ${binary:Version})
 Description: PAM integration for lastlog2
  PAM module for recording and displaying previous login information.
-
-Package: libblkid1
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: blkid shared library
- Shared blkid library from util-linux.
 
 Package: libblkid-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: libblkid1 (= ${binary:Version})
-Description: blkid development files
- Headers, static library and linker metadata for blkid.
+Suggests: libblkid1-shared (= ${binary:Version}), libblkid-static (= ${binary:Version})
+Multi-Arch: same
+Description: blkid development headers and metadata
+ Public headers and pkg-config metadata for blkid.
 
-Package: libmount1
+Package: libblkid-static
+Architecture: amd64
+Depends: ${misc:Depends}, libblkid-dev (= ${binary:Version})
+Multi-Arch: same
+Description: blkid static library
+ Static archive and libtool metadata for blkid.
+
+Package: libblkid1-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: mount shared library
- Shared mount library from util-linux.
+Multi-Arch: same
+Description: blkid shared library
+ Shared runtime library and linker symlink for blkid.
 
 Package: libmount-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: libmount1 (= ${binary:Version})
-Description: mount development files
- Headers, static library and linker metadata for mount.
+Suggests: libmount1-shared (= ${binary:Version}), libmount-static (= ${binary:Version})
+Multi-Arch: same
+Description: mount development headers and metadata
+ Public headers and pkg-config metadata for mount.
 
-Package: libuuid1
+Package: libmount-static
+Architecture: amd64
+Depends: ${misc:Depends}, libmount-dev (= ${binary:Version})
+Multi-Arch: same
+Description: mount static library
+ Static archive and libtool metadata for mount.
+
+Package: libmount1-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: uuid shared library
- Shared uuid library from util-linux.
+Multi-Arch: same
+Description: mount shared library
+ Shared runtime library and linker symlink for mount.
 
 Package: uuid-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: libuuid1 (= ${binary:Version})
-Description: uuid development files
- Headers, static library and linker metadata for uuid.
+Suggests: libuuid1-shared (= ${binary:Version}), libuuid-static (= ${binary:Version})
+Multi-Arch: same
+Description: uuid development headers and metadata
+ Public headers and pkg-config metadata for uuid.
 
-Package: libfdisk1
+Package: libuuid-static
+Architecture: amd64
+Depends: ${misc:Depends}, uuid-dev (= ${binary:Version})
+Multi-Arch: same
+Description: uuid static library
+ Static archive and libtool metadata for uuid.
+
+Package: libuuid1-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: fdisk shared library
- Shared fdisk library from util-linux.
+Multi-Arch: same
+Description: uuid shared library
+ Shared runtime library and linker symlink for uuid.
 
 Package: libfdisk-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: libfdisk1 (= ${binary:Version})
-Description: fdisk development files
- Headers, static library and linker metadata for fdisk.
+Suggests: libfdisk1-shared (= ${binary:Version}), libfdisk-static (= ${binary:Version})
+Multi-Arch: same
+Description: fdisk development headers and metadata
+ Public headers and pkg-config metadata for fdisk.
 
-Package: libsmartcols1
+Package: libfdisk-static
+Architecture: amd64
+Depends: ${misc:Depends}, libfdisk-dev (= ${binary:Version})
+Multi-Arch: same
+Description: fdisk static library
+ Static archive and libtool metadata for fdisk.
+
+Package: libfdisk1-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: smartcols shared library
- Shared smartcols library from util-linux.
+Multi-Arch: same
+Description: fdisk shared library
+ Shared runtime library and linker symlink for fdisk.
 
 Package: libsmartcols-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: libsmartcols1 (= ${binary:Version})
-Description: smartcols development files
- Headers, static library and linker metadata for smartcols.
+Suggests: libsmartcols1-shared (= ${binary:Version}), libsmartcols-static (= ${binary:Version})
+Multi-Arch: same
+Description: smartcols development headers and metadata
+ Public headers and pkg-config metadata for smartcols.
 
-Package: liblastlog2-2
+Package: libsmartcols-static
+Architecture: amd64
+Depends: ${misc:Depends}, libsmartcols-dev (= ${binary:Version})
+Multi-Arch: same
+Description: smartcols static library
+ Static archive and libtool metadata for smartcols.
+
+Package: libsmartcols1-shared
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: lastlog2 shared library
- Shared lastlog2 library from util-linux.
+Multi-Arch: same
+Description: smartcols shared library
+ Shared runtime library and linker symlink for smartcols.
 
 Package: liblastlog2-dev
 Architecture: amd64
 Depends: ${misc:Depends}
-Suggests: liblastlog2-2 (= ${binary:Version})
-Description: lastlog2 development files
- Headers, static library and linker metadata for lastlog2.
+Suggests: liblastlog2-2-shared (= ${binary:Version}), liblastlog2-static (= ${binary:Version})
+Multi-Arch: same
+Description: lastlog2 development headers and metadata
+ Public headers and pkg-config metadata for lastlog2.
+
+Package: liblastlog2-static
+Architecture: amd64
+Depends: ${misc:Depends}, liblastlog2-dev (= ${binary:Version})
+Multi-Arch: same
+Description: lastlog2 static library
+ Static archive and libtool metadata for lastlog2.
+
+Package: liblastlog2-2-shared
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: lastlog2 shared library
+ Shared runtime library and linker symlink for lastlog2.

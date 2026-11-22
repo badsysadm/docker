@@ -1,5 +1,2 @@
-usr/include/libfdisk*
-usr/lib/libfdisk.a
-usr/lib/libfdisk.so
-usr/lib/libfdisk.la
+usr/include/libfdisk/*
 usr/lib/pkgconfig/fdisk.pc

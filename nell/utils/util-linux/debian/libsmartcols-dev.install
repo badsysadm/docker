@@ -1,5 +1,2 @@
-usr/include/libsmartcols*
-usr/lib/libsmartcols.a
-usr/lib/libsmartcols.so
-usr/lib/libsmartcols.la
+usr/include/libsmartcols/*
 usr/lib/pkgconfig/smartcols.pc

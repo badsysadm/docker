@@ -1,0 +1,3 @@
+lib/libblkid.so.1
+lib/libblkid.so.1.*
+usr/lib/libblkid.so

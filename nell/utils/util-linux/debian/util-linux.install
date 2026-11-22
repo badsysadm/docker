@@ -1,3 +1,5 @@
+bin/*
+sbin/*
 usr/bin/*
 usr/sbin/*
-usr/share/*
+usr/share/bash-completion/completions/*
