@@ -21,7 +21,7 @@ Build-Depends: debhelper-compat (= 13),
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: sqlite (= 3.54.1), libxcrypt (= 1:4.4.38-1)
+Static-Built-Using: sqlite (= 3.54.1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: util-linux-bash-completion
 Description: Linux system management utilities
@@ -42,8 +42,21 @@ Description: Swap space management utilities
 Package: util-linux-disk
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Disk partitioning and filesystem creation utilities
- fdisk, sfdisk, partx, partition table helpers, mkfs and filesystem creation tools.
+Description: Disk and filesystem management utilities
+ Tools for partitioning, creating, checking and maintaining filesystems and block devices.
+
+Package: su
+Architecture: amd64
+Static-Built-Using: libxcrypt (= 1:4.4.38-1)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: User switching and emergency login utilities
+ su, runuser and sulogin for user switching and emergency system login.
+
+Package: util-linux-mount
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Mount and unmount utilities
+ Tools for mounting filesystems, inspecting mounts and switching root filesystems.
 
 Package: util-linux-whereis
 Architecture: amd64
