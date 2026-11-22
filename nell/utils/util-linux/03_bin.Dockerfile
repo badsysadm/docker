@@ -12,6 +12,7 @@ RUN ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \
     --sbindir=/usr/sbin \
+    --libdir=/usr/lib \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --disable-nls \
