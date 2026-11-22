@@ -4,5 +4,4 @@ usr/bin/mount.static
 usr/bin/mountpoint
 usr/bin/umount
 usr/bin/umount.static
-usr/sbin/pivot_root
 usr/sbin/switch_root

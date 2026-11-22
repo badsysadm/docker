@@ -13,9 +13,6 @@ usr/bin/linux64
 usr/bin/lsfd
 usr/bin/lsipc
 usr/bin/lslocks
-usr/bin/lsns
-usr/bin/nsenter
-usr/bin/nsenter.static
 usr/bin/prlimit
 usr/bin/renice
 usr/bin/setarch
@@ -25,7 +22,5 @@ usr/bin/setsid
 usr/bin/taskset
 usr/bin/uclampset
 usr/bin/uname26
-usr/bin/unshare
-usr/bin/unshare.static
 usr/bin/waitpid
 usr/bin/x86_64

@@ -80,8 +80,14 @@ Package: util-linux-process
 Architecture: amd64
 Static-Built-Using: libcap-ng (= 0.8.5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Process, scheduling, IPC and namespace utilities
- Tools for signaling, scheduling, controlling and inspecting processes and namespaces.
+Description: Process, scheduling and IPC utilities
+ Tools for signaling, scheduling, controlling and inspecting processes and IPC.
+
+Package: util-linux-namespace
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Linux namespace management utilities
+ Tools for entering, creating and inspecting namespaces, including pivot_root.
 
 Package: util-linux-bash-completion
 Architecture: all
