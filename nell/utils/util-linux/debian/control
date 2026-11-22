@@ -22,8 +22,15 @@ Build-Depends: debhelper-compat (= 13),
 Package: util-linux
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: util-linux-bash-completion
 Description: Linux system management utilities
  Command-line tools, including optional static variants.
+
+Package: util-linux-bash-completion
+Architecture: all
+Depends: ${misc:Depends}
+Description: Bash completion for util-linux commands
+ Bash command-line completion definitions for util-linux utilities.
 
 Package: libpam-lastlog2
 Architecture: amd64
