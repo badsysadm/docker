@@ -21,11 +21,17 @@ Build-Depends: debhelper-compat (= 13),
 
 Package: util-linux
 Architecture: amd64
-Static-Built-Using: sqlite (= 3.54.1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: util-linux-bash-completion
 Description: Linux system management utilities
  Command-line tools, including optional static variants.
+
+Package: login
+Architecture: amd64
+Static-Built-Using: sqlite (= 3.54.1)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: System login and login accounting utilities
+ Login, account information, login history and session accounting tools.
 
 Package: util-linux-agetty
 Architecture: amd64

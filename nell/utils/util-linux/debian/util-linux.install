@@ -1,8 +1,6 @@
 usr/bin/bits
 usr/bin/cal
-usr/bin/chfn
 usr/bin/chmem
-usr/bin/chsh
 usr/bin/col
 usr/bin/colcrt
 usr/bin/colrm
@@ -20,16 +18,11 @@ usr/bin/getopt
 usr/bin/hardlink
 usr/bin/hexdump
 usr/bin/isosize
-usr/bin/last
-usr/bin/lastb
-usr/bin/lastlog2
 usr/bin/logger
-usr/bin/login
 usr/bin/look
 usr/bin/lsclocks
 usr/bin/lscpu
 usr/bin/lsirq
-usr/bin/lslogins
 usr/bin/lsmem
 usr/bin/mcookie
 usr/bin/mesg
@@ -40,7 +33,6 @@ usr/bin/rev
 usr/bin/script
 usr/bin/scriptlive
 usr/bin/scriptreplay
-usr/bin/utmpdump
 usr/bin/uuidgen
 usr/bin/uuidparse
 usr/bin/wall
@@ -49,7 +41,6 @@ usr/sbin/chcpu
 usr/sbin/ctrlaltdel
 usr/sbin/hwclock
 usr/sbin/ldattach
-usr/sbin/nologin
 usr/sbin/readprofile
 usr/sbin/rfkill
 usr/sbin/rtcwake

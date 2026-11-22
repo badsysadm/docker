@@ -1,0 +1,9 @@
+usr/bin/chfn
+usr/bin/chsh
+usr/bin/last
+usr/bin/lastb
+usr/bin/lastlog2
+usr/bin/login
+usr/bin/lslogins
+usr/bin/utmpdump
+usr/sbin/nologin
