@@ -69,7 +69,7 @@ usr/sbin/fstrim
 usr/sbin/hwclock
 usr/sbin/ldattach
 usr/sbin/losetup
-usr/sbin/losetup.static
+usr/bin/losetup.static
 usr/sbin/nologin
 usr/sbin/pivot_root
 usr/sbin/readprofile
