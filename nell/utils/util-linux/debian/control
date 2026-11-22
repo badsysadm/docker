@@ -83,7 +83,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Process, scheduling and IPC utilities
  Tools for signaling, scheduling, controlling and inspecting processes and IPC.
 
-Package: util-linux-namespace
+Package: util-linux-ns
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Linux namespace management utilities
