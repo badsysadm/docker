@@ -1,3 +1,35 @@
+diff --git a/configure.ac b/configure.ac
+--- a/configure.ac
++++ b/configure.ac
+@@ -257,9 +257,7 @@
+ PKG_PROG_PKG_CONFIG
+ PKG_INSTALLDIR(['${usrlib_execdir}/pkgconfig'])
+ 
+-GTK_DOC_CHECK([1.10])
+-AC_PATH_PROG([XSLTPROC], [xsltproc])
+ 
+ 
+ linux_os=no
+@@ -3124,21 +3122,13 @@
+ # more details.
+ #
+ AC_CONFIG_FILES([
+ Makefile
+-libblkid/docs/Makefile
+-libblkid/docs/version.xml
+ libblkid/src/blkid.h
+-libfdisk/docs/Makefile
+-libfdisk/docs/version.xml
+ libfdisk/src/libfdisk.h
+ liblastlog2/src/lastlog2.h
+-libmount/docs/Makefile
+-libmount/docs/version.xml
+ libmount/src/libmount.h
+-libsmartcols/docs/Makefile
+-libsmartcols/docs/version.xml
+ libsmartcols/src/libsmartcols.h
+ po/Makefile.in
+ ])
 diff --git a/liblastlog2/src/Makemodule.am b/liblastlog2/src/Makemodule.am
 --- a/liblastlog2/src/Makemodule.am
 +++ b/liblastlog2/src/Makemodule.am
